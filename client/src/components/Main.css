@@ -1,0 +1,63 @@
+#main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 99%;
+  height: 2rem;
+  text-align: center;
+  border: solid black;
+} */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 30rem;
+  text-align: center;
+  border: solid red;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 10rem;
+  text-align: center;
+  border: solid blue;
+}
+
+.enter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 15rem;
+  text-align: center;
+  border: solid green;
+}
+
+.tail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 5rem;
+  text-align: center;
+  border: solid yellow;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
