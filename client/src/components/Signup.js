@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Signup.css";
 import Nav from "./Nav";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 class Signup extends Component {
   constructor(props) {
@@ -85,4 +86,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);

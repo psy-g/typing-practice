@@ -1,38 +1,48 @@
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
-const app = express();
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const { sequelize } = require("./models");
+const passport = require("passport");
+const passportConfig = require("./config/JWTStrategy");
 
-// 환경변수를 통해 production 포트로 변경
-const port = 8080;
+const authRouter = require("./routes/auth");
 
-// const usersRouter = require("./routes/user");
-// const fridgesRouter = require("./routes/fridge");
-// const recipesRouter = require("./routes/recipe");
-// const oauthRouter = require("./routes/oauth");
-
-app.use(express.json());
+const app = express();
 sequelize.sync();
+passportConfig(passport);
 
-// 환경변수를 통해 cors production origin 으로 변경
+app.set("port", process.env.PORT || 8080);
+
+app.use(logger("combined"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
-    methods: "GET,PUT,POST",
+    methods: ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
-    secret: "typing",
     resave: false,
     saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
-// routes
-// app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 // app.use("/myfridge", fridgesRouter);
 // app.use("/recipes", recipesRouter);
 // app.use("/callback", oauthRouter);
@@ -42,6 +52,4 @@ app.get("/", (req, res) => {
   res.send("HELLO WORLD");
 });
 
-app.listen(port, () => {
-  console.log("server on " + port);
-});
+app.listen(app.get("port"));

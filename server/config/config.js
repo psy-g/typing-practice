@@ -7,6 +7,7 @@ module.exports = {
     database: "typing",
     host: "localhost",
     dialect: "mysql",
+    timezone: "+09:00",
   },
 
   production: {
