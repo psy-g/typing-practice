@@ -1,3 +1,3 @@
 # typing-practice
 
-Hello, World!
+## Hello, World!
