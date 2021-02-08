@@ -16,3 +16,43 @@
   text-align: center;
   border: solid black;
 }
+
+.burger_open {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.burger_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 44px;
+  right: 0;
+  bottom: 0;
+  left: 25px;
+  width: 150px;
+  height: 200px;
+  border: solid red;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.burger_icon {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 46px;
+  cursor: pointer;
+  border: solid blue;
+}
+
+.burger_close {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: solid green;
+  height: 60%;
+}
