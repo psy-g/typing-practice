@@ -5,6 +5,7 @@ import Main from "../components/Main";
 import Test from "../components/Test";
 import Signup from "../components/Signup";
 import Signin from "../components/Signin";
+import "./App.css";
 
 class App extends Component {
   render() {
