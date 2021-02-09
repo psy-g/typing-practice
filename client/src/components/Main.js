@@ -12,7 +12,7 @@ class Main extends Component {
           <div className="header">이미지</div>
           <div className="login">상</div>
           <div className="enter">
-            <Link to="/test">중</Link>
+            <Link to="/test">들어가기</Link>
           </div>
           <div className="tail">하</div>
         </div>
