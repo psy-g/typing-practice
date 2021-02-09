@@ -21,11 +21,10 @@ class Signin extends React.Component {
 
   loginHandler() {
     window.localStorage.setItem("isLogin", true);
-    window.localStorage.setItem("local", true);
-    this.props.close();
     this.props.history.push({
       isLogin: this.state.isLogin,
     });
+    this.props.history.push("/");
   }
 
   nicknameValidator = (e) => {
