@@ -11,6 +11,7 @@
 .test_header {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 90%;
   height: 15rem;
@@ -18,8 +19,24 @@
   border: solid red;
 }
 
+.header_problem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+}
+
+.header_timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+}
+
 .test_input {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 90%;
@@ -39,10 +56,10 @@
 }
 
 .typing {
-  width: 10%;
-  height: 50%;
+  width: 60%;
+  height: 70%;
   resize: none;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .btn_1,
@@ -70,7 +87,7 @@
   align-content: center;
   grid-gap: 0.5rem;
   padding: 1rem;
-  width: 50vw;
+  width: 60vw;
   height: 100vh;
   /* background: skyblue; */
 }
