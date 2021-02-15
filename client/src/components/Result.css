@@ -1,0 +1,43 @@
+.loginModal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.loginList {
+  position: fixed;
+  top: 120px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 480px;
+  height: 500px;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.modalContents {
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  padding: 0 20px 32px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
