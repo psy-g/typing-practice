@@ -24,26 +24,18 @@ class Result extends Component {
               </span>
               <div className="modalContents" onClick={() => isOpen}>
                 <div className="logo_signin">
-                  <img className="signinLogo" alt="signinLogo" />
+                  <img className="signinLogo" alt="결과" />
                 </div>
-                <input className="loginId" placeholder="아이디(이메일)" />
+                <input className="loginId" placeholder="속도" />
                 <input
                   className="loginPw"
                   type="password"
-                  placeholder="비밀번호"
+                  placeholder="정확도"
                 />
-                <button className="loginBtn">로그인</button>
+                <button className="loginBtn">결과</button>
                 <div className="socialBox">
-                  <div className="kakao" onClick={this.kakaoLoginHandler}>
-                    <img className="btn_kakao" alt="kakaoLogo" />
-                    카카오 로그인
-                    <span className="anyMessage">
-                      은 이메일 동의를 필요로 합니다.
-                    </span>
-                  </div>
                   <div className="naver" onClick={this.naverLoginHandler}>
-                    <img className="btn_naver" alt="naverLogo" />
-                    네이버 로그인
+                    결과
                   </div>
                 </div>
               </div>

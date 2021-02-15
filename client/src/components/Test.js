@@ -12,20 +12,41 @@ class Test extends Component {
       problem:
         "얼마나 더 견뎌야 하는지 짙은 어둠을 헤매고 있어 내가 바란 꿈이라는 것은 없는 걸까?",
       answer: "",
+      time: "빠져버린",
+      accuracy: "",
+      speed: "",
     };
   }
 
   // 정확도 계산
   compare() {
-    const { problem, answer } = this.state;
+    const { problem, answer, time } = this.state;
 
-    if (problem === answer) alert("100%");
-    else {
-      alert("틀렸당");
+    // if (problem === answer) alert("100%");
+    // else {
+    //   alert("틀렸당");
+    // }
+
+    // 타수 계산(타수*60/걸린시간(초))
+    // 48글자 * 60초 / 10초
+    // 2880 / 10 => 288타
+
+    // const resultSpeed = 2880 / time;
+    const resultSpeed = (problem.length * 60) / time;
+
+    console.log("시간은?", resultSpeed);
+
+    if (problem === answer) {
+      this.setState({ accuracy: 100 });
+      this.setState({ speed: resultSpeed });
+    } else {
+      this.setState({ accuracy: "44" });
+      this.setState({ speed: resultSpeed });
     }
 
     console.log("problem", problem);
     console.log("answer", answer);
+    // console.log("time", time);
   }
 
   handleInputValue = (key) => (e) => {
@@ -91,13 +112,16 @@ class Test extends Component {
 
   // 타이머
   timer() {
+    // const { time } = this.state;
     const startButton = document.querySelector(".timer_start");
     const stopButton = document.querySelector(".timer_stop");
     const resetButton = document.querySelector(".timer_reset");
 
-    let timer;
+    // inputText.addEventListener("keydown", function (event) {
+    //   console.log("Textarea two was changed.");
+    // });
 
-    console.log("===", startButton);
+    let timer;
 
     // 시작
     function start() {
@@ -123,10 +147,33 @@ class Test extends Component {
       show.innerHTML = "0";
     }
 
-    startButton.onclick = function () {
-      // alert("클릭했어요");
-      start();
-    };
+    const inputText = document.querySelector(".typing");
+
+    inputText.addEventListener(
+      "keydown",
+      function (e) {
+        start();
+      },
+      { once: true }
+    );
+
+    // 시간 계산
+    // inputText.addEventListener("keydown", function (e) {
+    //   if (e.keyCode === 46) {
+    //     stop();
+    //     const timer = document.getElementById("show").innerHTML;
+    //     console.log("====", timer);
+    //   }
+    // });
+    inputText.addEventListener("keydown", (e) => {
+      // const { time } = this.state;
+      if (e.keyCode === 46) {
+        stop();
+        const resultTime = document.getElementById("show").innerHTML;
+        this.setState({ time: resultTime });
+        // console.log("time", this.state.time);
+      }
+    });
 
     stopButton.onclick = function () {
       // alert("클릭했어요");
@@ -145,6 +192,8 @@ class Test extends Component {
   }
 
   render() {
+    const { accuracy, speed } = this.state;
+
     return (
       <div>
         <Nav />
@@ -175,7 +224,10 @@ class Test extends Component {
               onChange={this.handleInputValue("answer")}
             ></textarea>
             <div className="row">
-              <div className="btn_result">
+              <div className="result">
+                속도: {speed}타수 <br></br>정확도: {accuracy}%
+              </div>
+              {/* <div className="btn_result">
                 <div onClick={this.openModal} className="text">
                   결과확인
                 </div>
@@ -183,7 +235,7 @@ class Test extends Component {
                   isOpen={this.state.isModalOpen}
                   close={this.closeModal}
                 />
-              </div>
+              </div> */}
             </div>
             <div id="keyboard">
               <div id="ㅂ" className="btn_1">
