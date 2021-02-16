@@ -24,6 +24,7 @@
   justify-content: center;
   align-items: center;
   height: 40%;
+  font-size: 20px;
 }
 
 .header_timer {
@@ -56,8 +57,9 @@
 }
 
 .typing {
-  width: 60%;
+  width: 65%;
   height: 70%;
+  overflow: hidden;
   resize: none;
   font-size: 25px;
 }

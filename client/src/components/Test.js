@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Test.css";
 import Nav from "./Nav";
-import Result from "./Result";
+// import Result from "./Result";
 import { withRouter } from "react-router-dom";
 
 class Test extends Component {
@@ -37,11 +37,13 @@ class Test extends Component {
     console.log("시간은?", resultSpeed);
 
     if (problem === answer) {
-      this.setState({ accuracy: 100 });
-      this.setState({ speed: resultSpeed });
+      this.setState({ accuracy: "100%" });
+      this.setState({ speed: `${resultSpeed}타수` });
     } else {
-      this.setState({ accuracy: "44" });
-      this.setState({ speed: resultSpeed });
+      // alert("오타가 있습니다");
+      this.setState({ accuracy: "오타가 있습니다" });
+      this.setState({ speed: "오타가 있습니다" });
+      // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
     }
 
     console.log("problem", problem);
@@ -77,7 +79,8 @@ class Test extends Component {
       // console.log("===del====", key.id);
 
       if (key) {
-        if (key.id === "Delete") {
+        // if (key.id === "Delete") {
+        if (key.id === "Enter") {
           this.showResult();
           // this.props.history.push("/");
         } else {
@@ -100,7 +103,7 @@ class Test extends Component {
   }
 
   showResult = () => {
-    const confirmResult = document.querySelector(".btn_result");
+    // const confirmResult = document.querySelector(".btn_result");
     // const confirmResult = document.querySelector(".row");
 
     this.compare();
@@ -113,7 +116,7 @@ class Test extends Component {
   // 타이머
   timer() {
     // const { time } = this.state;
-    const startButton = document.querySelector(".timer_start");
+    // const startButton = document.querySelector(".timer_start");
     const stopButton = document.querySelector(".timer_stop");
     const resetButton = document.querySelector(".timer_reset");
 
@@ -167,7 +170,8 @@ class Test extends Component {
     // });
     inputText.addEventListener("keydown", (e) => {
       // const { time } = this.state;
-      if (e.keyCode === 46) {
+      // if (e.keyCode === 46) { // delete
+      if (e.keyCode === 13) {
         stop();
         const resultTime = document.getElementById("show").innerHTML;
         this.setState({ time: resultTime });
@@ -225,7 +229,7 @@ class Test extends Component {
             ></textarea>
             <div className="row">
               <div className="result">
-                속도: {speed}타수 <br></br>정확도: {accuracy}%
+                속도: {speed} <br></br>정확도: {accuracy}
               </div>
               {/* <div className="btn_result">
                 <div onClick={this.openModal} className="text">
@@ -268,7 +272,10 @@ class Test extends Component {
               <div id="ㅔ" className="btn_1">
                 ㅔ
               </div>
-              <div id="Delete" className="btn_1">
+              {/* <div id="Delete" className="btn_1">
+                Del
+              </div> */}
+              <div id="Enter" className="btn_1">
                 Del
               </div>
               <div id="ㅁ" className="btn_11">
