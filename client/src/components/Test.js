@@ -3,46 +3,55 @@ import "./Test.css";
 import Nav from "./Nav";
 // import Result from "./Result";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isModalOpen: false,
-      problem:
-        "얼마나 더 견뎌야 하는지 짙은 어둠을 헤매고 있어 내가 바란 꿈이라는 것은 없는 걸까?",
+      // problem:
+      //   "얼마나 더 견뎌야 하는지 짙은 어둠을 헤매고 있어 내가 바란 꿈이라는 것은 없는 걸까?",
+      problem: [],
+      count: 0,
+      filterProblem: [],
       answer: "",
-      time: "빠져버린",
+      time: 0,
       accuracy: "",
       speed: "",
+      title: "말리꽃",
     };
+
+    this.requestProblem = this.requestProblem.bind(this);
   }
 
   // 정확도 계산
   compare() {
-    const { problem, answer, time } = this.state;
+    const { problem, count, answer, time } = this.state;
 
-    // if (problem === answer) alert("100%");
-    // else {
-    //   alert("틀렸당");
-    // }
+    // const resetInput = document.querySelector(".typing").value;
+
+    // console.log("input", resetInput);
 
     // 타수 계산(타수*60/걸린시간(초))
     // 48글자 * 60초 / 10초
     // 2880 / 10 => 288타
 
     // const resultSpeed = 2880 / time;
-    const resultSpeed = (problem.length * 60) / time;
+    const resultSpeed = (problem[count].length * 60) / time;
 
     console.log("시간은?", resultSpeed);
 
-    if (problem === answer) {
+    if (problem[count] === answer) {
       this.setState({ accuracy: "100%" });
       this.setState({ speed: `${resultSpeed}타수` });
+      this.setState({ count: count + 1 }, function () {});
+      document.querySelector(".typing").value = "";
     } else {
       // alert("오타가 있습니다");
       this.setState({ accuracy: "오타가 있습니다" });
       this.setState({ speed: "오타가 있습니다" });
+      document.querySelector(".typing").value = "";
       // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
     }
 
@@ -63,6 +72,36 @@ class Test extends Component {
   };
 
   keyboardEvent() {
+    // const { count } = this.state;
+    const { time } = this.state;
+    let timer;
+
+    // 시작
+    function start() {
+      const show = document.getElementById("show");
+      const startSeconds = new Date().getSeconds();
+
+      timer = setInterval(function () {
+        show.innerHTML = new Date().getSeconds() - startSeconds;
+      }, 1000);
+    }
+
+    // 중지
+    function stop() {
+      clearInterval(timer);
+    }
+
+    // 리셋
+    function reset() {
+      const show = document.getElementById("show");
+
+      // this.startButton.onclick = this.start;
+      clearInterval(timer);
+      show.innerHTML = "0";
+    }
+
+    //
+
     const keyboardEvent = document.querySelector(".typing");
     // console.log("===", keyboard.children[0].innerHTML);
     // console.log("len", keyboard.children.length);
@@ -79,10 +118,19 @@ class Test extends Component {
       // console.log("===del====", key.id);
 
       if (key) {
-        // if (key.id === "Delete") {
+        if (key.id === "Delete") {
+          reset();
+          start();
+        }
+
         if (key.id === "Enter") {
+          const resultTime = document.getElementById("show").innerHTML;
+          this.setState({ time: resultTime });
           this.showResult();
-          // this.props.history.push("/");
+          stop();
+          if (e.preventDefault) e.preventDefault();
+          return false;
+          // this.setState({ count: count + 1 }, function () {});
         } else {
           key.classList.add("pressed");
         }
@@ -112,6 +160,34 @@ class Test extends Component {
 
     // this.props.history.push("/");
   };
+
+  startTimer() {
+    let timer;
+    const show = document.getElementById("show");
+    const startSeconds = new Date().getSeconds();
+
+    timer = setInterval(function () {
+      show.innerHTML = new Date().getSeconds() - startSeconds;
+    }, 1000);
+  }
+
+  resetTimer() {
+    // let timer;
+    const show = document.getElementById("show");
+    // const startSeconds = new Date().getSeconds();
+
+    // timer = setInterval(function () {
+    //   show.innerHTML = new Date().getSeconds() - startSeconds;
+    // }, 1000);
+
+    // this.startButton.onclick = this.start;
+
+    document.getElementById("show").innerHTML = "";
+    clearInterval(this.startTimer());
+
+    // clearInterval(show);
+    // show.innerHTML = "0";
+  }
 
   // 타이머
   timer() {
@@ -175,6 +251,8 @@ class Test extends Component {
         stop();
         const resultTime = document.getElementById("show").innerHTML;
         this.setState({ time: resultTime });
+        if (e.preventDefault) e.preventDefault();
+        return false;
         // console.log("time", this.state.time);
       }
     });
@@ -190,35 +268,96 @@ class Test extends Component {
     };
   }
 
+  requestProblem() {
+    // const random = ["말리꽃"];
+    // const title = random[Math.floor(Math.random() * random.length)];
+
+    const { title, problem } = this.state;
+
+    if (title) {
+      axios
+        .post("http://localhost:8080/problem/random", this.state)
+        .then((res) => {
+          // this.setState({ problem: res.data.data });
+          // console.log("문제", this.state.problem);
+          // console.log("문제", this.state.problem[0].problem);
+          let filterProblem = [];
+
+          res.data.data.forEach((el) => {
+            filterProblem.push(el.problem);
+          });
+
+          this.setState({ problem: filterProblem });
+
+          // console.log("====", this.state.problem);
+        })
+        .catch((err) => {
+          if (err) {
+            alert("문제 요청 에러");
+          }
+        });
+    } else {
+      alert("에러");
+    }
+  }
+
+  problem() {
+    const { problem, filterProblem } = this.state;
+  }
+
   componentDidMount() {
-    this.timer();
+    // this.timer();
     this.keyboardEvent();
   }
 
   render() {
-    const { accuracy, speed } = this.state;
+    const { accuracy, speed, problem, count } = this.state;
+
+    // problem.forEach((el) => {
+    //   filterProblem.push(el.problem);
+    // });
+
+    // console.log("??", count);
 
     return (
       <div>
         <Nav />
         <div id="test">
           <div className="test_header">
-            <div className="header_problem">{this.state.problem}</div>
+            {/* <div className="header_problem">{this.state.problem}</div> */}
+            <div className="header_problem">{problem[count]}</div>
             <div className="header_timer">
               {/* <p id="show">0</p> */}
               <span id="show">0</span>
               <span>초</span>
-              <input
-                type="button"
-                value="start"
-                className="timer_start"
-              ></input>
-              <input type="button" value="stop" className="timer_stop"></input>
-              <input
-                type="button"
-                value="reset"
-                className="timer_reset"
-              ></input>
+              <div className="start_button">
+                <input
+                  type="button"
+                  value="랜덤"
+                  className="random_start"
+                  onClick={this.requestProblem}
+                ></input>
+                <input
+                  type="button"
+                  value="start"
+                  className="timer_start"
+                ></input>
+                <input
+                  type="button"
+                  value="stop"
+                  className="timer_stop"
+                ></input>
+                <input
+                  type="button"
+                  value="reset"
+                  className="timer_reset"
+                ></input>
+                <input
+                  type="button"
+                  value="선택"
+                  className="select_start"
+                ></input>
+              </div>
             </div>
           </div>
           <div className="test_input">
@@ -325,6 +464,9 @@ class Test extends Component {
               </div>
               <div id="ㅡ" className="btn_1">
                 ㅡ
+              </div>
+              <div id="Delete" className="btn_1">
+                /
               </div>
             </div>
           </div>

@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   });
 
   if (problem) {
-    res.status(200).json({ data: problem });
+    res.status(200).json({ message: "problem ok", data: problem });
   } else {
     res.status(401).json({ message: "problem no" });
   }
