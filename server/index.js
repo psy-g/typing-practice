@@ -8,6 +8,7 @@ const passport = require("passport");
 const passportConfig = require("./config/JWTStrategy");
 
 const authRouter = require("./routes/auth");
+const problemRouter = require("./routes/problem");
 
 const app = express();
 sequelize.sync();
@@ -43,7 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRouter);
-// app.use("/myfridge", fridgesRouter);
+app.use("/problem", problemRouter);
 // app.use("/recipes", recipesRouter);
 // app.use("/callback", oauthRouter);
 
