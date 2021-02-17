@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Test.css";
 import Nav from "./Nav";
-// import Result from "./Result";
+import Result from "./Result";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -23,8 +23,11 @@ class Test extends Component {
       filterTitle: "",
       timer: "",
       keyEvent: false,
+      recordTime: 0,
+      recordresultSpeed: 0,
+      average: 0,
     };
-
+    //270, 435, 370
     this.requestProblem = this.requestProblem.bind(this);
   }
 
@@ -34,13 +37,10 @@ class Test extends Component {
 
     // const resetInput = document.querySelector(".typing").value;
 
-    // console.log("input", resetInput);
-
     // 타수 계산(타수*60/걸린시간(초))
     // 48글자 * 60초 / 10초
     // 2880 / 10 => 288타
 
-    // const resultSpeed = 2880 / time;
     const resultSpeed = (problem[count].length * 60) / time;
 
     console.log("시간은?", resultSpeed);
@@ -51,6 +51,12 @@ class Test extends Component {
       this.setState({ count: count + 1 }, function () {});
       document.querySelector(".typing").value = "";
       this.setState({ keyEvent: false });
+      this.setState({ recordTime: this.state.recordTime + time });
+      this.setState({
+        recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
+      });
+      console.log("카운트", this.state.count);
+      console.log("기록", this.state.recordresultSpeed);
     } else {
       // alert("오타가 있습니다");
       this.setState({ accuracy: "오타가 있습니다" });
@@ -60,8 +66,8 @@ class Test extends Component {
       // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
     }
 
-    console.log("problem", problem);
-    console.log("answer", answer);
+    // console.log("problem", problem);
+    // console.log("answer", answer);
     // console.log("time", time);
   }
 
@@ -120,7 +126,7 @@ class Test extends Component {
   stop() {
     const { timer } = this.state;
 
-    console.log("stop", timer);
+    // console.log("stop", timer);
 
     clearInterval(timer);
   }
@@ -229,13 +235,19 @@ class Test extends Component {
   }
 
   render() {
-    const { accuracy, speed, problem, count, filterTitle } = this.state;
+    const {
+      accuracy,
+      speed,
+      problem,
+      count,
+      filterTitle,
+      recordresultSpeed,
+      recordTime,
+    } = this.state;
 
     // problem.forEach((el) => {
     //   filterProblem.push(el.problem);
     // });
-
-    // console.log("??", count);
 
     return (
       <div>
@@ -243,10 +255,57 @@ class Test extends Component {
         <div id="test">
           <div className="test_header">
             <div className="header_title">{filterTitle}</div>
-            {/* <div className="header_problem">{this.state.problem}</div> */}
             <div className="header_problem">{problem[count]}</div>
-            <div className="header_timer">
-              {/* <p id="show">0</p> */}
+            <div className="header_problem">
+              {/* {!problem[count] ? ( */}
+              {count === 2 ? (
+                <div className="header_pro">
+                  결과: {recordresultSpeed / count}
+                  <br></br>
+                  시간: {recordTime}초{/* </div> */}
+                  <div className="btn_result">
+                    <div onClick={this.openModal} className="text">
+                      랭킹보기
+                    </div>
+                    <Result
+                      isOpen={this.state.isModalOpen}
+                      time={this.state.recordTime}
+                      average={recordresultSpeed / count}
+                      close={this.closeModal}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className="header_timer">
+                    <span id="show">00:00:00</span>
+                    <span>초</span>
+                    <div className="start_button">
+                      <input
+                        type="button"
+                        value="랜덤"
+                        className="random_start"
+                        onClick={this.requestProblem}
+                      ></input>
+                      <select type="button" className="select_start">
+                        <option value="select">선택</option>
+                        <option value="select_1">눈 녹듯</option>
+                        <option value="select_2">말리꽃</option>
+                        <option value="select_3">오아시스</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* <div>
+              {problem[count] ? (
+                <div className="header_problem">{problem[count]}</div>
+              ) : (
+                <div className="header_pro">엔터로 시작 가능</div>
+              )}
+            </div> */}
+            {/* <div className="header_timer">
               <span id="show">00:00:00</span>
               <span>초</span>
               <div className="start_button">
@@ -256,37 +315,14 @@ class Test extends Component {
                   className="random_start"
                   onClick={this.requestProblem}
                 ></input>
-                {/* <input
-                  type="button"
-                  value="start"
-                  className="timer_start"
-                ></input>
-                <input
-                  type="button"
-                  value="stop"
-                  className="timer_stop"
-                ></input> */}
-                {/* <input
-                  type="button"
-                  value="reset"
-                  className="timer_reset"
-                ></input> */}
                 <select type="button" className="select_start">
                   <option value="select">선택</option>
                   <option value="select_1">눈 녹듯</option>
-                  {/* <option value="select_1" onChange={alert("안뇽")}>
-                    눈 녹듯
-                  </option> */}
                   <option value="select_2">말리꽃</option>
                   <option value="select_3">오아시스</option>
                 </select>
-                {/* <input
-                  type="button"
-                  value="선택"
-                  className="select_start"
-                ></input> */}
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="test_input">
             <textarea
