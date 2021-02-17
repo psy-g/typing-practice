@@ -2,7 +2,7 @@ const { Ranking } = require("../../models");
 
 module.exports = async (req, res) => {
   //   const { name, time, average, rank } = req.body;
-  const { id, name, time, average } = req.body;
+  const { id, name, time, average, title } = req.body;
 
   // 유저 아이디 있으면 업데이트
   // 없으면 추가
@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
         name: name,
         time: time,
         average: average,
+        title: title,
       },
       {
         where: {
@@ -20,19 +21,21 @@ module.exports = async (req, res) => {
         },
       }
     );
-  }
-  if (!time) {
-    res.status(400).json({ message: "rank failed" });
-  }
-
-  const ranking = await Ranking.findOrCreate({
-    where: { name },
-    defaults: { name, time, average },
-  });
-
-  if (time) {
-    res.status(200).json({ message: "register ok", data: ranking });
+    res.status(400).json({ message: "update ok" });
   } else {
-    res.status(401).json({ message: "register no" });
+    if (!time) {
+      res.status(400).json({ message: "rank failed" });
+    }
+
+    const ranking = await Ranking.findOrCreate({
+      where: { name },
+      defaults: { name, time, average, title },
+    });
+
+    if (time) {
+      res.status(200).json({ message: "register ok" });
+    } else {
+      res.status(401).json({ message: "register no" });
+    }
   }
 };
