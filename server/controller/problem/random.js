@@ -3,13 +3,17 @@ const { Test } = require("../../models");
 module.exports = async (req, res) => {
   const { title } = req.body;
 
+  console.log("서버", title);
+
   if (!title) {
     res.status(400).json({ message: "problem failed" });
   }
 
+  const random = title[Math.floor(Math.random() * title.length)];
+
   const problem = await Test.findAll({
-    where: { title },
-    attributes: ["id", "problem"],
+    where: { title: random },
+    attributes: ["id", "title", "problem"],
   });
 
   if (problem) {
