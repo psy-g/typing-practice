@@ -9,6 +9,7 @@ const passportConfig = require("./config/JWTStrategy");
 
 const authRouter = require("./routes/auth");
 const problemRouter = require("./routes/problem");
+const rankingRouter = require("./routes/ranking");
 
 const app = express();
 sequelize.sync();
@@ -45,7 +46,7 @@ app.use(passport.session());
 
 app.use("/auth", authRouter);
 app.use("/problem", problemRouter);
-// app.use("/recipes", recipesRouter);
+app.use("/ranking", rankingRouter);
 // app.use("/callback", oauthRouter);
 
 // 배포 테스트용
