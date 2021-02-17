@@ -19,7 +19,10 @@ class Test extends Component {
       time: 0,
       accuracy: "",
       speed: "",
-      title: "말리꽃",
+      title: ["말리꽃", "오아시스", "눈 녹듯"],
+      filterTitle: "",
+      timer: "",
+      keyEvent: false,
     };
 
     this.requestProblem = this.requestProblem.bind(this);
@@ -47,11 +50,13 @@ class Test extends Component {
       this.setState({ speed: `${resultSpeed}타수` });
       this.setState({ count: count + 1 }, function () {});
       document.querySelector(".typing").value = "";
+      this.setState({ keyEvent: false });
     } else {
       // alert("오타가 있습니다");
       this.setState({ accuracy: "오타가 있습니다" });
       this.setState({ speed: "오타가 있습니다" });
       document.querySelector(".typing").value = "";
+      this.setState({ keyEvent: false });
       // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
     }
 
@@ -71,208 +76,118 @@ class Test extends Component {
     this.setState({ isModalOpen: false });
   };
 
-  keyboardEvent() {
-    // const { count } = this.state;
-    const { time } = this.state;
+  // timer
+  init() {
+    document.getElementById("show").innerHTML = "00:00:00";
+  }
+
+  start() {
+    const show = document.getElementById("show");
+
+    let hour = 0;
+    let min = 0;
+    let sec = 0;
     let timer;
+    let time = 0;
 
-    // 시작
-    function start() {
-      const show = document.getElementById("show");
-      const startSeconds = new Date().getSeconds();
+    timer = setInterval(function () {
+      time++;
 
-      timer = setInterval(function () {
-        show.innerHTML = new Date().getSeconds() - startSeconds;
-      }, 1000);
-    }
+      min = Math.floor(time / 60);
+      hour = Math.floor(min / 60);
+      sec = time % 60;
+      min = min % 60;
 
-    // 중지
-    function stop() {
-      clearInterval(timer);
-    }
+      let th = hour;
+      let tm = min;
+      let ts = sec;
+      if (th < 10) {
+        th = "0" + hour;
+      }
+      if (tm < 10) {
+        tm = "0" + min;
+      }
+      if (ts < 10) {
+        ts = "0" + sec;
+      }
 
-    // 리셋
-    function reset() {
-      const show = document.getElementById("show");
+      show.innerHTML = th + ":" + tm + ":" + ts;
+    }, 1000);
 
-      // this.startButton.onclick = this.start;
-      clearInterval(timer);
-      show.innerHTML = "0";
-    }
+    this.setState({ timer: timer });
+  }
 
+  stop() {
+    const { timer } = this.state;
+
+    console.log("stop", timer);
+
+    clearInterval(timer);
+  }
+
+  reset() {
+    const { timer } = this.state;
+
+    clearInterval(timer);
+    // time = 0;
+    this.init();
+  }
+
+  keyboardEvent() {
+    // event = false 처음에 이벤트 발생시키면 true로 바꾸고 문제가 넘어가거나
+    // 틀렸을 경우 다시 false로 바꾸고 다시 실행 시킬 준비
+    console.log("확인", this.state.keyEvent);
     //
-
     const keyboardEvent = document.querySelector(".typing");
-    // console.log("===", keyboard.children[0].innerHTML);
-    // console.log("len", keyboard.children.length);
 
-    // keyboardEvent.addEventListener("keydown", (e) => {
-    //   // if (keyboard) keyboard.children[0].classList.add("pressed");
-    //   const key = document.getElementById(e.key);
-    //   if (key) key.classList.add("pressed");
-    // });
     keyboardEvent.addEventListener("keydown", (e) => {
-      // if (keyboard) keyboard.children[0].classList.add("pressed");
+      // keyboardEvent.addEventListener("keypress", (e) => {
       const key = document.getElementById(e.key);
 
-      // console.log("===del====", key.id);
-
       if (key) {
-        if (key.id === "Delete") {
-          reset();
-          start();
-        }
+        // if (key.id === "Delete") {
+        //   this.reset();
+        //   this.start();
+        // }
 
-        if (key.id === "Enter") {
-          const resultTime = document.getElementById("show").innerHTML;
-          this.setState({ time: resultTime });
-          this.showResult();
-          stop();
-          if (e.preventDefault) e.preventDefault();
-          return false;
-          // this.setState({ count: count + 1 }, function () {});
+        // if (key.id === "Enter") {
+        if (e.keyCode === 13) {
+          if (document.querySelector(".header_problem").innerHTML === "") {
+            this.requestProblem();
+            if (e.preventDefault) e.preventDefault();
+            return false;
+          } else {
+            this.stop();
+            const resultTime = document.getElementById("show").innerHTML;
+            // console.log("입력시간", Number(resultTime.substring(6)));
+            this.setState({ time: Number(resultTime.substring(6)) });
+            // this.setState({ time: resultTime });
+            this.compare();
+            // console.log("=====", keyboardEvent.value);
+            if (e.preventDefault) e.preventDefault();
+            return false;
+          }
         } else {
+          if (!this.state.keyEvent) {
+            this.start();
+            this.setState({ keyEvent: true });
+          }
           key.classList.add("pressed");
         }
       }
     });
 
     keyboardEvent.addEventListener("keyup", (e) => {
-      // if (keyboard) keyboard.children[0].classList.remove("pressed");
       const key = document.getElementById(e.key);
+
       if (key) key.classList.remove("pressed");
     });
-
-    //
-    // keyboardEnter.addEventListener("keydown", (e) => {
-    //   const key = document.getElementById(e.key);
-    //   if (key) this.props.history.push("/");
-    // });
-  }
-
-  showResult = () => {
-    // const confirmResult = document.querySelector(".btn_result");
-    // const confirmResult = document.querySelector(".row");
-
-    this.compare();
-
-    // confirmResult.click();
-
-    // this.props.history.push("/");
-  };
-
-  startTimer() {
-    let timer;
-    const show = document.getElementById("show");
-    const startSeconds = new Date().getSeconds();
-
-    timer = setInterval(function () {
-      show.innerHTML = new Date().getSeconds() - startSeconds;
-    }, 1000);
-  }
-
-  resetTimer() {
-    // let timer;
-    const show = document.getElementById("show");
-    // const startSeconds = new Date().getSeconds();
-
-    // timer = setInterval(function () {
-    //   show.innerHTML = new Date().getSeconds() - startSeconds;
-    // }, 1000);
-
-    // this.startButton.onclick = this.start;
-
-    document.getElementById("show").innerHTML = "";
-    clearInterval(this.startTimer());
-
-    // clearInterval(show);
-    // show.innerHTML = "0";
-  }
-
-  // 타이머
-  timer() {
-    // const { time } = this.state;
-    // const startButton = document.querySelector(".timer_start");
-    const stopButton = document.querySelector(".timer_stop");
-    const resetButton = document.querySelector(".timer_reset");
-
-    // inputText.addEventListener("keydown", function (event) {
-    //   console.log("Textarea two was changed.");
-    // });
-
-    let timer;
-
-    // 시작
-    function start() {
-      const show = document.getElementById("show");
-      const startSeconds = new Date().getSeconds();
-
-      timer = setInterval(function () {
-        show.innerHTML = new Date().getSeconds() - startSeconds;
-      }, 1000);
-    }
-
-    // 중지
-    function stop() {
-      clearInterval(timer);
-    }
-
-    // 리셋
-    function reset() {
-      const show = document.getElementById("show");
-
-      // this.startButton.onclick = this.start;
-      clearInterval(timer);
-      show.innerHTML = "0";
-    }
-
-    const inputText = document.querySelector(".typing");
-
-    inputText.addEventListener(
-      "keydown",
-      function (e) {
-        start();
-      },
-      { once: true }
-    );
-
-    // 시간 계산
-    // inputText.addEventListener("keydown", function (e) {
-    //   if (e.keyCode === 46) {
-    //     stop();
-    //     const timer = document.getElementById("show").innerHTML;
-    //     console.log("====", timer);
-    //   }
-    // });
-    inputText.addEventListener("keydown", (e) => {
-      // const { time } = this.state;
-      // if (e.keyCode === 46) { // delete
-      if (e.keyCode === 13) {
-        stop();
-        const resultTime = document.getElementById("show").innerHTML;
-        this.setState({ time: resultTime });
-        if (e.preventDefault) e.preventDefault();
-        return false;
-        // console.log("time", this.state.time);
-      }
-    });
-
-    stopButton.onclick = function () {
-      // alert("클릭했어요");
-      stop();
-    };
-
-    resetButton.onclick = function () {
-      // alert("클릭했어요");
-      reset();
-    };
   }
 
   requestProblem() {
-    // const random = ["말리꽃"];
-    // const title = random[Math.floor(Math.random() * random.length)];
+    const { title } = this.state;
 
-    const { title, problem } = this.state;
+    // console.log("타이틀", title);
 
     if (title) {
       axios
@@ -282,14 +197,17 @@ class Test extends Component {
           // console.log("문제", this.state.problem);
           // console.log("문제", this.state.problem[0].problem);
           let filterProblem = [];
+          let filter = "";
 
           res.data.data.forEach((el) => {
             filterProblem.push(el.problem);
+            filter = el.title;
           });
 
           this.setState({ problem: filterProblem });
+          this.setState({ filterTitle: filter });
 
-          // console.log("====", this.state.problem);
+          // console.log("====", filter);
         })
         .catch((err) => {
           if (err) {
@@ -311,7 +229,7 @@ class Test extends Component {
   }
 
   render() {
-    const { accuracy, speed, problem, count } = this.state;
+    const { accuracy, speed, problem, count, filterTitle } = this.state;
 
     // problem.forEach((el) => {
     //   filterProblem.push(el.problem);
@@ -324,11 +242,12 @@ class Test extends Component {
         <Nav />
         <div id="test">
           <div className="test_header">
+            <div className="header_title">{filterTitle}</div>
             {/* <div className="header_problem">{this.state.problem}</div> */}
             <div className="header_problem">{problem[count]}</div>
             <div className="header_timer">
               {/* <p id="show">0</p> */}
-              <span id="show">0</span>
+              <span id="show">00:00:00</span>
               <span>초</span>
               <div className="start_button">
                 <input
@@ -337,7 +256,7 @@ class Test extends Component {
                   className="random_start"
                   onClick={this.requestProblem}
                 ></input>
-                <input
+                {/* <input
                   type="button"
                   value="start"
                   className="timer_start"
@@ -346,17 +265,26 @@ class Test extends Component {
                   type="button"
                   value="stop"
                   className="timer_stop"
-                ></input>
-                <input
+                ></input> */}
+                {/* <input
                   type="button"
                   value="reset"
                   className="timer_reset"
-                ></input>
-                <input
+                ></input> */}
+                <select type="button" className="select_start">
+                  <option value="select">선택</option>
+                  <option value="select_1">눈 녹듯</option>
+                  {/* <option value="select_1" onChange={alert("안뇽")}>
+                    눈 녹듯
+                  </option> */}
+                  <option value="select_2">말리꽃</option>
+                  <option value="select_3">오아시스</option>
+                </select>
+                {/* <input
                   type="button"
                   value="선택"
                   className="select_start"
-                ></input>
+                ></input> */}
               </div>
             </div>
           </div>
@@ -420,7 +348,7 @@ class Test extends Component {
               <div id="ㅁ" className="btn_11">
                 ㅁ
               </div>
-              <div id="ㄴ" className="btn_1">
+              <div id="ㅔ" className="btn_1">
                 ㄴ
               </div>
               <div id="ㅇ" className="btn_1">
