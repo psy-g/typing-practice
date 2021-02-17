@@ -1,22 +1,39 @@
 import React, { Component } from "react";
 import "./Result.css";
+import axios from "axios";
 
 class Result extends Component {
   constructor(props) {
     super(props);
+
+    this.ranking = this.ranking.bind(this);
+  }
+
+  ranking() {
+    const { time, average } = this.props;
+
+    if (time && average) {
+      axios
+        .post("http://localhost:8080/rank", this.props)
+        .then((res) => {
+          console.log("====", res);
+        })
+        .catch((err) => {
+          if (err) {
+            alert("랭킹 요청 에러");
+          }
+        });
+    } else {
+      alert("에러");
+    }
   }
 
   render() {
-    const { isOpen, close } = this.props;
+    const { isOpen, close, time, average } = this.props;
 
     return (
       <>
         {isOpen ? (
-          // isopen이 true: 코드를 실행, false: null
-          // <div onClick={close}> 버튼, 입력 창 제외 다른 부분(회색바탕) 클릭시 모달이 꺼짐
-          // <span className="close" onClick={close}>&times;</span> (&times; = x버튼) 누를시 꺼짐
-          // isOpen이 true: 모달 켜짐, false: 모달 꺼짐
-
           <div className="loginModal">
             <div className="loginList">
               <span className="close" onClick={close}>
@@ -34,8 +51,9 @@ class Result extends Component {
                 />
                 <button className="loginBtn">결과</button>
                 <div className="socialBox">
-                  <div className="naver" onClick={this.naverLoginHandler}>
-                    결과
+                  <div className="test" onClick={this.ranking}>
+                    {average}타수<br></br>
+                    {time}초
                   </div>
                 </div>
               </div>
