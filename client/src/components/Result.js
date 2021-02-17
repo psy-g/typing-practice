@@ -10,9 +10,9 @@ class Result extends Component {
   }
 
   ranking() {
-    const { time, average } = this.props;
+    const { time, average, title } = this.props;
 
-    if (time && average) {
+    if (time && average && title) {
       axios
         .post("http://localhost:8080/rank", this.props)
         .then((res) => {

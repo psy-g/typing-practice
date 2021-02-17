@@ -271,6 +271,7 @@ class Test extends Component {
                       isOpen={this.state.isModalOpen}
                       time={this.state.recordTime}
                       average={recordresultSpeed / count}
+                      title={this.state.filterTitle}
                       close={this.closeModal}
                     />
                   </div>
