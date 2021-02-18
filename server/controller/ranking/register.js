@@ -1,41 +1,129 @@
-const { Ranking } = require("../../models");
+const { Ranking, Users } = require("../../models");
 
 module.exports = async (req, res) => {
-  //   const { name, time, average, rank } = req.body;
-  const { id, name, time, average, title } = req.body;
+  const { id, recordTime, recordresultSpeed, count, filterTitle } = req.body;
+  // const { id, time, average, title } = req.body;
 
   // 유저 아이디 있으면 업데이트
   // 없으면 추가
+  const user = await Users.findOne({
+    where: { id: id },
+  });
 
-  if (id) {
-    const ranking = await Ranking.update(
+  const ranking = await Ranking.findOne({
+    where: { userId: id },
+  });
+
+  if (!ranking) {
+    await Ranking.findOrCreate({
+      where: { name: user.nickname },
+      defaults: {
+        name: user.nickname,
+        time: recordTime,
+        average: Math.round(recordresultSpeed / count),
+        title: filterTitle,
+        userId: id,
+      },
+    });
+
+    if (time) {
+      const filterRanking = await Ranking.findAll({
+        where: { title: filterTitle },
+        order: [["time", "ASC"]],
+      });
+
+      if (!filterTitle) {
+        res.status(401).json({ message: "print no" });
+      } else {
+        res.status(200).json({ message: "print ok", data: filterRanking });
+      }
+      // res.status(200).json({ message: "register ok" });
+    } else {
+      res.status(401).json({ message: "register no" });
+    }
+  } else if (ranking) {
+    // const ranking = await Ranking.update(
+    await Ranking.update(
       {
-        name: name,
-        time: time,
-        average: average,
-        title: title,
+        name: user.nickname,
+        time: recordTime,
+        average: Math.round(recordresultSpeed / count),
+        title: filterTitle,
       },
       {
         where: {
-          id: id,
+          userid: id,
         },
       }
     );
-    res.status(400).json({ message: "update ok" });
+    const filterRanking = await Ranking.findAll({
+      where: { title: filterTitle },
+      order: [["time", "ASC"]],
+    });
+
+    if (!filterTitle) {
+      res.status(401).json({ message: "print no" });
+    } else {
+      res.status(200).json({ message: "print ok", data: filterRanking });
+    }
+    // res.status(200).json({ message: "update ok" });
   } else {
     if (!time) {
       res.status(400).json({ message: "rank failed" });
     }
-
-    const ranking = await Ranking.findOrCreate({
-      where: { name },
-      defaults: { name, time, average, title },
-    });
-
-    if (time) {
-      res.status(200).json({ message: "register ok" });
-    } else {
-      res.status(401).json({ message: "register no" });
-    }
   }
 };
+
+// module.exports = async (req, res) => {
+//   const { id, recordTime, recordresultSpeed, count, filterTitle } = req.body;
+//   // const { id, time, average, title } = req.body;
+
+//   // 유저 아이디 있으면 업데이트
+//   // 없으면 추가
+//   const user = await Users.findOne({
+//     where: { id: id },
+//   });
+
+//   const ranking = await Ranking.findOne({
+//     where: { userId: id },
+//   });
+
+//   if (!ranking) {
+//     await Ranking.findOrCreate({
+//       where: { name: user.nickname },
+//       defaults: {
+//         name: user.nickname,
+//         time: recordTime,
+//         average: recordresultSpeed / count,
+//         title: filterTitle,
+//         userId: id,
+//       },
+//     });
+
+//     if (time) {
+//       res.status(200).json({ message: "register ok" });
+//     } else {
+//       res.status(401).json({ message: "register no" });
+//     }
+//   } else if (ranking) {
+//     // const ranking = await Ranking.update(
+//     await Ranking.update(
+//       {
+//         name: user.nickname,
+//         time: recordTime,
+//         average: recordresultSpeed / count,
+//         title: filterTitle,
+//       },
+//       {
+//         where: {
+//           userid: id,
+//         },
+//       }
+//     );
+//     res.status(200).json({ message: "update ok" });
+//   } else {
+//     if (!time) {
+//       res.status(400).json({ message: "rank failed" });
+//     }
+//   }
+// };

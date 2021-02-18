@@ -16,6 +16,9 @@ db.Users = require("./users")(sequelize, Sequelize);
 db.Test = require("./test")(sequelize, Sequelize);
 db.Ranking = require("./ranking")(sequelize, Sequelize);
 
+db.Users.hasMany(db.Ranking, { foreignKey: { allowNull: false } });
+db.Ranking.belongsTo(db.Users);
+
 // db.Users.hasMany(db.Comments, { foreignKey: { allowNull: false } });
 // db.Comments.belongsTo(db.Users);
 
