@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Result.css";
-// import axios from "axios";
+import { Link } from "react-router-dom";
 
 class Result extends Component {
   constructor(props) {
@@ -24,11 +24,11 @@ class Result extends Component {
               <div className="modalContents" onClick={() => isOpen}>
                 <div className="logo_signin">랭킹</div>
                 <div className="rank">{items}</div>
-                <button className="loginBtn">결과</button>
+                <button className="loginBtn">
+                  <Link to="/ranking">자세히 보러가기</Link>
+                </button>
                 <div className="socialBox">
-                  {/* <div className="test" onClick={this.ranking}> */}
                   <div className="test">
-                    {/* {this.ranking} */}
                     {Math.round(average)}타수<br></br>
                     {time}초
                   </div>
