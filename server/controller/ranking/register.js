@@ -43,37 +43,75 @@ module.exports = async (req, res) => {
       res.status(401).json({ message: "register no" });
     }
   } else if (ranking) {
-    // console.log("======================");
-    await Ranking.update(
-      {
-        name: user.nickname,
-        time: recordTime,
-        average: Math.round(recordresultSpeed / count),
-        title: filterTitle,
-      },
-      {
-        where: {
-          userid: id,
+    if (ranking.time > recordTime) {
+      await Ranking.update(
+        {
+          name: user.nickname,
+          time: recordTime,
+          average: Math.round(recordresultSpeed / count),
           title: filterTitle,
         },
-      }
-    );
-    const filterRanking = await Ranking.findAll({
-      where: { title: filterTitle },
-      order: [["time", "ASC"]],
-    });
-
-    if (!filterTitle) {
-      res.status(401).json({ message: "print no" });
-    } else {
+        {
+          where: {
+            userid: id,
+            title: filterTitle,
+          },
+        }
+      );
+      const filterRanking = await Ranking.findAll({
+        where: { title: filterTitle },
+        order: [["time", "ASC"]],
+      });
       res.status(200).json({ message: "print ok", data: filterRanking });
+    } else {
+      const filterRanking = await Ranking.findAll({
+        where: { title: filterTitle },
+        order: [["time", "ASC"]],
+      });
+      if (!filterTitle) {
+        res.status(401).json({ message: "print no" });
+      } else {
+        res.status(200).json({ message: "print ok", data: filterRanking });
+      }
     }
-    // res.status(200).json({ message: "update ok" });
   } else {
     if (!recordTime) {
       res.status(400).json({ message: "rank failed" });
     }
   }
+
+  // } else if (ranking) {
+  //   // console.log("======================");
+  //   await Ranking.update(
+  //     {
+  //       name: user.nickname,
+  //       time: recordTime,
+  //       average: Math.round(recordresultSpeed / count),
+  //       title: filterTitle,
+  //     },
+  //     {
+  //       where: {
+  //         userid: id,
+  //         title: filterTitle,
+  //       },
+  //     }
+  //   );
+  //   const filterRanking = await Ranking.findAll({
+  //     where: { title: filterTitle },
+  //     order: [["time", "ASC"]],
+  //   });
+
+  //   if (!filterTitle) {
+  //     res.status(401).json({ message: "print no" });
+  //   } else {
+  //     res.status(200).json({ message: "print ok", data: filterRanking });
+  //   }
+  //   // res.status(200).json({ message: "update ok" });
+  // } else {
+  //   if (!recordTime) {
+  //     res.status(400).json({ message: "rank failed" });
+  //   }
+  // }
 };
 
 // module.exports = async (req, res) => {

@@ -256,7 +256,7 @@ class Test extends Component {
           console.log(err.response);
         });
     } else {
-      alert("등록 에러");
+      alert("회원가입이 필요합니다");
     }
   }
 
