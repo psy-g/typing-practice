@@ -26,9 +26,11 @@ class Test extends Component {
       recordTime: 0,
       recordresultSpeed: 0,
       average: 0,
+      id: window.localStorage.getItem("id"),
     };
-    //270, 435, 370
+
     this.requestProblem = this.requestProblem.bind(this);
+    this.ranking = this.ranking.bind(this);
   }
 
   // 정확도 계산
@@ -76,7 +78,13 @@ class Test extends Component {
   };
 
   openModal = () => {
-    this.setState({ isModalOpen: true });
+    this.ranking();
+    setTimeout(() => {
+      this.setState({
+        isModalOpen: true,
+      });
+    }, 2000); // 시간. 2초 후 실행
+    // this.setState({ isModalOpen: true });
   };
   closeModal = () => {
     this.setState({ isModalOpen: false });
@@ -193,15 +201,10 @@ class Test extends Component {
   requestProblem() {
     const { title } = this.state;
 
-    // console.log("타이틀", title);
-
     if (title) {
       axios
         .post("http://localhost:8080/problem/random", this.state)
         .then((res) => {
-          // this.setState({ problem: res.data.data });
-          // console.log("문제", this.state.problem);
-          // console.log("문제", this.state.problem[0].problem);
           let filterProblem = [];
           let filter = "";
 
@@ -212,8 +215,6 @@ class Test extends Component {
 
           this.setState({ problem: filterProblem });
           this.setState({ filterTitle: filter });
-
-          // console.log("====", filter);
         })
         .catch((err) => {
           if (err) {
@@ -225,9 +226,158 @@ class Test extends Component {
     }
   }
 
-  problem() {
-    const { problem, filterProblem } = this.state;
+  // 랭킹 등록, 출력
+  // rankingRegister() {
+  //   // 등록
+  //   const {
+  //     id,
+  //     count,
+  //     filterTitle,
+  //     recordresultSpeed,
+  //     recordTime,
+  //   } = this.state;
+
+  //   if (id) {
+  //     axios
+  //       .post("http://localhost:8080/ranking/register", this.state)
+  //       .then((res) => {
+  //         console.log("register OK");
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.response);
+  //       });
+  //   } else {
+  //     alert("등록 에러");
+  //   }
+  // }
+
+  // rankingPrint() {
+  //   const { filterTitle } = this.state;
+
+  //   const items = [];
+  //   const printRank = [];
+
+  //   if (filterTitle) {
+  //     axios
+  //       .post("http://localhost:8080/ranking/print", this.state)
+  //       .then((res) => {
+  //         res.data.data.forEach((el) => {
+  //           printRank.push({
+  //             name: el.name,
+  //             average: el.average,
+  //             time: el.time,
+  //           });
+  //         });
+
+  //         for (const [index, value] of printRank.entries()) {
+  //           items.push(
+  //             <div className={`rank__${index}`}>
+  //               {index + 1}등 {value.name} {value.average}타수 {value.time}초
+  //             </div>
+  //           );
+  //         }
+
+  //         this.setState({ items: items });
+  //       })
+  //       .catch((err) => {
+  //         console.log(err.response);
+  //       });
+  //   } else {
+  //     alert("에러");
+  //   }
+  // }
+
+  ranking() {
+    // 등록
+    const {
+      id,
+      count,
+      filterTitle,
+      recordresultSpeed,
+      recordTime,
+    } = this.state;
+    const items = [];
+    const printRank = [];
+
+    if (id) {
+      axios
+        .post("http://localhost:8080/ranking/register", this.state)
+        .then((res) => {
+          res.data.data.forEach((el) => {
+            printRank.push({
+              name: el.name,
+              average: el.average,
+              time: el.time,
+            });
+          });
+          for (const [index, value] of printRank.entries()) {
+            items.push(
+              <div className={`rank__${index}`}>
+                {index + 1}등 {value.name} {value.average}타수 {value.time}초
+              </div>
+            );
+          }
+          this.setState({ items: items });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else {
+      alert("등록 에러");
+    }
   }
+
+  // ranking() {
+  // 등록
+  // const {
+  //   id,
+  //   count,
+  //   filterTitle,
+  //   recordresultSpeed,
+  //   recordTime,
+  // } = this.state;
+  // if (id) {
+  //   axios
+  //     .post("http://localhost:8080/ranking/register", this.state)
+  //     .then((res) => {
+  //       console.log("register OK");
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  // } else {
+  //   alert("등록 에러");
+  // }
+  // 출력
+  // const items = [];
+  // const printRank = [];
+  // if (filterTitle) {
+  //   axios
+  //     .post("http://localhost:8080/ranking/print", this.state)
+  //     .then((res) => {
+  //       res.data.data.forEach((el) => {
+  //         printRank.push({
+  //           name: el.name,
+  //           average: el.average,
+  //           time: el.time,
+  //         });
+  //       });
+  //       for (const [index, value] of printRank.entries()) {
+  //         items.push(
+  //           <div className={`rank__${index}`}>
+  //             {index + 1}등 {value.name} {value.average}타수 {value.time}초
+  //           </div>
+  //         );
+  //       }
+  //       this.setState({ items: items });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  // } else {
+  //   alert("에러");
+  // }
+  // }
 
   componentDidMount() {
     // this.timer();
@@ -245,10 +395,6 @@ class Test extends Component {
       recordTime,
     } = this.state;
 
-    // problem.forEach((el) => {
-    //   filterProblem.push(el.problem);
-    // });
-
     return (
       <div>
         <Nav />
@@ -260,11 +406,15 @@ class Test extends Component {
               {/* {!problem[count] ? ( */}
               {count === 2 ? (
                 <div className="header_pro">
-                  결과: {recordresultSpeed / count}
+                  결과: {Math.round(recordresultSpeed / count)}
                   <br></br>
                   시간: {recordTime}초{/* </div> */}
                   <div className="btn_result">
-                    <div onClick={this.openModal} className="text">
+                    <div
+                      onClick={this.openModal}
+                      // onClick={this.onClick}
+                      className="text"
+                    >
                       랭킹보기
                     </div>
                     <Result
@@ -272,6 +422,7 @@ class Test extends Component {
                       time={this.state.recordTime}
                       average={recordresultSpeed / count}
                       title={this.state.filterTitle}
+                      items={this.state.items}
                       close={this.closeModal}
                     />
                   </div>

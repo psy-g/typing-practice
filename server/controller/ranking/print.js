@@ -1,13 +1,16 @@
 const { Ranking } = require("../../models");
 
 module.exports = async (req, res) => {
-  const { title } = req.body;
+  const { filterTitle } = req.body;
 
   const filterRanking = await Ranking.findAll({
-    where: { title: title },
-
+    where: { title: filterTitle },
     order: [["time", "ASC"]],
   });
 
-  res.status(400).json({ data: filterRanking });
+  if (!filterTitle) {
+    res.status(401).json({ message: "print no" });
+  } else {
+    res.status(200).json({ message: "print ok", data: filterRanking });
+  }
 };
