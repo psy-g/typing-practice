@@ -37,6 +37,7 @@ class Ranking extends Component {
           });
           for (const [index, value] of printRank.entries()) {
             items.push(
+              // <div className={index}>
               <div className={`rank__${index}`}>
                 {index + 1}등 {value.name} {value.average}타수 {value.time}초
               </div>

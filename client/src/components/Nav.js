@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
+import Signout from "./Signout";
 
 class Nav extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Nav extends Component {
 
   render() {
     const { isOpen } = this.state;
+    const loginCheck = window.localStorage.getItem("isLogin");
 
     return (
       <div>
@@ -35,12 +37,29 @@ class Nav extends Component {
                 <div className="burger_icon" onClick={this.closeBurger}>
                   &times;
                 </div>
-                {/* <div className="burger_icon"> */}
-                <div className="burger_close">
+                {loginCheck ? (
+                  <div className="burger_close">
+                    <div className="logout">
+                      <Signout />
+                    </div>
+                    <Link to="/mypage">마이페이지</Link>
+                    <Link to="/ranking">랭킹</Link>
+                  </div>
+                ) : (
+                  <div className="burger_close">
+                    <Link to="/signin">로그인</Link>
+                    <Link to="/signup">회원가입</Link>
+                    <Link to="/ranking">랭킹</Link>
+                  </div>
+                )}
+                {/* <div className="burger_close">
                   <Link to="/signin">로그인</Link>
                   <Link to="/signup">회원가입</Link>
                   <Link to="/ranking">랭킹</Link>
-                </div>
+                  <div className="logout">
+                    <Signout />
+                  </div>
+                </div> */}
               </div>
             ) : (
               // </div>

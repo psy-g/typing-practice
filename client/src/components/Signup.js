@@ -46,7 +46,8 @@ class Signup extends Component {
             <div className="signup_container">
               <div className="row">
                 <div className="col-25">
-                  <label for="nickname">닉네임</label>
+                  {/* <label for="nickname">닉네임</label> */}
+                  <label className="nickname">닉네임</label>
                 </div>
                 <div className="col-75">
                   <input
@@ -59,7 +60,8 @@ class Signup extends Component {
               </div>
               <div className="row">
                 <div className="col-25">
-                  <label for="password">비밀번호</label>
+                  {/* <label for="password">비밀번호</label> */}
+                  <label className="password">비밀번호</label>
                 </div>
                 <div className="col-75">
                   <input

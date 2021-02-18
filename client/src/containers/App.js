@@ -6,6 +6,7 @@ import Test from "../components/Test";
 import Signup from "../components/Signup";
 import Signin from "../components/Signin";
 import Ranking from "../components/Ranking";
+import Mypage from "../components/Mypage";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
           <Route exact path="/signin" render={() => <Signin />} />
           <Route exact path="/ranking" render={() => <Ranking />} />
           <Route exact path="/test" render={() => <Test />} />
+          <Route exact path="/mypage" render={() => <Mypage />} />
         </Switch>
       </div>
     );
