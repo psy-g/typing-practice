@@ -226,76 +226,9 @@ class Test extends Component {
     }
   }
 
-  // 랭킹 등록, 출력
-  // rankingRegister() {
-  //   // 등록
-  //   const {
-  //     id,
-  //     count,
-  //     filterTitle,
-  //     recordresultSpeed,
-  //     recordTime,
-  //   } = this.state;
-
-  //   if (id) {
-  //     axios
-  //       .post("http://localhost:8080/ranking/register", this.state)
-  //       .then((res) => {
-  //         console.log("register OK");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.response);
-  //       });
-  //   } else {
-  //     alert("등록 에러");
-  //   }
-  // }
-
-  // rankingPrint() {
-  //   const { filterTitle } = this.state;
-
-  //   const items = [];
-  //   const printRank = [];
-
-  //   if (filterTitle) {
-  //     axios
-  //       .post("http://localhost:8080/ranking/print", this.state)
-  //       .then((res) => {
-  //         res.data.data.forEach((el) => {
-  //           printRank.push({
-  //             name: el.name,
-  //             average: el.average,
-  //             time: el.time,
-  //           });
-  //         });
-
-  //         for (const [index, value] of printRank.entries()) {
-  //           items.push(
-  //             <div className={`rank__${index}`}>
-  //               {index + 1}등 {value.name} {value.average}타수 {value.time}초
-  //             </div>
-  //           );
-  //         }
-
-  //         this.setState({ items: items });
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.response);
-  //       });
-  //   } else {
-  //     alert("에러");
-  //   }
-  // }
-
   ranking() {
     // 등록
-    const {
-      id,
-      count,
-      filterTitle,
-      recordresultSpeed,
-      recordTime,
-    } = this.state;
+    const { id } = this.state;
     const items = [];
     const printRank = [];
 

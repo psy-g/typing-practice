@@ -11,12 +11,14 @@ module.exports = async (req, res) => {
   });
 
   const ranking = await Ranking.findOne({
-    where: { userId: id },
+    where: { userId: id, title: filterTitle },
   });
+
+  console.log("ranking", ranking);
 
   if (!ranking) {
     await Ranking.findOrCreate({
-      where: { name: user.nickname },
+      where: { name: user.nickname, title: filterTitle },
       defaults: {
         name: user.nickname,
         time: recordTime,
@@ -26,7 +28,7 @@ module.exports = async (req, res) => {
       },
     });
 
-    if (time) {
+    if (recordTime) {
       const filterRanking = await Ranking.findAll({
         where: { title: filterTitle },
         order: [["time", "ASC"]],
@@ -37,12 +39,11 @@ module.exports = async (req, res) => {
       } else {
         res.status(200).json({ message: "print ok", data: filterRanking });
       }
-      // res.status(200).json({ message: "register ok" });
     } else {
       res.status(401).json({ message: "register no" });
     }
   } else if (ranking) {
-    // const ranking = await Ranking.update(
+    // console.log("======================");
     await Ranking.update(
       {
         name: user.nickname,
@@ -53,6 +54,7 @@ module.exports = async (req, res) => {
       {
         where: {
           userid: id,
+          title: filterTitle,
         },
       }
     );
@@ -68,7 +70,7 @@ module.exports = async (req, res) => {
     }
     // res.status(200).json({ message: "update ok" });
   } else {
-    if (!time) {
+    if (!recordTime) {
       res.status(400).json({ message: "rank failed" });
     }
   }
