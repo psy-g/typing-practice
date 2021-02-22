@@ -46,9 +46,32 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  /* width: 50%;
-  height: 50%; */
+  width: 100%;
 }
+
+/* .animation {
+  position: absolute;
+  animation-name: slidein;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+}
+
+@keyframes slidein {
+  0% {
+    left: 100px;
+  }
+  100% {
+    left: 600px;
+  }
+} */
+
+/* .main_body_running {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1px;
+} */
 
 /* .login {
   display: flex;

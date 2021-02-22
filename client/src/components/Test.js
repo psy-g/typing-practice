@@ -4,6 +4,8 @@ import Nav from "./Nav";
 import Result from "./Result";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import running from "../image/run2.gif";
+import styled from "styled-components";
 
 class Test extends Component {
   constructor(props) {
@@ -27,6 +29,7 @@ class Test extends Component {
       recordresultSpeed: 0,
       average: 0,
       id: window.localStorage.getItem("id"),
+      winnerRecord: 0,
     };
 
     this.requestProblem = this.requestProblem.bind(this);
@@ -200,10 +203,13 @@ class Test extends Component {
 
   requestProblem() {
     const { title } = this.state;
+    const random = title[Math.floor(Math.random() * title.length)];
 
-    if (title) {
+    // if (title) {
+    if (random) {
       axios
-        .post("http://localhost:8080/problem/random", this.state)
+        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", this.state)
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -213,8 +219,16 @@ class Test extends Component {
             filter = el.title;
           });
 
+          // console.log("====", res);
+
+          // res.data.winner.forEach((el) => {
+          //   winner.push(el.time);
+          //   winner = el.time;
+          // });
+
           this.setState({ problem: filterProblem });
           this.setState({ filterTitle: filter });
+          this.setState({ winnerRecord: res.data.winner.time });
         })
         .catch((err) => {
           if (err) {
@@ -260,58 +274,6 @@ class Test extends Component {
     }
   }
 
-  // ranking() {
-  // 등록
-  // const {
-  //   id,
-  //   count,
-  //   filterTitle,
-  //   recordresultSpeed,
-  //   recordTime,
-  // } = this.state;
-  // if (id) {
-  //   axios
-  //     .post("http://localhost:8080/ranking/register", this.state)
-  //     .then((res) => {
-  //       console.log("register OK");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // } else {
-  //   alert("등록 에러");
-  // }
-  // 출력
-  // const items = [];
-  // const printRank = [];
-  // if (filterTitle) {
-  //   axios
-  //     .post("http://localhost:8080/ranking/print", this.state)
-  //     .then((res) => {
-  //       res.data.data.forEach((el) => {
-  //         printRank.push({
-  //           name: el.name,
-  //           average: el.average,
-  //           time: el.time,
-  //         });
-  //       });
-  //       for (const [index, value] of printRank.entries()) {
-  //         items.push(
-  //           <div className={`rank__${index}`}>
-  //             {index + 1}등 {value.name} {value.average}타수 {value.time}초
-  //           </div>
-  //         );
-  //       }
-  //       this.setState({ items: items });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  // } else {
-  //   alert("에러");
-  // }
-  // }
-
   componentDidMount() {
     // this.timer();
     this.keyboardEvent();
@@ -326,7 +288,10 @@ class Test extends Component {
       filterTitle,
       recordresultSpeed,
       recordTime,
+      winnerRecord,
     } = this.state;
+
+    // console.log("=====", this.state.winnerRecord);
 
     return (
       <div>
@@ -410,6 +375,12 @@ class Test extends Component {
             </div> */}
           </div>
           <div className="test_input">
+            <div className="test_run">
+              {/* <Running checkRun={winnerRecord}> */}
+              <Running runtime={winnerRecord}>
+                <img src={running} width="150px" height="100px" alt="run" />
+              </Running>
+            </div>
             <textarea
               type="text"
               className="typing"
@@ -525,5 +496,43 @@ class Test extends Component {
     );
   }
 }
+
+//   animation-duration: 10s;
+//   animation-duration: ${(props) => props.runtime}s;
+//   animation-timing-function: linear;
+
+const Running = styled.div`
+  position: absolute;
+  animation-name: slidein;
+  animation-duration: ${(props) => props.runtime}s;
+  animation-direction: normal;
+  animation-timing-function: linear;
+  @keyframes slidein {
+    0% {
+      left: 310px;
+    }
+    100% {
+      left: 1000px;
+    }
+`;
+
+// const Running = styled.div`
+//   padding-top: 100px;
+//   align-items: left;
+//   padding-left: ${(props) => {
+//     if (props.runtime === 0) return "0px";
+//     if (props.runtime === 1) return "10px";
+//     if (props.runtime === 2) return "20px";
+//     if (props.runtime === 3) return "30px";
+//     if (props.runtime === 3) return "40px";
+//     if (props.runtime === 4) return "50px";
+//     if (props.runtime === 5) return "60px";
+//     if (props.runtime === 6) return "70px";
+//     if (props.runtime === 7) return "80px";
+//     if (props.runtime === 8) return "90px";
+//     if (props.runtime === 9) return "100px";
+//     else return "0px";
+//   }};
+// `;
 
 export default withRouter(Test);

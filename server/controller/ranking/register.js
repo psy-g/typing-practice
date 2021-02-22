@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     where: { userId: id, title: filterTitle },
   });
 
-  console.log("ranking", ranking);
+  // console.log("ranking", ranking);
 
   if (!ranking) {
     await Ranking.findOrCreate({
