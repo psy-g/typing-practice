@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import Signout from "./Signout";
 
+import loginIcon from "../image/login.png";
+
 class Nav extends Component {
   constructor(props) {
     super(props);
@@ -28,51 +30,61 @@ class Nav extends Component {
         <div id="nav">
           <div className="nav">
             <span className="nav_logo">
-              <Link to="/">로고</Link>
+              <Link to="/" className="nav_logo_font">
+                보드런
+              </Link>
             </span>
-            {/* <span className="nav_btn">버튼</span> */}
             {isOpen ? (
-              // <div onClick={this.closeBurger}>
               <div className="burger_container">
-                <div className="burger_icon" onClick={this.closeBurger}>
-                  &times;
+                <div className="bunger_container_header">
+                  <div className="burger_icon" onClick={this.closeBurger}>
+                    &times;&nbsp;
+                  </div>
                 </div>
                 {loginCheck ? (
                   <div className="burger_close">
-                    <div className="logout">
+                    <div className="burger_close_logout">
                       <Signout />
                     </div>
-                    <Link to="/mypage">마이페이지</Link>
-                    <Link to="/ranking">랭킹</Link>
+                    <div className="burger_close_mypage">
+                      <Link to="/mypage">
+                        <span className="buger_ranking_mypage">📊</span>{" "}
+                        마이페이지
+                      </Link>
+                    </div>
+                    <div className="burger_close_ranking">
+                      <Link to="/ranking">
+                        <span className="buger_ranking_icon">🏆</span> 랭킹
+                      </Link>
+                    </div>
                   </div>
                 ) : (
                   <div className="burger_close">
-                    <Link to="/signin">로그인</Link>
-                    <Link to="/signup">회원가입</Link>
-                    <Link to="/ranking">랭킹</Link>
+                    <div className="burger_close_signin">
+                      <Link to="/signin">
+                        <span className="buger_signup_icon">⌨</span> 로그인
+                      </Link>
+                    </div>
+                    <div className="burger_close_signup">
+                      <Link to="/signup">
+                        <span className="buger_signup_icon">🤝</span> 회원가입
+                      </Link>
+                    </div>
+                    <div className="burger_close_ranking">
+                      <Link to="/ranking">
+                        <span className="buger_ranking_icon">🏆</span> 랭킹
+                      </Link>
+                    </div>
                   </div>
                 )}
-                {/* <div className="burger_close">
-                  <Link to="/signin">로그인</Link>
-                  <Link to="/signup">회원가입</Link>
-                  <Link to="/ranking">랭킹</Link>
-                  <div className="logout">
-                    <Signout />
-                  </div>
-                </div> */}
               </div>
             ) : (
-              // </div>
               <div className="bad">
                 <span className="burger_open" onClick={this.openBurger}>
                   &#9776;
                 </span>
               </div>
             )}
-
-            {/* <div className="burgerburger" onclick={this.toggleNav("myNav")}>
-              &#9776; open
-            </div> */}
           </div>
         </div>
       </div>

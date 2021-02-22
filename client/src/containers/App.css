@@ -5,3 +5,13 @@
   font-family: "Jua", sans-serif;
   box-sizing: border-box;
 }
+
+body {
+  margin: 0px 0px;
+}
+
+.app {
+  /* position: relative; */
+  height: 100vh;
+  background-color: #f17f42;
+}
