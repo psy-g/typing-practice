@@ -46,6 +46,14 @@
   border: solid blue;
 }
 
+.test_run {
+  width: 65%;
+  height: 25rem;
+  text-align: center;
+  border: solid black;
+  background-color: #ffeee4;
+}
+
 .test_submit {
   display: flex;
   justify-content: center;
