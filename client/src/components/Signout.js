@@ -18,6 +18,7 @@ class Signout extends Component {
           window.localStorage.removeItem("isLogin");
           window.localStorage.removeItem("token");
           window.localStorage.removeItem("id");
+          window.localStorage.removeItem("nick");
           this.props.history.push("/");
         }
       })
