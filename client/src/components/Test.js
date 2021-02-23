@@ -5,6 +5,7 @@ import Result from "./Result";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import running from "../image/run2.gif";
+import running2 from "../image/run1.gif";
 import styled from "styled-components";
 
 class Test extends Component {
@@ -34,6 +35,11 @@ class Test extends Component {
 
     this.requestProblem = this.requestProblem.bind(this);
     this.ranking = this.ranking.bind(this);
+    this.runStart1 = this.runStart1.bind(this);
+    this.runStart2 = this.runStart2.bind(this);
+    this.runStop = this.runStop.bind(this);
+    this.runRestart = this.runRestart.bind(this);
+    this.runChallenge = this.runChallenge.bind(this);
   }
 
   // 정확도 계산
@@ -60,6 +66,8 @@ class Test extends Component {
       this.setState({
         recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
       });
+      this.runChallenge();
+
       console.log("카운트", this.state.count);
       console.log("기록", this.state.recordresultSpeed);
     } else {
@@ -70,10 +78,6 @@ class Test extends Component {
       this.setState({ keyEvent: false });
       // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
     }
-
-    // console.log("problem", problem);
-    // console.log("answer", answer);
-    // console.log("time", time);
   }
 
   handleInputValue = (key) => (e) => {
@@ -137,8 +141,6 @@ class Test extends Component {
   stop() {
     const { timer } = this.state;
 
-    // console.log("stop", timer);
-
     clearInterval(timer);
   }
 
@@ -146,7 +148,6 @@ class Test extends Component {
     const { timer } = this.state;
 
     clearInterval(timer);
-    // time = 0;
     this.init();
   }
 
@@ -174,19 +175,23 @@ class Test extends Component {
             if (e.preventDefault) e.preventDefault();
             return false;
           } else {
+            this.runStop();
             this.stop();
+
             const resultTime = document.getElementById("show").innerHTML;
-            // console.log("입력시간", Number(resultTime.substring(6)));
+
             this.setState({ time: Number(resultTime.substring(6)) });
-            // this.setState({ time: resultTime });
             this.compare();
-            // console.log("=====", keyboardEvent.value);
+
             if (e.preventDefault) e.preventDefault();
             return false;
           }
         } else {
           if (!this.state.keyEvent) {
             this.start();
+            this.runStart1();
+            this.runStart2();
+            this.runRestart();
             this.setState({ keyEvent: true });
           }
           key.classList.add("pressed");
@@ -218,13 +223,6 @@ class Test extends Component {
             filterProblem.push(el.problem);
             filter = el.title;
           });
-
-          // console.log("====", res);
-
-          // res.data.winner.forEach((el) => {
-          //   winner.push(el.time);
-          //   winner = el.time;
-          // });
 
           this.setState({ problem: filterProblem });
           this.setState({ filterTitle: filter });
@@ -274,6 +272,55 @@ class Test extends Component {
     }
   }
 
+  // 달리기(시작, 일시정지, 재시작)
+  runStart1() {
+    const running1 = document.querySelector(".runImg");
+
+    running1.style.animationDuration = `${this.state.winnerRecord}s`;
+  }
+
+  runStart2() {
+    const { time } = this.state;
+    const running2 = document.querySelector(".run_challenger");
+
+    if (time === 0)
+      running2.style.animationDuration = `${this.state.winnerRecord}s`;
+    else running2.style.animationDuration = `${this.state.time * 2}s`;
+  }
+
+  runStop() {
+    const running1 = document.querySelector(".runImg");
+    const running2 = document.querySelector(".run_challenger");
+
+    running1.style.animationPlayState = "paused";
+    running2.style.animationPlayState = "paused";
+  }
+
+  runRestart() {
+    const running1 = document.querySelector(".runImg");
+    const running2 = document.querySelector(".run_challenger");
+
+    running1.style.animationPlayState = "running";
+    running2.style.animationPlayState = "running";
+  }
+
+  // runChallenge() {
+  //   const runChal = document.querySelector(".run_challenger");
+
+  //   runChal.style.animationDuration = "20s";
+  // }
+
+  // 1등 기록 - 지난 시간(지난 문제 경과 시간) = 시간(..)
+  runChallenge() {
+    const running2 = document.querySelector(".run_challenger");
+
+    // const newDuration = this.state.recordTime * 2;
+    const newDuration = this.state.time * 2;
+
+    running2.style.animationDuration = `${newDuration}s`;
+    // running.style.animationDuration = "60s";
+  }
+
   componentDidMount() {
     // this.timer();
     this.keyboardEvent();
@@ -288,7 +335,6 @@ class Test extends Component {
       filterTitle,
       recordresultSpeed,
       recordTime,
-      winnerRecord,
     } = this.state;
 
     // console.log("=====", this.state.winnerRecord);
@@ -343,44 +389,42 @@ class Test extends Component {
                         <option value="select_2">말리꽃</option>
                         <option value="select_3">오아시스</option>
                       </select>
+                      <div className="stop" onClick={this.runStop}>
+                        스톱
+                      </div>
+                      <div className="restart" onClick={this.runRestart}>
+                        재시작
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
             </div>
-            {/* <div>
-              {problem[count] ? (
-                <div className="header_problem">{problem[count]}</div>
-              ) : (
-                <div className="header_pro">엔터로 시작 가능</div>
-              )}
-            </div> */}
-            {/* <div className="header_timer">
-              <span id="show">00:00:00</span>
-              <span>초</span>
-              <div className="start_button">
-                <input
-                  type="button"
-                  value="랜덤"
-                  className="random_start"
-                  onClick={this.requestProblem}
-                ></input>
-                <select type="button" className="select_start">
-                  <option value="select">선택</option>
-                  <option value="select_1">눈 녹듯</option>
-                  <option value="select_2">말리꽃</option>
-                  <option value="select_3">오아시스</option>
-                </select>
-              </div>
-            </div> */}
           </div>
           <div className="test_input">
             <div className="test_run">
-              {/* <Running checkRun={winnerRecord}> */}
-              <Running runtime={winnerRecord}>
-                <img src={running} width="150px" height="100px" alt="run" />
-              </Running>
+              <div className="test_run_1st">
+                {/* <Running runtime={winnerRecord}> */}
+                <img
+                  className="runImg"
+                  src={running}
+                  width="150px"
+                  height="100px"
+                  alt="1st"
+                />
+                {/* </Running> */}
+              </div>
+              <div className="test_run_challenger">
+                <img
+                  className="run_challenger"
+                  src={running2}
+                  width="110px"
+                  height="80px"
+                  alt="challenge"
+                />
+              </div>
             </div>
+
             <textarea
               type="text"
               className="typing"
@@ -500,21 +544,22 @@ class Test extends Component {
 //   animation-duration: 10s;
 //   animation-duration: ${(props) => props.runtime}s;
 //   animation-timing-function: linear;
+//   animation-play-state: paused; // 엔터 누를 때 정지 시키기?
 
-const Running = styled.div`
-  position: absolute;
-  animation-name: slidein;
-  animation-duration: ${(props) => props.runtime}s;
-  animation-direction: normal;
-  animation-timing-function: linear;
-  @keyframes slidein {
-    0% {
-      left: 310px;
-    }
-    100% {
-      left: 1000px;
-    }
-`;
+// const Running = styled.div`
+//   position: absolute;
+//   animation-name: slidein;
+//   animation-duration: ${(props) => props.runtime}s;
+//   animation-direction: normal;
+//   animation-timing-function: linear;
+//   @keyframes slidein {
+//     0% {
+//       left: 310px;
+//     }
+//     100% {
+//       left: 1000px;
+//     }
+// `;
 
 // const Running = styled.div`
 //   padding-top: 100px;
