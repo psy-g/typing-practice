@@ -68,6 +68,7 @@ class Signin extends React.Component {
       if (loginRequest.data.message === "signin OK") {
         window.localStorage.setItem("token", loginRequest.data.token);
         window.localStorage.setItem("id", loginRequest.data.id);
+        window.localStorage.setItem("nick", loginRequest.data.nickname);
         this.loginHandler();
       }
     }

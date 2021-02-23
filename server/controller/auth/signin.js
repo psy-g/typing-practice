@@ -29,10 +29,12 @@ module.exports = async (req, res) => {
           expiresIn: "7d",
         }
       );
-      return res
-        .status(200)
-        .cookie("token", token)
-        .json({ message: "signin OK", token: token, id: users.id });
+      return res.status(200).cookie("token", token).json({
+        message: "signin OK",
+        token: token,
+        id: users.id,
+        nickname: users.nickname,
+      });
     } else {
       return res.status(400).json({ message: "invalid password" });
     }
