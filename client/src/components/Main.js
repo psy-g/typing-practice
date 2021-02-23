@@ -3,7 +3,6 @@ import "./Main.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import running from "../image/run2.gif";
-import styled from "styled-components";
 
 // const Circle = styled.div`
 //   width: 5rem;

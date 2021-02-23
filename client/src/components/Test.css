@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   width: 90%;
-  height: 15rem;
+  height: 20rem;
   text-align: center;
   border: solid red;
 }
@@ -47,11 +47,66 @@
 }
 
 .test_run {
+  flex-direction: column;
+  justify-content: flex-start;
   width: 65%;
-  height: 25rem;
-  text-align: center;
+  height: 40rem;
   border: solid black;
   background-color: #ffeee4;
+}
+
+.test_run_1st {
+  /* text-align: left; */
+  display: flex;
+  justify-content: flex-start;
+}
+
+.test_run_challenger {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.runImg {
+  /* position: relative;
+  animation-name: slidein;
+  animation-direction: normal;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards; */
+  position: relative;
+  animation-name: challenger;
+  animation-direction: normal;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  /* animation-duration: 30s; */
+}
+
+@keyframes slidein {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 88%;
+  }
+}
+
+.run_challenger {
+  position: relative;
+  animation-name: challenger;
+  animation-direction: normal;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  /* animation-duration: 30s; */
+}
+
+@keyframes challenger {
+  0% {
+    left: 1%;
+  }
+  100% {
+    /* left: 250px; */
+    /* left: 1000px; */
+    left: 89%;
+  }
 }
 
 .test_submit {
@@ -77,12 +132,12 @@
 .btn_3,
 .btn_4,
 .btn_11 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
   color: white;
   background: black;
-  border-radius: 0.8rem;
-  padding: 2rem;
+  border-radius: 0.6rem;
+  padding: 1.3rem;
   transition: all 0.5s ease;
 }
 
@@ -95,7 +150,7 @@
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   align-content: center;
-  grid-gap: 0.5rem;
+  grid-gap: 0.4rem;
   padding: 1rem;
   width: 60vw;
   height: 100vh;
