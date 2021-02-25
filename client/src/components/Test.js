@@ -13,8 +13,6 @@ class Test extends Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      // problem:
-      //   "얼마나 더 견뎌야 하는지 짙은 어둠을 헤매고 있어 내가 바란 꿈이라는 것은 없는 걸까?",
       problem: [],
       count: 0,
       filterProblem: [],
@@ -48,7 +46,7 @@ class Test extends Component {
 
     // const resetInput = document.querySelector(".typing").value;
 
-    // 타수 계산(타수*60/걸린시간(초))
+    // 수 계산(타수*60/걸린시간(초))
     // 48글자 * 60초 / 10초
     // 2880 / 10 => 288타
 
@@ -58,7 +56,7 @@ class Test extends Component {
 
     if (problem[count] === answer) {
       this.setState({ accuracy: "100%" });
-      this.setState({ speed: `${resultSpeed}타수` });
+      this.setState({ speed: `${Math.floor(resultSpeed)}타수` });
       this.setState({ count: count + 1 }, function () {});
       document.querySelector(".typing").value = "";
       this.setState({ keyEvent: false });
@@ -66,7 +64,7 @@ class Test extends Component {
       this.setState({
         recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
       });
-      this.runChallenge();
+      // this.runChallenge();
 
       console.log("카운트", this.state.count);
       console.log("기록", this.state.recordresultSpeed);
@@ -91,7 +89,6 @@ class Test extends Component {
         isModalOpen: true,
       });
     }, 2000); // 시간. 2초 후 실행
-    // this.setState({ isModalOpen: true });
   };
   closeModal = () => {
     this.setState({ isModalOpen: false });
@@ -159,7 +156,6 @@ class Test extends Component {
     const keyboardEvent = document.querySelector(".typing");
 
     keyboardEvent.addEventListener("keydown", (e) => {
-      // keyboardEvent.addEventListener("keypress", (e) => {
       const key = document.getElementById(e.key);
 
       if (key) {
@@ -170,12 +166,14 @@ class Test extends Component {
 
         // if (key.id === "Enter") {
         if (e.keyCode === 13) {
-          if (document.querySelector(".header_problem").innerHTML === "") {
+          if (
+            document.querySelector(".header_problem_count").innerHTML === ""
+          ) {
             this.requestProblem();
             if (e.preventDefault) e.preventDefault();
             return false;
           } else {
-            this.runStop();
+            // this.runStop();
             this.stop();
 
             const resultTime = document.getElementById("show").innerHTML;
@@ -189,9 +187,9 @@ class Test extends Component {
         } else {
           if (!this.state.keyEvent) {
             this.start();
-            this.runStart1();
-            this.runStart2();
-            this.runRestart();
+            // this.runStart1();
+            // this.runStart2();
+            // this.runRestart();
             this.setState({ keyEvent: true });
           }
           key.classList.add("pressed");
@@ -239,8 +237,7 @@ class Test extends Component {
   }
 
   ranking() {
-    // 등록
-    const { id } = this.state;
+    const { id, filterTitle } = this.state;
     const items = [];
     const printRank = [];
 
@@ -257,8 +254,15 @@ class Test extends Component {
           });
           for (const [index, value] of printRank.entries()) {
             items.push(
-              <div className={`rank__${index}`}>
-                {index + 1}등 {value.name} {value.average}타수 {value.time}초
+              // <div className={`rank__${index}`}>
+              //   {index + 1}등 {value.name} {value.average}타수 {value.time}초
+              // </div>
+              <div className={`result_rank__${index}`}>
+                <div className="result_rank__rank">{index + 1}</div>
+                <div className="result_rank__name">{value.name}</div>
+                <div className="result_rank__record">
+                  {value.average}타수 {value.time}초
+                </div>
               </div>
             );
           }
@@ -267,8 +271,36 @@ class Test extends Component {
         .catch((err) => {
           console.log(err.response);
         });
+
+      // 게스트
     } else {
-      alert("회원가입이 필요합니다");
+      // alert("회원가입이 필요합니다");
+      axios
+        .post("http://localhost:8080/ranking/print", { title: filterTitle })
+        .then((res) => {
+          res.data.data.forEach((el) => {
+            printRank.push({
+              name: el.name,
+              average: el.average,
+              time: el.time,
+            });
+          });
+          for (const [index, value] of printRank.entries()) {
+            items.push(
+              <div className={`result_rank__${index}`}>
+                <div className="result_rank__rank">{index + 1}</div>
+                <div className="result_rank__name">{value.name}</div>
+                <div className="result_rank__record">
+                  {value.average}타수 {value.time}초
+                </div>
+              </div>
+            );
+          }
+          this.setState({ items: items });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
   }
 
@@ -304,12 +336,6 @@ class Test extends Component {
     running2.style.animationPlayState = "running";
   }
 
-  // runChallenge() {
-  //   const runChal = document.querySelector(".run_challenger");
-
-  //   runChal.style.animationDuration = "20s";
-  // }
-
   // 1등 기록 - 지난 시간(지난 문제 경과 시간) = 시간(..)
   runChallenge() {
     const running2 = document.querySelector(".run_challenger");
@@ -344,21 +370,45 @@ class Test extends Component {
         <Nav />
         <div id="test">
           <div className="test_header">
-            <div className="header_title">{filterTitle}</div>
-            <div className="header_problem">{problem[count]}</div>
+            {/* <div className="header_title">{filterTitle}</div>
+            <div className="header_problem">{problem[count]}</div> */}
             <div className="header_problem">
+              <div className="header_problem_score">
+                <div className="header_problem_score_speed">
+                  <div className="header_problem_score_speed_column">속도</div>
+                  <div className="header_problem_score_speed_result">
+                    {speed}
+                  </div>
+                </div>
+                {/* <div className="header_problem_score_time">
+                  <span id="show">00:00:00</span>
+                </div> */}
+                <div className="header_problem_score_accuracy">
+                  <div className="header_problem_score_accuracy_column">
+                    정확도
+                  </div>
+                  <div className="header_problem_score_accuracy_result">
+                    {accuracy}
+                  </div>
+                </div>
+              </div>
+              <div className="header_title">{filterTitle}</div>
+              <div className="header_problem_count">{problem[count]}</div>
+              <textarea
+                type="text"
+                className="typing"
+                onChange={this.handleInputValue("answer")}
+              ></textarea>
+              <span id="show">00:00:00</span>
+            </div>
+            <div className="header_problem_result">
               {/* {!problem[count] ? ( */}
               {count === 2 ? (
                 <div className="header_pro">
-                  결과: {Math.round(recordresultSpeed / count)}
-                  <br></br>
-                  시간: {recordTime}초{/* </div> */}
+                  결과: 평균 {Math.round(recordresultSpeed / count)}타수
+                  <br></br>총 걸린 시간: {recordTime}초
                   <div className="btn_result">
-                    <div
-                      onClick={this.openModal}
-                      // onClick={this.onClick}
-                      className="text"
-                    >
+                    <div onClick={this.openModal} className="text">
                       랭킹보기
                     </div>
                     <Result
@@ -374,8 +424,7 @@ class Test extends Component {
               ) : (
                 <div>
                   <div className="header_timer">
-                    <span id="show">00:00:00</span>
-                    <span>초</span>
+                    {/* <span id="show">00:00:00</span> */}
                     <div className="start_button">
                       <input
                         type="button"
@@ -389,12 +438,12 @@ class Test extends Component {
                         <option value="select_2">말리꽃</option>
                         <option value="select_3">오아시스</option>
                       </select>
-                      <div className="stop" onClick={this.runStop}>
+                      {/* <div className="stop" onClick={this.runStop}>
                         스톱
                       </div>
                       <div className="restart" onClick={this.runRestart}>
                         재시작
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -402,9 +451,8 @@ class Test extends Component {
             </div>
           </div>
           <div className="test_input">
-            <div className="test_run">
+            {/* <div className="test_run">
               <div className="test_run_1st">
-                {/* <Running runtime={winnerRecord}> */}
                 <img
                   className="runImg"
                   src={running}
@@ -412,7 +460,6 @@ class Test extends Component {
                   height="100px"
                   alt="1st"
                 />
-                {/* </Running> */}
               </div>
               <div className="test_run_challenger">
                 <img
@@ -423,27 +470,17 @@ class Test extends Component {
                   alt="challenge"
                 />
               </div>
-            </div>
-
-            <textarea
+            </div> */}
+            {/* <textarea
               type="text"
               className="typing"
               onChange={this.handleInputValue("answer")}
-            ></textarea>
-            <div className="row">
+            ></textarea> */}
+            {/* <div className="header_problem_score">
               <div className="result">
                 속도: {speed} <br></br>정확도: {accuracy}
               </div>
-              {/* <div className="btn_result">
-                <div onClick={this.openModal} className="text">
-                  결과확인
-                </div>
-                <Result
-                  isOpen={this.state.isModalOpen}
-                  close={this.closeModal}
-                />
-              </div> */}
-            </div>
+            </div> */}
             <div id="keyboard">
               <div id="ㅂ" className="btn_1">
                 ㅂ
@@ -534,7 +571,7 @@ class Test extends Component {
               </div>
             </div>
           </div>
-          <div className="test_submit"></div>
+          {/* <div className="test_submit"></div> */}
         </div>
       </div>
     );

@@ -138,6 +138,24 @@
   padding-bottom: 20px;
 }
 
+.ranking_detail_guest {
+  background-color: #ffeee4;
+  box-shadow: 0 2px 5px 0 rgb(96 96 96 / 16%),
+    2px 10px 23px 0 rgb(96 96 96 / 13%);
+  padding: 40px;
+  padding-bottom: 20px;
+  display: flex;
+  width: 100%;
+  height: 90%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail_body_guest {
+  font-size: 28px;
+}
+
 @keyframes p-1 {
   from {
     width: 0;
@@ -938,6 +956,14 @@
     width: 100%;
   }
 }
+@keyframes p-999 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 106%;
+  }
+}
 
 /* li.p-5 {
   width: 5%;
@@ -1020,7 +1046,7 @@ li.p-100 {
   animation: p-100 2s;
 } */
 
-li.p-5::before {
+/* li.p-5::before {
   content: "5%";
 }
 li.p-10::before {
@@ -1056,9 +1082,9 @@ li.p-55::before {
 li.p-60::before {
   content: "60%";
 }
-/* li.p-65::before {
+li.p-65::before {
   content: "65%";
-} */
+}
 li.p-70::before {
   content: "70%";
 }
@@ -1079,7 +1105,7 @@ li.p-95::before {
 }
 li.p-100::before {
   content: "100%";
-}
+} */
 
 .percent-indicator .per-0::before {
   content: "0";
@@ -1235,18 +1261,6 @@ li:hover::before {
 li.item2::after {
   content: "가입이";
 } */
-
-li.item3::after {
-  content: "1등 시간";
-}
-
-li.item4::after {
-  content: "테스트 시간";
-}
-
-li.item5::after {
-  content: "item5";
-}
 
 @media screen and (max-width: 640px) {
   .percent-indicator div::after {

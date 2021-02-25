@@ -3,6 +3,7 @@ import "./Main.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import running from "../image/run2.gif";
+import logo from "../image/boardland1.png";
 
 // const Circle = styled.div`
 //   width: 5rem;
@@ -26,24 +27,36 @@ class Main extends Component {
       <div>
         <Nav />
         <div id="main">
-          <div className="header"></div>
-          <div className="main_body">
+          <div className="header">
+            <div className="header_top">
+              <img
+                className="header_logo"
+                src={logo}
+                // width="600px"
+                // height="150px"
+                alt="logo"
+              />
+            </div>
+            <div className="header_enter">
+              <Link to="/test" className="header_enter_test">
+                INSERT COIN
+              </Link>
+              <div className="header_enter_tail">@YG 2021</div>
+            </div>
+            {/* <div className="header_enter">ENTER</div> */}
+            {/* <div className="header_tail">YG 2021</div> */}
+          </div>
+          {/* <div className="main_body">
             <div className="main_body_running">
               <div className="animation">
-                <img
-                  // className="main_body_running"
-                  src={running}
-                  width="200px"
-                  height="150px"
-                  alt="run"
-                />
+                <img src={running} width="200px" height="150px" alt="run" />
               </div>
             </div>
-          </div>
-          <div className="enter">
+          </div> */}
+          {/* <div className="enter">
             <Link to="/test">들어가기</Link>
-          </div>
-          <div className="tail">하</div>
+          </div> */}
+          <div className="tail">하단</div>
         </div>
       </div>
     );

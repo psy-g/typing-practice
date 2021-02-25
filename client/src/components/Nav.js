@@ -31,7 +31,9 @@ class Nav extends Component {
           <div className="nav">
             <span className="nav_logo">
               <Link to="/" className="nav_logo_font">
-                보드런
+                {/* 보드런 */}
+                {/* 강타자 */}
+                보드랜드
               </Link>
             </span>
             {isOpen ? (
@@ -42,38 +44,66 @@ class Nav extends Component {
                   </div>
                 </div>
                 {loginCheck ? (
-                  <div className="burger_close">
-                    <div className="burger_close_logout">
-                      <Signout />
+                  <div className="burger">
+                    <div className="burger_home">
+                      <div className="buger_home_home">
+                        <Link to="/">
+                          <span>🏠</span> 홈
+                        </Link>
+                      </div>
                     </div>
-                    <div className="burger_close_mypage">
-                      <Link to="/mypage">
-                        <span className="buger_ranking_mypage">📊</span>{" "}
-                        마이페이지
-                      </Link>
-                    </div>
-                    <div className="burger_close_ranking">
-                      <Link to="/ranking">
-                        <span className="buger_ranking_icon">🏆</span> 랭킹
-                      </Link>
+                    <div className="burger_close">
+                      <div className="burger_close_logout">
+                        <Signout />
+                      </div>
+                      <div className="burger_close_mypage">
+                        <Link to="/mypage">
+                          <span className="buger_ranking_mypage">📊</span>{" "}
+                          마이페이지
+                        </Link>
+                      </div>
+                      <div className="burger_close_ranking">
+                        <Link to="/ranking">
+                          <span className="buger_ranking_icon">🏆</span> 랭킹
+                        </Link>
+                      </div>
+                      <div className="burger_close_test">
+                        <Link to="/test">
+                          <span className="buger_test_icon">⌨</span> 속도 측정
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="burger_close">
-                    <div className="burger_close_signin">
-                      <Link to="/signin">
-                        <span className="buger_signup_icon">⌨</span> 로그인
-                      </Link>
+                  <div className="burger">
+                    <div className="burger_home">
+                      <div className="buger_home_home">
+                        <Link to="/">
+                          <span>🏠</span> 홈
+                        </Link>
+                      </div>
                     </div>
-                    <div className="burger_close_signup">
-                      <Link to="/signup">
-                        <span className="buger_signup_icon">🤝</span> 회원가입
-                      </Link>
-                    </div>
-                    <div className="burger_close_ranking">
-                      <Link to="/ranking">
-                        <span className="buger_ranking_icon">🏆</span> 랭킹
-                      </Link>
+                    <div className="burger_close">
+                      <div className="burger_close_signin">
+                        <Link to="/signin">
+                          <span className="buger_signup_icon">🖥</span> 로그인
+                        </Link>
+                      </div>
+                      <div className="burger_close_signup">
+                        <Link to="/signup">
+                          <span className="buger_signup_icon">🤝</span> 회원가입
+                        </Link>
+                      </div>
+                      <div className="burger_close_ranking">
+                        <Link to="/ranking">
+                          <span className="buger_ranking_icon">🏆</span> 랭킹
+                        </Link>
+                      </div>
+                      <div className="burger_close_test">
+                        <Link to="/test">
+                          <span className="buger_test_icon">⌨</span> 속도 측정
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 )}

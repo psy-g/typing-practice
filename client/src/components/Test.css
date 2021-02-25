@@ -10,30 +10,85 @@
 
 .test_header {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
   width: 90%;
-  height: 20rem;
+  height: 40rem;
   text-align: center;
   border: solid red;
 }
 
+.header_problem_score_speed_column {
+  color: red;
+}
+
+.header_problem_score_accuracy_column {
+  color: red;
+}
+
+.header_problem_score_time_column {
+  color: red;
+}
+
 .header_problem {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  height: 40%;
+  width: 70%;
+  height: 70%;
+  color: white;
   font-size: 20px;
+  background-color: #090707;
 }
+
+.header_problem_score {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.header_problem_result {
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  width: 40%;
+  height: 20%;
+  background-color: #1f2124;
+}
+
+/* #show {
+  color: red;
+} */
 
 .header_timer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60%;
+  background-color: #1f2124;
 }
+
+.header_pro {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+  color: white;
+  background-color: #30a9de; */
+}
+
+/* .header_timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+} */
 
 .test_input {
   display: flex;
@@ -41,7 +96,7 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 40rem;
+  height: 16rem;
   text-align: center;
   border: solid blue;
 }
@@ -109,7 +164,7 @@
   }
 }
 
-.test_submit {
+/* .test_submit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,14 +172,15 @@
   height: 5rem;
   text-align: center;
   border: solid green;
-}
+} */
 
 .typing {
-  width: 65%;
-  height: 70%;
+  margin-top: 35px;
+  width: 55%;
+  height: 20%;
   overflow: hidden;
   resize: none;
-  font-size: 25px;
+  font-size: 18px;
 }
 
 .btn_1,
