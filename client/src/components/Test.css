@@ -46,7 +46,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 60%;
-  height: 20%;
+  height: 15%;
 }
 
 .header_problem_score_speed {
@@ -66,9 +66,44 @@
 .header_titleAndProblem {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   width: 90%;
   height: 40%;
+}
+
+.header_titleAndProblem_print {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header_titleAndProblem_print_header {
+  width: 100%;
+  color: #e53a40;
+}
+
+.header_titleAndProblem_print_body {
+  margin-top: 10px;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.header_titleAndProblem_print_body_speed {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_titleAndProblem_print_body_speed_column,
+.header_titleAndProblem_print_body_time_column,
+.header_titleAndProblem_print_body_speed_result,
+.header_titleAndProblem_print_body_time_result,
+.header_titleAndProblem_print_body_name_column,
+.header_titleAndProblem_print_body_name_result {
+  color: #33ffff;
 }
 
 .header_problem_result {
@@ -119,12 +154,49 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1f2124;
+}
+
+.random_start {
+  cursor: pointer;
 }
 
 .header_problem_result_print_rank {
   cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+.header_problem_result_print_rank_text {
+  color: #e53a40;
+}
+
+.header_problem_result_print_rank_top3_print {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* justify-content: center; */
+  align-items: center;
+  color: #33ffff;
+}
+
+/* .header_problem_result_print_rank_ranker_column {
+  margin-right: 50px;
+}
+
+.header_problem_result_print_rank_speed_column {
+  margin-right: 50px;
+}
+
+.header_problem_result_print_rank_time_column {
+  margin-right: 50px;
+}
+
+.header_problem_result_print_rank_name_column {
+  margin-right: 50px;
+} */
 
 /* .header_timer {
   display: flex;
@@ -218,10 +290,19 @@
   border: solid green;
 } */
 
+.header_problem_tail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  height: 5rem;
+}
+
 .typing {
-  margin-top: 35px;
-  width: 55%;
-  height: 20%;
+  /* margin-top: 35px; */
+  width: 68%;
+  height: 50%;
   overflow: hidden;
   resize: none;
   font-size: 18px;

@@ -164,6 +164,10 @@
   border-radius: 0 0 0.6rem 0.6rem;
 }
 
+.tail_button {
+  cursor: pointer;
+}
+
 /* .tail_button {
   background-color: #86efef;
   width: 80px;
