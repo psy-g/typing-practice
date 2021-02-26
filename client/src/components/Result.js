@@ -23,7 +23,7 @@ class Result extends Component {
                 &times;
               </span>
               <div className="modalContents" onClick={() => isOpen}>
-                <div className="logo">순위</div>
+                {/* <div className="logo">순위</div> */}
                 <div className="result_table">
                   <div className="result_table__column">
                     <span className="result_table__column__rank">순위</span>

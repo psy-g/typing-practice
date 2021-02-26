@@ -64,7 +64,7 @@ class Nav extends Component {
                       </div>
                       <div className="burger_close_ranking">
                         <Link to="/ranking">
-                          <span className="buger_ranking_icon">🏆</span> 랭킹
+                          <span className="buger_ranking_icon">🏆</span> 순위
                         </Link>
                       </div>
                       <div className="burger_close_test">
