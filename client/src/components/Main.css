@@ -28,6 +28,10 @@
   /* background-color: #1f2124; */
   background-color: #090707;
   z-index: 1;
+  border: solid 15px #383a3f;
+  border-bottom-width: 25px;
+  border-top-width: 25px;
+  border-radius: 0.6rem 0.6rem 0 0;
 }
 
 .header_top {
@@ -151,10 +155,26 @@
   justify-content: center;
   align-items: center;
   width: 70%;
-  height: 10rem;
+  height: 8rem;
   text-align: center;
-  border: solid yellow;
+  background-color: #cadbe9;
+  border-top-width: 2.5px;
+  border-top-style: solid;
+  border-top-color: #090707;
+  border-radius: 0 0 0.6rem 0.6rem;
 }
+
+/* .tail_button {
+  background-color: #86efef;
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 12px;
+  vertical-align: middle;
+  line-height: 80px;
+} */
 
 a {
   text-decoration: none;

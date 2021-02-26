@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import running from "../image/run2.gif";
 import logo from "../image/boardland1.png";
+import btn from "../image/power.png";
 
 // const Circle = styled.div`
 //   width: 5rem;
@@ -56,7 +57,17 @@ class Main extends Component {
           {/* <div className="enter">
             <Link to="/test">들어가기</Link>
           </div> */}
-          <div className="tail">하단</div>
+          <div className="tail">
+            <div className="tail_button">
+              <img
+                className="tail_button"
+                src={btn}
+                width="50px"
+                height="50px"
+                alt="btn"
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

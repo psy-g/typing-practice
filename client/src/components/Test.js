@@ -392,8 +392,10 @@ class Test extends Component {
                   </div>
                 </div>
               </div>
-              <div className="header_title">{filterTitle}</div>
-              <div className="header_problem_count">{problem[count]}</div>
+              <div className="header_titleAndProblem">
+                <div className="header_title">{filterTitle}</div>
+                <div className="header_problem_count">{problem[count]}</div>
+              </div>
               <textarea
                 type="text"
                 className="typing"
@@ -404,12 +406,29 @@ class Test extends Component {
             <div className="header_problem_result">
               {/* {!problem[count] ? ( */}
               {count === 2 ? (
-                <div className="header_pro">
-                  결과: 평균 {Math.round(recordresultSpeed / count)}타수
-                  <br></br>총 걸린 시간: {recordTime}초
-                  <div className="btn_result">
+                <div className="header_problem_result_print">
+                  <div className="header_problem_result_print_header">결과</div>
+                  <div className="header_problem_result_print_body">
+                    <div className="header_problem_result_print_body_speed">
+                      <div className="header_problem_result_print_body_speed_column">
+                        평균
+                      </div>
+                      <div className="header_problem_result_print_body_speed_result">
+                        {Math.round(recordresultSpeed / count)}타수
+                      </div>
+                    </div>
+                    <div className="header_problem_result_print_body_time">
+                      <div className="header_problem_result_print_body_time_column">
+                        걸린 시간
+                      </div>
+                      <div className="header_problem_result_print_body_time_result">
+                        {recordTime}초
+                      </div>
+                    </div>
+                  </div>
+                  <div className="header_problem_result_print_rank">
                     <div onClick={this.openModal} className="text">
-                      랭킹보기
+                      🏆 순위
                     </div>
                     <Result
                       isOpen={this.state.isModalOpen}
