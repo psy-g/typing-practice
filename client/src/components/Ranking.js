@@ -65,7 +65,7 @@ class Ranking extends Component {
 
     if (nickname === null)
       document.querySelector(".detail_body_guest").innerHTML =
-        "자세한 기록을 확인하기 위해서는 로그인이 필요합니다";
+        "기록을 등록하기 위해서는 로그인이 필요합니다";
     else {
       const target = document.querySelector(".detail_body");
 
@@ -258,7 +258,7 @@ class Ranking extends Component {
   }
 
   componentDidMount() {
-    // this.print();
+    this.print();
   }
 
   render() {
@@ -277,7 +277,9 @@ class Ranking extends Component {
                 className="select_start"
                 onChange={this.print}
               >
-                <option value="select_0">선택</option>
+                <option value="select_0" disabled>
+                  선택
+                </option>
                 <option value="select_1">눈 녹듯</option>
                 <option value="select_2">말리꽃</option>
                 <option value="select-3">오아시스</option>
@@ -294,7 +296,7 @@ class Ranking extends Component {
             <div className="ranking_tail">
               <div className="ranking_detail_guest">
                 <div className="detail_body_guest">
-                  자세한 기록을 확인하기 위해서는 로그인이 필요합니다
+                  기록을 등록하기 위해서는 로그인이 필요합니다
                 </div>
               </div>
             </div>

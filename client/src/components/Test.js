@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./Test.css";
 import Nav from "./Nav";
-import TestRank from "./TestRank";
 import Result from "./Result";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import randomBtn from "../image/power.png";
 import running from "../image/run2.gif";
@@ -271,7 +271,6 @@ class Test extends Component {
               time: el.time,
             });
           });
-          console.log("==", printRank);
 
           this.setState({ printRank: printRank });
         })
@@ -292,18 +291,8 @@ class Test extends Component {
               time: el.time,
             });
           });
-          for (const [index, value] of printRank.entries()) {
-            items.push(
-              <div className={`result_rank__${index}`}>
-                <div className="result_rank__rank">{index + 1}</div>
-                <div className="result_rank__name">{value.name}</div>
-                <div className="result_rank__record">
-                  {value.average}타수 {value.time}초
-                </div>
-              </div>
-            );
-          }
-          this.setState({ items: items });
+
+          this.setState({ printRank: printRank });
         })
         .catch((err) => {
           console.log(err.response);
@@ -333,14 +322,14 @@ class Test extends Component {
 <div class="header_problem_result_print_rank_top3_ranker">3RD</div>
 </div>
 <div class="header_problem_result_print_rank_speed_column">
-<div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}</div>
-<div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}</div>
-<div class="header_problem_result_print_rank_top3_speed">${printRank[2].average}</div>
+<div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
+<div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
+<div class="header_problem_result_print_rank_top3_speed">${printRank[2].average}타수</div>
 </div>
 <div class="header_problem_result_print_rank_time_column">
-<div class="header_problem_result_print_rank_top1_time">${printRank[0].time}</div>
-<div class="header_problem_result_print_rank_top3_time">${printRank[2].time}</div>
-<div class="header_problem_result_print_rank_top2_time">${printRank[1].time}</div>
+<div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
+<div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
+<div class="header_problem_result_print_rank_top3_time">${printRank[2].time}초</div>
 </div>
 <div class="header_problem_result_print_rank_name_column">
 <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
@@ -354,8 +343,33 @@ class Test extends Component {
     }, 2000); // 시간. 2초 후 실행
   }
 
+  // 복사, 붙여넣기 방지
+  // preventKeyCtrlV() {
+  //   if (event.ctrlKey && event.keyCode === 86) {
+  //     event.returnValue = false;
+  //   }
+  // }
+
+  preventKeyCtrlV() {
+    const keyboardCtrlV = document.querySelector(".typing");
+
+    keyboardCtrlV.addEventListener("keydown", (e) => {
+      const key = document.getElementById(e.key);
+
+      if (key) {
+        if ((e.keyCode === 17) & (e.keyCode === 86)) {
+          alert("붙여넣기는 안됩니다");
+        }
+      }
+      // if (event.ctrlKey && event.keyCode === 67) {
+      //   event.returnValue = false;
+      // }
+    });
+  }
+
   componentDidMount() {
     this.keyboardEvent();
+    this.preventKeyCtrlV();
   }
 
   render() {
@@ -437,7 +451,7 @@ class Test extends Component {
                     </div>
                     <div className="header_problem_result_print_rank">
                       <div className="header_problem_result_print_rank_text">
-                        🏆 TOP 3
+                        <Link to="/ranking">🏆</Link> TOP 3
                       </div>
                       <div className="header_problem_result_print_rank_top3"></div>
                       {/* <div onClick={this.openModal} className="text">

@@ -26,7 +26,8 @@
   height: 40rem;
   text-align: center;
   /* background-color: #1f2124; */
-  background-color: #090707;
+  /* background-color: #090707; */
+  background: url("../image/rankback.png");
   z-index: 1;
   border: solid 15px #383a3f;
   border-bottom-width: 25px;
