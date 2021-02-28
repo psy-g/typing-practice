@@ -59,13 +59,15 @@ class Main extends Component {
           </div> */}
           <div className="tail">
             <div className="tail_button">
-              <img
-                className="tail_button"
-                src={btn}
-                width="50px"
-                height="50px"
-                alt="btn"
-              />
+              <Link to="/signin">
+                <img
+                  className="tail_button"
+                  src={btn}
+                  width="50px"
+                  height="50px"
+                  alt="btn"
+                />
+              </Link>
             </div>
           </div>
         </div>

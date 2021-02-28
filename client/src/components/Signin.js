@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./Signin.css";
 import Nav from "./Nav";
+import signinLogo from "../image/boardland1.png";
 
 import { withRouter, Link } from "react-router-dom";
 
@@ -58,7 +59,7 @@ class Signin extends React.Component {
 
     // 이메일, 비밀번호 체크
     if (isNicknameChecked === false || isPasswordChecked === false) {
-      alert("아이디, 비밀번호를 확인해주세요");
+      alert("이름, 비밀번호를 확인해주세요");
     } else if (isNicknameChecked && isPasswordChecked) {
       const loginRequest = await axios.post(
         "http://localhost:8080/auth/signin",
@@ -84,32 +85,51 @@ class Signin extends React.Component {
         <Nav />
         <div id="signin">
           <div className="signin_container">
-            <input
-              className="loginId"
-              placeholder="아이디(닉네임)"
-              onChange={this.nicknameValidator.bind(this)}
-            />
-            <input
-              className="loginPw"
-              type="password"
-              placeholder="비밀번호"
-              onChange={this.passwordValidator.bind(this)}
-            />
-            <button
-              className="loginBtn"
-              onClick={this.loginRequestHandler.bind(this)}
-            >
-              로그인
-            </button>
-            <div>
-              <Link to="/signup" className="loginEnd">
-                <button
-                  className="signUpBtn"
-                  onClick={this.convertToSignup.bind(this)}
-                >
-                  회원가입
-                </button>
-              </Link>
+            <div className="signin_header">
+              <div className="signin_header_top">
+                <img
+                  className="header_logo"
+                  src={signinLogo}
+                  // width="600px"
+                  // height="150px"
+                  alt="login_logo"
+                />
+              </div>
+            </div>
+            <div className="signin_body">
+              <div className="signin_body_name">
+                <div className="signin_body_name_column">이름</div>
+                <input
+                  className="signin_body_name_input"
+                  // placeholder="아이디(닉네임)"
+                  onChange={this.nicknameValidator.bind(this)}
+                />
+              </div>
+              <div className="signin_body_password">
+                <div className="signin_body_password_column">비밀번호</div>
+                <input
+                  className="signin_body_password_input"
+                  type="password"
+                  // placeholder="비밀번호"
+                  onChange={this.passwordValidator.bind(this)}
+                />
+              </div>
+              <button
+                className="signin_body_loginBtn"
+                onClick={this.loginRequestHandler.bind(this)}
+              >
+                로그인
+              </button>
+              <div>
+                {/* <Link to="/signup" className="loginEnd">
+                  <button
+                    className="signUpBtn"
+                    onClick={this.convertToSignup.bind(this)}
+                  >
+                    회원가입
+                  </button>
+                </Link> */}
+              </div>
             </div>
           </div>
         </div>

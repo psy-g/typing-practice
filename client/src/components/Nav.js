@@ -69,7 +69,7 @@ class Nav extends Component {
                       </div>
                       <div className="burger_close_test">
                         <Link to="/test">
-                          <span className="buger_test_icon">⌨</span> 속도 측정
+                          <span className="buger_test_icon">⌨</span> 타수 측정
                         </Link>
                       </div>
                     </div>
