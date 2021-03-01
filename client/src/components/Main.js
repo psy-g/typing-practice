@@ -27,6 +27,8 @@ class Main extends Component {
   }
 
   render() {
+    const checkLogin = window.localStorage.getItem("isLogin");
+
     return (
       <div>
         <Nav />
@@ -47,22 +49,31 @@ class Main extends Component {
               </Link>
               <div className="header_enter_tail">@YG 2021</div>
             </div>
-            {/* <div className="header_enter">ENTER</div> */}
-            {/* <div className="header_tail">YG 2021</div> */}
           </div>
-          {/* <div className="main_body">
-            <div className="main_body_running">
-              <div className="animation">
-                <img src={running} width="200px" height="150px" alt="run" />
-              </div>
-            </div>
-          </div> */}
-          {/* <div className="enter">
-            <Link to="/test">들어가기</Link>
-          </div> */}
           <div className="tail">
             <div className="tail_button">
-              <Link to="/signin">
+              {!checkLogin ? (
+                <Link to="/signin">
+                  <img
+                    className="tail_button"
+                    src={btn}
+                    width="50px"
+                    height="50px"
+                    alt="btn"
+                  />
+                </Link>
+              ) : (
+                <Link to="/test">
+                  <img
+                    className="tail_button"
+                    src={btn}
+                    width="50px"
+                    height="50px"
+                    alt="btn"
+                  />
+                </Link>
+              )}
+              {/* <Link to="/signin">
                 <img
                   className="tail_button"
                   src={btn}
@@ -70,7 +81,7 @@ class Main extends Component {
                   height="50px"
                   alt="btn"
                 />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

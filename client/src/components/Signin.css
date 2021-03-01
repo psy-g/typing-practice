@@ -45,9 +45,17 @@
 .signin_body {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
   height: 40%;
+}
+
+.signin_body_name {
+  height: 35%;
+}
+
+.signin_body_password {
+  height: 30%;
 }
 
 .signin_body_name_column,
@@ -64,6 +72,12 @@
 .signin_body_name_input:focus,
 .signin_body_password_input:focus {
   outline: none;
+}
+
+.signin_body_name_input_validation {
+  display: none;
+  color: #e53a40;
+  font-size: 14px;
 }
 
 .signin_body_loginAndSignup {
