@@ -23,6 +23,7 @@ class Signin extends React.Component {
 
     this.loginHandler = this.loginHandler.bind(this);
     this.check = this.check.bind(this);
+    this.hanChk = this.hanChk.bind(this);
   }
 
   loginHandler() {
@@ -100,11 +101,35 @@ class Signin extends React.Component {
         })
         .catch((err) => {
           if (err) {
-            alert("이미 동일한 이메일이 존재합니다");
+            alert("이미 동일한 닉네임이 존재합니다");
           }
         });
     } else {
       alert("유효한 정보가 아닙니다. 다시 작성해주세요");
+    }
+  };
+
+  hanChk = (key) => (e) => {
+    // console.log("==key==", key);
+    // console.log("===value", e.target.value);
+    // console.log("=비교", e.target.value.length > 0);
+
+    const hanValidation = document.querySelector(
+      ".signin_body_name_input_validation"
+    );
+
+    if (e.target.value.length > 0) {
+      var s = e.target.value;
+      var len = s.length;
+      for (var i = 0; i < len; i++) {
+        if (s.charCodeAt(i) < 128) {
+          hanValidation.style.display = "block";
+          e.target.value = "";
+          return;
+        } else {
+          hanValidation.style.display = "none";
+        }
+      }
     }
   };
 
@@ -136,10 +161,14 @@ class Signin extends React.Component {
                 <div className="signin_body_name">
                   <div className="signin_body_name_column">이름</div>
                   <input
-                    type="email"
+                    type="text"
                     className="signin_body_name_input"
+                    onKeyUp={this.hanChk("hanChk")}
                     onChange={this.handleInputValue("nickname")}
                   />
+                  <div className="signin_body_name_input_validation">
+                    한글로만 가능합니다
+                  </div>
                 </div>
                 <div className="signin_body_password">
                   <div className="signin_body_password_column">비밀번호</div>
