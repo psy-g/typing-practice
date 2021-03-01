@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import "./Main.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
-import running from "../image/run2.gif";
-import logo from "../image/boardland1.png";
+import logo from "../image/taza.png";
 import btn from "../image/power.png";
+
+// import logo from "../image/logo6.png";
+// import logo from "../image/boardland1.png";
+// import running from "../image/run2.gif";
 
 // const Circle = styled.div`
 //   width: 5rem;

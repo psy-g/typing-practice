@@ -3,7 +3,8 @@ import "./Signup.css";
 import Nav from "./Nav";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
-import signupLogo from "../image/boardland1.png";
+import signupLogo from "../image/taza.png";
+// import signupLogo from "../image/boardland1.png";
 
 class Signup extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class Signup extends Component {
             </div>
             <div className="signup_body">
               <div className="signup_body_name">
-                <div className="signup_body_name_column">이름(닉네임)</div>
+                <div className="signup_body_name_column">이름</div>
                 <input
                   // placeholder="닉네임"
                   type="email"

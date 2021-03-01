@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./Test.css";
 import Nav from "./Nav";
-import Result from "./Result";
 import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import randomBtn from "../image/power.png";
-import running from "../image/run2.gif";
-import running2 from "../image/run1.gif";
-import styled from "styled-components";
+// import Result from "./Result";
+// import running from "../image/run2.gif";
+// import running2 from "../image/run1.gif";
+// import styled from "styled-components";
 
 class Test extends Component {
   constructor(props) {
@@ -257,7 +257,6 @@ class Test extends Component {
 
   ranking() {
     const { id, filterTitle } = this.state;
-    const items = [];
     const printRank = [];
 
     if (id) {
