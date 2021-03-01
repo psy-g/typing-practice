@@ -8,7 +8,7 @@
 }
 
 .signin_container {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -18,7 +18,20 @@
   background-position: center center;
   width: 60%;
   height: 35rem;
+  text-align: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  height: 40rem;
   text-align: center;
+  background: url("../image/rankback.png");
+  z-index: 1;
+  border: solid 15px #383a3f;
+  border-bottom-width: 25px;
+  border-top-width: 25px;
+  border-radius: 0.6rem 0.6rem 0 0;
 }
 
 .signin_header {
@@ -53,6 +66,14 @@
   outline: none;
 }
 
+.signin_body_loginAndSignup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 98%;
+  height: 35%;
+}
+
 .signin_body_loginBtn {
   width: 98%;
   color: white;
@@ -60,4 +81,27 @@
   border: solid 0.15rem #33ffff;
   border-radius: 0.4rem;
   cursor: pointer;
+}
+
+.signin_body_signupBtn {
+  width: 98%;
+  color: white;
+  background: black;
+  border: solid 0.15rem #33ffff;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+
+.signin_tail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 8rem;
+  text-align: center;
+  background-color: #cadbe9;
+  border-top-width: 2.5px;
+  border-top-style: solid;
+  border-top-color: #090707;
+  border-radius: 0 0 0.6rem 0.6rem;
 }

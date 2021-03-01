@@ -2,7 +2,9 @@ import React from "react";
 import axios from "axios";
 import "./Signin.css";
 import Nav from "./Nav";
-import signinLogo from "../image/boardland1.png";
+import signinLogo from "../image/taza.png";
+import btn from "../image/power.png";
+// import signinLogo from "../image/boardland1.png";
 
 import { withRouter, Link } from "react-router-dom";
 
@@ -16,9 +18,11 @@ class Signin extends React.Component {
       password: "",
       isNicknameChecked: false,
       isPasswordChecked: false,
+      check: false,
     };
 
     this.loginHandler = this.loginHandler.bind(this);
+    this.check = this.check.bind(this);
   }
 
   loginHandler() {
@@ -79,7 +83,38 @@ class Signin extends React.Component {
     this.props.history.push("/signup");
   };
 
+  // 회원가입
+  handleInputValue = (key) => (e) => {
+    this.setState({ [key]: e.target.value });
+  };
+
+  clickBtn = () => {
+    const { nickname, password } = this.state;
+
+    if (password.length >= 4 && nickname) {
+      axios
+        .post("http://localhost:8080/auth/signup", this.state)
+        // .post("https://missinganimals.ml/auth/signup", this.state)
+        .then((res) => {
+          this.props.history.push("/");
+        })
+        .catch((err) => {
+          if (err) {
+            alert("이미 동일한 이메일이 존재합니다");
+          }
+        });
+    } else {
+      alert("유효한 정보가 아닙니다. 다시 작성해주세요");
+    }
+  };
+
+  check() {
+    this.setState({ check: true });
+  }
+
   render() {
+    const { check } = this.state;
+
     return (
       <div>
         <Nav />
@@ -96,7 +131,69 @@ class Signin extends React.Component {
                 />
               </div>
             </div>
-            <div className="signin_body">
+            {check ? (
+              <div className="signin_body">
+                <div className="signin_body_name">
+                  <div className="signin_body_name_column">이름</div>
+                  <input
+                    type="email"
+                    className="signin_body_name_input"
+                    onChange={this.handleInputValue("nickname")}
+                  />
+                </div>
+                <div className="signin_body_password">
+                  <div className="signin_body_password_column">비밀번호</div>
+                  <input
+                    type="password"
+                    className="signin_body_password_input"
+                    onChange={this.handleInputValue("password")}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="signin_body_loginBtn"
+                  onClick={() => this.clickBtn()}
+                >
+                  회원가입
+                </button>
+              </div>
+            ) : (
+              <div className="signin_body">
+                <div className="signin_body_name">
+                  <div className="signin_body_name_column">이름</div>
+                  <input
+                    className="signin_body_name_input"
+                    // placeholder="아이디(닉네임)"
+                    onChange={this.nicknameValidator.bind(this)}
+                  />
+                </div>
+                <div className="signin_body_password">
+                  <div className="signin_body_password_column">비밀번호</div>
+                  <input
+                    className="signin_body_password_input"
+                    type="password"
+                    // placeholder="비밀번호"
+                    onChange={this.passwordValidator.bind(this)}
+                  />
+                </div>
+                <div className="signin_body_loginAndSignup">
+                  <button
+                    className="signin_body_loginBtn"
+                    onClick={this.loginRequestHandler.bind(this)}
+                  >
+                    로그인
+                  </button>
+                  <button
+                    className="signin_body_signupBtn"
+                    onClick={this.check}
+                    // onClick={this.convertToSignup.bind(this)}
+                  >
+                    회원가입
+                  </button>
+                </div>
+              </div>
+            )}
+            {/* <div className="signin_body">
               <div className="signin_body_name">
                 <div className="signin_body_name_column">이름</div>
                 <input
@@ -114,23 +211,33 @@ class Signin extends React.Component {
                   onChange={this.passwordValidator.bind(this)}
                 />
               </div>
-              <button
-                className="signin_body_loginBtn"
-                onClick={this.loginRequestHandler.bind(this)}
-              >
-                로그인
-              </button>
-              <div>
-                {/* <Link to="/signup" className="loginEnd">
-                  <button
-                    className="signUpBtn"
-                    onClick={this.convertToSignup.bind(this)}
-                  >
-                    회원가입
-                  </button>
-                </Link> */}
+              <div className="signin_body_loginAndSignup">
+                <button
+                  className="signin_body_loginBtn"
+                  onClick={this.loginRequestHandler.bind(this)}
+                >
+                  로그인
+                </button>
+                <button
+                  className="signin_body_signupBtn"
+                  onClick={this.check}
+                  // onClick={this.convertToSignup.bind(this)}
+                >
+                  회원가입
+                </button>
               </div>
-            </div>
+            </div> */}
+          </div>
+          <div className="signin_tail">
+            <Link to="/signin">
+              <img
+                className="signin_tail_button"
+                src={btn}
+                width="50px"
+                height="50px"
+                alt="btn"
+              />
+            </Link>
           </div>
         </div>
       </div>

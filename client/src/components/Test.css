@@ -351,7 +351,8 @@
   width: 45vw;
   min-width: 250px;
   height: 90vh;
-  background: #090707;
+  background: white;
+  /* background: #090707; */
   border-radius: 0.8rem;
 }
 
@@ -363,8 +364,10 @@
   /* font-size: 1.2rem; */
   font-size: 12px;
   text-align: center;
-  color: #383a3f;
-  background: white;
+  color: white;
+  /* color: #383a3f; */
+  background: #013252;
+  /* background: white; */
   border-radius: 0.6rem;
   padding: 30%;
   transition: all 0.5s ease;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Nav from "./Nav";
 import "./Ranking.css";
 import axios from "axios";
-import { keyframes } from "styled-components";
+// import { keyframes } from "styled-components";
 
 class Ranking extends Component {
   constructor(props) {
@@ -63,10 +63,101 @@ class Ranking extends Component {
     const test = document.querySelectorAll(".rank");
     const nickname = window.localStorage.getItem("nick");
 
-    if (nickname === null)
-      document.querySelector(".detail_body_guest").innerHTML =
-        "기록을 등록하기 위해서는 로그인이 필요합니다";
-    else {
+    if (nickname === null) {
+      const target = document.querySelector(".detail_body");
+
+      target.innerHTML = "";
+
+      // 1등 기록, 이름
+      const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+        .innerHTML;
+      const bestName = document.querySelector(".rank .rank__0 .rank__name")
+        .innerHTML;
+
+      const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+
+      const newDiv = document.createElement("div");
+
+      newDiv.className = "graph-wrapper";
+      newDiv.innerHTML = `
+        <div class="percent-indicator">
+          <div class="per-0"></div>
+          <div class="per-20"></div>
+          <div class="per-40"></div>
+          <div class="per-60"></div>
+          <div class="per-80"></div>
+          <div class="per-100"></div>
+        </div>
+        <ul class="graph">
+          <li class="item1 p-${best}"></li>
+          <li class="item2 p-20"></li>
+        </ul>
+        `;
+      target.prepend(newDiv);
+
+      const graph1 = document.querySelector(".graph .item1");
+      const graph2 = document.querySelector(".graph .item2");
+
+      if (best >= 101) {
+        graph1.style.width = `106%`;
+        graph1.style.animation = `p-999 3s`;
+        graph2.style.width = `20%`;
+        graph2.style.animation = `p-20 3s`;
+
+        const record1 = bestRecord.substring(0, 3);
+
+        var str1 = best;
+
+        document.styleSheets[0].addRule(
+          `li.p-${str1}::before`,
+          'content: "' + record1 + '타수";'
+        );
+
+        document.styleSheets[0].addRule(
+          `li.p-20::before`,
+          'content: "' + "로그인 필요" + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          "li.item1::after",
+          'content: "' + bestName + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          "li.item2::after",
+          'content: "' + "Guest" + '";'
+        );
+      } else {
+        graph1.style.width = `${best}%`;
+        graph1.style.animation = `p-${best} 3s`;
+        graph2.style.width = `20%`;
+        graph2.style.animation = `p-20 3s`;
+
+        const record1 = bestRecord.substring(0, 3);
+
+        var str1 = best;
+
+        document.styleSheets[0].addRule(
+          `li.p-${str1}::before`,
+          'content: "' + record1 + '타수";'
+        );
+
+        document.styleSheets[0].addRule(
+          `li.p-20::before`,
+          'content: "' + "Guest" + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          "li.item1::after",
+          'content: "' + bestName + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          "li.item2::after",
+          'content: "' + "Guest" + '";'
+        );
+      }
+    } else {
       const target = document.querySelector(".detail_body");
 
       target.innerHTML = "";
@@ -294,10 +385,16 @@ class Ranking extends Component {
           </div>
           {nick === null ? (
             <div className="ranking_tail">
-              <div className="ranking_detail_guest">
-                <div className="detail_body_guest">
-                  기록을 등록하기 위해서는 로그인이 필요합니다
+              {/* <div className="ranking_detail_guest"> */}
+              <div className="ranking_detail">
+                <div className="detail_header">
+                  Guest님의 기록<br></br>기록을 등록하기 위해서는 로그인이
+                  필요합니다
                 </div>
+                <div className="detail_body"></div>
+                {/* <div className="detail_body_guest">
+                  기록을 등록하기 위해서는 로그인이 필요합니다
+                </div> */}
               </div>
             </div>
           ) : (
@@ -353,3 +450,195 @@ export default Ranking;
 </ul>
 </div> */
 }
+
+// detail() {
+//   const test = document.querySelectorAll(".rank");
+//   const nickname = window.localStorage.getItem("nick");
+
+//   if (nickname === null)
+//     document.querySelector(".detail_body_guest").innerHTML =
+//       "기록을 등록하기 위해서는 로그인이 필요합니다";
+//   else {
+//     const target = document.querySelector(".detail_body");
+
+//     target.innerHTML = "";
+
+//     let userRecord;
+//     // 로그인 유저 기록
+//     for (let i = 0; i < test.length; i++) {
+//       for (
+//         let j = 0;
+//         j < test[i].querySelectorAll(".rank__name").length;
+//         j++
+//       ) {
+//         if (
+//           test[i].querySelectorAll(".rank__name")[j].innerHTML === nickname
+//         ) {
+//           userRecord = test[i]
+//             .querySelectorAll(".rank__name")
+//             [j].parentElement.querySelector(".rank__record").innerHTML;
+//         }
+//       }
+//     }
+
+//     // 1등 기록, 이름
+//     const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+//       .innerHTML;
+//     const bestName = document.querySelector(".rank .rank__0 .rank__name")
+//       .innerHTML;
+
+//     // 기록이 없으면
+//     if (userRecord === undefined) {
+//       const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+
+//       const newDiv = document.createElement("div");
+
+//       newDiv.className = "graph-wrapper";
+//       newDiv.innerHTML = `
+//       <div class="percent-indicator">
+//         <div class="per-0"></div>
+//         <div class="per-20"></div>
+//         <div class="per-40"></div>
+//         <div class="per-60"></div>
+//         <div class="per-80"></div>
+//         <div class="per-100"></div>
+//       </div>
+//       <ul class="graph">
+//         <li class="item1 p-${best}"></li>
+//         <li class="item2 p-20"></li>
+//       </ul>
+//       `;
+//       target.prepend(newDiv);
+
+//       const graph1 = document.querySelector(".graph .item1");
+//       const graph2 = document.querySelector(".graph .item2");
+
+//       if (best >= 101) {
+//         graph1.style.width = `106%`;
+//         graph1.style.animation = `p-999 3s`;
+//         graph2.style.width = `20%`;
+//         graph2.style.animation = `p-20 3s`;
+
+//         const record1 = bestRecord.substring(0, 3);
+
+//         var str1 = best;
+
+//         document.styleSheets[0].addRule(
+//           `li.p-${str1}::before`,
+//           'content: "' + record1 + '타수";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           `li.p-20::before`,
+//           'content: "' + "기록이 없습니다" + '";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item1::after",
+//           'content: "' + bestName + '";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item2::after",
+//           'content: "' + nickname + '";'
+//         );
+//       } else {
+//         graph1.style.width = `${best}%`;
+//         graph1.style.animation = `p-${best} 3s`;
+//         graph2.style.width = `20%`;
+//         graph2.style.animation = `p-20 3s`;
+
+//         const record1 = bestRecord.substring(0, 3);
+//         // const record2 = userRecord.substring(0, 3);
+
+//         var str1 = best;
+//         // var str2 = challenger;
+//         document.styleSheets[0].addRule(
+//           `li.p-${str1}::before`,
+//           'content: "' + record1 + '타수";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           `li.p-20::before`,
+//           'content: "' + "기록이 없습니다" + '";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item1::after",
+//           'content: "' + bestName + '";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item2::after",
+//           'content: "' + nickname + '";'
+//         );
+//       }
+//     } else {
+//       const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+//       const challenger = Math.floor((userRecord.substring(0, 3) / 500) * 100);
+
+//       const newDiv = document.createElement("div");
+
+//       newDiv.className = "graph-wrapper";
+//       newDiv.innerHTML = `
+//       <div class="percent-indicator">
+//         <div class="per-0"></div>
+//         <div class="per-20"></div>
+//         <div class="per-40"></div>
+//         <div class="per-60"></div>
+//         <div class="per-80"></div>
+//         <div class="per-100"></div>
+//       </div>
+//       <ul class="graph">
+//         <li class="item1 p-${best}"></li>
+//         <li class="item2 p-${challenger}"></li>
+//       </ul>
+//       `;
+//       target.prepend(newDiv);
+
+//       const graph1 = document.querySelector(".graph .item1");
+//       const graph2 = document.querySelector(".graph .item2");
+
+//       if (best >= 101) {
+//         graph1.style.width = `106%`;
+//         graph1.style.animation = `p-999 3s`;
+//       }
+//       if (challenger >= 101) {
+//         graph2.style.width = `106%`;
+//         graph2.style.animation = `p-999 3s`;
+//       } else {
+//         graph1.style.width = `${best}%`;
+//         graph1.style.animation = `p-${best} 3s`;
+//         graph2.style.width = `${challenger}%`;
+//         graph2.style.animation = `p-${challenger} 3s`;
+
+//         // console.log("========", document.styleSheets[0]);
+
+//         const record1 = bestRecord.substring(0, 3);
+//         const record2 = userRecord.substring(0, 3);
+
+//         var str1 = best;
+//         var str2 = challenger;
+//         document.styleSheets[0].addRule(
+//           `li.p-${str1}::before`,
+//           'content: "' + record1 + '타수";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           `li.p-${str2}::before`,
+//           'content: "' + record2 + '타수";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item1::after",
+//           'content: "' + bestName + '";'
+//         );
+
+//         document.styleSheets[0].addRule(
+//           "li.item2::after",
+//           'content: "' + nickname + '";'
+//         );
+//       }
+//     }
+//   }
+// }

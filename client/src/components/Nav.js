@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import Signout from "./Signout";
 
-import loginIcon from "../image/login.png";
-
 class Nav extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +31,8 @@ class Nav extends Component {
               <Link to="/" className="nav_logo_font">
                 {/* 보드런 */}
                 {/* 강타자 */}
-                보드랜드
+                {/* 보드랜드 */}
+                타자치자
               </Link>
             </span>
             {isOpen ? (
@@ -56,12 +55,12 @@ class Nav extends Component {
                       <div className="burger_close_logout">
                         <Signout />
                       </div>
-                      <div className="burger_close_mypage">
+                      {/* <div className="burger_close_mypage">
                         <Link to="/mypage">
                           <span className="buger_ranking_mypage">📊</span>{" "}
                           마이페이지
                         </Link>
-                      </div>
+                      </div> */}
                       <div className="burger_close_ranking">
                         <Link to="/ranking">
                           <span className="buger_ranking_icon">🏆</span> 순위
@@ -69,7 +68,7 @@ class Nav extends Component {
                       </div>
                       <div className="burger_close_test">
                         <Link to="/test">
-                          <span className="buger_test_icon">⌨</span> 타수 측정
+                          <span className="buger_test_icon">⌨</span> 타자연습
                         </Link>
                       </div>
                     </div>
@@ -89,11 +88,11 @@ class Nav extends Component {
                           <span className="buger_signup_icon">🖥</span> 로그인
                         </Link>
                       </div>
-                      <div className="burger_close_signup">
+                      {/* <div className="burger_close_signup">
                         <Link to="/signup">
                           <span className="buger_signup_icon">🤝</span> 회원가입
                         </Link>
-                      </div>
+                      </div> */}
                       <div className="burger_close_ranking">
                         <Link to="/ranking">
                           <span className="buger_ranking_icon">🏆</span> 랭킹
@@ -101,7 +100,7 @@ class Nav extends Component {
                       </div>
                       <div className="burger_close_test">
                         <Link to="/test">
-                          <span className="buger_test_icon">⌨</span> 속도 측정
+                          <span className="buger_test_icon">⌨</span> 타자연습
                         </Link>
                       </div>
                     </div>
