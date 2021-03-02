@@ -114,8 +114,8 @@ class Ranking extends Component {
         );
 
         document.styleSheets[0].addRule(
-          `li.p-20::before`,
-          'content: "' + "로그인 필요" + '";'
+          `li.p-20::before` // 'content: "' + "로그인 필요" + '";'
+          `content:  로그인 필요 `
         );
 
         document.styleSheets[0].addRule(
@@ -125,7 +125,8 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           "li.item2::after",
-          'content: "' + "Guest" + '";'
+          // 'content: "' + "Guest" + '";'
+          `content:  Guest `
         );
       } else {
         graph1.style.width = `${best}%`;
@@ -135,7 +136,7 @@ class Ranking extends Component {
 
         const record1 = bestRecord.substring(0, 3);
 
-        var str1 = best;
+        // var str1 = best;
 
         document.styleSheets[0].addRule(
           `li.p-${str1}::before`,
@@ -144,7 +145,8 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           `li.p-20::before`,
-          'content: "' + "Guest" + '";'
+          `content:  Guest `
+          // 'content: "' + "Guest" + '";'
         );
 
         document.styleSheets[0].addRule(
@@ -154,7 +156,8 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           "li.item2::after",
-          'content: "' + "Guest" + '";'
+          `content:  Guest `
+          // 'content: "' + "Guest" + '";'
         );
       }
     } else {
@@ -220,7 +223,7 @@ class Ranking extends Component {
 
           const record1 = bestRecord.substring(0, 3);
 
-          var str1 = best;
+          // var str1 = best;
 
           document.styleSheets[0].addRule(
             `li.p-${str1}::before`,
@@ -229,7 +232,8 @@ class Ranking extends Component {
 
           document.styleSheets[0].addRule(
             `li.p-20::before`,
-            'content: "' + "기록이 없습니다" + '";'
+            `content: 기록이 없습니다 `
+            // 'content: "' + "기록이 없습니다" + '";'
           );
 
           document.styleSheets[0].addRule(
@@ -250,7 +254,7 @@ class Ranking extends Component {
           const record1 = bestRecord.substring(0, 3);
           // const record2 = userRecord.substring(0, 3);
 
-          var str1 = best;
+          // var str1 = best;
           // var str2 = challenger;
           document.styleSheets[0].addRule(
             `li.p-${str1}::before`,
@@ -259,7 +263,8 @@ class Ranking extends Component {
 
           document.styleSheets[0].addRule(
             `li.p-20::before`,
-            'content: "' + "기록이 없습니다" + '";'
+            `content: 기록이 없습니다 `
+            // 'content: "' + "기록이 없습니다" + '";'
           );
 
           document.styleSheets[0].addRule(
@@ -316,7 +321,7 @@ class Ranking extends Component {
           const record1 = bestRecord.substring(0, 3);
           const record2 = userRecord.substring(0, 3);
 
-          var str1 = best;
+          // var str1 = best;
           var str2 = challenger;
           document.styleSheets[0].addRule(
             `li.p-${str1}::before`,
@@ -355,7 +360,7 @@ class Ranking extends Component {
   render() {
     const { items } = this.state;
     const nick = window.localStorage.getItem("nick");
-    const id = window.localStorage.getItem("id");
+    // const id = window.localStorage.getItem("id");
 
     return (
       <div>
@@ -429,8 +434,7 @@ export default Ranking;
 //   <div className="detail_body"></div>
 // )}
 
-{
-  /* <div class="graph-wrapper">
+/* <div class="graph-wrapper">
 <h1>Title</h1>
 <div class="percent-indicator">
   <div class="per-0"></div>
@@ -449,7 +453,6 @@ export default Ranking;
   <li class="item5 p-15"></li>
 </ul>
 </div> */
-}
 
 // detail() {
 //   const test = document.querySelectorAll(".rank");

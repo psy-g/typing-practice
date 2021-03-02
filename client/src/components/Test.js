@@ -61,10 +61,13 @@ class Test extends Component {
     // 타수
     // 현재속도 = (타수(글자수) - 백스페이스 * 2) / 경과시간(초) * 60초
     // 한컴타자는 백스페이스 * 3
+    let tasu = this.getConstantVowel(problem[count]);
 
-    const resultSpeed = (problem[count].length * 60) / time;
+    // const resultSpeed = (problem[count].length * 60) / time;
 
-    console.log("시간은?", resultSpeed);
+    const resultSpeed = (tasu * 60) / time;
+
+    console.log("타수는?", resultSpeed);
 
     if (problem[count] === answer) {
       this.setState({
@@ -496,20 +499,49 @@ class Test extends Component {
       "ㅎ",
     ];
 
+    console.log("==", kor);
+
     const ga = 44032;
-    let uni = kor.charCodeAt(0);
+    // let uni = kor.charCodeAt(0);
+    // let uni = kor[0].charCodeAt(0);
+    let result = [];
 
-    uni = uni - ga;
+    for (let i = 0; i < kor.length; i++) {
+      let uni = kor[i].charCodeAt(0);
+      uni = uni - ga;
 
-    let fn = parseInt(uni / 588);
-    let sn = parseInt((uni - fn * 588) / 28);
-    let tn = parseInt(uni % 28);
+      let fn = parseInt(uni / 588);
+      let sn = parseInt((uni - fn * 588) / 28);
+      let tn = parseInt(uni % 28);
 
-    return console.log({
-      f: f[fn],
-      s: s[sn],
-      t: t[tn],
+      // result.push({ f: f[fn], s: s[sn], t: t[tn] });
+      result.push(f[fn], s[sn], t[tn]);
+    }
+
+    // console.log("=====", result);
+
+    let final = result.filter((item) => {
+      return item !== null && item !== undefined && item !== "";
     });
+
+    console.log("final", final);
+
+    return final.length;
+
+    // uni = uni - ga;
+
+    // let fn = parseInt(uni / 588);
+    // let sn = parseInt((uni - fn * 588) / 28);
+    // let tn = parseInt(uni % 28);
+
+    // return console.log(
+    //   result.concat({
+    //     f: f[fn],
+    //     s: s[sn],
+    //     t: t[tn],
+    //   })
+    // );
+
     // return {
     //   f: f[fn],
     //   s: s[sn],
@@ -520,7 +552,29 @@ class Test extends Component {
   componentDidMount() {
     this.keyboardEvent();
     this.testValid();
-    this.getConstantVowel("뚫");
+    // this.getConstantVowel([
+    //   "그",
+    //   "",
+    //   "밤",
+    //   "",
+    //   "눈",
+    //   "이",
+    //   "",
+    //   "펑",
+    //   "펑",
+    //   "",
+    //   "왔",
+    //   "지",
+    //   "",
+    //   "빛",
+    //   "의",
+    //   "",
+    //   "조",
+    //   "각",
+    //   "들",
+    //   "처",
+    //   "럼",
+    // ]);
   }
 
   render() {
