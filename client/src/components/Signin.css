@@ -80,6 +80,12 @@
   font-size: 14px;
 }
 
+.signin_body_password_input_validation {
+  display: none;
+  color: #e53a40;
+  font-size: 14px;
+}
+
 .signin_body_loginAndSignup {
   display: flex;
   flex-direction: column;

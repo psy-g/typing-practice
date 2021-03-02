@@ -32,6 +32,8 @@ class Test extends Component {
       id: window.localStorage.getItem("id"),
       winnerRecord: 0,
       items: "",
+      twins: "어떡해 올 여름 난 너무 바쁜데 그 어디라도 꼼짝하지 못할것 같아",
+      pro: "ab cde fgh ijk",
     };
 
     this.requestProblem = this.requestProblem.bind(this);
@@ -48,9 +50,17 @@ class Test extends Component {
   compare() {
     const { problem, count, answer, time } = this.state;
 
+    // 반짝이는 눈 속에 나는 두 손 모아 빌었지(50유효타수, 4초)
+    // 50타 * 60초 / 4초 => 750타?
+    // 백스페이스 7번
+
     // 수 계산(타수*60/걸린시간(초))
     // 48글자 * 60초 / 10초
     // 2880 / 10 => 288타
+
+    // 타수
+    // 현재속도 = (타수(글자수) - 백스페이스 * 2) / 경과시간(초) * 60초
+    // 한컴타자는 백스페이스 * 3
 
     const resultSpeed = (problem[count].length * 60) / time;
 
@@ -67,6 +77,17 @@ class Test extends Component {
       this.setState({ count: count + 1 }, function () {});
       document.querySelector(".typing").value = "";
 
+      // 색 초기화
+      if (this.state.count < 2) {
+        for (
+          let i = 0;
+          i < document.querySelector(".header_problem_count").children.length;
+          i++
+        ) {
+          document.querySelector(`.header_problem_count .t${i}`).style.color =
+            "white";
+        }
+      }
       // this.runChallenge();
 
       console.log("카운트", this.state.count);
@@ -79,6 +100,7 @@ class Test extends Component {
         keyEvent: false,
       });
       document.querySelector(".typing").value = "";
+      //
       // this.setState({ speed: "오타가 있습니다" });
       // this.setState({ keyEvent: false });
       // 오타가 있습니다 출력하는게 나을듯? 오타 있으면 타수 의미가 없지 않나..
@@ -158,7 +180,7 @@ class Test extends Component {
   keyboardEvent() {
     // event = false 처음에 이벤트 발생시키면 true로 바꾸고 문제가 넘어가거나
     // 틀렸을 경우 다시 false로 바꾸고 다시 실행 시킬 준비
-    console.log("확인", this.state.keyEvent);
+    // console.log("확인", this.state.keyEvent);
     //
     const keyboardEvent = document.querySelector(".typing");
 
@@ -174,7 +196,9 @@ class Test extends Component {
         // if (key.id === "Enter") {
         if (e.keyCode === 13) {
           if (
-            document.querySelector(".header_problem_count").innerHTML === ""
+            document.querySelector(".header_problem_count").innerHTML === "" ||
+            document.querySelector(".header_problem_count").childNodes
+              .length === 9
           ) {
             this.requestProblem();
             if (e.preventDefault) e.preventDefault();
@@ -204,6 +228,18 @@ class Test extends Component {
             // this.runStart2();
             // this.runRestart();
             this.setState({ keyEvent: true });
+
+            // 색상 초기화
+            for (
+              let i = 0;
+              i <
+              document.querySelector(".header_problem_count").children.length;
+              i++
+            ) {
+              document.querySelector(
+                `.header_problem_count .t${i}`
+              ).style.color = "white";
+            }
           }
           key.classList.add("pressed");
         }
@@ -220,6 +256,13 @@ class Test extends Component {
   // 랜덤(시간 초기화, 카운트 초기화)
   requestProblem() {
     document.querySelector(".typing").value = "";
+    const divChange = document.querySelector(".header_problem_count").children
+      .length;
+    for (let i = 0; i < divChange; i++) {
+      document.querySelector(`.header_problem_count .t${i}`).style.color =
+        "white";
+    }
+
     this.setState({ keyEvent: false, count: 0, recordTime: 0 });
     this.stop();
     this.init();
@@ -342,33 +385,142 @@ class Test extends Component {
     }, 2000); // 시간. 2초 후 실행
   }
 
-  // 복사, 붙여넣기 방지
-  // preventKeyCtrlV() {
-  //   if (event.ctrlKey && event.keyCode === 86) {
-  //     event.returnValue = false;
-  //   }
-  // }
+  testValid() {
+    const problemValid = document.querySelector(".typing");
+    const problemCheck = document.querySelector(".header_problem_count");
 
-  preventKeyCtrlV() {
-    const keyboardCtrlV = document.querySelector(".typing");
+    problemValid.addEventListener("input", (e) => {
+      // const newProblem = this.state.problem[this.state.count].split("");
+      // console.log("======", problemCheck.childNodes.length);
 
-    keyboardCtrlV.addEventListener("keydown", (e) => {
-      const key = document.getElementById(e.key);
+      if (problemCheck.childNodes.length > 9) {
+        const input = e.target.value;
+        const inputLen = e.target.value.length;
+        const newProblem = this.state.problem[this.state.count].split("");
 
-      if (key) {
-        if ((e.keyCode === 17) & (e.keyCode === 86)) {
-          alert("붙여넣기는 안됩니다");
+        // 조건문 개선
+        let counter = inputLen + 3;
+        let limit = newProblem.length + 4;
+
+        console.log("inputLen", inputLen);
+        // console.log("problem", limit);
+
+        if (counter > 3 && counter < limit) {
+          if (input[counter - 4] === newProblem[counter - 4]) {
+            document.querySelector(
+              `.header_problem_count .t${counter - 4}`
+            ).style.color = "#efdc05";
+          } else {
+            document.querySelector(
+              `.header_problem_count .t${counter - 4}`
+            ).style.color = "#e53a40";
+          }
         }
       }
-      // if (event.ctrlKey && event.keyCode === 67) {
-      //   event.returnValue = false;
-      // }
     });
+  }
+
+  getConstantVowel(kor) {
+    const f = [
+      "ㄱ",
+      "ㄲ",
+      "ㄴ",
+      "ㄷ",
+      "ㄸ",
+      "ㄹ",
+      "ㅁ",
+      "ㅂ",
+      "ㅃ",
+      "ㅅ",
+      "ㅆ",
+      "ㅇ",
+      "ㅈ",
+      "ㅉ",
+      "ㅊ",
+      "ㅋ",
+      "ㅌ",
+      "ㅍ",
+      "ㅎ",
+    ];
+    const s = [
+      "ㅏ",
+      "ㅐ",
+      "ㅑ",
+      "ㅒ",
+      "ㅓ",
+      "ㅔ",
+      "ㅕ",
+      "ㅖ",
+      "ㅗ",
+      "ㅘ",
+      "ㅙ",
+      "ㅚ",
+      "ㅛ",
+      "ㅜ",
+      "ㅝ",
+      "ㅞ",
+      "ㅟ",
+      "ㅠ",
+      "ㅡ",
+      "ㅢ",
+      "ㅣ",
+    ];
+    const t = [
+      "",
+      "ㄱ",
+      "ㄲ",
+      "ㄳ",
+      "ㄴ",
+      "ㄵ",
+      "ㄶ",
+      "ㄷ",
+      "ㄹ",
+      "ㄺ",
+      "ㄻ",
+      "ㄼ",
+      "ㄽ",
+      "ㄾ",
+      "ㄿ",
+      "ㅀ",
+      "ㅁ",
+      "ㅂ",
+      "ㅄ",
+      "ㅅ",
+      "ㅆ",
+      "ㅇ",
+      "ㅈ",
+      "ㅊ",
+      "ㅋ",
+      "ㅌ",
+      "ㅍ",
+      "ㅎ",
+    ];
+
+    const ga = 44032;
+    let uni = kor.charCodeAt(0);
+
+    uni = uni - ga;
+
+    let fn = parseInt(uni / 588);
+    let sn = parseInt((uni - fn * 588) / 28);
+    let tn = parseInt(uni % 28);
+
+    return console.log({
+      f: f[fn],
+      s: s[sn],
+      t: t[tn],
+    });
+    // return {
+    //   f: f[fn],
+    //   s: s[sn],
+    //   t: t[tn],
+    // };
   }
 
   componentDidMount() {
     this.keyboardEvent();
-    this.preventKeyCtrlV();
+    this.testValid();
+    this.getConstantVowel("뚫");
   }
 
   render() {
@@ -382,8 +534,15 @@ class Test extends Component {
       recordTime,
     } = this.state;
 
+    const tt = String(problem[count]);
+    const ttt = tt.split("");
+    const tttt = ttt.map((el, index) => (
+      <span className={"t" + index}>{el}</span>
+    ));
+
+    // console.log("len", tttt.length);
+
     const nickname = window.localStorage.getItem("nick");
-    // console.log("=====", this.state.winnerRecord);
 
     return (
       <div>
@@ -410,8 +569,16 @@ class Test extends Component {
               </div>
               <div className="header_titleAndProblem">
                 {count !== 2 ? (
-                  <div className="header_problem_count">{problem[count]}</div>
+                  <div>
+                    {tttt.length !== 9 ? (
+                      <div className="header_problem_count">{tttt}</div>
+                    ) : (
+                      <div className="header_problem_count"></div>
+                    )}
+                    {/* <div className="header_problem_count">{tttt}</div> */}
+                  </div>
                 ) : (
+                  // <div className="header_problem_count">{problem[count]}</div>
                   <div className="header_titleAndProblem_print">
                     <div className="header_titleAndProblem_print_header">
                       기록
@@ -472,7 +639,9 @@ class Test extends Component {
                 <textarea
                   type="text"
                   className="typing"
+                  // onInput={this.testValid}
                   onChange={this.handleInputValue("answer")}
+                  autoFocus
                 ></textarea>
                 <span id="show">00:00:00</span>
               </div>

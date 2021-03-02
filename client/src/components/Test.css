@@ -187,6 +187,10 @@
   color: #33ffff;
 }
 
+.header_problem_count {
+  display: inline-block;
+}
+
 /* .header_problem_result_print_rank_top3_print {
   display: flex;
   width: 100%;
