@@ -23,7 +23,7 @@ class Signin extends React.Component {
 
     this.loginHandler = this.loginHandler.bind(this);
     this.check = this.check.bind(this);
-    this.hanChk = this.hanChk.bind(this);
+    // this.hanChk = this.hanChk.bind(this);
   }
 
   loginHandler() {
@@ -36,7 +36,7 @@ class Signin extends React.Component {
 
   nicknameValidator = (e) => {
     const nicknameInput = e.target.value;
-    if (nicknameInput.length > 2) {
+    if (nicknameInput.length >= 2) {
       this.setState({ isNicknameChecked: true });
       this.setState({ nickname: nicknameInput });
     } else {
@@ -92,7 +92,7 @@ class Signin extends React.Component {
   clickBtn = () => {
     const { nickname, password } = this.state;
 
-    if (password.length >= 4 && nickname) {
+    if (password.length >= 4 && nickname >= 2) {
       axios
         .post("http://localhost:8080/auth/signup", this.state)
         // .post("https://missinganimals.ml/auth/signup", this.state)
@@ -105,7 +105,21 @@ class Signin extends React.Component {
           }
         });
     } else {
-      alert("유효한 정보가 아닙니다. 다시 작성해주세요");
+      // alert("유효한 정보가 아닙니다. 다시 작성해주세요");
+
+      if (nickname.length < 2) {
+        const hanValidation = document.querySelector(
+          ".signin_body_name_input_validation"
+        );
+        hanValidation.style.display = "block";
+      }
+      if (password.length < 4) {
+        const passValidation = document.querySelector(
+          ".signin_body_password_input_validation"
+        );
+
+        passValidation.style.display = "block";
+      }
     }
   };
 
@@ -132,6 +146,28 @@ class Signin extends React.Component {
       }
     }
   };
+
+  passChk(e) {
+    const passValidation = document.querySelector(
+      ".signin_body_password_input_validation"
+    );
+
+    passValidation.style.display = "none";
+
+    // if (e.target.value.length > 0) {
+    //   var s = e.target.value;
+
+    //   for (var i = 0; i < s.length; i++) {
+    //     if (s.length <= 4) {
+    //       passValidation.style.display = "block";
+    //       e.target.value = "";
+    //       return;
+    //     } else {
+    //       passValidation.style.display = "none";
+    //     }
+    //   }
+    // }
+  }
 
   check() {
     this.setState({ check: true });
@@ -167,7 +203,7 @@ class Signin extends React.Component {
                     onChange={this.handleInputValue("nickname")}
                   />
                   <div className="signin_body_name_input_validation">
-                    한글로만 가능합니다
+                    한글만 가능합니다(2자이상)
                   </div>
                 </div>
                 <div className="signin_body_password">
@@ -175,8 +211,12 @@ class Signin extends React.Component {
                   <input
                     type="password"
                     className="signin_body_password_input"
+                    onKeyUp={this.passChk}
                     onChange={this.handleInputValue("password")}
                   />
+                  <div className="signin_body_password_input_validation">
+                    4자 이상이어야 합니다
+                  </div>
                 </div>
                 <button
                   type="submit"
