@@ -56,25 +56,36 @@ class Ranking extends Component {
 
     setTimeout(() => {
       this.detail();
-    }, 2000);
+    }, 500);
   }
 
   detail() {
     const test = document.querySelectorAll(".rank");
     const nickname = window.localStorage.getItem("nick");
 
+    // 1등 기록, 이름
+    const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+      .innerHTML;
+    const bestName = document.querySelector(".rank .rank__0 .rank__name")
+      .innerHTML;
+
+    // 1등 타수만
+    const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
+
+    // 비회원
     if (nickname === null) {
       const target = document.querySelector(".detail_body");
+      const guest = "Guest";
 
       target.innerHTML = "";
 
-      // 1등 기록, 이름
-      const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
-        .innerHTML;
-      const bestName = document.querySelector(".rank .rank__0 .rank__name")
-        .innerHTML;
+      // // 1등 기록, 이름
+      // const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+      //   .innerHTML;
+      // const bestName = document.querySelector(".rank .rank__0 .rank__name")
+      //   .innerHTML;
 
-      const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+      // const best = Math.floor((bestRecord.substring(0, 3) / 750) * 100);
 
       const newDiv = document.createElement("div");
 
@@ -101,21 +112,22 @@ class Ranking extends Component {
       if (best >= 101) {
         graph1.style.width = `106%`;
         graph1.style.animation = `p-999 3s`;
-        graph2.style.width = `20%`;
-        graph2.style.animation = `p-20 3s`;
+        graph1.style.maxHeight = "40px";
+        graph2.style.width = `30%`;
+        graph2.style.animation = `p-30 3s`;
+        graph2.style.maxHeight = "40px";
 
-        const record1 = bestRecord.substring(0, 3);
-
-        var str1 = best;
+        // const record1 = bestRecord.substring(0, 3);
 
         document.styleSheets[0].addRule(
-          `li.p-${str1}::before`,
-          'content: "' + record1 + '타수";'
+          `li.item1::before`,
+          'content: "' + best + '타수";'
         );
 
         document.styleSheets[0].addRule(
-          `li.p-20::before` // 'content: "' + "로그인 필요" + '";'
-          `content:  로그인 필요 `
+          `li.item2::before`,
+          // 'content: "' + 'Guest";',
+          'content: "' + guest + '";'
         );
 
         document.styleSheets[0].addRule(
@@ -125,27 +137,28 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           "li.item2::after",
-          // 'content: "' + "Guest" + '";'
-          `content:  Guest `
+          'content: "' + guest + '";'
+          // `content:  Guest `
         );
       } else {
         graph1.style.width = `${best}%`;
         graph1.style.animation = `p-${best} 3s`;
-        graph2.style.width = `20%`;
-        graph2.style.animation = `p-20 3s`;
+        graph1.style.maxHeight = "40px";
+        graph2.style.width = `30%`;
+        graph2.style.animation = `p-30 3s`;
+        graph2.style.maxHeight = "40px";
 
         const record1 = bestRecord.substring(0, 3);
 
-        // var str1 = best;
-
         document.styleSheets[0].addRule(
-          `li.p-${str1}::before`,
+          `li.item1::before`,
           'content: "' + record1 + '타수";'
         );
 
         document.styleSheets[0].addRule(
-          `li.p-20::before`,
-          `content:  Guest `
+          `li.item2::before`,
+          'content: "' + guest + '";'
+          // `content:  Guest `
           // 'content: "' + "Guest" + '";'
         );
 
@@ -156,11 +169,14 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           "li.item2::after",
-          `content:  Guest `
+          'content: "' + guest + '";'
+          // `content:  Guest `
           // 'content: "' + "Guest" + '";'
         );
       }
-    } else {
+    }
+    // 회원
+    else {
       const target = document.querySelector(".detail_body");
 
       target.innerHTML = "";
@@ -184,14 +200,14 @@ class Ranking extends Component {
       }
 
       // 1등 기록, 이름
-      const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
-        .innerHTML;
-      const bestName = document.querySelector(".rank .rank__0 .rank__name")
-        .innerHTML;
+      // const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+      //   .innerHTML;
+      // const bestName = document.querySelector(".rank .rank__0 .rank__name")
+      //   .innerHTML;
 
-      // 기록이 없으면
+      // 로그인(기록 없음)
       if (userRecord === undefined) {
-        const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+        // const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
 
         const newDiv = document.createElement("div");
 
@@ -218,15 +234,17 @@ class Ranking extends Component {
         if (best >= 101) {
           graph1.style.width = `106%`;
           graph1.style.animation = `p-999 3s`;
+          graph1.style.maxHeight = "40px";
           graph2.style.width = `20%`;
           graph2.style.animation = `p-20 3s`;
+          graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
 
           // var str1 = best;
 
           document.styleSheets[0].addRule(
-            `li.p-${str1}::before`,
+            `li.p-${best}::before`,
             'content: "' + record1 + '타수";'
           );
 
@@ -248,8 +266,10 @@ class Ranking extends Component {
         } else {
           graph1.style.width = `${best}%`;
           graph1.style.animation = `p-${best} 3s`;
+          graph1.style.maxHeight = "40px";
           graph2.style.width = `20%`;
           graph2.style.animation = `p-20 3s`;
+          graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
           // const record2 = userRecord.substring(0, 3);
@@ -257,7 +277,7 @@ class Ranking extends Component {
           // var str1 = best;
           // var str2 = challenger;
           document.styleSheets[0].addRule(
-            `li.p-${str1}::before`,
+            `li.p-${best}::before`,
             'content: "' + record1 + '타수";'
           );
 
@@ -277,11 +297,23 @@ class Ranking extends Component {
             'content: "' + nickname + '";'
           );
         }
-      } else {
-        const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
-        const challenger = Math.floor((userRecord.substring(0, 3) / 500) * 100);
+      }
+      // 로그인(기록 있음)
+      else {
+        const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
+        const challenger = Math.floor(
+          (userRecord.split("타수")[0] / 750) * 100
+        );
+
+        // 2700타수 15초 or 250타수 30초
+
+        // const best = Math.floor((bestRecord.substring(0, 3) / 500) * 100);
+        // const challenger = Math.floor((userRecord.substring(0, 3) / 500) * 100);
 
         const newDiv = document.createElement("div");
+
+        console.log("=best=", best);
+        console.log("=chall=", challenger);
 
         newDiv.className = "graph-wrapper";
         newDiv.innerHTML = `
@@ -302,35 +334,82 @@ class Ranking extends Component {
 
         const graph1 = document.querySelector(".graph .item1");
         const graph2 = document.querySelector(".graph .item2");
+        const record1 = bestRecord.split(" ")[0];
+        const record2 = userRecord.split(" ")[0];
 
-        if (best >= 101) {
+        if (best >= 101 && challenger >= 101) {
           graph1.style.width = `106%`;
           graph1.style.animation = `p-999 3s`;
-        }
-        if (challenger >= 101) {
+          graph1.style.maxHeight = "40px";
           graph2.style.width = `106%`;
           graph2.style.animation = `p-999 3s`;
-        } else {
-          graph1.style.width = `${best}%`;
-          graph1.style.animation = `p-${best} 3s`;
-          graph2.style.width = `${challenger}%`;
-          graph2.style.animation = `p-${challenger} 3s`;
+          graph2.style.maxHeight = "40px";
 
-          // console.log("========", document.styleSheets[0]);
-
-          const record1 = bestRecord.substring(0, 3);
-          const record2 = userRecord.substring(0, 3);
-
-          // var str1 = best;
-          var str2 = challenger;
           document.styleSheets[0].addRule(
-            `li.p-${str1}::before`,
-            'content: "' + record1 + '타수";'
+            `li.item1::before`,
+            'content: "' + record1 + '";'
           );
 
           document.styleSheets[0].addRule(
-            `li.p-${str2}::before`,
-            'content: "' + record2 + '타수";'
+            `li.item2::before`,
+            'content: "' + record2 + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            "li.item1::after",
+            'content: "' + bestName + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            "li.item2::after",
+            'content: "' + nickname + '";'
+          );
+        } else if (best >= 101 && challenger < 101) {
+          graph1.style.width = `106%`;
+          graph1.style.animation = `p-999 3s`;
+          graph1.style.maxHeight = "40px";
+          graph2.style.width = `${challenger}%`;
+          graph2.style.animation = `p-${challenger} 3s`;
+          graph2.style.maxHeight = "40px";
+
+          document.styleSheets[0].addRule(
+            `li.item1::before`,
+            'content: "' + record1 + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            `li.item2::before`,
+            'content: "' + record2 + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            "li.item1::after",
+            'content: "' + bestName + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            "li.item2::after",
+            'content: "' + nickname + '";'
+          );
+        } else {
+          graph1.style.width = `${best}%`;
+          graph1.style.animation = `p-${best} 3s`;
+          graph1.style.maxHeight = "40px";
+          graph2.style.width = `${challenger}%`;
+          graph2.style.animation = `p-${challenger} 3s`;
+          graph2.style.maxHeight = "40px";
+
+          console.log("====1===", record1);
+          console.log("====2===", record2);
+
+          document.styleSheets[0].addRule(
+            `li.item1::before`,
+            'content: "' + record1 + '";'
+          );
+
+          document.styleSheets[0].addRule(
+            `li.item2::before`,
+            'content: "' + record2 + '";'
           );
 
           document.styleSheets[0].addRule(
@@ -343,6 +422,48 @@ class Ranking extends Component {
             'content: "' + nickname + '";'
           );
         }
+        // if (best >= 101) {
+        //   graph1.style.width = `106%`;
+        //   graph1.style.animation = `p-999 3s`;
+        // }
+        // if (challenger >= 101) {
+        //   graph2.style.width = `106%`;
+        //   graph2.style.animation = `p-999 3s`;
+        // } else {
+        //   graph1.style.width = `${best}%`;
+        //   graph1.style.animation = `p-${best} 3s`;
+        //   graph2.style.width = `${challenger}%`;
+        //   graph2.style.animation = `p-${challenger} 3s`;
+
+        //   // const record1 = bestRecord.split(" ")[0];
+        //   // const record2 = userRecord.split(" ")[0];
+
+        //   console.log("====1===", record1);
+        //   console.log("====2===", record2);
+
+        //   document.styleSheets[0].addRule(
+        //     // `li.p-${str1}::before`,
+        //     `li.item1::before`,
+        //     'content: "' + record1 + '";'
+        //     // 'content: "' + record1 + '타수";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     // `li.p-${str2}::before`,
+        //     `li.item2::before`,
+        //     'content: "' + record2 + '";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     "li.item1::after",
+        //     'content: "' + bestName + '";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     "li.item2::after",
+        //     'content: "' + nickname + '";'
+        //   );
+        // }
       }
     }
   }
@@ -382,7 +503,7 @@ class Ranking extends Component {
               </select>
               <div className="table__column">
                 <span className="column__rank">순위</span>
-                <span className="column__nick">이름</span>
+                <span className="column__nick">닉네임</span>
                 <span className="column__record">기록</span>
               </div>
               <div className="rank">{items}</div>

@@ -31,7 +31,7 @@ class Signup extends Component {
         })
         .catch((err) => {
           if (err) {
-            alert("이미 동일한 이메일이 존재합니다");
+            alert("이미 동일한 닉네임이 존재합니다");
           }
         });
     } else {

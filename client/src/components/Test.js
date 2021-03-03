@@ -94,7 +94,7 @@ class Test extends Component {
       document.querySelector(".typing").value = "";
 
       // 색 초기화
-      if (this.state.count < 2) {
+      if (this.state.count < 7) {
         for (
           let i = 0;
           i < document.querySelector(".header_problem_count").children.length;
@@ -242,7 +242,7 @@ class Test extends Component {
             this.setState({ time: Number(resultTime.substring(6)) });
             this.compare();
 
-            if (this.state.count === 2) {
+            if (this.state.count === 7) {
               // this.ranking();
               this.rankPrint();
               // 2초 후에 렌더링 시킬 메소드 추가
@@ -695,7 +695,7 @@ class Test extends Component {
                 </div>
               </div>
               <div className="header_titleAndProblem">
-                {count !== 2 ? (
+                {count !== 7 ? (
                   <div>
                     {tttt.length !== 9 ? (
                       <div className="header_problem_count">{tttt}</div>

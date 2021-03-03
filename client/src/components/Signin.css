@@ -86,6 +86,24 @@
   font-size: 14px;
 }
 
+.signin_body_name_input_duplicate {
+  display: none;
+  color: #e53a40;
+  font-size: 14px;
+}
+
+.signin_body_name_input_login1 {
+  display: none;
+  color: #e53a40;
+  font-size: 13px;
+}
+
+.signin_body_name_input_login2 {
+  display: none;
+  color: #e53a40;
+  font-size: 13px;
+}
+
 .signin_body_loginAndSignup {
   display: flex;
   flex-direction: column;

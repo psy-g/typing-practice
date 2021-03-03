@@ -36,7 +36,7 @@ class Signin extends React.Component {
 
   nicknameValidator = (e) => {
     const nicknameInput = e.target.value;
-    if (nicknameInput.length >= 2) {
+    if (nicknameInput.length >= 1) {
       this.setState({ isNicknameChecked: true });
       this.setState({ nickname: nicknameInput });
     } else {
@@ -46,7 +46,7 @@ class Signin extends React.Component {
 
   passwordValidator = (e) => {
     const passwordInput = e.target.value;
-    if (passwordInput.length >= 4) {
+    if (passwordInput.length >= 1) {
       this.setState({ isPasswordChecked: true });
       this.setState({ password: passwordInput });
     } else {
@@ -62,10 +62,20 @@ class Signin extends React.Component {
       isPasswordChecked,
     } = this.state;
 
+    const loginDuplicate = document.querySelector(
+      ".signin_body_name_input_login1"
+    );
+
+    const loginDuplicate2 = document.querySelector(
+      ".signin_body_name_input_login2"
+    );
+
     // 이메일, 비밀번호 체크
     if (isNicknameChecked === false || isPasswordChecked === false) {
-      alert("이름, 비밀번호를 확인해주세요");
+      loginDuplicate.style.display = "block";
     } else if (isNicknameChecked && isPasswordChecked) {
+      loginDuplicate.style.display = "none";
+
       const loginRequest = await axios.post(
         "http://localhost:8080/auth/signin",
         { nickname, password },
@@ -76,6 +86,8 @@ class Signin extends React.Component {
         window.localStorage.setItem("id", loginRequest.data.id);
         window.localStorage.setItem("nick", loginRequest.data.nickname);
         this.loginHandler();
+      } else {
+        loginDuplicate2.style.display = "block";
       }
     }
   };
@@ -91,18 +103,23 @@ class Signin extends React.Component {
 
   clickBtn = () => {
     const { nickname, password } = this.state;
+    const duplicate = document.querySelector(
+      ".signin_body_name_input_duplicate"
+    );
 
-    if (password.length >= 4 && nickname >= 2) {
+    if (password.length >= 4 && nickname.length >= 2) {
       axios
         .post("http://localhost:8080/auth/signup", this.state)
         // .post("https://missinganimals.ml/auth/signup", this.state)
         .then((res) => {
-          this.props.history.push("/");
+          if (res.data.message === "signup") {
+            this.props.history.push("/");
+          } else {
+            duplicate.style.display = "block";
+          }
         })
         .catch((err) => {
-          if (err) {
-            alert("이미 동일한 닉네임이 존재합니다");
-          }
+          console.log(err);
         });
     } else {
       // alert("유효한 정보가 아닙니다. 다시 작성해주세요");
@@ -111,6 +128,7 @@ class Signin extends React.Component {
         const hanValidation = document.querySelector(
           ".signin_body_name_input_validation"
         );
+        duplicate.style.display = "none";
         hanValidation.style.display = "block";
       }
       if (password.length < 4) {
@@ -122,6 +140,19 @@ class Signin extends React.Component {
       }
     }
   };
+
+  loginChk() {
+    const loginDuplicate = document.querySelector(
+      ".signin_body_name_input_login1"
+    );
+
+    const loginDuplicate2 = document.querySelector(
+      ".signin_body_name_input_login2"
+    );
+
+    loginDuplicate.style.display = "none";
+    loginDuplicate2.style.display = "none";
+  }
 
   hanChk = (key) => (e) => {
     // console.log("==key==", key);
@@ -195,7 +226,7 @@ class Signin extends React.Component {
             {check ? (
               <div className="signin_body">
                 <div className="signin_body_name">
-                  <div className="signin_body_name_column">이름</div>
+                  <div className="signin_body_name_column">닉네임</div>
                   <input
                     type="text"
                     className="signin_body_name_input"
@@ -204,6 +235,9 @@ class Signin extends React.Component {
                   />
                   <div className="signin_body_name_input_validation">
                     한글만 가능합니다(2자이상)
+                  </div>
+                  <div className="signin_body_name_input_duplicate">
+                    중복된 닉네임입니다
                   </div>
                 </div>
                 <div className="signin_body_password">
@@ -229,12 +263,19 @@ class Signin extends React.Component {
             ) : (
               <div className="signin_body">
                 <div className="signin_body_name">
-                  <div className="signin_body_name_column">이름</div>
+                  <div className="signin_body_name_column">닉네임</div>
                   <input
                     className="signin_body_name_input"
                     // placeholder="아이디(닉네임)"
                     onChange={this.nicknameValidator.bind(this)}
+                    onKeyUp={this.loginChk}
                   />
+                  <div className="signin_body_name_input_login1">
+                    정보가 입력되지 않았습니다
+                  </div>
+                  <div className="signin_body_name_input_login2">
+                    가입정보가 일치하지 않습니다
+                  </div>
                 </div>
                 <div className="signin_body_password">
                   <div className="signin_body_password_column">비밀번호</div>
@@ -243,6 +284,7 @@ class Signin extends React.Component {
                     type="password"
                     // placeholder="비밀번호"
                     onChange={this.passwordValidator.bind(this)}
+                    onKeyUp={this.loginChk}
                   />
                 </div>
                 <div className="signin_body_loginAndSignup">
