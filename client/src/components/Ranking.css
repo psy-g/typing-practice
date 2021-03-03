@@ -557,9 +557,11 @@
 @keyframes p-47 {
   from {
     width: 0;
+    /* max-height: 40px; */
   }
   to {
     width: 47%;
+    /* max-height: 40px; */
   }
 }
 @keyframes p-48 {
@@ -1141,19 +1143,19 @@ li.p-100::before {
   content: "0";
 }
 .percent-indicator .per-20::before {
-  content: "100";
+  content: "150";
 }
 .percent-indicator .per-40::before {
-  content: "200";
-}
-.percent-indicator .per-60::before {
   content: "300";
 }
+.percent-indicator .per-60::before {
+  content: "450";
+}
 .percent-indicator .per-80::before {
-  content: "400";
+  content: "600";
 }
 .percent-indicator .per-100::before {
-  content: "500";
+  content: "750";
 }
 
 /* body {
@@ -1250,7 +1252,7 @@ li.p-100::before {
 }
 
 li {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   padding: 10px 5px;
   background: #000;
   color: #fff;

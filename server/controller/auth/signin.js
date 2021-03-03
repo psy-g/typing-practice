@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   });
 
   if (!users) {
-    return res.status(400).json({ message: "invalid nickname" });
+    return res.status(201).json({ message: "invalid nickname" });
   } else {
     // 비밀번호 확인
     const isMatch = await bcrypt.compare(password, users.password);
@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
         nickname: users.nickname,
       });
     } else {
-      return res.status(400).json({ message: "invalid password" });
+      return res.status(201).json({ message: "invalid password" });
     }
   }
 };
