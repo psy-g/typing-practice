@@ -54,6 +54,10 @@ class Test extends Component {
     // 50타 * 60초 / 4초 => 750타?
     // 백스페이스 7번
 
+    // 일단 스페이스 빼자
+    // 스페이스는 하나만 인정(배열에는 스페이스 하나당 세개씩 들어감)
+    // 빈 칸 3칸이면 undefinded가 9개 들어감
+
     // 수 계산(타수*60/걸린시간(초))
     // 48글자 * 60초 / 10초
     // 2880 / 10 => 288타
@@ -61,15 +65,24 @@ class Test extends Component {
     // 타수
     // 현재속도 = (타수(글자수) - 백스페이스 * 2) / 경과시간(초) * 60초
     // 한컴타자는 백스페이스 * 3
-    let tasu = this.getConstantVowel(problem[count]);
+    const tasu = this.getConstantVowel(problem[count]);
+    const tasuJS = JSON.stringify(tasu);
+    const inputAnswer = this.getConstantVowel(answer);
+    const inputAnswerJS = JSON.stringify(inputAnswer);
 
     // const resultSpeed = (problem[count].length * 60) / time;
 
-    const resultSpeed = (tasu * 60) / time;
+    // 타수
+    const resultSpeed = (tasu.length * 60) / time;
 
-    console.log("타수는?", resultSpeed);
+    // console.log("타수는?", tasu);
+    // console.log("입력값", inputAnswer);
+    // console.log("타수", tasuJS);
+    // console.log("입력", inputAnswerJS);
 
-    if (problem[count] === answer) {
+    // 정확도
+    // if (problem[count] === answer) {
+    if (tasuJS === inputAnswerJS) {
       this.setState({
         accuracy: "100%",
         speed: `${Math.floor(resultSpeed)}타수`,
@@ -93,13 +106,27 @@ class Test extends Component {
       }
       // this.runChallenge();
 
-      console.log("카운트", this.state.count);
-      console.log("기록", this.state.recordresultSpeed);
+      // console.log("카운트", this.state.count);
+      // console.log("기록", this.state.recordresultSpeed);
     } else {
-      // alert("오타가 있습니다");
+      let right = 0;
+
+      for (let i = 0; i < inputAnswer.length; i++) {
+        if (JSON.stringify(tasu[i]) === JSON.stringify(inputAnswer[i])) {
+          right++;
+        }
+      }
+
+      console.log("몇개맞음?", right);
+      console.log("몇문제", tasu.length);
+
+      const acc = ((right / tasu.length) * 100).toFixed(1);
+
       this.setState({
-        accuracy: "오타가 있습니다",
-        speed: "오타가 있습니다",
+        // accuracy: "오타가 있습니다",
+        accuracy: `${acc}%`,
+        speed: `${Math.floor((inputAnswer.length * 60) / time)}타수`,
+        // speed: "오타가 있습니다",
         keyEvent: false,
       });
       document.querySelector(".typing").value = "";
@@ -405,7 +432,7 @@ class Test extends Component {
         let counter = inputLen + 3;
         let limit = newProblem.length + 4;
 
-        console.log("inputLen", inputLen);
+        // console.log("inputLen", inputLen);
         // console.log("problem", limit);
 
         if (counter > 3 && counter < limit) {
@@ -425,25 +452,25 @@ class Test extends Component {
 
   getConstantVowel(kor) {
     const f = [
-      "ㄱ",
-      "ㄲ",
-      "ㄴ",
-      "ㄷ",
-      "ㄸ",
-      "ㄹ",
-      "ㅁ",
-      "ㅂ",
-      "ㅃ",
-      "ㅅ",
-      "ㅆ",
-      "ㅇ",
-      "ㅈ",
-      "ㅉ",
-      "ㅊ",
-      "ㅋ",
-      "ㅌ",
-      "ㅍ",
-      "ㅎ",
+      "ㄱ", // -31439
+      "ㄲ", // -31438
+      "ㄴ", // -31436
+      "ㄷ", // -31433
+      "ㄸ", // -31432
+      "ㄹ", // -31431
+      "ㅁ", // -31423
+      "ㅂ", // -31422
+      "ㅃ", // -31421
+      "ㅅ", // -31419
+      "ㅆ", // -31418
+      "ㅇ", // -31417
+      "ㅈ", // -31416
+      "ㅉ", // -31415
+      "ㅊ", // -31414
+      "ㅋ", // -31413
+      "ㅌ", // -31412
+      "ㅍ", // -31411
+      "ㅎ", // -31410
     ];
     const s = [
       "ㅏ",
@@ -499,34 +526,103 @@ class Test extends Component {
       "ㅎ",
     ];
 
-    console.log("==", kor);
-
     const ga = 44032;
-    // let uni = kor.charCodeAt(0);
-    // let uni = kor[0].charCodeAt(0);
     let result = [];
 
     for (let i = 0; i < kor.length; i++) {
       let uni = kor[i].charCodeAt(0);
       uni = uni - ga;
 
-      let fn = parseInt(uni / 588);
-      let sn = parseInt((uni - fn * 588) / 28);
-      let tn = parseInt(uni % 28);
+      // 자음 입력 하나만 된 것 => ("강", "ㅎ") "ㅎ"의 경우
+      if (uni < 0) {
+        if (uni === -31439) {
+          result.push(f[0]);
+        }
+        if (uni === -31438) {
+          result.push(f[1]);
+        }
+        if (uni === -31436) {
+          result.push(f[2]);
+        }
+        if (uni === -31433) {
+          result.push(f[3]);
+        }
+        if (uni === -31432) {
+          result.push(f[4]);
+        }
+        if (uni === -31431) {
+          result.push(f[5]);
+        }
+        if (uni === -31423) {
+          result.push(f[6]);
+        }
+        if (uni === -31422) {
+          result.push(f[7]);
+        }
+        if (uni === -31421) {
+          result.push(f[8]);
+        }
+        if (uni === -31419) {
+          result.push(f[9]);
+        }
+        if (uni === -31418) {
+          result.push(f[10]);
+        }
+        if (uni === -31417) {
+          result.push(f[11]);
+        }
+        if (uni === -31416) {
+          result.push(f[12]);
+        }
+        if (uni === -31415) {
+          result.push(f[13]);
+        }
+        if (uni === -31414) {
+          result.push(f[14]);
+        }
+        if (uni === -31413) {
+          result.push(f[15]);
+        }
+        if (uni === -31412) {
+          result.push(f[16]);
+        }
+        if (uni === -31411) {
+          result.push(f[17]);
+        }
+        if (uni === -31410) {
+          result.push(f[18]);
+        }
+      } else {
+        let fn = parseInt(uni / 588);
+        let sn = parseInt((uni - fn * 588) / 28);
+        let tn = parseInt(uni % 28);
 
-      // result.push({ f: f[fn], s: s[sn], t: t[tn] });
-      result.push(f[fn], s[sn], t[tn]);
+        if (tn === 0) {
+          result.push(f[fn], s[sn]);
+        } else {
+          result.push(f[fn], s[sn], t[tn]);
+        }
+      }
+      // let fn = parseInt(uni / 588);
+      // let sn = parseInt((uni - fn * 588) / 28);
+      // let tn = parseInt(uni % 28);
+
+      // // result.push({ f: f[fn], s: s[sn], t: t[tn] });
+      // if (tn === 0) {
+      //   result.push(f[fn], s[sn]);
+      // } else {
+      //   result.push(f[fn], s[sn], t[tn]);
+      // }
+      // result.push(f[fn], s[sn], t[tn]);
     }
 
-    // console.log("=====", result);
-
     let final = result.filter((item) => {
-      return item !== null && item !== undefined && item !== "";
+      return item !== null && item !== undefined;
+      // && item !== "";
     });
 
-    console.log("final", final);
-
-    return final.length;
+    // console.log("final", final);
+    return final;
 
     // uni = uni - ga;
 
@@ -552,29 +648,6 @@ class Test extends Component {
   componentDidMount() {
     this.keyboardEvent();
     this.testValid();
-    // this.getConstantVowel([
-    //   "그",
-    //   "",
-    //   "밤",
-    //   "",
-    //   "눈",
-    //   "이",
-    //   "",
-    //   "펑",
-    //   "펑",
-    //   "",
-    //   "왔",
-    //   "지",
-    //   "",
-    //   "빛",
-    //   "의",
-    //   "",
-    //   "조",
-    //   "각",
-    //   "들",
-    //   "처",
-    //   "럼",
-    // ]);
   }
 
   render() {
@@ -606,7 +679,7 @@ class Test extends Component {
             <div className="header_problem">
               <div className="header_problem_score">
                 <div className="header_problem_score_speed">
-                  <div className="header_problem_score_speed_column">속도</div>
+                  <div className="header_problem_score_speed_column">타수</div>
                   <div className="header_problem_score_speed_result">
                     {speed}
                   </div>
@@ -694,6 +767,7 @@ class Test extends Component {
                   type="text"
                   className="typing"
                   // onInput={this.testValid}
+                  // onChange={this.handleInputValue("answer")}
                   onChange={this.handleInputValue("answer")}
                   autoFocus
                 ></textarea>
