@@ -107,7 +107,7 @@ class Signin extends React.Component {
       ".signin_body_name_input_duplicate"
     );
 
-    if (password.length >= 4 && nickname.length >= 2) {
+    if (password.length >= 4 && nickname.length >= 2 && nickname.length <= 5) {
       axios
         .post("http://localhost:8080/auth/signup", this.state)
         // .post("https://missinganimals.ml/auth/signup", this.state)
@@ -124,7 +124,7 @@ class Signin extends React.Component {
     } else {
       // alert("유효한 정보가 아닙니다. 다시 작성해주세요");
 
-      if (nickname.length < 2) {
+      if (nickname.length < 2 || nickname.length > 5) {
         const hanValidation = document.querySelector(
           ".signin_body_name_input_validation"
         );
@@ -211,100 +211,105 @@ class Signin extends React.Component {
       <div>
         <Nav />
         <div id="signin">
-          <div className="signin_container">
-            <div className="signin_header">
-              <div className="signin_header_top">
-                <img
-                  className="header_logo"
-                  src={signinLogo}
-                  // width="600px"
-                  // height="150px"
-                  alt="login_logo"
-                />
+          <div className="signin____header____tail">
+            <div className="signin_container">
+              <div className="signin_header">
+                <div className="signin_header_top">
+                  <img
+                    className="header_logo"
+                    src={signinLogo}
+                    // width="600px"
+                    // height="150px"
+                    alt="login_logo"
+                  />
+                </div>
               </div>
-            </div>
-            {check ? (
-              <div className="signin_body">
-                <div className="signin_body_name">
-                  <div className="signin_body_name_column">닉네임</div>
-                  <input
-                    type="text"
-                    className="signin_body_name_input"
-                    onKeyUp={this.hanChk("hanChk")}
-                    onChange={this.handleInputValue("nickname")}
-                  />
-                  <div className="signin_body_name_input_validation">
-                    한글만 가능합니다(2자이상)
+              {check ? (
+                <div className="signin_body">
+                  <div className="signin_body_name">
+                    <div className="signin_body_name_column">닉네임</div>
+                    <input
+                      type="text"
+                      className="signin_body_name_input"
+                      onKeyUp={this.hanChk("hanChk")}
+                      onChange={this.handleInputValue("nickname")}
+                    />
+                    <div className="signin_body_name_input_validation">
+                      한글만 가능합니다<br></br>
+                      최소 2글자, 최대 5글자
+                    </div>
+                    {/* <div className="signin_body_name_input_validation2">
+                    최소 2글자, 최대 8글자
+                  </div> */}
+                    <div className="signin_body_name_input_duplicate">
+                      중복된 닉네임입니다
+                    </div>
                   </div>
-                  <div className="signin_body_name_input_duplicate">
-                    중복된 닉네임입니다
+                  <div className="signin_body_password">
+                    <div className="signin_body_password_column">비밀번호</div>
+                    <input
+                      type="password"
+                      className="signin_body_password_input"
+                      onKeyUp={this.passChk}
+                      onChange={this.handleInputValue("password")}
+                    />
+                    <div className="signin_body_password_input_validation">
+                      4자 이상이어야 합니다
+                    </div>
                   </div>
-                </div>
-                <div className="signin_body_password">
-                  <div className="signin_body_password_column">비밀번호</div>
-                  <input
-                    type="password"
-                    className="signin_body_password_input"
-                    onKeyUp={this.passChk}
-                    onChange={this.handleInputValue("password")}
-                  />
-                  <div className="signin_body_password_input_validation">
-                    4자 이상이어야 합니다
-                  </div>
-                </div>
-                <button
-                  type="submit"
-                  className="signin_body_loginBtn"
-                  onClick={() => this.clickBtn()}
-                >
-                  회원가입
-                </button>
-              </div>
-            ) : (
-              <div className="signin_body">
-                <div className="signin_body_name">
-                  <div className="signin_body_name_column">닉네임</div>
-                  <input
-                    className="signin_body_name_input"
-                    // placeholder="아이디(닉네임)"
-                    onChange={this.nicknameValidator.bind(this)}
-                    onKeyUp={this.loginChk}
-                  />
-                  <div className="signin_body_name_input_login1">
-                    정보가 입력되지 않았습니다
-                  </div>
-                  <div className="signin_body_name_input_login2">
-                    가입정보가 일치하지 않습니다
-                  </div>
-                </div>
-                <div className="signin_body_password">
-                  <div className="signin_body_password_column">비밀번호</div>
-                  <input
-                    className="signin_body_password_input"
-                    type="password"
-                    // placeholder="비밀번호"
-                    onChange={this.passwordValidator.bind(this)}
-                    onKeyUp={this.loginChk}
-                  />
-                </div>
-                <div className="signin_body_loginAndSignup">
                   <button
+                    type="submit"
                     className="signin_body_loginBtn"
-                    onClick={this.loginRequestHandler.bind(this)}
-                  >
-                    로그인
-                  </button>
-                  <button
-                    className="signin_body_signupBtn"
-                    onClick={this.check}
-                    // onClick={this.convertToSignup.bind(this)}
+                    onClick={() => this.clickBtn()}
                   >
                     회원가입
                   </button>
                 </div>
-              </div>
-            )}
-            {/* <div className="signin_body">
+              ) : (
+                <div className="signin_body">
+                  <div className="signin_body_name">
+                    <div className="signin_body_name_column">닉네임</div>
+                    <input
+                      className="signin_body_name_input"
+                      // placeholder="아이디(닉네임)"
+                      onChange={this.nicknameValidator.bind(this)}
+                      onKeyUp={this.loginChk}
+                    />
+                    <div className="signin_body_name_input_login1">
+                      정보가 입력되지 않았습니다
+                    </div>
+                    <div className="signin_body_name_input_login2">
+                      가입정보가 일치하지 않습니다
+                    </div>
+                  </div>
+                  <div className="signin_body_password">
+                    <div className="signin_body_password_column">비밀번호</div>
+                    <input
+                      className="signin_body_password_input"
+                      type="password"
+                      // placeholder="비밀번호"
+                      onChange={this.passwordValidator.bind(this)}
+                      onKeyUp={this.loginChk}
+                    />
+                  </div>
+                  <div className="signin_body_loginAndSignup">
+                    <button
+                      className="signin_body_loginBtn"
+                      onClick={this.loginRequestHandler.bind(this)}
+                    >
+                      로그인
+                    </button>
+                    <button
+                      className="signin_body_signupBtn"
+                      onClick={this.check}
+                      // onClick={this.convertToSignup.bind(this)}
+                    >
+                      회원가입
+                    </button>
+                  </div>
+                </div>
+              )}
+              {/* <div className="signin_body">
               <div className="signin_body_name">
                 <div className="signin_body_name_column">이름</div>
                 <input
@@ -338,17 +343,18 @@ class Signin extends React.Component {
                 </button>
               </div>
             </div> */}
-          </div>
-          <div className="signin_tail">
-            <Link to="/signin">
-              <img
-                className="signin_tail_button"
-                src={btn}
-                width="50px"
-                height="50px"
-                alt="btn"
-              />
-            </Link>
+            </div>
+            <div className="signin_tail">
+              <Link to="/signin">
+                <img
+                  className="signin_tail_button"
+                  src={btn}
+                  width="50px"
+                  height="50px"
+                  alt="btn"
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

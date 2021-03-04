@@ -7,24 +7,23 @@
   align-items: center;
 }
 
-.signin_container {
-  /* display: flex;
+.signin____header____tail {
+  display: flex;
+  width: 75%;
+  min-width: 500px;
+  height: 100%;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  background: url("../image/rankback.png");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
-  width: 60%;
-  height: 35rem;
-  text-align: center; */
+}
+
+.signin_container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 70%;
-  height: 40rem;
+  height: 65vh;
   text-align: center;
   background: url("../image/rankback.png");
   z-index: 1;
@@ -74,7 +73,8 @@
   outline: none;
 }
 
-.signin_body_name_input_validation {
+.signin_body_name_input_validation,
+.signin_body_name_input_validation2 {
   display: none;
   color: #e53a40;
   font-size: 14px;
@@ -135,7 +135,7 @@
   justify-content: center;
   align-items: center;
   width: 70%;
-  height: 8rem;
+  height: 13vh;
   text-align: center;
   background-color: #cadbe9;
   border-top-width: 2.5px;
