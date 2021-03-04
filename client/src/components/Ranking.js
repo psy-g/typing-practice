@@ -272,7 +272,7 @@ class Ranking extends Component {
           graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
-          var noRecord = "기록x";
+          var noRecord1 = "기록x";
           // const record2 = userRecord.substring(0, 3);
 
           // var str1 = best;
@@ -285,7 +285,7 @@ class Ranking extends Component {
           document.styleSheets[0].addRule(
             `li.p-20::before`,
             // `content: 기록이 없습니다 `
-            'content: "' + noRecord + '";'
+            'content: "' + noRecord1 + '";'
             // 'content: "' + "기록이 없습니다" + '";'
           );
 
