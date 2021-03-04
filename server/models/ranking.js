@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) =>
         allowNull: false,
       },
       time: {
-        type: DataTypes.INTEGER(),
+        // type: DataTypes.INTEGER(),
+        type: DataTypes.DECIMAL(10, 1),
         allowNull: false,
       },
       average: {

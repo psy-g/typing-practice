@@ -7,21 +7,36 @@
   align-items: center;
 }
 
+.ranking____header____tail {
+  display: flex;
+  width: 80%;
+  min-width: 500px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .ranking_list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 35rem;
   text-align: center;
+  width: 85%;
+  height: 50vh;
+  /* width: 90%;
+  height: 35rem; */
+
   /* border: solid red; */
 }
 
 .ranking_list_table {
-  width: 50%;
+  width: 80%;
   min-width: 350px;
-  height: 90%;
+  max-width: 900px;
+  height: 65vh;
+  /* height: 90%; */
   /* background-color: #ffeee4; */
   /* background: white; */
   background: url("../image/rankback.png");
@@ -42,7 +57,8 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  font-size: 20px;
+  font-size: max(0.8em, 1.1vw);
+  /* font-size: 20px; */
 }
 
 .column__rank {
@@ -73,7 +89,8 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  font-size: 25px;
+  font-size: max(0.9em, 1.3vw);
+  /* font-size: 25px; */
   color: #33ffff;
 }
 
@@ -89,7 +106,8 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  font-size: 18px;
+  font-size: max(0.7em, 1vw);
+  /* font-size: 18px; */
   color: #fffff3;
 }
 
@@ -133,6 +151,15 @@
   content: "🥉";
 }
 
+.rank__0 .rank__name {
+  padding-left: 15px;
+}
+
+.rank__1 .rank__name,
+.rank__2 .rank__name {
+  padding-left: 19px;
+}
+
 .rank__rank {
   width: 10%;
 }
@@ -165,6 +192,10 @@
     2px 10px 23px 0 rgb(96 96 96 / 13%);
   padding: 40px;
   padding-bottom: 20px;
+}
+
+.detail_header {
+  font-size: max(0.8em, 1.1vw);
 }
 
 .ranking_detail_guest {
@@ -1141,21 +1172,27 @@ li.p-100::before {
 
 .percent-indicator .per-0::before {
   content: "0";
+  font-size: max(0.8em, 1.1vw);
 }
 .percent-indicator .per-20::before {
   content: "150";
+  font-size: max(0.8em, 1.1vw);
 }
 .percent-indicator .per-40::before {
   content: "300";
+  font-size: max(0.8em, 1.1vw);
 }
 .percent-indicator .per-60::before {
   content: "450";
+  font-size: max(0.8em, 1.1vw);
 }
 .percent-indicator .per-80::before {
   content: "600";
+  font-size: max(0.8em, 1.1vw);
 }
 .percent-indicator .per-100::before {
   content: "750";
+  font-size: max(0.8em, 1.1vw);
 }
 
 /* body {
@@ -1175,8 +1212,8 @@ li.p-100::before {
   /* width: 600px; */
   /* min-width: 500px; */
   max-width: 800px;
-  /* height: 320px; */
-  height: 200px;
+  height: 20vh;
+  /* height: 200px; */
   margin: auto;
 }
 
@@ -1257,6 +1294,7 @@ li {
   background: #000;
   color: #fff;
   text-align: left;
+  font-size: max(0.6em, 0.8vw);
 }
 
 li.item1 {

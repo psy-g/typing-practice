@@ -1,7 +1,16 @@
 #test {
   display: flex;
-  /* display: grid; */
   width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.test_____header____tail {
+  display: flex;
+  width: 75%;
+  min-width: 500px;
   height: 100%;
   flex-direction: column;
   justify-content: center;
@@ -10,11 +19,13 @@
 
 .test_header {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   flex-direction: column;
   align-items: center;
   width: 90%;
-  height: 40rem;
+  height: 65vh;
+  min-height: 400px;
+  /* height: 40rem; */
   text-align: center;
   /* border: solid red; */
 }
@@ -23,6 +34,8 @@
 .header_problem_score_accuracy_column,
 .header_problem_score_time_column {
   color: #e53a40;
+  /* font-size: 1.3vw; */
+  font-size: max(0.7em, 1.3vw);
 }
 
 .header_problem {
@@ -67,6 +80,8 @@
 
 .header_title {
   color: #efdc05;
+  /* font-size: 1.3vw; */
+  font-size: max(0.7em, 1.3vw);
 }
 
 .header_titleAndProblem {
@@ -75,6 +90,14 @@
   justify-content: center; */
   width: 80%;
   height: 50%;
+}
+
+.header_problem_count_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
 }
 
 .header_titleAndProblem_print {
@@ -86,6 +109,7 @@
 .header_titleAndProblem_print_header {
   width: 100%;
   color: #e53a40;
+  font-size: max(0.7em, 1.3vw);
 }
 
 .header_titleAndProblem_print_body {
@@ -95,6 +119,7 @@
   width: 100%;
   place-content: center;
   color: #33ffff;
+  font-size: max(0.8em, 1.4vw);
 }
 
 .header_titleAndProblem_print_body_speed {
@@ -118,14 +143,22 @@
   align-items: center;
   width: 70%;
   max-width: 1000px;
-  height: 20%;
+  height: 11vh;
+  min-height: 50px;
+  /* height: 20%; */
   /* background-color: #090707; */
   background-color: #cadbe9;
   border-top-width: 2.5px;
   border-top-style: solid;
   border-top-color: #090707;
-  margin-bottom: 70px;
+  /* margin-bottom: 70px; */
   border-radius: 0 0 0.6rem 0.6rem;
+}
+
+.header_problem_score_speed_result,
+.header_problem_score_accuracy_result {
+  /* font-size: 1.4vw; */
+  font-size: max(0.8em, 1.4vw);
 }
 
 .header_problem_result_print {
@@ -166,6 +199,10 @@
   cursor: pointer;
 }
 
+.random_start_rank {
+  cursor: pointer;
+}
+
 .header_problem_result_print_rank {
   margin-top: 15px;
   width: 100%;
@@ -177,6 +214,7 @@
 .header_problem_result_print_rank_text {
   color: #e53a40;
   margin-bottom: 5px;
+  font-size: max(0.7em, 1.3vw);
 }
 
 .header_problem_result_print_rank_top3_print {
@@ -185,10 +223,13 @@
   width: 90%;
   place-content: center;
   color: #33ffff;
+  font-size: max(0.5em, 1vw);
 }
 
 .header_problem_count {
   display: inline-block;
+  /* font-size: 1.4vw; */
+  font-size: max(0.8em, 1.4vw);
 }
 
 /* .header_problem_result_print_rank_top3_print {
@@ -224,7 +265,7 @@
   height: 60%;
 } */
 
-.test_run {
+/* .test_run {
   flex-direction: column;
   justify-content: flex-start;
   width: 65%;
@@ -234,7 +275,6 @@
 }
 
 .test_run_1st {
-  /* text-align: left; */
   display: flex;
   justify-content: flex-start;
 }
@@ -245,17 +285,11 @@
 }
 
 .runImg {
-  /* position: relative;
-  animation-name: slidein;
-  animation-direction: normal;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards; */
   position: relative;
   animation-name: challenger;
   animation-direction: normal;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
-  /* animation-duration: 30s; */
 }
 
 @keyframes slidein {
@@ -273,7 +307,6 @@
   animation-direction: normal;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
-  /* animation-duration: 30s; */
 }
 
 @keyframes challenger {
@@ -281,11 +314,9 @@
     left: 1%;
   }
   100% {
-    /* left: 250px; */
-    /* left: 1000px; */
     left: 89%;
   }
-}
+} */
 
 /* .test_submit {
   display: flex;
@@ -303,16 +334,29 @@
   justify-content: space-around;
   align-items: center;
   width: 90%;
-  height: 5rem;
+  /* height: 5rem; */
+}
+
+.header_problem_tail_end {
+  display: none;
 }
 
 .typing {
   /* margin-top: 35px; */
-  width: 68%;
-  height: 50%;
+  width: 25vw;
+  max-width: 450px;
+  height: 4vh;
+  /* width: 68%;
+  height: 50%; */
   overflow: hidden;
   resize: none;
-  font-size: 18px;
+  font-size: 1.1vw;
+  /* font-size: 18px; */
+}
+
+#show {
+  margin-top: 5px;
+  font-size: max(0.8em, 1vw);
 }
 
 /* .btn_1,
@@ -339,8 +383,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* width: 15vw;
+  height: 10vh; */
   width: 90%;
-  height: 15rem;
+  height: 10vh;
   /* text-align: center; */
 }
 
@@ -353,10 +399,11 @@
   /* width: 50vw;
   height: 100vh; */
   width: 45vw;
-  min-width: 250px;
-  height: 90vh;
-  background: white;
-  /* background: #090707; */
+  max-width: 800px;
+  min-width: 300px;
+  /* height: 90vh; */
+  /* background: white; */
+  background: #cadbe9;
   border-radius: 0.8rem;
 }
 
@@ -366,11 +413,14 @@
 .btn_4,
 .btn_11 {
   /* font-size: 1.2rem; */
-  font-size: 12px;
+  /* font-size: 12px; */
+  font-size: 0.8vw;
+  /* font-size: max(0.8em, 0.8vw); */
   text-align: center;
-  color: white;
+  color: #fffff3;
   /* color: #383a3f; */
-  background: #013252;
+  background: #090707;
+  /* background: #013252; */
   /* background: white; */
   border-radius: 0.6rem;
   padding: 30%;
@@ -390,40 +440,24 @@
   grid-column: 3;
 }
 
-/* .btn_1,
-.btn_2,
-.btn_3,
-.btn_4,
-.btn_11 {
-  font-size: 1.2rem;
+.btn_1_end,
+.btn_2_end,
+.btn_3_end,
+.btn_4_end,
+.btn_11_end {
+  font-size: 0.8vw;
   text-align: center;
-  color: white;
-  background: black;
+  color: #fffff3;
+  background: #090707;
   border-radius: 0.6rem;
-  padding: 1.3rem;
+  padding: 30%;
   transition: all 0.5s ease;
 }
 
-.pressed {
-  background: tomato;
-  transform: scale(1.2);
-}
-
-#keyboard {
-  display: grid;
-  grid-template-columns: repeat(11, 1fr);
-  align-content: center;
-  grid-gap: 0.4rem;
-  padding: 1rem;
-  width: 60vw;
-  height: 100vh;
-  background: skyblue;
-}
-
-.btn_11:nth-child(12) {
+.btn_11_end:nth-child(12) {
   grid-column: 2;
 }
 
-.btn_4:nth-child(21) {
+.btn_4_end:nth-child(21) {
   grid-column: 3;
-} */
+}

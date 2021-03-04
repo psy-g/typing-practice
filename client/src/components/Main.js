@@ -33,47 +33,48 @@ class Main extends Component {
       <div>
         <Nav />
         <div id="main">
-          <div className="header">
-            <div className="header_top">
-              <img
-                className="header_logo"
-                src={logo}
-                // width="600px"
-                // height="150px"
-                alt="logo"
-              />
-            </div>
-            <div className="header_enter">
-              <Link to="/test" className="header_enter_test">
-                INSERT COIN
-              </Link>
-              <div className="header_enter_tail">@YG 2021</div>
-            </div>
-          </div>
-          <div className="tail">
-            <div className="tail_button">
-              {!checkLogin ? (
-                <Link to="/signin">
-                  <img
-                    className="tail_button"
-                    src={btn}
-                    width="50px"
-                    height="50px"
-                    alt="btn"
-                  />
+          <div className="header____tail">
+            <div className="header">
+              <div className="header_top">
+                <img
+                  className="header_logo"
+                  src={logo}
+                  // width="600px"
+                  // height="150px"
+                  alt="logo"
+                />
+              </div>
+              <div className="header_enter">
+                <Link to="/test" className="header_enter_test">
+                  INSERT COIN
                 </Link>
-              ) : (
-                <Link to="/test">
-                  <img
-                    className="tail_button"
-                    src={btn}
-                    width="50px"
-                    height="50px"
-                    alt="btn"
-                  />
-                </Link>
-              )}
-              {/* <Link to="/signin">
+                <div className="header_enter_tail">@YG 2021</div>
+              </div>
+            </div>
+            <div className="tail">
+              <div className="tail_button">
+                {!checkLogin ? (
+                  <Link to="/signin">
+                    <img
+                      className="tail_button"
+                      src={btn}
+                      width="50px"
+                      height="50px"
+                      alt="btn"
+                    />
+                  </Link>
+                ) : (
+                  <Link to="/test">
+                    <img
+                      className="tail_button"
+                      src={btn}
+                      width="50px"
+                      height="50px"
+                      alt="btn"
+                    />
+                  </Link>
+                )}
+                {/* <Link to="/signin">
                 <img
                   className="tail_button"
                   src={btn}
@@ -82,6 +83,7 @@ class Main extends Component {
                   alt="btn"
                 />
               </Link> */}
+              </div>
             </div>
           </div>
         </div>
@@ -117,35 +119,3 @@ class Main extends Component {
 // `;
 
 export default Main;
-
-// import React, { Component } from "react";
-// import "./Main.css";
-// import Nav from "./Nav";
-// import { Link } from "react-router-dom";
-
-// class Main extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <Nav />
-//         <div id="main">
-//           <div className="header"></div>
-//           <div className="login">
-//             {/* <div className="login-box">
-//               <div className="out-box">
-//                 <i className="in-box"></i>
-//               </div>
-//               <p>Loading...</p>
-//             </div> */}
-//           </div>
-//           <div className="enter">
-//             <Link to="/test">들어가기</Link>
-//           </div>
-//           <div className="tail">하</div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default Main;

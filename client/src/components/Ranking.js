@@ -240,8 +240,7 @@ class Ranking extends Component {
           graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
-
-          // var str1 = best;
+          var noRecord = "기록x";
 
           document.styleSheets[0].addRule(
             `li.p-${best}::before`,
@@ -250,7 +249,8 @@ class Ranking extends Component {
 
           document.styleSheets[0].addRule(
             `li.p-20::before`,
-            `content: 기록이 없습니다 `
+            'content: "' + noRecord + '";'
+            // `content: 기록이 없습니다 `
             // 'content: "' + "기록이 없습니다" + '";'
           );
 
@@ -272,6 +272,7 @@ class Ranking extends Component {
           graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
+          var noRecord = "기록x";
           // const record2 = userRecord.substring(0, 3);
 
           // var str1 = best;
@@ -283,7 +284,8 @@ class Ranking extends Component {
 
           document.styleSheets[0].addRule(
             `li.p-20::before`,
-            `content: 기록이 없습니다 `
+            // `content: 기록이 없습니다 `
+            'content: "' + noRecord + '";'
             // 'content: "' + "기록이 없습니다" + '";'
           );
 
@@ -487,58 +489,60 @@ class Ranking extends Component {
       <div>
         <Nav />
         <div id="ranking">
-          <div className="ranking_list">
-            <div className="ranking_list_table">
-              <select
-                type="button"
-                className="select_start"
-                onChange={this.print}
-              >
-                <option value="select_0" disabled>
-                  선택
-                </option>
-                <option value="select_1">눈 녹듯</option>
-                <option value="select_2">말리꽃</option>
-                <option value="select-3">오아시스</option>
-              </select>
-              <div className="table__column">
-                <span className="column__rank">순위</span>
-                <span className="column__nick">닉네임</span>
-                <span className="column__record">기록</span>
-              </div>
-              <div className="rank">{items}</div>
-            </div>
-          </div>
-          {nick === null ? (
-            <div className="ranking_tail">
-              {/* <div className="ranking_detail_guest"> */}
-              <div className="ranking_detail">
-                <div className="detail_header">
-                  Guest님의 기록<br></br>기록을 등록하기 위해서는 로그인이
-                  필요합니다
+          <div className="ranking____header____tail">
+            <div className="ranking_list">
+              <div className="ranking_list_table">
+                <select
+                  type="button"
+                  className="select_start"
+                  onChange={this.print}
+                >
+                  <option value="select_0" disabled>
+                    선택
+                  </option>
+                  <option value="select_1">눈 녹듯</option>
+                  <option value="select_2">말리꽃</option>
+                  <option value="select-3">오아시스</option>
+                </select>
+                <div className="table__column">
+                  <span className="column__rank">순위</span>
+                  <span className="column__nick">닉네임</span>
+                  <span className="column__record">기록</span>
                 </div>
-                <div className="detail_body"></div>
-                {/* <div className="detail_body_guest">
+                <div className="rank">{items}</div>
+              </div>
+            </div>
+            {nick === null ? (
+              <div className="ranking_tail">
+                {/* <div className="ranking_detail_guest"> */}
+                <div className="ranking_detail">
+                  <div className="detail_header">
+                    Guest님의 기록<br></br>기록을 등록하기 위해서는 로그인이
+                    필요합니다
+                  </div>
+                  <div className="detail_body"></div>
+                  {/* <div className="detail_body_guest">
                   기록을 등록하기 위해서는 로그인이 필요합니다
                 </div> */}
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="ranking_tail">
-              <div className="ranking_detail">
-                <div className="detail_header">
-                  {nick}님의 기록
-                  {/* <div className="header_click" onClick={this.detail}>
+            ) : (
+              <div className="ranking_tail">
+                <div className="ranking_detail">
+                  <div className="detail_header">
+                    {nick}님의 기록
+                    {/* <div className="header_click" onClick={this.detail}>
                     클릭
                   </div>
                   <div className="header_click" onClick={this.remove}>
                     삭제
                   </div> */}
+                  </div>
+                  <div className="detail_body"></div>
                 </div>
-                <div className="detail_body"></div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     );
