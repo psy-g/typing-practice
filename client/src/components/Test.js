@@ -335,8 +335,8 @@ class Test extends Component {
     // if (title) {
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
-        // .post("http://localhost:8080/problem/random", this.state)
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("http://54.180.91.194:8080/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -381,7 +381,8 @@ class Test extends Component {
 
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("http://54.180.91.194:8080/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -416,7 +417,8 @@ class Test extends Component {
 
     if (id) {
       axios
-        .post("http://localhost:8080/ranking/register", this.state)
+        // .post("http://localhost:8080/ranking/register", this.state)
+        .post("http://54.180.91.194:8080/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -436,7 +438,8 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        .post("http://localhost:8080/ranking/print", { title: filterTitle })
+        // .post("http://localhost:8080/ranking/print", { title: filterTitle })
+        .post("http://54.180.91.194:8080/ranking/print", { title: filterTitle })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({

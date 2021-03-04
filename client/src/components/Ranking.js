@@ -23,7 +23,10 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
+        //   title: selectValue,
+        // })
+        .post("http://54.180.91.194:8080/ranking/print", {
           title: selectValue,
         })
         .then((res) => {
