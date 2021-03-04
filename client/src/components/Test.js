@@ -162,8 +162,8 @@ class Test extends Component {
   start() {
     const show = document.getElementById("show");
 
-    let hour = 0;
-    let min = 0;
+    // let hour = 0;
+    // let min = 0;
     let sec = 0;
     let timer;
     let time = 0;
