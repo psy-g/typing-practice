@@ -24,8 +24,8 @@ class Signup extends Component {
 
     if (password.length >= 4 && nickname) {
       axios
-        .post("http://localhost:8080/auth/signup", this.state)
-        // .post("https://missinganimals.ml/auth/signup", this.state)
+        // .post("http://localhost:8080/auth/signup", this.state)
+        .post("http://54.180.91.194:8080/auth/signup", this.state)
         .then((res) => {
           this.props.history.push("/");
         })
