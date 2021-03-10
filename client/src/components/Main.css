@@ -17,27 +17,13 @@
   align-items: center;
 }
 
-/* .nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 99%;
-  height: 2rem;
-  text-align: center;
-  border: solid black;
-} */
-
 .header {
-  /* background-color: #1f2124; */
-  /* background-color: #090707; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 70%;
   height: 65vh;
-  /* height: 20%; */
-  /* height: 40rem; */
   text-align: center;
   background: url("../image/rankback.png");
   z-index: 1;
@@ -58,13 +44,10 @@
 .header_logo {
   width: 30vw;
   height: 25vh;
-  /* width: 70%; */
-  /* height: 25rem; */
   margin-bottom: 50px;
 }
 
 .header_enter {
-  /* margin-top: 50px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -74,7 +57,6 @@
 
 .header_enter_test {
   font-size: 1.6vw;
-  /* font-size: 28px; */
   animation: blink 1s infinite;
 }
 
@@ -89,63 +71,10 @@
 }
 
 .header_enter_tail {
-  /* font-size: 18px; */
   font-size: 1.2vw;
   color: #e53a40;
   text-shadow: -2px 0 #30a9de, 0 2px #30a9de, 2px 0 #30a9de, 0 -2px #30a9de;
 }
-
-/* .main_body {
-  display: flex;
-  width: 90%;
-  height: 10rem;
-  text-align: center;
-  border: solid blue;
-  background-color: #ffeee4;
-} */
-
-/* .main_body_running {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-} */
-
-/* .animation {
-  position: absolute;
-  animation-name: slidein;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-direction: normal;
-}
-
-@keyframes slidein {
-  0% {
-    left: 100px;
-  }
-  100% {
-    left: 600px;
-  }
-} */
-
-/* .main_body_running {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 1px;
-} */
-
-/* .login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 25rem;
-  text-align: center;
-  border: solid blue;
-  background: url("../image/background.png") no-repeat;
-  background-position: center;
-} */
 
 .enter {
   display: flex;
@@ -153,7 +82,6 @@
   align-items: center;
   width: 90%;
   height: 40%;
-  /* height: 3rem; */
   text-align: center;
   border: solid green;
 }
@@ -164,7 +92,6 @@
   align-items: center;
   width: 70%;
   height: 13vh;
-  /* height: 8rem; */
   text-align: center;
   background-color: #cadbe9;
   border-top-width: 2.5px;

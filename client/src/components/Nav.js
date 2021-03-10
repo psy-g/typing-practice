@@ -7,7 +7,6 @@ class Nav extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hambugerWidth: "0px",
       isOpen: false,
     };
   }
@@ -29,9 +28,6 @@ class Nav extends Component {
           <div className="nav">
             <span className="nav_logo">
               <Link to="/" className="nav_logo_font">
-                {/* 보드런 */}
-                {/* 강타자 */}
-                {/* 보드랜드 */}
                 타자치자
               </Link>
             </span>
@@ -55,12 +51,6 @@ class Nav extends Component {
                       <div className="burger_close_logout">
                         <Signout />
                       </div>
-                      {/* <div className="burger_close_mypage">
-                        <Link to="/mypage">
-                          <span className="buger_ranking_mypage">📊</span>{" "}
-                          마이페이지
-                        </Link>
-                      </div> */}
                       <div className="burger_close_ranking">
                         <Link to="/ranking">
                           <span className="buger_ranking_icon">🏆</span> 순위
@@ -88,11 +78,6 @@ class Nav extends Component {
                           <span className="buger_signup_icon">🖥</span> 로그인
                         </Link>
                       </div>
-                      {/* <div className="burger_close_signup">
-                        <Link to="/signup">
-                          <span className="buger_signup_icon">🤝</span> 회원가입
-                        </Link>
-                      </div> */}
                       <div className="burger_close_ranking">
                         <Link to="/ranking">
                           <span className="buger_ranking_icon">🏆</span> 랭킹

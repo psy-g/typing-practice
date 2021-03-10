@@ -4,7 +4,6 @@ import Nav from "./Nav";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import signupLogo from "../image/taza.png";
-// import signupLogo from "../image/boardland1.png";
 
 class Signup extends Component {
   constructor(props) {
@@ -24,8 +23,8 @@ class Signup extends Component {
 
     if (password.length >= 4 && nickname) {
       axios
-        // .post("http://localhost:8080/auth/signup", this.state)
-        .post("http://54.180.91.194:8080/auth/signup", this.state)
+        .post("http://localhost:8080/auth/signup", this.state)
+        // .post("http://54.180.91.194:8080/auth/signup", this.state)
         .then((res) => {
           this.props.history.push("/");
         })
@@ -58,7 +57,6 @@ class Signup extends Component {
               <div className="signup_body_name">
                 <div className="signup_body_name_column">이름</div>
                 <input
-                  // placeholder="닉네임"
                   type="email"
                   className="signup_body_name_input"
                   onChange={this.handleInputValue("nickname")}
@@ -67,7 +65,6 @@ class Signup extends Component {
               <div className="signup_body_password">
                 <div className="signup_body_password_column">비밀번호</div>
                 <input
-                  // placeholder="비밀번호"
                   type="password"
                   className="signup_body_password_input"
                   onChange={this.handleInputValue("password")}
@@ -89,49 +86,3 @@ class Signup extends Component {
 }
 
 export default withRouter(Signup);
-
-{
-  /* <div>
-<Nav />
-<div id="signup">
-  <div className="register">
-    <div className="signup_container">
-      <div className="row">
-        <div className="col-25">
-          <label className="nickname">닉네임</label>
-        </div>
-        <div className="col-75">
-          <input
-            placeholder="닉네임"
-            type="email"
-            className="inputNickname"
-            onChange={this.handleInputValue("nickname")}
-          />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-25">
-          <label className="password">비밀번호</label>
-        </div>
-        <div className="col-75">
-          <input
-            placeholder="비밀번호"
-            type="password"
-            className="inputPassword"
-            onChange={this.handleInputValue("password")}
-          />
-        </div>
-      </div>
-      <div className="row">
-        <input
-          type="submit"
-          className="user_submit"
-          value="회원가입"
-          onClick={() => this.clickBtn()}
-        />
-      </div>
-    </div>
-  </div>
-</div>
-</div> */
-}
