@@ -1,8 +1,8 @@
-// Action types
+// Action type
 export const OPEN_NAV = "nav/OPEN_NAV";
 export const CLOSE_NAV = "nav/CLOSE_NAV";
 
-// Action creators
+// Action creator
 export const openNav = () => {
   return {
     type: OPEN_NAV,
@@ -14,11 +14,3 @@ export const closeNav = () => {
     type: CLOSE_NAV,
   };
 };
-
-// export const openNav = () => ({
-//   type: types.OPEN_NAV,
-// });
-
-// export const closeNav = () => ({
-//   type: types.CLOSE_NAV,
-// });

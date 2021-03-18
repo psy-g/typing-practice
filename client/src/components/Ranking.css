@@ -1,3 +1,11 @@
+:root {
+  --graphWidth: 0%;
+}
+
+/* p {
+  font-size: var(--textSize);
+} */
+
 #ranking {
   display: flex;
   width: 100%;

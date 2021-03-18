@@ -140,23 +140,18 @@
 // // export default Nav;
 // export default connect(mapStateToProps, mapDispatchToProps)(Nav);
 
-import React, { useEffect, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import Signout from "./Signout";
-import * as actions from "../actions";
+import * as actions from "../actions/nav";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const [navCheck, setNavCheck] = useState(false);
+  const [navCheck, setNavCheck] = useState(0);
   const loginCheck = window.localStorage.getItem("isLogin");
-
-  // const { nav: storeNav } = useSelector((state) => state.nav);
-
-  useEffect(() => {
-    console.log("Component did mount.");
-  }, []);
 
   const openNav = useCallback(() => {
     setNavCheck(navCheck + 1);
@@ -168,6 +163,10 @@ const Nav = () => {
     dispatch(actions.closeNav());
   }, [navCheck, dispatch]);
 
+  // useEffect(() => {
+  //   console.log("Component did mount.");
+  // }, []);
+
   return (
     <div>
       <div id="nav">
@@ -177,7 +176,7 @@ const Nav = () => {
               타자치자
             </Link>
           </span>
-          {navCheck ? (
+          {navCheck !== 0 ? (
             <div className="burger_container">
               <div className="bunger_container_header">
                 <div className="burger_icon" onClick={closeNav}>
@@ -210,41 +209,41 @@ const Nav = () => {
                   </div>
                 </div>
               ) : (
-                <div className="burger">
-                  <div className="burger_home">
-                    <div className="buger_home_home">
-                      <Link to="/">
-                        <span>🏠</span> 홈
+                  <div className="burger">
+                    <div className="burger_home">
+                      <div className="buger_home_home">
+                        <Link to="/">
+                          <span>🏠</span> 홈
                       </Link>
+                      </div>
+                    </div>
+                    <div className="burger_close">
+                      <div className="burger_close_signin">
+                        <Link to="/signin">
+                          <span className="buger_signup_icon">🖥</span> 로그인
+                      </Link>
+                      </div>
+                      <div className="burger_close_ranking">
+                        <Link to="/ranking">
+                          <span className="buger_ranking_icon">🏆</span> 랭킹
+                      </Link>
+                      </div>
+                      <div className="burger_close_test">
+                        <Link to="/test">
+                          <span className="buger_test_icon">⌨</span> 타자연습
+                      </Link>
+                      </div>
                     </div>
                   </div>
-                  <div className="burger_close">
-                    <div className="burger_close_signin">
-                      <Link to="/signin">
-                        <span className="buger_signup_icon">🖥</span> 로그인
-                      </Link>
-                    </div>
-                    <div className="burger_close_ranking">
-                      <Link to="/ranking">
-                        <span className="buger_ranking_icon">🏆</span> 랭킹
-                      </Link>
-                    </div>
-                    <div className="burger_close_test">
-                      <Link to="/test">
-                        <span className="buger_test_icon">⌨</span> 타자연습
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              )}
+                )}
             </div>
           ) : (
-            <div className="bad">
-              <span className="burger_open" onClick={openNav}>
-                &#9776;
+              <div className="bad">
+                <span className="burger_open" onClick={openNav}>
+                  &#9776;
               </span>
-            </div>
-          )}
+              </div>
+            )}
         </div>
       </div>
     </div>

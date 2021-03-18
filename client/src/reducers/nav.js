@@ -1,8 +1,7 @@
 import * as navActions from "../actions/nav";
 
-// 초기 상태를 정의
 const initialState = {
-  isOpen: false,
+  isOpen: 0,
 };
 
 const reducers = (state = initialState, action) => {
