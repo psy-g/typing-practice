@@ -180,7 +180,7 @@ class Ranking extends Component {
           ) {
             userRecord = test[i]
               .querySelectorAll(".rank__name")
-              [j].parentElement.querySelector(".rank__record").innerHTML;
+            [j].parentElement.querySelector(".rank__record").innerHTML;
           }
         }
       }
@@ -443,13 +443,13 @@ class Ranking extends Component {
                 </div>
               </div>
             ) : (
-              <div className="ranking_tail">
-                <div className="ranking_detail">
-                  <div className="detail_header">{nick}님의 기록</div>
-                  <div className="detail_body"></div>
+                <div className="ranking_tail">
+                  <div className="ranking_detail">
+                    <div className="detail_header">{nick}님의 기록</div>
+                    <div className="detail_body"></div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
         </div>
       </div>
