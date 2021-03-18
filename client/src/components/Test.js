@@ -10,7 +10,6 @@ class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalOpen: false,
       problem: [],
       count: 0,
       filterProblem: [],
@@ -28,8 +27,6 @@ class Test extends Component {
       id: window.localStorage.getItem("id"),
       winnerRecord: 0,
       items: "",
-      twins: "어떡해 올 여름 난 너무 바쁜데 그 어디라도 꼼짝하지 못할것 같아",
-      pro: "ab cde fgh ijk",
     };
 
     this.requestProblem = this.requestProblem.bind(this);
@@ -76,10 +73,12 @@ class Test extends Component {
         recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
       });
       this.setState({ count: count + 1 }, function () { });
-      if (this.state.count < 7) document.querySelector(".typing").value = "";
+      // if (this.state.count < 7) document.querySelector(".typing").value = "";
+      if (this.state.count < 2) document.querySelector(".typing").value = "";
 
       // 색 초기화
-      if (this.state.count < 7) {
+      // if (this.state.count < 7) {
+      if (this.state.count < 2) {
         for (
           let i = 0;
           i < document.querySelector(".header_problem_count").children.length;
@@ -98,9 +97,6 @@ class Test extends Component {
         }
       }
 
-      console.log("몇개맞음?", right);
-      console.log("몇문제", tasu.length);
-
       const acc = ((right / tasu.length) * 100).toFixed(1);
 
       this.setState({
@@ -116,17 +112,6 @@ class Test extends Component {
     this.setState({ [key]: e.target.value });
   };
 
-  // openModal = () => {
-  //   this.ranking();
-  //   setTimeout(() => {
-  //     this.setState({
-  //       isModalOpen: true,
-  //     });
-  //   }, 2000); // 시간. 2초 후 실행
-  // };
-  // closeModal = () => {
-  //   this.setState({ isModalOpen: false });
-  // };
 
   // 타이머 초기화
   init() {
@@ -168,12 +153,6 @@ class Test extends Component {
     clearInterval(timer);
   }
 
-  // reset() {
-  //   const { timer } = this.state;
-
-  //   clearInterval(timer);
-  //   this.init();
-  // }
 
   // 키보드 이벤트
   keyboardEvent() {
@@ -202,14 +181,14 @@ class Test extends Component {
               .getElementById("show")
               .innerHTML.split(":");
 
-            console.log("show", Number(`${resultTime[0]}.${resultTime[1]}`));
 
             this.setState({
               time: Number(`${resultTime[0]}.${resultTime[1]}`),
             });
             this.compare();
 
-            if (this.state.count === 7) {
+            // if (this.state.count === 7) {
+            if (this.state.count === 2) {
               this.rankPrint();
               // 2초 후에 렌더링 시킬 메소드 추가
             }
@@ -387,6 +366,87 @@ class Test extends Component {
     }
   }
 
+  // // 순위 출력
+  // rankPrint() {
+  //   this.ranking();
+
+  //   setTimeout(() => {
+  //     const { printRank } = this.state;
+
+  //     const target = document.querySelector(
+  //       ".header_problem_result_print_rank_top3"
+  //     );
+
+  //     const newDiv = document.createElement("div");
+
+  //     newDiv.className = "header_problem_result_print_rank_top3_print";
+
+  //     if (printRank.length === 1) {
+  //       newDiv.innerHTML = `
+  //       <div class="header_problem_result_print_rank_ranker_column">
+  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_speed_column">
+  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_time_column">
+  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_name_column">
+  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
+  //       </div>
+  //       </div>
+  //       `;
+  //     } else if (printRank.length === 2) {
+  //       newDiv.innerHTML = `
+  //       <div class="header_problem_result_print_rank_ranker_column">
+  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
+  //       <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_speed_column">
+  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
+  //       <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_time_column">
+  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
+  //       <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_name_column">
+  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
+  //       <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
+  //       </div>
+  //       </div>
+  //       `;
+  //     } else {
+  //       newDiv.innerHTML = `
+  //       <div class="header_problem_result_print_rank_ranker_column">
+  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
+  //       <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
+  //       <div class="header_problem_result_print_rank_top3_ranker">3RD</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_speed_column">
+  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
+  //       <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
+  //       <div class="header_problem_result_print_rank_top3_speed">${printRank[2].average}타수</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_time_column">
+  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
+  //       <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
+  //       <div class="header_problem_result_print_rank_top3_time">${printRank[2].time}초</div>
+  //       </div>
+  //       <div class="header_problem_result_print_rank_name_column">
+  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
+  //       <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
+  //       <div class="header_problem_result_print_rank_top3_name">${printRank[2].name}</div>
+  //       </div>
+  //       </div>
+  //       `;
+  //     }
+
+  //     target.prepend(newDiv);
+  //   }, 2000); // 시간. 2초 후 실행
+  // }
+
   // 순위 출력
   rankPrint() {
     this.ranking();
@@ -402,68 +462,26 @@ class Test extends Component {
 
       newDiv.className = "header_problem_result_print_rank_top3_print";
 
-      if (printRank.length === 1) {
-        newDiv.innerHTML = `
-        <div class="header_problem_result_print_rank_ranker_column">
-        <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-        </div>
-        <div class="header_problem_result_print_rank_speed_column">
-        <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-        </div>
-        <div class="header_problem_result_print_rank_time_column">
-        <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-        </div>
-        <div class="header_problem_result_print_rank_name_column">
-        <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-        </div>
-        </div>
-        `;
-      } else if (printRank.length === 2) {
-        newDiv.innerHTML = `
-        <div class="header_problem_result_print_rank_ranker_column">
-        <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-        <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
-        </div>
-        <div class="header_problem_result_print_rank_speed_column">
-        <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-        <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
-        </div>
-        <div class="header_problem_result_print_rank_time_column">
-        <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-        <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
-        </div>
-        <div class="header_problem_result_print_rank_name_column">
-        <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-        <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
-        </div>
-        </div>
-        `;
-      } else {
-        // newDiv.className = "header_problem_result_print_rank_top3_print";
-        newDiv.innerHTML = `
-        <div class="header_problem_result_print_rank_ranker_column">
-        <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-        <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
-        <div class="header_problem_result_print_rank_top3_ranker">3RD</div>
-        </div>
-        <div class="header_problem_result_print_rank_speed_column">
-        <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-        <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
-        <div class="header_problem_result_print_rank_top3_speed">${printRank[2].average}타수</div>
-        </div>
-        <div class="header_problem_result_print_rank_time_column">
-        <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-        <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
-        <div class="header_problem_result_print_rank_top3_time">${printRank[2].time}초</div>
-        </div>
-        <div class="header_problem_result_print_rank_name_column">
-        <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-        <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
-        <div class="header_problem_result_print_rank_top3_name">${printRank[2].name}</div>
-        </div>
-        </div>
-        `;
-      }
+
+      printRank.forEach(function (el, index) {
+        newDiv.innerHTML +=
+          `
+          <div id="header_problem_result_print_rank_top3_print_print_${index}">
+          <div class="header_problem_result_print_rank_top_ranker}">${index + 1}등
+          </div>
+          <div class="header_problem_result_print_rank_speed_column">
+          <div class="header_problem_result_print_rank_top_speed">${el.average}타수</div>
+          </div>
+          <div class="header_problem_result_print_rank_time_column">
+          <div class="header_problem_result_print_rank_top_time">${el.time}초</div>
+           </div>
+          <div class="header_problem_result_print_rank_name_column">
+          <div class="header_problem_result_print_rank_top_name">${el.name}</div>
+          </div>
+          </div>
+
+          `
+      })
 
       target.prepend(newDiv);
     }, 2000); // 시간. 2초 후 실행
@@ -713,7 +731,8 @@ class Test extends Component {
                   </div>
                 </div>
                 <div className="header_titleAndProblem">
-                  {count !== 7 ? (
+                  {/* {count !== 7 ? ( */}
+                  {count !== 2 ? (
                     <div className="header_problem_count_header">
                       {tttt.length !== 9 ? (
                         <div className="header_problem_count">{tttt}</div>
@@ -767,7 +786,8 @@ class Test extends Component {
                       </div>
                     )}
                 </div>
-                {count !== 7 ? (
+                {/* {count !== 7 ? ( */}
+                {count !== 2 ? (
                   <div className="header_problem_tail">
                     <textarea
                       type="text"
@@ -791,7 +811,8 @@ class Test extends Component {
               </div>
               <div className="header_problem_result">
                 <div className="header_timer">
-                  {count !== 7 ? (
+                  {/* {count !== 7 ? ( */}
+                  {count !== 2 ? (
                     <div className="start_button">
                       <img
                         className="random_start"
@@ -817,7 +838,8 @@ class Test extends Component {
                 </div>
               </div>
             </div>
-            {count !== 7 ? (
+            {/* {count !== 7 ? ( */}
+            {count !== 2 ? (
               <div className="test_input">
                 <div id="keyboard">
                   <div id="ㅂ" className="btn_1">
