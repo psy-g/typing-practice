@@ -1,28 +1,87 @@
+/* html {
+  background: #30a9de;  
+  background: -webkit-linear-gradient(to bottom, #30a9de, #30a9de);  
+  background: linear-gradient(to bottom, #30a9de, #30a9de); 
+  height: auto!important;
+  } */
+
+/* 스크롤 */
 #main {
-  display: flex;
   width: 100%;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 1000px;
+  /* border: 1px solid #000; */
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
 }
 
-.header____tail {
+#main::-webkit-scrollbar {
+  display: none;
+}
+
+/* #main {
+  display: flex;
+  width: 100%;
+  height: 200vh;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+/* .header____tail {
   display: flex;
   width: 75%;
   min-width: 500px;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  scroll-snap-align: start;
+} */
+
+.header____tail {
+  display: flex;
+  width: 100%;
+  min-width: 500px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  scroll-snap-align: start;
 }
+
+.header____tail:nth-child(3n + 1) {
+  background: #30a9de;
+}
+
+.header____tail:nth-child(3n + 2) {
+  background: #30a9de;
+}
+
+.header____tail:nth-child(3n) {
+  background: #30a9de;
+}
+
+/* .header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  height: 65vh;
+  text-align: center;
+  background: url("../image/rankback.png");
+  z-index: 1;
+  border: solid 15px #383a3f;
+  border-bottom-width: 25px;
+  border-top-width: 25px;
+  border-radius: 0.6rem 0.6rem 0 0;
+} */
 
 .header {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 70%;
+  width: 50%;
   height: 65vh;
   text-align: center;
   background: url("../image/rankback.png");
@@ -86,7 +145,7 @@
   border: solid green;
 }
 
-.tail {
+/* .tail {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,10 +157,131 @@
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
+} */
+
+.tail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 13vh;
+  text-align: center;
+  background-color: #cadbe9;
+  border-top-width: 2.5px;
+  border-top-style: solid;
+  border-top-color: #090707;
+  border-radius: 0 0 0.6rem 0.6rem;
 }
 
 .tail_button {
   cursor: pointer;
+}
+
+.header____tail____tail {
+  background-color: #fafafa;
+  display: flex;
+  width: 75%;
+  min-width: 500px;
+  /* height: 100%; */
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header____tail____descript {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+
+.context-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 77%;
+}
+
+.context-header-text {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* text-align: left; */
+}
+
+.context-header-text-top {
+  color: white;
+  font-size: max(2.5em, 3.5vw);
+  text-align: left;
+  display: flex;
+  /* align-items: flex-end; */
+  align-items: flex-start;
+  margin-bottom: 25px;
+}
+
+.context-header-text-bottom {
+  color: white;
+  font-size: max(0.8em, 1vw);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "HeirofLightRegular";
+}
+
+.context-header-text-bottom-marker-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.context-header-text-bottom-marker {
+  font-family: "HeirofLightRegular";
+  color: #e53a40;
+}
+
+.context-header-text-bottom-noMarker {
+  font-family: "HeirofLightRegular";
+  color: white;
+}
+
+.context-header-img-container {
+  width: 50%;
+  height: 45%;
+  border-radius: 8px;
+  border: solid;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* background: url("../image/main_img1.gif"); */
+  /* align-items: center; */
+}
+
+.context-header-img {
+  width: 100%;
+  height: 100%;
+}
+
+.context-body {
+  height: 10%;
+  width: 100%;
+  color: white;
+  font-size: max(0.8em, 1vw);
+  text-align: left;
+  font-family: "HeirofLightRegular";
+  /* align-items: flex-start; */
+}
+
+.context-body-marker {
+  font-family: "HeirofLightRegular";
+  color: #e53a40;
+  /* text-decoration: underline;
+  text-decoration-color: black;
+  text-underline-position: under; */
 }
 
 a {
