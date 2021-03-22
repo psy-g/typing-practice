@@ -209,41 +209,41 @@ const Nav = () => {
                   </div>
                 </div>
               ) : (
-                  <div className="burger">
-                    <div className="burger_home">
-                      <div className="buger_home_home">
-                        <Link to="/">
-                          <span>🏠</span> 홈
+                <div className="burger">
+                  <div className="burger_home">
+                    <div className="buger_home_home">
+                      <Link to="/">
+                        <span>🏠</span> 홈
                       </Link>
-                      </div>
-                    </div>
-                    <div className="burger_close">
-                      <div className="burger_close_signin">
-                        <Link to="/signin">
-                          <span className="buger_signup_icon">🖥</span> 로그인
-                      </Link>
-                      </div>
-                      <div className="burger_close_ranking">
-                        <Link to="/ranking">
-                          <span className="buger_ranking_icon">🏆</span> 랭킹
-                      </Link>
-                      </div>
-                      <div className="burger_close_test">
-                        <Link to="/test">
-                          <span className="buger_test_icon">⌨</span> 타자연습
-                      </Link>
-                      </div>
                     </div>
                   </div>
-                )}
+                  <div className="burger_close">
+                    <div className="burger_close_signin">
+                      <Link to="/signin">
+                        <span className="buger_signup_icon">🖥</span> 로그인
+                      </Link>
+                    </div>
+                    <div className="burger_close_ranking">
+                      <Link to="/ranking">
+                        <span className="buger_ranking_icon">🏆</span> 순위
+                      </Link>
+                    </div>
+                    <div className="burger_close_test">
+                      <Link to="/test">
+                        <span className="buger_test_icon">⌨</span> 타자연습
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
-              <div className="bad">
-                <span className="burger_open" onClick={openNav}>
-                  &#9776;
+            <div className="bad">
+              <span className="burger_open" onClick={openNav}>
+                &#9776;
               </span>
-              </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
     </div>

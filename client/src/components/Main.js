@@ -9,14 +9,74 @@ import mainImg2 from "../image/main_img2.png";
 import mainImg3 from "../image/main_img3.png";
 import mainImg4 from "../image/main_img4.png";
 import scroll from "../image/scroll1.png";
+import scrollIcon1 from "../image/icon1.png";
+import scrollIcon2 from "../image/icon2.png";
+import scrollIcon3 from "../image/icon3.png";
+import scrollIcon4 from "../image/icon4.png";
+import $ from "jquery";
 
 class Main extends Component {
   // constructor(props) {
   //   super(props);
   // }
 
+  scrollTest() {
+    $(document).ready(function () {
+      $("#main").on("scroll", function () {
+        var scrollValue = $("#main").scrollTop();
+        console.log("스크롤위치", scrollValue);
+
+        var scrollValue2 = $(".scroll_icon-img1").offset();
+        console.log("대상의위치값", scrollValue2);
+
+        const icon1 = document.querySelector(".scroll_icon-img1");
+        const icon2 = document.querySelector(".scroll_icon-img2");
+        const icon3 = document.querySelector(".scroll_icon-img3");
+        const icon4 = document.querySelector(".scroll_icon-img4");
+
+        if (scrollValue < 999) {
+          icon1.style.display = `block`;
+          icon2.style.display = `none`;
+          icon3.style.display = `none`;
+          icon4.style.display = `none`;
+        }
+        if (scrollValue === 1000) {
+          icon1.style.display = `none`;
+          icon2.style.display = `block`;
+          icon3.style.display = `none`;
+          icon4.style.display = `none`;
+        }
+        if (scrollValue === 2000) {
+          icon1.style.display = `none`;
+          icon2.style.display = `none`;
+          icon3.style.display = `block`;
+          icon4.style.display = `none`;
+        }
+        if (scrollValue === 3000) {
+          icon1.style.display = `none`;
+          icon2.style.display = `none`;
+          icon3.style.display = `none`;
+          icon4.style.display = `block`;
+        }
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.scrollTest();
+  }
   render() {
     const checkLogin = window.localStorage.getItem("isLogin");
+
+    // var second = document.querySelector("#main .header____tail:nth-child(2)");
+    // console.log("1", second);
+
+    // var even = document.querySelectorAll(".header____tail:nth-child(2n)");
+    // console.log("2", even);
+
+    // var check = document.querySelector(".context-header-text-top1").innerHTML;
+
+    // console.log("3", check);
 
     return (
       <div>
@@ -59,13 +119,22 @@ class Main extends Component {
                 )}
               </div>
             </div>
-            <div className="context-main-tail">
+            {/* <div className="context-main-tail">
               <img
                 className="context-main-tail-img"
                 src={scroll}
                 width="50px"
                 height="50px"
                 alt="스크롤"
+              />
+            </div> */}
+            <div className="scroll_icon">
+              <img
+                className="scroll_icon-img1"
+                src={scrollIcon1}
+                // width="50px"
+                // height="50px"
+                alt="스크롤아이콘"
               />
             </div>
           </div>
@@ -75,7 +144,7 @@ class Main extends Component {
                 <div className="context-header-text">
                   <div className="context-header-text-top1">
                     타자치자<br></br>
-                    측정하고 기록을<br></br>
+                    입력하여 실력을<br></br>
                     확인하자!
                   </div>
                   <div className="context-header-text-bottom1">
@@ -83,7 +152,7 @@ class Main extends Component {
                     <div className="context-header-text-bottom-marker-container">
                       <div className="context-header-text-bottom-marker">
                         {" "}
-                        정확도를 계산
+                        타수와 정확도를 계산
                       </div>
                       <div className="context-header-text-bottom-noMarker">
                         합니다
@@ -101,13 +170,20 @@ class Main extends Component {
                   />
                 </div>
               </div>
-              <div className="context-tail">
+              {/* <div className="context-tail">
                 <img
                   className="context-tail-img"
                   src={scroll}
                   width="50px"
                   height="50px"
                   alt="스크롤"
+                />
+              </div> */}
+              <div className="scroll_icon">
+                <img
+                  className="scroll_icon-img2"
+                  src={scrollIcon2}
+                  alt="스크롤아이콘"
                 />
               </div>
             </div>
@@ -126,16 +202,16 @@ class Main extends Component {
                 </div>
                 <div className="context-header-text">
                   <div className="context-header-text-top2">
-                    <div>타자치자</div>
-                    <div>측정이 끝나면</div>
-                    <div>순위를 확인하자</div>
+                    <div>기록</div>
+                    <div>측정이 끝나고</div>
+                    <div>기록을 확인하자</div>
                   </div>
                   <div className="context-header-text-bottom2">
                     주어진 문제를 모두 풀면
                     <div className="context-header-text-bottom-marker-container">
                       <div className="context-header-text-bottom-marker">
                         {" "}
-                        순위를 확인
+                        기록과 순위를 확인
                       </div>
                       <div className="context-header-text-bottom-noMarker">
                         합니다
@@ -144,7 +220,7 @@ class Main extends Component {
                   </div>
                 </div>
               </div>
-              <div className="context-tail">
+              {/* <div className="context-tail">
                 <img
                   className="context-tail-img"
                   src={scroll}
@@ -152,20 +228,27 @@ class Main extends Component {
                   height="50px"
                   alt="스크롤"
                 />
+              </div> */}
+              <div className="scroll_icon">
+                <img
+                  className="scroll_icon-img3"
+                  src={scrollIcon3}
+                  alt="스크롤아이콘"
+                />
               </div>
             </div>
           </div>
           <div className="header____tail">
             <div className="header____tail____descript">
               <div className="context-header3">
-                <div className="context-header-text">
+                <div className="context-header-text3">
                   <div className="context-header-text-top3">
-                    랭킹<br></br>
-                    자세한 기록을<br></br>
-                    확인하자!
+                    순위<br></br>
+                    다른 사람의<br></br>
+                    기록을 확인합니다
                   </div>
                   <div className="context-header-text-bottom3">
-                    1등 기록과
+                    그래프를 통해 1등 기록과
                     <div className="context-header-text-bottom-marker-container">
                       <div className="context-header-text-bottom-marker">
                         {" "}
@@ -203,6 +286,22 @@ class Main extends Component {
                   alt="스크롤"
                 />
               </div> */}
+              <div className="main_footer">
+                <a href="https://wonderfulharu.tistory.com/" target="_blank">
+                  블로그
+                </a>
+                <a href="mailto:@gmail.com">이메일</a>
+                <a href="https://github.com/psy-g" target="_blank">
+                  깃허브
+                </a>
+              </div>
+              <div className="scroll_icon">
+                <img
+                  className="scroll_icon-img4"
+                  src={scrollIcon4}
+                  alt="스크롤아이콘"
+                />
+              </div>
             </div>
           </div>
         </div>

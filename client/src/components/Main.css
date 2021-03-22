@@ -48,21 +48,24 @@
   scroll-snap-align: start;
 }
 
-.header____tail:nth-child(4n + 1) {
+.header____tail:nth-child(1),
+.header____tail:nth-child(2),
+.header____tail:nth-child(3),
+.header____tail:nth-child(4) {
   background: #30a9de;
 }
 
-.header____tail:nth-child(4n + 2) {
+/* .header____tail:nth-child(2) {
   background: #30a9de;
 }
 
-.header____tail:nth-child(4n + 3) {
+.header____tail:nth-child(3) {
   background: #30a9de;
 }
 
-.header____tail:nth-child(4n) {
+.header____tail:nth-child(4) {
   background: #30a9de;
-}
+} */
 
 /* .header {
   display: flex;
@@ -194,6 +197,34 @@
   height: 100%;
 }
 
+.scroll_icon-img1 {
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  display: block;
+}
+
+.scroll_icon-img2 {
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  display: none;
+}
+
+.scroll_icon-img3 {
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  display: none;
+}
+
+.scroll_icon-img4 {
+  position: absolute;
+  top: 40%;
+  right: 2%;
+  display: none;
+}
+
 .header____tail____tail {
   background-color: #fafafa;
   display: flex;
@@ -314,7 +345,7 @@
 .context-header3 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   width: 100%;
   height: 60%;
@@ -340,24 +371,54 @@
   font-family: "HeirofLightRegular";
 }
 
-.context-header-img-container3 {
+.context-header-text3 {
   width: 50%;
-  height: 70%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.context-header-img3-container {
+  /* width: 50%;
+  height: 70%; */
   display: flex;
   justify-content: space-between;
-  /* justify-content: center; */
 }
 
 .context-header-img3-1 {
-  width: 40%;
+  width: 45%;
   height: 100%;
   border-radius: 8px;
 }
 
 .context-header-img3-2 {
-  width: 40%;
+  width: 45%;
   height: 100%;
   border-radius: 8px;
+}
+
+.main_footer {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_footer a {
+  color: #fafafa;
+  font-family: "HeirofLightRegular";
+  font-size: 18px;
+  margin-left: 15px;
+  opacity: 0.6;
+}
+
+.main_footer a:hover {
+  color: #fafafa;
+  font-family: "HeirofLightRegular";
+  font-size: 18px;
+  margin-left: 15px;
+  opacity: 1;
 }
 
 a {
