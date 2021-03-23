@@ -33,7 +33,8 @@ class Signout extends Component {
   render() {
     return (
       <div onClick={() => this.logout()} className="logoutBtn">
-        <span className="buger_ranking_logout">👋</span> 로그아웃
+        <span className="burger_ranking_logout_icon">👋</span>{" "}
+        <span className="burger_ranking_logout_text">로그아웃</span>
       </div>
     );
   }

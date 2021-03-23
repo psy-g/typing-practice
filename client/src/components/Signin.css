@@ -9,7 +9,7 @@
 
 .signin____header____tail {
   display: flex;
-  width: 75%;
+  width: 100%;
   min-width: 500px;
   height: 100%;
   flex-direction: column;
@@ -22,7 +22,8 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 70%;
+  width: 50%;
+  min-width: 480px;
   height: 65vh;
   text-align: center;
   background: url("../image/rankback.png");
@@ -39,6 +40,13 @@
   justify-content: center;
   align-items: center;
   height: 60%;
+}
+
+.signin_header_logo {
+  width: 30vw;
+  min-width: 300px;
+  height: 25vh;
+  /* margin-bottom: 0px; */
 }
 
 .signin_body {
@@ -133,7 +141,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 50%;
+  min-width: 480px;
   height: 13vh;
   text-align: center;
   background-color: #cadbe9;

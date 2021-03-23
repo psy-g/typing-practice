@@ -24,10 +24,10 @@ class Main extends Component {
     $(document).ready(function () {
       $("#main").on("scroll", function () {
         var scrollValue = $("#main").scrollTop();
-        console.log("스크롤위치", scrollValue);
+        // console.log("스크롤위치", scrollValue);
 
-        var scrollValue2 = $(".scroll_icon-img1").offset();
-        console.log("대상의위치값", scrollValue2);
+        // var scrollValue2 = $(".scroll_icon-img1").offset();
+        // console.log("대상의위치값", scrollValue2);
 
         const icon1 = document.querySelector(".scroll_icon-img1");
         const icon2 = document.querySelector(".scroll_icon-img2");

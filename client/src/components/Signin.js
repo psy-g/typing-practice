@@ -196,7 +196,7 @@ class Signin extends React.Component {
               <div className="signin_header">
                 <div className="signin_header_top">
                   <img
-                    className="header_logo"
+                    className="signin_header_logo"
                     src={signinLogo}
                     alt="login_logo"
                   />
