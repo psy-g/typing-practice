@@ -41,18 +41,21 @@ class Main extends Component {
           icon4.style.display = `none`;
         }
         if (scrollValue === 1000) {
+          // if (800 < scrollValue) {
           icon1.style.display = `none`;
           icon2.style.display = `block`;
           icon3.style.display = `none`;
           icon4.style.display = `none`;
         }
         if (scrollValue === 2000) {
+          // if (1650 < scrollValue) {
           icon1.style.display = `none`;
           icon2.style.display = `none`;
           icon3.style.display = `block`;
           icon4.style.display = `none`;
         }
         if (scrollValue === 3000) {
+          // if (2700 < scrollValue) {
           icon1.style.display = `none`;
           icon2.style.display = `none`;
           icon3.style.display = `none`;
@@ -245,11 +248,11 @@ class Main extends Component {
                   <div className="context-header-text-top3">
                     순위<br></br>
                     다른 사람의<br></br>
-                    기록을 확인합니다
+                    순위를 확인합니다
                   </div>
                   <div className="context-header-text-bottom3">
                     그래프를 통해 1등 기록과
-                    <div className="context-header-text-bottom-marker-container">
+                    <div className="context-header-text-bottom-marker-container3">
                       <div className="context-header-text-bottom-marker">
                         {" "}
                         비교
