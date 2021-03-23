@@ -171,11 +171,11 @@ const Nav = () => {
     <div>
       <div id="nav">
         <div className="nav">
-          <span className="nav_logo">
+          <div className="nav_logo">
             <Link to="/" className="nav_logo_font">
               타자치자
             </Link>
-          </span>
+          </div>
           {navCheck !== 0 ? (
             <div className="burger_container">
               <div className="bunger_container_header">
@@ -188,7 +188,8 @@ const Nav = () => {
                   <div className="burger_home">
                     <div className="buger_home_home">
                       <Link to="/">
-                        <span>🏠</span> 홈
+                        <span className="burger_home_icon">🏠</span>{" "}
+                        <span className="burger_home_text">홈</span>
                       </Link>
                     </div>
                   </div>
@@ -198,14 +199,28 @@ const Nav = () => {
                     </div>
                     <div className="burger_close_ranking">
                       <Link to="/ranking">
-                        <span className="buger_ranking_icon">🏆</span> 순위
+                        <span className="burger_ranking_icon">🏆</span>{" "}
+                        <span className="burger_ranking_text">순위</span>
                       </Link>
                     </div>
                     <div className="burger_close_test">
                       <Link to="/test">
-                        <span className="buger_test_icon">⌨</span> 타자연습
+                        <span className="burger_test_icon">⌨</span>{" "}
+                        <span className="burger_test_text">타자연습</span>
                       </Link>
                     </div>
+                  </div>
+                  <div className="nav_footer">
+                    <a
+                      href="https://wonderfulharu.tistory.com/"
+                      target="_blank"
+                    >
+                      블로그
+                    </a>
+                    <a href="mailto:@gmail.com">이메일</a>
+                    <a href="https://github.com/psy-g" target="_blank">
+                      깃허브
+                    </a>
                   </div>
                 </div>
               ) : (
@@ -213,32 +228,48 @@ const Nav = () => {
                   <div className="burger_home">
                     <div className="buger_home_home">
                       <Link to="/">
-                        <span>🏠</span> 홈
+                        <span className="burger_home_icon">🏠</span>{" "}
+                        <span className="burger_home_text">홈</span>
                       </Link>
                     </div>
                   </div>
                   <div className="burger_close">
                     <div className="burger_close_signin">
                       <Link to="/signin">
-                        <span className="buger_signup_icon">🖥</span> 로그인
+                        <span className="burger_signup_icon">🖥</span>{" "}
+                        <span className="burger_signup_text">로그인</span>
                       </Link>
                     </div>
                     <div className="burger_close_ranking">
                       <Link to="/ranking">
-                        <span className="buger_ranking_icon">🏆</span> 순위
+                        <span className="burger_ranking_icon">🏆</span>{" "}
+                        <span className="burger_ranking_text">순위</span>
                       </Link>
                     </div>
                     <div className="burger_close_test">
                       <Link to="/test">
-                        <span className="buger_test_icon">⌨</span> 타자연습
+                        <span className="burger_test_icon">⌨</span>{" "}
+                        <span className="burger_test_text">타자연습</span>
                       </Link>
                     </div>
+                  </div>
+                  <div className="nav_footer">
+                    <a
+                      href="https://wonderfulharu.tistory.com/"
+                      target="_blank"
+                    >
+                      블로그
+                    </a>
+                    <a href="mailto:@gmail.com">이메일</a>
+                    <a href="https://github.com/psy-g" target="_blank">
+                      깃허브
+                    </a>
                   </div>
                 </div>
               )}
             </div>
           ) : (
-            <div className="bad">
+            <div className="burger_basic">
               <span className="burger_open" onClick={openNav}>
                 &#9776;
               </span>

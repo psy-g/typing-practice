@@ -45,7 +45,7 @@
   height: 100%;
   flex-direction: column;
   align-items: center;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
 
 .header____tail:nth-child(1),
@@ -89,6 +89,7 @@
   justify-content: space-around;
   align-items: center;
   width: 50%;
+  min-width: 480px;
   height: 65vh;
   text-align: center;
   background: url("../image/rankback.png");
@@ -97,6 +98,13 @@
   border-bottom-width: 25px;
   border-top-width: 25px;
   border-radius: 0.6rem 0.6rem 0 0;
+}
+
+@media (max-width: 600px) {
+  .header {
+    width: 80%;
+    height: 65vh;
+  }
 }
 
 .header_top {
@@ -109,8 +117,9 @@
 
 .header_logo {
   width: 30vw;
+  min-width: 300px;
   height: 25vh;
-  margin-bottom: 50px;
+  margin-bottom: 93px;
 }
 
 .header_enter {
@@ -122,7 +131,8 @@
 }
 
 .header_enter_test {
-  font-size: 1.6vw;
+  /* font-size: 1.6vw; */
+  font-size: max(1.4em, 1.5vw);
   animation: blink 1s infinite;
 }
 
@@ -171,6 +181,7 @@
   justify-content: center;
   align-items: center;
   width: 50%;
+  min-width: 480px;
   height: 13vh;
   text-align: center;
   background-color: #cadbe9;
@@ -178,6 +189,12 @@
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .tail {
+    width: 80%;
+  }
 }
 
 .tail_button {
@@ -223,6 +240,18 @@
   top: 40%;
   right: 2%;
   display: none;
+}
+
+@media (max-width: 600px) {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
+    position: absolute;
+    top: 88%;
+    right: 4%;
+    display: none;
+  }
 }
 
 .header____tail____tail {
