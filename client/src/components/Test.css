@@ -9,8 +9,8 @@
 
 .test_____header____tail {
   display: flex;
-  width: 75%;
-  /* width: 100%; */
+  /* width: 75%; */
+  width: 100%;
   min-width: 500px;
   height: 100%;
   flex-direction: column;
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-.test_header {
+/* .test_header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,23 +26,23 @@
   height: 65vh;
   min-height: 400px;
   text-align: center;
-}
+} */
 
 .header_problem_score_speed_column,
 .header_problem_score_accuracy_column,
 .header_problem_score_time_column {
   color: #e53a40;
-  font-size: max(0.7em, 1.3vw);
+  font-size: max(0.8em, 1.4vw);
 }
 
-/* .header_problem {
+.header_problem {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 50%;
   min-width: 480px;
-  height: 45vh;
+  height: 60vh;
   text-align: center;
   background: url("../image/rankback.png");
   z-index: 1;
@@ -50,9 +50,18 @@
   border-bottom-width: 25px;
   border-top-width: 25px;
   border-radius: 0.6rem 0.6rem 0 0;
+  font-size: 20px;
+  color: white;
+}
+
+/* @media (max-width: 600px) {
+  .header_problem {
+    width: 80%;
+    height: 65vh;
+  }
 } */
 
-.header_problem {
+/* .header_problem {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -67,7 +76,7 @@
   border-bottom-width: 20px;
   border-top-width: 20px;
   border-radius: 0.6rem 0.6rem 0 0;
-}
+} */
 
 .header_problem_score {
   display: flex;
@@ -93,7 +102,7 @@
 
 .header_title {
   color: #efdc05;
-  font-size: max(0.7em, 1.3vw);
+  font-size: max(0.8em, 1.4vw);
 }
 
 .header_titleAndProblem {
@@ -118,7 +127,7 @@
 .header_titleAndProblem_print_header {
   width: 100%;
   color: #e53a40;
-  font-size: max(0.7em, 1.3vw);
+  font-size: max(0.8em, 1.4vw);
 }
 
 .header_titleAndProblem_print_body {
@@ -147,6 +156,27 @@
 
 .header_problem_result {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  min-width: 480px;
+  height: 13vh;
+  text-align: center;
+  background-color: #cadbe9;
+  border-top-width: 2.5px;
+  border-top-style: solid;
+  border-top-color: #090707;
+  border-radius: 0 0 0.6rem 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .header_problem_result {
+    width: 80%;
+  }
+}
+
+/* .header_problem_result {
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -159,7 +189,7 @@
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
-}
+} */
 
 .header_problem_score_speed_result,
 .header_problem_score_accuracy_result {
@@ -238,7 +268,7 @@
 .header_problem_result_print_rank_text {
   color: #e53a40;
   margin-bottom: 5px;
-  font-size: max(0.7em, 1.3vw);
+  font-size: max(0.8em, 1.4vw);
 }
 
 /* .header_problem_result_print_rank_top3_print {
@@ -257,8 +287,10 @@
   */
   display: flex;
   width: 100%;
+  height: 14vh;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: space-around;
   align-items: center;
   color: #33ffff;
   font-size: max(0.6em, 1vw);
@@ -271,6 +303,7 @@
   width: 70%;
   flex-direction: row;
   justify-content: space-evenly;
+  margin-bottom: 10px;
 }
 
 #header_problem_result_print_rank_top3_print_print_3,
@@ -291,12 +324,12 @@
 .header_problem_result_print_rank_speed_column,
 .header_problem_result_print_rank_time_column,
 .header_problem_result_print_rank_name_column {
-  width: 15%;
+  width: 20%;
 }
 
 .header_problem_count {
   display: inline-block;
-  font-size: max(0.8em, 1.4vw);
+  font-size: max(1em, 1.7vw);
 }
 
 .header_problem_tail {
@@ -314,10 +347,12 @@
 .typing {
   width: 25vw;
   max-width: 450px;
+  min-width: 250px;
   height: 4vh;
   overflow: hidden;
   resize: none;
-  font-size: 1.1vw;
+  font-size: max(0.8em, 1.4vw);
+  /* font-size: 1.1vw; */
 }
 
 #show {
@@ -328,13 +363,35 @@
 .test_input {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: flex-end;
   align-items: center;
-  width: 90%;
-  height: 10vh;
+  width: 100%;
+  /* height: 10vh; */
+  height: 20vh;
 }
 
 #keyboard {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  align-content: center;
+  grid-gap: 0.2rem;
+  padding: 0.7rem;
+  width: 30vw;
+  max-width: 800px;
+  min-width: 420px;
+  min-height: 15vh;
+  background: #cadbe9;
+  border-radius: 0.8rem;
+}
+
+/* @media (max-width: 500px) {
+  #keyboard {
+    border-radius: 0.1rem;
+  }
+} */
+
+/* #keyboard {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   align-content: center;
@@ -345,7 +402,7 @@
   min-width: 300px;
   background: #cadbe9;
   border-radius: 0.8rem;
-}
+} */
 
 .btn_1,
 .btn_2,

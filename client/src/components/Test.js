@@ -632,132 +632,131 @@ class Test extends Component {
         <Nav />
         <div id="test">
           <div className="test_____header____tail">
-            <div className="test_header">
-              <div className="header_problem">
-                <div className="header_problem_score">
-                  <div className="header_problem_score_speed">
-                    <div className="header_problem_score_speed_column">
-                      타수
-                    </div>
-                    <div className="header_problem_score_speed_result">
-                      {speed}
-                    </div>
-                  </div>
-                  <div className="header_title">{filterTitle}</div>
-                  <div className="header_problem_score_accuracy">
-                    <div className="header_problem_score_accuracy_column">
-                      정확도
-                    </div>
-                    <div className="header_problem_score_accuracy_result">
-                      {accuracy}
-                    </div>
+            {/* <div className="test_header"> */}
+
+            <div className="header_problem">
+              <div className="header_problem_score">
+                <div className="header_problem_score_speed">
+                  <div className="header_problem_score_speed_column">타수</div>
+                  <div className="header_problem_score_speed_result">
+                    {speed}
                   </div>
                 </div>
-                <div className="header_titleAndProblem">
-                  {/* {count !== 7 ? ( */}
-                  {count !== 2 ? (
-                    <div className="header_problem_count_header">
-                      {tttt.length !== 9 ? (
-                        <div className="header_problem_count">{tttt}</div>
-                      ) : (
-                        <div className="header_problem_count"></div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="header_titleAndProblem_print">
-                      <div className="header_titleAndProblem_print_header">
-                        기록
-                      </div>
-                      <div className="header_titleAndProblem_print_body">
-                        <div className="header_titleAndProblem_print_body_speed">
-                          <div className="header_titleAndProblem_print_body_speed_column">
-                            평균
-                          </div>
-                          <div className="header_titleAndProblem_print_body_speed_result">
-                            {Math.round(recordresultSpeed / count)}타수
-                          </div>
-                        </div>
-                        <div className="header_titleAndProblem_print_body_time">
-                          <div className="header_titleAndProblem_print_body_time_column">
-                            시간
-                          </div>
-                          <div className="header_titleAndProblem_print_body_time_result">
-                            {recordTime.toFixed(1)}초
-                          </div>
-                        </div>
-                        <div className="header_titleAndProblem_print_body_name">
-                          <div className="header_titleAndProblem_print_body_name_column">
-                            닉네임
-                          </div>
-                          {nickname ? (
-                            <div className="header_titleAndProblem_print_body_name_result">
-                              {nickname}
-                            </div>
-                          ) : (
-                            <div className="header_titleAndProblem_print_body_name_result">
-                              Guest
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="header_problem_result_print_rank">
-                        <div className="header_problem_result_print_rank_text">
-                          <Link to="/ranking">🏆</Link> TOP 3
-                        </div>
-                        <div className="header_problem_result_print_rank_top3"></div>
-                      </div>
-                    </div>
-                  )}
+                <div className="header_title">{filterTitle}</div>
+                <div className="header_problem_score_accuracy">
+                  <div className="header_problem_score_accuracy_column">
+                    정확도
+                  </div>
+                  <div className="header_problem_score_accuracy_result">
+                    {accuracy}
+                  </div>
                 </div>
+              </div>
+              <div className="header_titleAndProblem">
                 {/* {count !== 7 ? ( */}
                 {count !== 2 ? (
-                  <div className="header_problem_tail">
-                    <textarea
-                      type="text"
-                      className="typing"
-                      onChange={this.handleInputValue("answer")}
-                      autoFocus
-                    ></textarea>
-                    <span id="show">00:00:00</span>
+                  <div className="header_problem_count_header">
+                    {tttt.length !== 9 ? (
+                      <div className="header_problem_count">{tttt}</div>
+                    ) : (
+                      <div className="header_problem_count"></div>
+                    )}
                   </div>
                 ) : (
-                  <div className="header_problem_tail_end">
-                    <textarea
-                      type="text"
-                      className="typing"
-                      onChange={this.handleInputValue("answer")}
-                      disabled
-                    ></textarea>
-                    <span id="show">00:00:00</span>
+                  <div className="header_titleAndProblem_print">
+                    <div className="header_titleAndProblem_print_header">
+                      기록
+                    </div>
+                    <div className="header_titleAndProblem_print_body">
+                      <div className="header_titleAndProblem_print_body_speed">
+                        <div className="header_titleAndProblem_print_body_speed_column">
+                          평균
+                        </div>
+                        <div className="header_titleAndProblem_print_body_speed_result">
+                          {Math.round(recordresultSpeed / count)}타수
+                        </div>
+                      </div>
+                      <div className="header_titleAndProblem_print_body_time">
+                        <div className="header_titleAndProblem_print_body_time_column">
+                          시간
+                        </div>
+                        <div className="header_titleAndProblem_print_body_time_result">
+                          {recordTime.toFixed(1)}초
+                        </div>
+                      </div>
+                      <div className="header_titleAndProblem_print_body_name">
+                        <div className="header_titleAndProblem_print_body_name_column">
+                          닉네임
+                        </div>
+                        {nickname ? (
+                          <div className="header_titleAndProblem_print_body_name_result">
+                            {nickname}
+                          </div>
+                        ) : (
+                          <div className="header_titleAndProblem_print_body_name_result">
+                            Guest
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="header_problem_result_print_rank">
+                      <div className="header_problem_result_print_rank_text">
+                        <Link to="/ranking">🏆</Link> TOP 3
+                      </div>
+                      <div className="header_problem_result_print_rank_top3"></div>
+                    </div>
                   </div>
                 )}
               </div>
-              <div className="header_problem_result">
-                <div className="header_timer">
-                  {/* {count !== 7 ? ( */}
-                  {count !== 2 ? (
-                    <div className="start_button">
-                      {!checkLogin ? (
-                        <div
-                          className="tail_button_test_login_false"
-                          src={randomBtn}
-                          width="50px"
-                          height="50px"
-                          alt="randomBtn"
-                          onClick={this.requestProblem}
-                        />
-                      ) : (
-                        <div
-                          className="tail_button_test_login_true"
-                          src={randomBtn}
-                          width="50px"
-                          height="50px"
-                          alt="randomBtn"
-                          onClick={this.requestProblem}
-                        />
-                      )}
+              {/* {count !== 7 ? ( */}
+              {count !== 2 ? (
+                <div className="header_problem_tail">
+                  <textarea
+                    type="text"
+                    className="typing"
+                    onChange={this.handleInputValue("answer")}
+                    autoFocus
+                  ></textarea>
+                  <span id="show">00:00:00</span>
+                </div>
+              ) : (
+                <div className="header_problem_tail_end">
+                  <textarea
+                    type="text"
+                    className="typing"
+                    onChange={this.handleInputValue("answer")}
+                    disabled
+                  ></textarea>
+                  <span id="show">00:00:00</span>
+                </div>
+              )}
+            </div>
+            <div className="header_problem_result">
+              <div className="header_timer">
+                {/* {count !== 7 ? ( */}
+                {count !== 2 ? (
+                  <div className="start_button">
+                    {!checkLogin ? (
+                      <div
+                        className="tail_button_test_login_false"
+                        src={randomBtn}
+                        width="50px"
+                        height="50px"
+                        alt="randomBtn"
+                        onClick={this.requestProblem}
+                      />
+                    ) : (
+                      <div
+                        className="tail_button_test_login_true"
+                        src={randomBtn}
+                        width="50px"
+                        height="50px"
+                        alt="randomBtn"
+                        onClick={this.requestProblem}
+                      />
+                    )}
 
-                      {/* <img
+                    {/* <img
                         className="random_start"
                         src={randomBtn}
                         width="50px"
@@ -765,30 +764,30 @@ class Test extends Component {
                         alt="randomBtn"
                         onClick={this.requestProblem}
                       /> */}
-                    </div>
-                  ) : (
-                    <div className="start_button">
-                      {!checkLogin ? (
-                        <div
-                          className="tail_button_test_login_false"
-                          src={randomBtn}
-                          width="50px"
-                          height="50px"
-                          alt="randomBtn"
-                          onClick={this.requestRefresh}
-                        />
-                      ) : (
-                        <div
-                          className="tail_button_test_login_true"
-                          src={randomBtn}
-                          width="50px"
-                          height="50px"
-                          alt="randomBtn"
-                          onClick={this.requestRefresh}
-                        />
-                      )}
+                  </div>
+                ) : (
+                  <div className="start_button">
+                    {!checkLogin ? (
+                      <div
+                        className="tail_button_test_login_false"
+                        src={randomBtn}
+                        width="50px"
+                        height="50px"
+                        alt="randomBtn"
+                        onClick={this.requestRefresh}
+                      />
+                    ) : (
+                      <div
+                        className="tail_button_test_login_true"
+                        src={randomBtn}
+                        width="50px"
+                        height="50px"
+                        alt="randomBtn"
+                        onClick={this.requestRefresh}
+                      />
+                    )}
 
-                      {/* <img
+                    {/* <img
                         className="random_start_rank"
                         src={randomBtn}
                         width="50px"
@@ -796,11 +795,12 @@ class Test extends Component {
                         alt="randomBtn"
                         onClick={this.requestRefresh}
                       /> */}
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
+            {/* </div> */}
+
             {/* {count !== 7 ? ( */}
             {count !== 2 ? (
               <div className="test_input">
