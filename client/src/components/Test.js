@@ -72,7 +72,7 @@ class Test extends Component {
         recordTime: this.state.recordTime + time,
         recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
       });
-      this.setState({ count: count + 1 }, function () { });
+      this.setState({ count: count + 1 }, function () {});
       // if (this.state.count < 7) document.querySelector(".typing").value = "";
       if (this.state.count < 2) document.querySelector(".typing").value = "";
 
@@ -111,7 +111,6 @@ class Test extends Component {
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
-
 
   // 타이머 초기화
   init() {
@@ -153,7 +152,6 @@ class Test extends Component {
     clearInterval(timer);
   }
 
-
   // 키보드 이벤트
   keyboardEvent() {
     // event = false 처음에 이벤트 발생시키면 true로 바꾸고 문제가 넘어가거나
@@ -180,7 +178,6 @@ class Test extends Component {
             const resultTime = document
               .getElementById("show")
               .innerHTML.split(":");
-
 
             this.setState({
               time: Number(`${resultTime[0]}.${resultTime[1]}`),
@@ -366,87 +363,6 @@ class Test extends Component {
     }
   }
 
-  // // 순위 출력
-  // rankPrint() {
-  //   this.ranking();
-
-  //   setTimeout(() => {
-  //     const { printRank } = this.state;
-
-  //     const target = document.querySelector(
-  //       ".header_problem_result_print_rank_top3"
-  //     );
-
-  //     const newDiv = document.createElement("div");
-
-  //     newDiv.className = "header_problem_result_print_rank_top3_print";
-
-  //     if (printRank.length === 1) {
-  //       newDiv.innerHTML = `
-  //       <div class="header_problem_result_print_rank_ranker_column">
-  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_speed_column">
-  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_time_column">
-  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_name_column">
-  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-  //       </div>
-  //       </div>
-  //       `;
-  //     } else if (printRank.length === 2) {
-  //       newDiv.innerHTML = `
-  //       <div class="header_problem_result_print_rank_ranker_column">
-  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-  //       <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_speed_column">
-  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-  //       <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_time_column">
-  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-  //       <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_name_column">
-  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-  //       <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
-  //       </div>
-  //       </div>
-  //       `;
-  //     } else {
-  //       newDiv.innerHTML = `
-  //       <div class="header_problem_result_print_rank_ranker_column">
-  //       <div class="header_problem_result_print_rank_top1_ranker">1ST</div>
-  //       <div class="header_problem_result_print_rank_top2_ranker">2ND</div>
-  //       <div class="header_problem_result_print_rank_top3_ranker">3RD</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_speed_column">
-  //       <div class="header_problem_result_print_rank_top1_speed">${printRank[0].average}타수</div>
-  //       <div class="header_problem_result_print_rank_top2_speed">${printRank[1].average}타수</div>
-  //       <div class="header_problem_result_print_rank_top3_speed">${printRank[2].average}타수</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_time_column">
-  //       <div class="header_problem_result_print_rank_top1_time">${printRank[0].time}초</div>
-  //       <div class="header_problem_result_print_rank_top2_time">${printRank[1].time}초</div>
-  //       <div class="header_problem_result_print_rank_top3_time">${printRank[2].time}초</div>
-  //       </div>
-  //       <div class="header_problem_result_print_rank_name_column">
-  //       <div class="header_problem_result_print_rank_top1_name">${printRank[0].name}</div>
-  //       <div class="header_problem_result_print_rank_top2_name">${printRank[1].name}</div>
-  //       <div class="header_problem_result_print_rank_top3_name">${printRank[2].name}</div>
-  //       </div>
-  //       </div>
-  //       `;
-  //     }
-
-  //     target.prepend(newDiv);
-  //   }, 2000); // 시간. 2초 후 실행
-  // }
-
   // 순위 출력
   rankPrint() {
     this.ranking();
@@ -462,26 +378,32 @@ class Test extends Component {
 
       newDiv.className = "header_problem_result_print_rank_top3_print";
 
-
       printRank.forEach(function (el, index) {
-        newDiv.innerHTML +=
-          `
+        newDiv.innerHTML += `
           <div id="header_problem_result_print_rank_top3_print_print_${index}">
-          <div class="header_problem_result_print_rank_top_ranker}">${index + 1}등
+          <div class="header_problem_result_print_rank_top_ranker}">${
+            index + 1
+          }등
           </div>
           <div class="header_problem_result_print_rank_speed_column">
-          <div class="header_problem_result_print_rank_top_speed">${el.average}타수</div>
+          <div class="header_problem_result_print_rank_top_speed">${
+            el.average
+          }타수</div>
           </div>
           <div class="header_problem_result_print_rank_time_column">
-          <div class="header_problem_result_print_rank_top_time">${el.time}초</div>
+          <div class="header_problem_result_print_rank_top_time">${
+            el.time
+          }초</div>
            </div>
           <div class="header_problem_result_print_rank_name_column">
-          <div class="header_problem_result_print_rank_top_name">${el.name}</div>
+          <div class="header_problem_result_print_rank_top_name">${
+            el.name
+          }</div>
           </div>
           </div>
 
-          `
-      })
+          `;
+      });
 
       target.prepend(newDiv);
     }, 2000); // 시간. 2초 후 실행
@@ -703,6 +625,7 @@ class Test extends Component {
     ));
 
     const nickname = window.localStorage.getItem("nick");
+    const checkLogin = window.localStorage.getItem("isLogin");
 
     return (
       <div>
@@ -737,54 +660,54 @@ class Test extends Component {
                       {tttt.length !== 9 ? (
                         <div className="header_problem_count">{tttt}</div>
                       ) : (
-                          <div className="header_problem_count"></div>
-                        )}
+                        <div className="header_problem_count"></div>
+                      )}
                     </div>
                   ) : (
-                      <div className="header_titleAndProblem_print">
-                        <div className="header_titleAndProblem_print_header">
-                          기록
+                    <div className="header_titleAndProblem_print">
+                      <div className="header_titleAndProblem_print_header">
+                        기록
                       </div>
-                        <div className="header_titleAndProblem_print_body">
-                          <div className="header_titleAndProblem_print_body_speed">
-                            <div className="header_titleAndProblem_print_body_speed_column">
-                              평균
+                      <div className="header_titleAndProblem_print_body">
+                        <div className="header_titleAndProblem_print_body_speed">
+                          <div className="header_titleAndProblem_print_body_speed_column">
+                            평균
                           </div>
-                            <div className="header_titleAndProblem_print_body_speed_result">
-                              {Math.round(recordresultSpeed / count)}타수
-                          </div>
-                          </div>
-                          <div className="header_titleAndProblem_print_body_time">
-                            <div className="header_titleAndProblem_print_body_time_column">
-                              시간
-                          </div>
-                            <div className="header_titleAndProblem_print_body_time_result">
-                              {recordTime.toFixed(1)}초
-                          </div>
-                          </div>
-                          <div className="header_titleAndProblem_print_body_name">
-                            <div className="header_titleAndProblem_print_body_name_column">
-                              닉네임
-                          </div>
-                            {nickname ? (
-                              <div className="header_titleAndProblem_print_body_name_result">
-                                {nickname}
-                              </div>
-                            ) : (
-                                <div className="header_titleAndProblem_print_body_name_result">
-                                  Guest
-                                </div>
-                              )}
+                          <div className="header_titleAndProblem_print_body_speed_result">
+                            {Math.round(recordresultSpeed / count)}타수
                           </div>
                         </div>
-                        <div className="header_problem_result_print_rank">
-                          <div className="header_problem_result_print_rank_text">
-                            <Link to="/ranking">🏆</Link> TOP 3
+                        <div className="header_titleAndProblem_print_body_time">
+                          <div className="header_titleAndProblem_print_body_time_column">
+                            시간
+                          </div>
+                          <div className="header_titleAndProblem_print_body_time_result">
+                            {recordTime.toFixed(1)}초
+                          </div>
                         </div>
-                          <div className="header_problem_result_print_rank_top3"></div>
+                        <div className="header_titleAndProblem_print_body_name">
+                          <div className="header_titleAndProblem_print_body_name_column">
+                            닉네임
+                          </div>
+                          {nickname ? (
+                            <div className="header_titleAndProblem_print_body_name_result">
+                              {nickname}
+                            </div>
+                          ) : (
+                            <div className="header_titleAndProblem_print_body_name_result">
+                              Guest
+                            </div>
+                          )}
                         </div>
                       </div>
-                    )}
+                      <div className="header_problem_result_print_rank">
+                        <div className="header_problem_result_print_rank_text">
+                          <Link to="/ranking">🏆</Link> TOP 3
+                        </div>
+                        <div className="header_problem_result_print_rank_top3"></div>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {/* {count !== 7 ? ( */}
                 {count !== 2 ? (
@@ -798,43 +721,83 @@ class Test extends Component {
                     <span id="show">00:00:00</span>
                   </div>
                 ) : (
-                    <div className="header_problem_tail_end">
-                      <textarea
-                        type="text"
-                        className="typing"
-                        onChange={this.handleInputValue("answer")}
-                        disabled
-                      ></textarea>
-                      <span id="show">00:00:00</span>
-                    </div>
-                  )}
+                  <div className="header_problem_tail_end">
+                    <textarea
+                      type="text"
+                      className="typing"
+                      onChange={this.handleInputValue("answer")}
+                      disabled
+                    ></textarea>
+                    <span id="show">00:00:00</span>
+                  </div>
+                )}
               </div>
               <div className="header_problem_result">
                 <div className="header_timer">
                   {/* {count !== 7 ? ( */}
                   {count !== 2 ? (
                     <div className="start_button">
-                      <img
+                      {!checkLogin ? (
+                        <div
+                          className="tail_button_test_login_false"
+                          src={randomBtn}
+                          width="50px"
+                          height="50px"
+                          alt="randomBtn"
+                          onClick={this.requestProblem}
+                        />
+                      ) : (
+                        <div
+                          className="tail_button_test_login_true"
+                          src={randomBtn}
+                          width="50px"
+                          height="50px"
+                          alt="randomBtn"
+                          onClick={this.requestProblem}
+                        />
+                      )}
+
+                      {/* <img
                         className="random_start"
                         src={randomBtn}
                         width="50px"
                         height="50px"
                         alt="randomBtn"
                         onClick={this.requestProblem}
-                      />
+                      /> */}
                     </div>
                   ) : (
-                      <div className="start_button">
-                        <img
-                          className="random_start_rank"
+                    <div className="start_button">
+                      {!checkLogin ? (
+                        <div
+                          className="tail_button_test_login_false"
                           src={randomBtn}
                           width="50px"
                           height="50px"
                           alt="randomBtn"
                           onClick={this.requestRefresh}
                         />
-                      </div>
-                    )}
+                      ) : (
+                        <div
+                          className="tail_button_test_login_true"
+                          src={randomBtn}
+                          width="50px"
+                          height="50px"
+                          alt="randomBtn"
+                          onClick={this.requestRefresh}
+                        />
+                      )}
+
+                      {/* <img
+                        className="random_start_rank"
+                        src={randomBtn}
+                        width="50px"
+                        height="50px"
+                        alt="randomBtn"
+                        onClick={this.requestRefresh}
+                      /> */}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -926,92 +889,92 @@ class Test extends Component {
                 </div>
               </div>
             ) : (
-                <div className="test_input">
-                  <div id="keyboard">
-                    <div id="ㅂ" className="btn_1_end">
-                      ㅂ
+              <div className="test_input">
+                <div id="keyboard">
+                  <div id="ㅂ" className="btn_1_end">
+                    ㅂ
                   </div>
-                    <div id="ㅈ" className="btn_2_end">
-                      ㅈ
+                  <div id="ㅈ" className="btn_2_end">
+                    ㅈ
                   </div>
-                    <div id="ㄷ" className="btn_3_end">
-                      ㄷ
+                  <div id="ㄷ" className="btn_3_end">
+                    ㄷ
                   </div>
-                    <div id="ㄱ" className="btn_1_end">
-                      ㄱ
+                  <div id="ㄱ" className="btn_1_end">
+                    ㄱ
                   </div>
-                    <div id="ㅅ" className="btn_1_end">
-                      ㅅ
+                  <div id="ㅅ" className="btn_1_end">
+                    ㅅ
                   </div>
-                    <div id="ㅛ" className="btn_1_end">
-                      ㅛ
+                  <div id="ㅛ" className="btn_1_end">
+                    ㅛ
                   </div>
-                    <div id="ㅕ" className="btn_1_end">
-                      ㅕ
+                  <div id="ㅕ" className="btn_1_end">
+                    ㅕ
                   </div>
-                    <div id="ㅑ" className="btn_1_end">
-                      ㅑ
+                  <div id="ㅑ" className="btn_1_end">
+                    ㅑ
                   </div>
-                    <div id="ㅐ" className="btn_1_end">
-                      ㅐ
+                  <div id="ㅐ" className="btn_1_end">
+                    ㅐ
                   </div>
-                    <div id="ㅔ" className="btn_1_end">
-                      ㅔ
+                  <div id="ㅔ" className="btn_1_end">
+                    ㅔ
                   </div>
-                    <div id="Enter" className="btn_1_end">
-                      ↲
+                  <div id="Enter" className="btn_1_end">
+                    ↲
                   </div>
-                    <div id="ㅁ" className="btn_11_end">
-                      ㅁ
+                  <div id="ㅁ" className="btn_11_end">
+                    ㅁ
                   </div>
-                    <div id="ㅔ" className="btn_1_end">
-                      ㄴ
+                  <div id="ㅔ" className="btn_1_end">
+                    ㄴ
                   </div>
-                    <div id="ㅇ" className="btn_1_end">
-                      ㅇ
+                  <div id="ㅇ" className="btn_1_end">
+                    ㅇ
                   </div>
-                    <div id="ㄹ" className="btn_1_end">
-                      ㄹ
+                  <div id="ㄹ" className="btn_1_end">
+                    ㄹ
                   </div>
-                    <div id="ㅎ" className="btn_1_end">
-                      ㅎ
+                  <div id="ㅎ" className="btn_1_end">
+                    ㅎ
                   </div>
-                    <div id="ㅗ" className="btn_1_end">
-                      ㅗ
+                  <div id="ㅗ" className="btn_1_end">
+                    ㅗ
                   </div>
-                    <div id="ㅓ" className="btn_1_end">
-                      ㅓ
+                  <div id="ㅓ" className="btn_1_end">
+                    ㅓ
                   </div>
-                    <div id="ㅏ" className="btn_1_end">
-                      ㅏ
+                  <div id="ㅏ" className="btn_1_end">
+                    ㅏ
                   </div>
-                    <div id="ㅣ" className="btn_1_end">
-                      ㅣ
+                  <div id="ㅣ" className="btn_1_end">
+                    ㅣ
                   </div>
-                    <div id="ㅋ" className="btn_4_end">
-                      ㅋ
+                  <div id="ㅋ" className="btn_4_end">
+                    ㅋ
                   </div>
-                    <div id="ㅌ" className="btn_1_end">
-                      ㅌ
+                  <div id="ㅌ" className="btn_1_end">
+                    ㅌ
                   </div>
-                    <div id="ㅊ" className="btn_1_end">
-                      ㅊ
+                  <div id="ㅊ" className="btn_1_end">
+                    ㅊ
                   </div>
-                    <div id="ㅍ" className="btn_1_end">
-                      ㅍ
+                  <div id="ㅍ" className="btn_1_end">
+                    ㅍ
                   </div>
-                    <div id="ㅠ" className="btn_1_end">
-                      ㅠ
+                  <div id="ㅠ" className="btn_1_end">
+                    ㅠ
                   </div>
-                    <div id="ㅜ" className="btn_1_end">
-                      ㅜ
+                  <div id="ㅜ" className="btn_1_end">
+                    ㅜ
                   </div>
-                    <div id="ㅡ" className="btn_1_end">
-                      ㅡ
-                  </div>
+                  <div id="ㅡ" className="btn_1_end">
+                    ㅡ
                   </div>
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -3,12 +3,10 @@ import "./Main.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import logo from "../image/taza.png";
-import btn from "../image/power.png";
 import mainImg1 from "../image/main_img1.gif";
 import mainImg2 from "../image/main_img2.png";
 import mainImg3 from "../image/main_img3.png";
 import mainImg4 from "../image/main_img4.png";
-import scroll from "../image/scroll1.png";
 import scrollIcon1 from "../image/icon1.png";
 import scrollIcon2 from "../image/icon2.png";
 import scrollIcon3 from "../image/icon3.png";
@@ -101,26 +99,23 @@ class Main extends Component {
               <div className="tail_button">
                 {!checkLogin ? (
                   <Link to="/signin">
-                    <img
+                    {/* <img
                       className="tail_button"
                       src={btn}
                       width="50px"
                       height="50px"
                       alt="btn"
-                    />
+                    /> */}
+                    {/* <img className="tail_button_img" /> */}
+                    <div className="tail_button_main" />
                   </Link>
                 ) : (
                   <Link to="/test">
-                    <img
-                      className="tail_button"
-                      src={btn}
-                      width="50px"
-                      height="50px"
-                      alt="btn"
-                    />
+                    <div className="tail_button_main_login" />
                   </Link>
                 )}
               </div>
+              {/* <p className="tail_button_arrow_box">로그인</p> */}
             </div>
             {/* <div className="context-main-tail">
               <img
@@ -248,7 +243,7 @@ class Main extends Component {
                   <div className="context-header-text-top3">
                     순위<br></br>
                     다른 사람의<br></br>
-                    순위를 확인합니다
+                    기록을 확인합니다
                   </div>
                   <div className="context-header-text-bottom3">
                     그래프를 통해 1등 기록과
@@ -290,11 +285,19 @@ class Main extends Component {
                 />
               </div> */}
               <div className="main_footer">
-                <a href="https://wonderfulharu.tistory.com/" target="_blank">
+                <a
+                  href="https://wonderfulharu.tistory.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   블로그
                 </a>
                 <a href="mailto:@gmail.com">이메일</a>
-                <a href="https://github.com/psy-g" target="_blank">
+                <a
+                  href="https://github.com/psy-g"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   깃허브
                 </a>
               </div>

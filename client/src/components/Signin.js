@@ -3,7 +3,6 @@ import axios from "axios";
 import "./Signin.css";
 import Nav from "./Nav";
 import signinLogo from "../image/taza.png";
-import btn from "../image/power.png";
 import { withRouter, Link } from "react-router-dom";
 
 class Signin extends React.Component {
@@ -283,14 +282,15 @@ class Signin extends React.Component {
               )}
             </div>
             <div className="signin_tail">
-              <Link to="/signin">
-                <img
+              <Link to="/">
+                {/* <img
                   className="signin_tail_button"
                   src={btn}
                   width="50px"
                   height="50px"
                   alt="btn"
-                />
+                /> */}
+                <div className="tail_button_signin" />
               </Link>
             </div>
           </div>

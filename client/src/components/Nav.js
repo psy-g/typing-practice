@@ -214,11 +214,16 @@ const Nav = () => {
                     <a
                       href="https://wonderfulharu.tistory.com/"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       블로그
                     </a>
                     <a href="mailto:@gmail.com">이메일</a>
-                    <a href="https://github.com/psy-g" target="_blank">
+                    <a
+                      href="https://github.com/psy-g"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       깃허브
                     </a>
                   </div>
@@ -257,11 +262,16 @@ const Nav = () => {
                     <a
                       href="https://wonderfulharu.tistory.com/"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       블로그
                     </a>
                     <a href="mailto:@gmail.com">이메일</a>
-                    <a href="https://github.com/psy-g" target="_blank">
+                    <a
+                      href="https://github.com/psy-g"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       깃허브
                     </a>
                   </div>
