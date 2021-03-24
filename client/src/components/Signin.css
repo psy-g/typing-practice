@@ -151,3 +151,12 @@
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
 }
+
+.tail_button_signin {
+  /* background: url("../image/power.png") no-repeat center center; */
+  border: none;
+  background: url("../image/power_pending.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+}

@@ -10,6 +10,7 @@
 .test_____header____tail {
   display: flex;
   width: 75%;
+  /* width: 100%; */
   min-width: 500px;
   height: 100%;
   flex-direction: column;
@@ -33,6 +34,23 @@
   color: #e53a40;
   font-size: max(0.7em, 1.3vw);
 }
+
+/* .header_problem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  min-width: 480px;
+  height: 45vh;
+  text-align: center;
+  background: url("../image/rankback.png");
+  z-index: 1;
+  border: solid 15px #383a3f;
+  border-bottom-width: 25px;
+  border-top-width: 25px;
+  border-radius: 0.6rem 0.6rem 0 0;
+} */
 
 .header_problem {
   display: flex;
@@ -188,6 +206,24 @@
 
 .random_start_rank {
   cursor: pointer;
+}
+
+.tail_button_test_login_true {
+  cursor: pointer;
+  border: none;
+  background: url("../image/power_on.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+}
+
+.tail_button_test_login_false {
+  cursor: pointer;
+  border: none;
+  background: url("../image/power.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
 }
 
 .header_problem_result_print_rank {
