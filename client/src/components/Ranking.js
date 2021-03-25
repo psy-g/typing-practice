@@ -38,13 +38,20 @@ class Ranking extends Component {
           });
           for (const [index, value] of printRank.entries()) {
             items.push(
-              <div className={`rank__${index}`}>
-                <div className="rank__rank">{index + 1}</div>
-                <div className="rank__name">{value.name}</div>
-                <div className="rank__record">
+              <tr className={`rank__${index}`}>
+                <td className="rank__rank">{index + 1}</td>
+                <td className="rank__name">{value.name}</td>
+                <td className="rank__record">
                   {value.average}타수 {value.time}초
-                </div>
-              </div>
+                </td>
+              </tr>
+              // <div className={`rank__${index}`}>
+              //   <div className="rank__rank">{index + 1}</div>
+              //   <div className="rank__name">{value.name}</div>
+              //   <div className="rank__record">
+              //     {value.average}타수 {value.time}초
+              //   </div>
+              // </div>
             );
           }
           this.setState({ items: items });
@@ -66,10 +73,13 @@ class Ranking extends Component {
     const nickname = window.localStorage.getItem("nick");
 
     // 1등 기록, 이름
-    const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+    // const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
+    //   .innerHTML;
+    // const bestName = document.querySelector(".rank .rank__0 .rank__name")
+    //   .innerHTML;
+    const bestRecord = document.querySelector(".rank__0 .rank__record")
       .innerHTML;
-    const bestName = document.querySelector(".rank .rank__0 .rank__name")
-      .innerHTML;
+    const bestName = document.querySelector(".rank__0 .rank__name").innerHTML;
 
     // 1등 타수만
     const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
@@ -180,7 +190,7 @@ class Ranking extends Component {
           ) {
             userRecord = test[i]
               .querySelectorAll(".rank__name")
-            [j].parentElement.querySelector(".rank__record").innerHTML;
+              [j].parentElement.querySelector(".rank__record").innerHTML;
           }
         }
       }
@@ -424,12 +434,30 @@ class Ranking extends Component {
                   <option value="select_2">말리꽃</option>
                   <option value="select-3">오아시스</option>
                 </select>
-                <div className="table__column">
+                {/* <div className="table__column">
                   <span className="column__rank">순위</span>
                   <span className="column__nick">닉네임</span>
                   <span className="column__record">기록</span>
                 </div>
-                <div className="rank">{items}</div>
+                <div className="rank">{items}</div> */}
+                <table className="ranking_table">
+                  <thead>
+                    <tr>
+                      <th className="column__rank">순위</th>
+                      <th className="column__nick">닉네임</th>
+                      <th className="column__record">기록</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* <tr>
+                      <td>Lorem</td>
+                      <td>Ipsum</td>
+                      <td>Dolor</td>
+                    </tr> */}
+                    {items}
+                  </tbody>
+                  {/* <div className="rank">{items}</div> */}
+                </table>
               </div>
             </div>
             {nick === null ? (
@@ -443,13 +471,13 @@ class Ranking extends Component {
                 </div>
               </div>
             ) : (
-                <div className="ranking_tail">
-                  <div className="ranking_detail">
-                    <div className="detail_header">{nick}님의 기록</div>
-                    <div className="detail_body"></div>
-                  </div>
+              <div className="ranking_tail">
+                <div className="ranking_detail">
+                  <div className="detail_header">{nick}님의 기록</div>
+                  <div className="detail_body"></div>
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
       </div>
