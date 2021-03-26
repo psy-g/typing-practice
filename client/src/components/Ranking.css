@@ -280,21 +280,25 @@ tbody tr:hover {
 
 .myRanking_rank {
   width: 20%;
+  color: #ffbd0a;
 }
 
 .myRanking_name {
   width: 30%;
   text-align: left;
+  color: #ffbd0a;
 }
 
 .myRanking_record {
   width: 25%;
   text-align: left;
+  color: #ffbd0a;
 }
 
 .myRanking_time {
   width: 25%;
   text-align: left;
+  color: #ffbd0a;
 }
 
 /* .column__rank {
