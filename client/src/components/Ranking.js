@@ -41,9 +41,8 @@ class Ranking extends Component {
               <tr className={`rank__${index}`}>
                 <td className="rank__rank">{index + 1}</td>
                 <td className="rank__name">{value.name}</td>
-                <td className="rank__record">
-                  {value.average}타수 {value.time}초
-                </td>
+                <td className="rank__record">{value.average}타수</td>
+                <td className="rank__time">{value.time}초</td>
               </tr>
               // <div className={`rank__${index}`}>
               //   <div className="rank__rank">{index + 1}</div>
@@ -407,8 +406,24 @@ class Ranking extends Component {
     target.innerHTML = "";
   }
 
+  selectBtn() {
+    document.querySelector("#myDropdown").classList.toggle("show");
+
+    window.onclick = function (event) {
+      if (!event.target.matches(".dropbtn")) {
+        let dropdowns = document.querySelector(".dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          let openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains("show")) {
+            openDropdown.classList.remove("show");
+          }
+        }
+      }
+    };
+  }
+
   componentDidMount() {
-    this.print();
+    // this.print();
   }
 
   render() {
@@ -420,8 +435,22 @@ class Ranking extends Component {
         <Nav />
         <div id="ranking">
           <div className="ranking____header____tail">
-            <div className="ranking_list">
-              <div className="ranking_list_table">
+            {/* <div className="ranking_list"> */}
+            <div className="ranking_list_table">
+              {/* <div className="select_wrapper">
+                <div className="dropdown">
+                  <button className="dropbtn" onClick={this.selectBtn}>
+                    버튼
+                  </button>
+                  <div id="myDropdown" className="dropdown-content">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                  </div>
+                </div>
+              </div> */}
+
+              <div className="select_wrapper">
                 <select
                   type="button"
                   className="select_start"
@@ -434,18 +463,23 @@ class Ranking extends Component {
                   <option value="select_2">말리꽃</option>
                   <option value="select-3">오아시스</option>
                 </select>
-                {/* <div className="table__column">
+              </div>
+
+              {/* <div className="table__column">
                   <span className="column__rank">순위</span>
                   <span className="column__nick">닉네임</span>
                   <span className="column__record">기록</span>
                 </div>
                 <div className="rank">{items}</div> */}
+              <div className="ranking_table_wrapper">
                 <table className="ranking_table">
                   <thead>
                     <tr>
                       <th className="column__rank">순위</th>
                       <th className="column__nick">닉네임</th>
-                      <th className="column__record">기록</th>
+                      {/* <th className="column__record">기록</th> */}
+                      <th className="column__record">타수</th>
+                      <th className="column__time">시간</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -460,6 +494,7 @@ class Ranking extends Component {
                 </table>
               </div>
             </div>
+            {/* </div> */}
             {nick === null ? (
               <div className="ranking_tail">
                 <div className="ranking_detail">
