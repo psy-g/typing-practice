@@ -13,6 +13,7 @@ class Ranking extends Component {
       myRecord: "",
       init: "눈 녹듯",
       myInit: [],
+      myRanking: "",
     };
 
     this.print = this.print.bind(this);
@@ -99,6 +100,11 @@ class Ranking extends Component {
         }
         this.setState({ items: items });
 
+        for (let i = 0; i < res.data.data.length; i++) {
+          if (res.data.data[i].name === nickname)
+            this.setState({ myRanking: i + 1 });
+        }
+
         res.data.myRank.forEach((el) => {
           myRank.push({
             name: el.name,
@@ -109,14 +115,26 @@ class Ranking extends Component {
         for (const [index, value] of myRank.entries()) {
           myItems.push(
             <tr>
-              <td className="myRanking_rank">{index + 1}</td>
+              <td className="myRanking_rank">{this.state.myRanking}</td>
               <td className="myRanking_name">{value.name}</td>
               <td className="myRanking_record">{value.average}타수</td>
               <td className="myRanking_time">{value.time}초</td>
             </tr>
           );
         }
-        this.setState({ myItems: myItems });
+        if (myItems.length !== 0) {
+          this.setState({ myItems: myItems });
+        } else {
+          myItems.push(
+            <tr>
+              <td className="myRanking_rank"></td>
+              <td className="myRanking_name">{nickname}</td>
+              <td className="myRanking_record">0타수</td>
+              <td className="myRanking_time">0초</td>
+            </tr>
+          );
+          this.setState({ myItems: myItems });
+        }
       })
 
       .catch((err) => {
@@ -519,6 +537,13 @@ class Ranking extends Component {
               time: el.time,
             });
           });
+
+          for (let i = 0; i < res.data.data.length; i++) {
+            if (res.data.data[i].name === nickname) {
+              this.setState({ myRanking: i + 1 });
+            }
+          }
+
           for (const [index, value] of printRank.entries()) {
             items.push(
               <tr className={`rank__${index}`}>
@@ -541,14 +566,26 @@ class Ranking extends Component {
           for (const [index, value] of myRank.entries()) {
             myItems.push(
               <tr>
-                <td className="myRanking_rank">{index + 1}</td>
+                <td className="myRanking_rank">{this.state.myRanking}</td>
                 <td className="myRanking_name">{value.name}</td>
                 <td className="myRanking_record">{value.average}타수</td>
                 <td className="myRanking_time">{value.time}초</td>
               </tr>
             );
           }
-          this.setState({ myItems: myItems });
+          if (myItems.length !== 0) {
+            this.setState({ myItems: myItems });
+          } else {
+            myItems.push(
+              <tr>
+                <td className="myRanking_rank"></td>
+                <td className="myRanking_name">{nickname}</td>
+                <td className="myRanking_record">0타수</td>
+                <td className="myRanking_time">0초</td>
+              </tr>
+            );
+            this.setState({ myItems: myItems });
+          }
         })
         .catch((err) => {
           console.log(err.response);
