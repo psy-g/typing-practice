@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import Nav from "./Nav";
 import "./Ranking.css";
 import axios from "axios";
+import arrow from "../image/arrow2.png";
 
 class Ranking extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
+      myItems: [],
       myRecord: "",
+      init: "눈 녹듯",
+      myInit: [],
     };
 
     this.print = this.print.bind(this);
@@ -44,13 +48,6 @@ class Ranking extends Component {
                 <td className="rank__record">{value.average}타수</td>
                 <td className="rank__time">{value.time}초</td>
               </tr>
-              // <div className={`rank__${index}`}>
-              //   <div className="rank__rank">{index + 1}</div>
-              //   <div className="rank__name">{value.name}</div>
-              //   <div className="rank__record">
-              //     {value.average}타수 {value.time}초
-              //   </div>
-              // </div>
             );
           }
           this.setState({ items: items });
@@ -61,6 +58,70 @@ class Ranking extends Component {
     } else {
       alert("에러");
     }
+
+    setTimeout(() => {
+      this.detail();
+    }, 500);
+  }
+
+  init() {
+    const items = [];
+    const printRank = [];
+    const myRank = [];
+    const myItems = [];
+    const nickname = window.localStorage.getItem("nick");
+
+    axios
+      .post("http://localhost:8080/ranking/print", {
+        title: "눈 녹듯",
+        name: nickname,
+      })
+      // .post("http://54.180.91.194:8080/ranking/print", {
+      //   title: selectValue,
+      // })
+      .then((res) => {
+        res.data.data.forEach((el) => {
+          printRank.push({
+            name: el.name,
+            average: el.average,
+            time: el.time,
+          });
+        });
+        for (const [index, value] of printRank.entries()) {
+          items.push(
+            <tr className={`rank__${index}`}>
+              <td className="rank__rank">{index + 1}</td>
+              <td className="rank__name">{value.name}</td>
+              <td className="rank__record">{value.average}타수</td>
+              <td className="rank__time">{value.time}초</td>
+            </tr>
+          );
+        }
+        this.setState({ items: items });
+
+        res.data.myRank.forEach((el) => {
+          myRank.push({
+            name: el.name,
+            average: el.average,
+            time: el.time,
+          });
+        });
+        for (const [index, value] of myRank.entries()) {
+          myItems.push(
+            <tr>
+              <td className="myRanking_rank">{index + 1}</td>
+              <td className="myRanking_name">{value.name}</td>
+              <td className="myRanking_record">{value.average}타수</td>
+              <td className="myRanking_time">{value.time}초</td>
+            </tr>
+          );
+        }
+        this.setState({ myItems: myItems });
+      })
+
+      .catch((err) => {
+        console.log(err.response);
+      });
 
     setTimeout(() => {
       this.detail();
@@ -412,22 +473,104 @@ class Ranking extends Component {
     window.onclick = function (event) {
       if (!event.target.matches(".dropbtn")) {
         let dropdowns = document.querySelector(".dropdown-content");
-        for (let i = 0; i < dropdowns.length; i++) {
-          let openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains("show")) {
-            openDropdown.classList.remove("show");
-          }
-        }
+
+        // console.log("=======", dropdowns.childNodes[0]);
+
+        // for (let i = 0; i < dropdowns.childNodes.length; i++) {
+        //   // let openDropdown = dropdowns.childNodes[i];
+
+        //   console.log("123456789", dropdowns.childNodes[0]);
+
+        // if (openDropdown.classList.contains("show")) {
+        //   openDropdown.classList.remove("show");
+        // }
+        // }
       }
     };
   }
 
+  print2 = (value) => (e) => {
+    const items = [];
+    const printRank = [];
+    const selectValue = value;
+
+    const myRank = [];
+    const myItems = [];
+    const nickname = window.localStorage.getItem("nick");
+
+    this.setState({ init: value });
+
+    // console.log("=====", value);
+
+    if (selectValue) {
+      axios
+        .post("http://localhost:8080/ranking/print", {
+          title: selectValue,
+          name: nickname,
+        })
+        // .post("http://54.180.91.194:8080/ranking/print", {
+        //   title: selectValue,
+        // })
+        .then((res) => {
+          res.data.data.forEach((el) => {
+            printRank.push({
+              name: el.name,
+              average: el.average,
+              time: el.time,
+            });
+          });
+          for (const [index, value] of printRank.entries()) {
+            items.push(
+              <tr className={`rank__${index}`}>
+                <td className="rank__rank">{index + 1}</td>
+                <td className="rank__name">{value.name}</td>
+                <td className="rank__record">{value.average}타수</td>
+                <td className="rank__time">{value.time}초</td>
+              </tr>
+            );
+          }
+          this.setState({ items: items });
+
+          res.data.myRank.forEach((el) => {
+            myRank.push({
+              name: el.name,
+              average: el.average,
+              time: el.time,
+            });
+          });
+          for (const [index, value] of myRank.entries()) {
+            myItems.push(
+              <tr>
+                <td className="myRanking_rank">{index + 1}</td>
+                <td className="myRanking_name">{value.name}</td>
+                <td className="myRanking_record">{value.average}타수</td>
+                <td className="myRanking_time">{value.time}초</td>
+              </tr>
+            );
+          }
+          this.setState({ myItems: myItems });
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    } else {
+      alert("에러");
+    }
+
+    document.querySelector(".dropdown-content").classList.remove("show");
+
+    setTimeout(() => {
+      this.detail();
+    }, 500);
+  };
+
   componentDidMount() {
     // this.print();
+    this.init();
   }
 
   render() {
-    const { items } = this.state;
+    const { items, myItems } = this.state;
     const nick = window.localStorage.getItem("nick");
 
     return (
@@ -437,20 +580,21 @@ class Ranking extends Component {
           <div className="ranking____header____tail">
             {/* <div className="ranking_list"> */}
             <div className="ranking_list_table">
-              {/* <div className="select_wrapper">
+              <div className="select_wrapper">
                 <div className="dropdown">
                   <button className="dropbtn" onClick={this.selectBtn}>
-                    버튼
+                    <span className="dropbtn_text">{this.state.init}</span>
+                    <img className="dropbtn_img" src={arrow} alt="arrow" />
                   </button>
                   <div id="myDropdown" className="dropdown-content">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                    <span onClick={this.print2("눈 녹듯")}>눈 녹듯</span>
+                    <span onClick={this.print2("말리꽃")}>말리꽃</span>
+                    <span onClick={this.print2("오아시스")}>오아시스</span>
                   </div>
                 </div>
-              </div> */}
+              </div>
 
-              <div className="select_wrapper">
+              {/* <div className="select_wrapper">
                 <select
                   type="button"
                   className="select_start"
@@ -463,7 +607,7 @@ class Ranking extends Component {
                   <option value="select_2">말리꽃</option>
                   <option value="select-3">오아시스</option>
                 </select>
-              </div>
+              </div> */}
 
               {/* <div className="table__column">
                   <span className="column__rank">순위</span>
@@ -477,7 +621,6 @@ class Ranking extends Component {
                     <tr>
                       <th className="column__rank">순위</th>
                       <th className="column__nick">닉네임</th>
-                      {/* <th className="column__record">기록</th> */}
                       <th className="column__record">타수</th>
                       <th className="column__time">시간</th>
                     </tr>
@@ -491,6 +634,18 @@ class Ranking extends Component {
                     {items}
                   </tbody>
                   {/* <div className="rank">{items}</div> */}
+                </table>
+              </div>
+
+              <div className="ranking_table_myRanking">
+                <table className="myRanking_table">
+                  <tbody>
+                    {/* <td className="myRanking_rank">3</td>
+                      <td className="myRanking_name">테스트</td>
+                      <td className="myRanking_record">617타수</td>
+                      <td className="myRanking_time">4.9초</td> */}
+                    {myItems}
+                  </tbody>
                 </table>
               </div>
             </div>
