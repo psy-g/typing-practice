@@ -27,6 +27,8 @@ class Test extends Component {
       id: window.localStorage.getItem("id"),
       winnerRecord: 0,
       items: "",
+      recordArray: [],
+      timeArray: [],
     };
 
     this.requestProblem = this.requestProblem.bind(this);
@@ -37,7 +39,7 @@ class Test extends Component {
 
   // 정확도 계산
   compare() {
-    const { problem, count, answer, time } = this.state;
+    const { problem, count, answer, time, recordArray } = this.state;
 
     // 반짝이는 눈 속에 나는 두 손 모아 빌었지(50유효타수, 4초)
     // 50타 * 60초 / 4초 => 750타?
@@ -73,12 +75,16 @@ class Test extends Component {
         recordresultSpeed: this.state.recordresultSpeed + resultSpeed,
       });
       this.setState({ count: count + 1 }, function () {});
-      // if (this.state.count < 7) document.querySelector(".typing").value = "";
-      if (this.state.count < 2) document.querySelector(".typing").value = "";
+
+      recordArray.push(Math.floor(resultSpeed));
+      this.setState({ recordArray: recordArray });
+
+      if (this.state.count < 7) document.querySelector(".typing").value = "";
+      // if (this.state.count < 2) document.querySelector(".typing").value = "";
 
       // 색 초기화
-      // if (this.state.count < 7) {
-      if (this.state.count < 2) {
+      if (this.state.count < 7) {
+        // if (this.state.count < 2) {
         for (
           let i = 0;
           i < document.querySelector(".header_problem_count").children.length;
@@ -184,8 +190,8 @@ class Test extends Component {
             });
             this.compare();
 
-            // if (this.state.count === 7) {
-            if (this.state.count === 2) {
+            if (this.state.count === 7) {
+              // if (this.state.count === 2) {
               this.rankPrint();
               // 2초 후에 렌더링 시킬 메소드 추가
             }
@@ -653,8 +659,8 @@ class Test extends Component {
                 </div>
               </div>
               <div className="header_titleAndProblem">
-                {/* {count !== 7 ? ( */}
-                {count !== 2 ? (
+                {count !== 7 ? (
+                  // {count !== 2 ? (
                   <div className="header_problem_count_header">
                     {tttt.length !== 9 ? (
                       <div className="header_problem_count">{tttt}</div>
@@ -708,8 +714,8 @@ class Test extends Component {
                   </div>
                 )}
               </div>
-              {/* {count !== 7 ? ( */}
-              {count !== 2 ? (
+              {count !== 7 ? (
+                // {count !== 2 ? (
                 <div className="header_problem_tail">
                   <textarea
                     type="text"
@@ -733,8 +739,8 @@ class Test extends Component {
             </div>
             <div className="header_problem_result">
               <div className="header_timer">
-                {/* {count !== 7 ? ( */}
-                {count !== 2 ? (
+                {count !== 7 ? (
+                  // {count !== 2 ? (
                   <div className="start_button">
                     {!checkLogin ? (
                       <div
@@ -801,8 +807,8 @@ class Test extends Component {
             </div>
             {/* </div> */}
 
-            {/* {count !== 7 ? ( */}
-            {count !== 2 ? (
+            {count !== 7 ? (
+              // {count !== 2 ? (
               <div className="test_input">
                 <div id="keyboard">
                   <div id="ㅂ" className="btn_1">

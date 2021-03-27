@@ -1354,8 +1354,15 @@ tbody tr:hover {
   position: absolute;
 }
 
+/* .percent-indicator2 span {
+  font-size: max(0.5em, 0.6vw);
+  width: 12.5%;
+  display: flex;
+  justify-content: center;
+} */
+
 .percent-indicator2 .per-0::before {
-  content: "0";
+  /* content: "0"; */
   font-size: max(0.5em, 0.6vw);
 }
 .percent-indicator2 .per-20::before {
@@ -1390,34 +1397,87 @@ tbody tr:hover {
 .graph2 {
   width: 100%;
   height: 100%;
-  display: flex;
+  /* display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: flex-start; */
+  display: grid;
+  /* grid-template-columns: repeat(8, 1fr); */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
   position: relative;
   /* list-style: none; */
   margin: 0px;
-  padding: 0px 0px 0px 25px;
+  /* padding: 0px 0px 0px 25px; */
+  z-index: 2;
+  /* padding-inline-start: 0px; */
+}
+
+.graph2_problem_count {
+  width: 100%;
+  display: grid;
+  /* grid-template-columns: repeat(8, 1fr); */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+  font-size: max(0.5em, 0.6vw);
+}
+
+.graph2_problem_count span {
+  height: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0px;
+  z-index: 2;
+}
+
+.graph2_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.graph2 span {
+  /* right: 6.5%; */
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  margin: 0px;
   z-index: 2;
 }
 
 li {
-  float: left;
   list-style: none;
   background: #000;
   color: #fff;
-  text-align: left;
+  text-align: center;
   font-size: max(0.6em, 0.8vw);
 }
 
-.item1 {
-  width: 5%;
-  height: 50%;
+.item1,
+.item2,
+.item4,
+.item6,
+.item8,
+.item10,
+.item12,
+.item14,
+.item16,
+.item18 {
+  width: 30%;
   background: #e53a40;
 }
 
-.item2 {
-  width: 5%;
-  height: 80%;
+.item2,
+.item3,
+.item5,
+.item7,
+.item9,
+.item11,
+.item13,
+.item15,
+.item17 {
+  width: 30%;
   background: #30a9de;
 }
 
