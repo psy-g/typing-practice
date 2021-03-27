@@ -16,6 +16,10 @@ class Ranking extends Component {
       myRanking: "",
       bestRecordArray: [],
       myRecordArray: [],
+      bestAverage: "",
+      myAverage: "",
+      bestName: "",
+      myName: "",
     };
 
     this.print = this.print.bind(this);
@@ -73,8 +77,8 @@ class Ranking extends Component {
     const myRank = [];
     const myItems = [];
     const nickname = window.localStorage.getItem("nick");
-
-    console.log("====", nickname);
+    const best = [];
+    const my = [];
 
     axios
       .post("http://localhost:8080/ranking/print", {
@@ -92,6 +96,29 @@ class Ranking extends Component {
             time: el.time,
           });
         });
+
+        best.push(
+          res.data.data[0].one,
+          res.data.data[0].two,
+          res.data.data[0].three,
+          res.data.data[0].four,
+          res.data.data[0].five,
+          res.data.data[0].six,
+          res.data.data[0].seven
+        );
+
+        this.setState({
+          bestRecordArray: best,
+          bestAverage: res.data.data[0].average,
+          bestName: res.data.data[0].name,
+        });
+
+        for (let i = 0; i < res.data.data.length; i++) {
+          if (res.data.data[i].name === nickname) {
+            this.setState({ myRanking: i + 1 });
+          }
+        }
+
         for (const [index, value] of printRank.entries()) {
           items.push(
             <tr className={`rank__${index}`}>
@@ -104,10 +131,7 @@ class Ranking extends Component {
         }
         this.setState({ items: items });
 
-        for (let i = 0; i < res.data.data.length; i++) {
-          if (res.data.data[i].name === nickname)
-            this.setState({ myRanking: i + 1 });
-        }
+        // console.log("======len======", items);
 
         res.data.myRank.forEach((el) => {
           myRank.push({
@@ -116,6 +140,27 @@ class Ranking extends Component {
             time: el.time,
           });
         });
+
+        // console.log("======len======", res.data.myRank);
+
+        // if(res.data.myRanking.length > 0) {
+        //   my.push(
+        //     res.data.myRank[0].one,
+        //     res.data.myRank[0].two,
+        //     res.data.myRank[0].three,
+        //     res.data.myRank[0].four,
+        //     res.data.myRank[0].five,
+        //     res.data.myRank[0].six,
+        //     res.data.myRank[0].seven
+        //   );
+
+        //   this.setState({
+        //     myRecordArray: my,
+        //     myAverage: res.data.myRank[0].average,
+        //     myName: res.data.myRank[0].name,
+        //   });
+        // }
+
         for (const [index, value] of myRank.entries()) {
           myItems.push(
             <tr>
@@ -126,6 +171,7 @@ class Ranking extends Component {
             </tr>
           );
         }
+
         if (myItems.length !== 0) {
           this.setState({ myItems: myItems });
         } else {
@@ -143,11 +189,29 @@ class Ranking extends Component {
           );
           this.setState({ myItems: myItems });
         }
-      })
+        // 유저 기록이 있으면
+        if (res.data.myRank.length > 0) {
+          my.push(
+            res.data.myRank[0].one,
+            res.data.myRank[0].two,
+            res.data.myRank[0].three,
+            res.data.myRank[0].four,
+            res.data.myRank[0].five,
+            res.data.myRank[0].six,
+            res.data.myRank[0].seven
+          );
 
-      .catch((err) => {
-        console.log(err.response);
+          this.setState({
+            myRecordArray: my,
+            myAverage: res.data.myRank[0].average,
+            myName: res.data.myRank[0].name,
+          });
+        }
       });
+
+    // .catch((err) => {
+    //   console.log(err.response);
+    // });
 
     setTimeout(() => {
       this.detail();
@@ -155,24 +219,38 @@ class Ranking extends Component {
   }
 
   detail() {
-    // const test = document.querySelectorAll(".rank");
     const test = document.querySelectorAll(".ranking_table");
     const nickname = window.localStorage.getItem("nick");
 
-    // 1등 기록, 이름
-    // const bestRecord = document.querySelector(".rank .rank__0 .rank__record")
-    //   .innerHTML;
-    // const bestName = document.querySelector(".rank .rank__0 .rank__name")
-    //   .innerHTML;
-    const bestRecord = document.querySelector(".rank__0 .rank__record")
-      .innerHTML;
-    const bestName = document.querySelector(".rank__0 .rank__name").innerHTML;
-
-    // 1등 타수만
-    const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
-
     // 1등, 로그인 유저 기록
-    const { bestRecordArray, myRecordArray } = this.state;
+    const {
+      bestRecordArray,
+      myRecordArray,
+      bestAverage,
+      myAverage,
+      bestName,
+    } = this.state;
+
+    // 1등 기록, 이름
+    // const bestRecord = document.querySelector(".rank__0 .rank__record")
+    //   .innerHTML;
+    // const bestName = document.querySelector(".rank__0 .rank__name").innerHTML;
+
+    // 1등 타수
+    // const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
+    const bestPercent = Math.floor((bestAverage / 750) * 100);
+
+    // 1등, 유저 배열
+    const bestArr = [];
+    const myArr = [];
+
+    for (let i = 0; i < bestRecordArray.length; i++) {
+      bestArr.push(Math.floor((bestRecordArray[i] / 750) * 100));
+    }
+
+    for (let i = 0; i < myRecordArray.length; i++) {
+      myArr.push(Math.floor((myRecordArray[i] / 750) * 100));
+    }
 
     // 비회원
     if (nickname === null) {
@@ -184,21 +262,6 @@ class Ranking extends Component {
 
       const newDiv = document.createElement("div");
 
-      // newDiv.className = "graph-wrapper";
-      // newDiv.innerHTML = `
-      //   <div class="percent-indicator">
-      //     <div class="per-0"></div>
-      //     <div class="per-20"></div>
-      //     <div class="per-40"></div>
-      //     <div class="per-60"></div>
-      //     <div class="per-80"></div>
-      //     <div class="per-100"></div>
-      //   </div>
-      //   <ul class="graph">
-      //     <li class="item1 p-${best}"></li>
-      //     <li class="item2 p-20"></li>
-      //   </ul>
-      //   `;
       newDiv.className = "graph-wrapper2";
       newDiv.innerHTML = `
         <div class="percent-indicator2">
@@ -211,7 +274,7 @@ class Ranking extends Component {
         </div>
         <ul class="graph2">
           <li class="item2 p-20"></li>
-          <li class="item1 p-${best}"></li>
+          <li class="item1 p-${bestPercent}"></li>
         </ul>
         `;
       target.prepend(newDiv);
@@ -221,23 +284,15 @@ class Ranking extends Component {
       const graph1 = document.querySelector(".graph2 .item1");
       const graph2 = document.querySelector(".graph2 .item2");
 
-      if (best >= 101) {
-        // graph1.style.width = `106%`;
-        // graph1.style.animation = `p-999 3s`;
-        // graph1.style.maxHeight = "40px";
-        // graph2.style.width = `30%`;
-        // graph2.style.animation = `p-30 3s`;
-        // graph2.style.maxHeight = "40px";
+      if (bestPercent >= 101) {
         graph1.style.height = `100%`;
         graph1.style.animation = `p-999 3s`;
-        // graph1.style.maxHeight = "40px";
         graph2.style.height = `30%`;
         graph2.style.animation = `p-30 3s`;
-        // graph2.style.maxHeight = "40px";
 
         document.styleSheets[0].addRule(
           `li.item1::before`,
-          'content: "' + bestRecord + '타수";'
+          'content: "' + bestAverage + '타수";'
         );
 
         document.styleSheets[0].addRule(
@@ -255,45 +310,35 @@ class Ranking extends Component {
           'content: "' + guest + '";'
         );
       } else {
-        // graph1.style.width = `${best}%`;
-        // graph1.style.animation = `p-${best} 3s`;
-        // graph1.style.maxHeight = "40px";
-        // graph2.style.width = `30%`;
-        // graph2.style.animation = `p-30 3s`;
-        // graph2.style.maxHeight = "40px";
-        graph1.style.height = `${best}%`;
-        graph1.style.animation = `p-${best} 3s`;
-        // graph1.style.maxHeight = "40px";
+        graph1.style.height = `${bestPercent}%`;
+        graph1.style.animation = `p-${bestPercent} 3s`;
         graph2.style.height = `30%`;
         graph2.style.animation = `p-30 3s`;
         // graph2.style.maxHeight = "40px";
 
-        const record1 = bestRecord.substring(0, 3);
+        // document.styleSheets[0].addRule(
+        //   `li.item1::before`,
+        //   'content: "' + record1 + '타수";'
+        // );
 
-        document.styleSheets[0].addRule(
-          `li.item1::before`,
-          'content: "' + record1 + '타수";'
-        );
+        // document.styleSheets[0].addRule(
+        //   `li.item2::before`,
+        //   'content: "' + guest + '";'
+        // );
 
-        document.styleSheets[0].addRule(
-          `li.item2::before`,
-          'content: "' + guest + '";'
-        );
+        // document.styleSheets[0].addRule(
+        //   "li.item1::after",
+        //   'content: "' + bestName + '";'
+        // );
 
-        document.styleSheets[0].addRule(
-          "li.item1::after",
-          'content: "' + bestName + '";'
-        );
-
-        document.styleSheets[0].addRule(
-          "li.item2::after",
-          'content: "' + guest + '";'
-        );
+        // document.styleSheets[0].addRule(
+        //   "li.item2::after",
+        //   'content: "' + guest + '";'
+        // );
       }
     }
     // 회원
     else {
-      // const target = document.querySelector(".detail_body");
       const target = document.querySelector(".detail_body2");
 
       target.innerHTML = "";
@@ -320,151 +365,6 @@ class Ranking extends Component {
       if (userRecord === undefined) {
         const newDiv = document.createElement("div");
 
-        // newDiv.className = "graph-wrapper";
-        // newDiv.innerHTML = `
-        // <div class="percent-indicator">
-        //   <div class="per-0"></div>
-        //   <div class="per-20"></div>
-        //   <div class="per-40"></div>
-        //   <div class="per-60"></div>
-        //   <div class="per-80"></div>
-        //   <div class="per-100"></div>
-        // </div>
-        // <ul class="graph">
-        //   <li class="item1 p-${best}"></li>
-        //   <li class="item2 p-20"></li>
-        // </ul>
-        // `;
-        newDiv.className = "graph-wrapper2";
-        newDiv.innerHTML = `
-        <div class="percent-indicator2">
-          <div class="per-0"></div>
-          <div class="per-20"></div>
-          <div class="per-40"></div>
-          <div class="per-60"></div>
-          <div class="per-80"></div>
-          <div class="per-100"></div>
-        </div>
-        <ul class="graph2">
-          <li class="item2 p-20"></li>
-          <li class="item1 p-${best}"></li>
-        </ul>
-        `;
-        target.prepend(newDiv);
-
-        // const graph1 = document.querySelector(".graph .item1");
-        // const graph2 = document.querySelector(".graph .item2");
-        const graph1 = document.querySelector(".graph2 .item1");
-        const graph2 = document.querySelector(".graph2 .item2");
-
-        if (best >= 101) {
-          // graph1.style.width = `106%`;
-          // graph1.style.animation = `p-999 3s`;
-          // graph1.style.maxHeight = "40px";
-          // graph2.style.width = `20%`;
-          // graph2.style.animation = `p-20 3s`;
-          // graph2.style.maxHeight = "40px";
-          graph1.style.height = `100%`;
-          graph1.style.animation = `p-999 3s`;
-          // graph1.style.maxHeight = "40px";
-          graph2.style.height = `20%`;
-          graph2.style.animation = `p-20 3s`;
-          // graph2.style.maxHeight = "40px";
-
-          const record1 = bestRecord.substring(0, 3);
-          var noRecord = "기록x";
-
-          document.styleSheets[0].addRule(
-            `li.p-${best}::before`,
-            'content: "' + record1 + '타수";'
-          );
-
-          document.styleSheets[0].addRule(
-            `li.p-20::before`,
-            'content: "' + noRecord + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item1::after",
-            'content: "' + bestName + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item2::after",
-            'content: "' + nickname + '";'
-          );
-        } else {
-          // graph1.style.width = `${best}%`;
-          // graph1.style.animation = `p-${best} 3s`;
-          // graph1.style.maxHeight = "40px";
-          // graph2.style.width = `20%`;
-          // graph2.style.animation = `p-20 3s`;
-          // graph2.style.maxHeight = "40px";
-          graph1.style.height = `${best}%`;
-          graph1.style.animation = `p-${best} 3s`;
-          // graph1.style.maxHeight = "40px";
-          graph2.style.height = `20%`;
-          graph2.style.animation = `p-20 3s`;
-          // graph2.style.maxHeight = "40px";
-
-          const record1 = bestRecord.substring(0, 3);
-          var noRecord1 = "기록x";
-
-          document.styleSheets[0].addRule(
-            `li.p-${best}::before`,
-            'content: "' + record1 + '타수";'
-          );
-
-          document.styleSheets[0].addRule(
-            `li.p-20::before`,
-            'content: "' + noRecord1 + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item1::after",
-            'content: "' + bestName + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item2::after",
-            'content: "' + nickname + '";'
-          );
-        }
-      }
-      // 로그인(기록 있음)
-      else {
-        const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
-        const challenger = Math.floor(
-          (userRecord.split("타수")[0] / 750) * 100
-        );
-        const newDiv = document.createElement("div");
-        //
-        const bestArr = [];
-        const myArr = [];
-
-        for (let i = 0; i < bestRecordArray.length; i++) {
-          bestArr.push(Math.floor((bestRecordArray[i] / 750) * 100));
-        }
-
-        for (let i = 0; i < myRecordArray.length; i++) {
-          myArr.push(Math.floor((myRecordArray[i] / 750) * 100));
-        }
-
-        // newDiv.className = "graph-wrapper";
-        // newDiv.innerHTML = `
-        // <div class="percent-indicator">
-        //   <div class="per-0"></div>
-        //   <div class="per-20"></div>
-        //   <div class="per-40"></div>
-        //   <div class="per-60"></div>
-        //   <div class="per-80"></div>
-        //   <div class="per-100"></div>
-        // </div>
-        // <ul class="graph">
-        //   <li class="item1 p-${best}"></li>
-        //   <li class="item2 p-${challenger}"></li>
-        // </ul>
-        // `;
         newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
         <div class="percent-indicator2">
@@ -479,36 +379,36 @@ class Ranking extends Component {
         <div class="graph2_container">
         <ul class="graph2">    
         <span>
-          <li class="item2 p-${challenger}"></li>
-          <li class="item1 p-${best}"></li>
+          <li class="item1 p-20"></li>
+          <li class="item2 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item3 p-${challenger}"></li>
-          <li class="item4 p-${best}"></li>
+          <li class="item3 p-20"></li>
+          <li class="item4 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item5 p-${challenger}"></li>
-          <li class="item6 p-${best}"></li>
+          <li class="item5 p-20"></li>
+          <li class="item6 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item7 p-${challenger}"></li>
-          <li class="item8 p-${best}"></li>
+          <li class="item7 p-20"></li>
+          <li class="item8 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item9 p-${challenger}"></li>
-          <li class="item10 p-${best}"></li>
+          <li class="item9 p-20"></li>
+          <li class="item10 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item11 p-${challenger}"></li>
-          <li class="item12 p-${best}"></li>
+          <li class="item11 p-20"></li>
+          <li class="item12 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item13 p-${challenger}"></li>
-          <li class="item14 p-${best}"></li>
+          <li class="item13 p-20"></li>
+          <li class="item14 p-${bestPercent}"></li>
         </span>
         <span>
-          <li class="item15 p-${challenger}"></li>
-          <li class="item16 p-${best}"></li>
+          <li class="item15 p-20"></li>
+          <li class="item16 p-${bestPercent}"></li>
         </span>
         </ul>
         <ul class="graph2_problem_count">
@@ -524,204 +424,322 @@ class Ranking extends Component {
         `;
         target.prepend(newDiv);
 
-        /*
-          <span class="per-0-0">0</span>
-          <span class="per-0-1">1번</span>
-          <span class="per-0-2">2번</span>
-          <span class="per-0-3">3번</span>
-          <span class="per-0-4">4번</span>
-          <span class="per-0-5">5번</span>
-          <span class="per-0-6">6번</span>
-          <span class="per-0-7">7번</span>
-          <span class="per-0-8">합계</span>
-        */
+        var noRecord = "기록x";
 
-        // const graph1 = document.querySelector(".graph .item1");
-        // const graph2 = document.querySelector(".graph .item2");
-        const graph1 = document.querySelector(".graph2 .item1");
-        const graph2 = document.querySelector(".graph2 .item2");
-        const graph3 = document.querySelector(".graph2 .item3");
-        const graph4 = document.querySelector(".graph2 .item4");
-        const graph5 = document.querySelector(".graph2 .item5");
-        const graph6 = document.querySelector(".graph2 .item6");
-        const graph7 = document.querySelector(".graph2 .item7");
-        const graph8 = document.querySelector(".graph2 .item8");
-        const graph9 = document.querySelector(".graph2 .item9");
-        const graph10 = document.querySelector(".graph2 .item10");
-        const graph11 = document.querySelector(".graph2 .item11");
-        const graph12 = document.querySelector(".graph2 .item12");
-        const graph13 = document.querySelector(".graph2 .item13");
-        const graph14 = document.querySelector(".graph2 .item14");
-        const graph15 = document.querySelector(".graph2 .item15");
-        const graph16 = document.querySelector(".graph2 .item16");
-
-        const record1 = bestRecord.split(" ")[0];
-        const record2 = userRecord.split(" ")[0];
-
-        if (best >= 101 && challenger >= 101) {
-          // graph1.style.width = `106%`;
-          // graph1.style.animation = `p-999 3s`;
-          // graph1.style.maxHeight = "40px";
-          // graph2.style.width = `106%`;
-          // graph2.style.animation = `p-999 3s`;
-          // graph2.style.maxHeight = "40px";
-          graph1.style.height = `100%`;
-          graph1.style.animation = `p-999 3s`;
-          graph2.style.height = `100%`;
-          graph2.style.animation = `p-999 3s`;
+        for (let i = 0; i < bestArr.length; i++) {
+          document.querySelector(
+            `.graph2 .item${i * 2 + 1}`
+          ).style.height = `20%`;
+          document.querySelector(
+            `.graph2 .item${i * 2 + 1}`
+          ).style.animation = `p-20 3s`;
 
           document.styleSheets[0].addRule(
-            `li.item1::before`,
-            'content: "' + record1 + '";'
+            `li.item${i * 2 + 1}::before`,
+            'content: "' + noRecord + '";'
+          );
+
+          document.querySelector(
+            `.graph2 .item${i * 2 + 2}`
+          ).style.height = `${bestArr[i]}%`;
+          document.querySelector(
+            `.graph2 .item${i * 2 + 2}`
+          ).style.animation = `p-${bestArr[i]} 3s`;
+
+          document.styleSheets[0].addRule(
+            `li.item${i * 2 + 2}::before`,
+            'content: "' + bestRecordArray[i] + '";'
+          );
+
+          document.querySelector(".graph2 .item15").style.height = `20%`;
+          document.querySelector(".graph2 .item15").style.animation = `p-20 5s`;
+          document.querySelector(
+            ".graph2 .item16"
+          ).style.height = `${bestPercent}%`;
+          document.querySelector(
+            ".graph2 .item16"
+          ).style.animation = `p-${bestPercent} 5s`;
+
+          document.styleSheets[0].addRule(
+            `li.item15::before`,
+            'content: "' + noRecord + '";'
           );
 
           document.styleSheets[0].addRule(
-            `li.item2::before`,
-            'content: "' + record2 + '";'
+            `li.item16::before`,
+            'content: "' + bestAverage + '";'
           );
-
-          document.styleSheets[0].addRule(
-            "li.item1::after",
-            'content: "' + bestName + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item2::after",
-            'content: "' + nickname + '";'
-          );
-        } else if (best >= 101 && challenger < 101) {
-          // graph1.style.width = `106%`;
-          // graph1.style.animation = `p-999 3s`;
-          // graph1.style.maxHeight = "40px";
-          // graph2.style.width = `${challenger}%`;
-          // graph2.style.animation = `p-${challenger} 3s`;
-          // graph2.style.maxHeight = "40px";
-          graph1.style.height = `100%`;
-          graph1.style.animation = `p-999 3s`;
-          graph2.style.height = `${challenger}%`;
-          graph2.style.animation = `p-${challenger} 3s`;
-
-          graph3.style.height = `${challenger}%`;
-          graph3.style.animation = `p-${challenger} 3s`;
-          graph4.style.height = `100%`;
-          graph4.style.animation = `p-999 3s`;
-
-          graph5.style.height = `${challenger}%`;
-          graph5.style.animation = `p-${challenger} 3s`;
-          graph6.style.height = `100%`;
-          graph6.style.animation = `p-999 3s`;
-
-          graph7.style.height = `${challenger}%`;
-          graph7.style.animation = `p-${challenger} 3s`;
-          graph8.style.height = `100%`;
-          graph8.style.animation = `p-999 3s`;
-
-          graph9.style.height = `${challenger}%`;
-          graph9.style.animation = `p-${challenger} 3s`;
-          graph10.style.height = `100%`;
-          graph10.style.animation = `p-999 3s`;
-
-          graph11.style.height = `${challenger}%`;
-          graph11.style.animation = `p-${challenger} 3s`;
-          graph12.style.height = `100%`;
-          graph12.style.animation = `p-999 3s`;
-
-          graph13.style.height = `${challenger}%`;
-          graph13.style.animation = `p-${challenger} 3s`;
-          graph14.style.height = `100%`;
-          graph14.style.animation = `p-999 3s`;
-
-          graph15.style.height = `${challenger}%`;
-          graph15.style.animation = `p-${challenger} 3s`;
-          graph16.style.height = `100%`;
-          graph16.style.animation = `p-999 3s`;
-
-          // alert("테스트");
-
-          document.styleSheets[0].addRule(
-            `li.item1::before`,
-            'content: "' + record1 + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            `li.item2::before`,
-            'content: "' + record2 + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item1::after",
-            'content: "' + bestName + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            "li.item2::after",
-            'content: "' + nickname + '";'
-          );
-        } else {
-          // graph1.style.height = `${best}%`;
-          // graph1.style.animation = `p-${best} 3s`;
-          // graph2.style.height = `${challenger}%`;
-          // graph2.style.animation = `p-${challenger} 3s`;
-          graph1.style.height = `${bestArr[0]}%`;
-          graph1.style.animation = `p-${bestArr[0]} 3s`;
-          graph2.style.height = `${myArr[0]}%`;
-          graph2.style.animation = `p-${myArr[0]} 3s`;
-
-          graph3.style.height = `${myArr[1]}%`;
-          graph3.style.animation = `p-${myArr[1]} 3s`;
-          graph4.style.height = `${bestArr[1]}%`;
-          graph4.style.animation = `p-${bestArr[1]} 3s`;
-
-          graph5.style.height = `${myArr[2]}%`;
-          graph5.style.animation = `p-${myArr[2]} 3s`;
-          graph6.style.height = `${bestArr[2]}%`;
-          graph6.style.animation = `p-${bestArr[2]} 3s`;
-
-          graph7.style.height = `${myArr[3]}%`;
-          graph7.style.animation = `p-${myArr[3]} 3s`;
-          graph8.style.height = `${bestArr[3]}%`;
-          graph8.style.animation = `p-${bestArr[3]} 3s`;
-
-          graph9.style.height = `${myArr[4]}%`;
-          graph9.style.animation = `p-${myArr[4]} 3s`;
-          graph10.style.height = `${bestArr[4]}%`;
-          graph10.style.animation = `p-${bestArr[4]} 3s`;
-
-          graph11.style.height = `${myArr[5]}%`;
-          graph11.style.animation = `p-${myArr[5]} 3s`;
-          graph12.style.height = `${bestArr[5]}%`;
-          graph12.style.animation = `p-${bestArr[5]} 3s`;
-
-          graph13.style.height = `${myArr[6]}%`;
-          graph13.style.animation = `p-${myArr[6]} 3s`;
-          graph14.style.height = `${bestArr[6]}%`;
-          graph14.style.animation = `p-${bestArr[6]} 3s`;
-
-          graph15.style.height = `${challenger}%`;
-          graph15.style.animation = `p-${challenger} 3s`;
-          graph16.style.height = `${best}%`;
-          graph16.style.animation = `p-${best} 3s`;
-
-          // document.styleSheets[0].addRule(
-          //   `li.item1::before`,
-          //   'content: "' + record1 + '";'
-          // );
-
-          // document.styleSheets[0].addRule(
-          //   `li.item2::before`,
-          //   'content: "' + record2 + '";'
-          // );
-
-          // document.styleSheets[0].addRule(
-          //   "li.item1::after",
-          //   'content: "' + bestName + '";'
-          // );
-
-          // document.styleSheets[0].addRule(
-          //   "li.item2::after",
-          //   'content: "' + nickname + '";'
-          // );
         }
+      }
+      // 로그인(기록 있음)
+      else {
+        // const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
+        // const challenger = Math.floor(
+        //   (userRecord.split("타수")[0] / 750) * 100
+        // );
+        const myPercent = Math.floor((myAverage / 750) * 100);
+
+        const newDiv = document.createElement("div");
+        //
+
+        newDiv.className = "graph-wrapper2";
+        newDiv.innerHTML = `
+        <div class="percent-indicator2">
+          <div class="per-0">
+          </div>
+          <div class="per-20"></div>
+          <div class="per-40"></div>
+          <div class="per-60"></div>
+          <div class="per-80"></div>
+          <div class="per-100"></div>
+        </div>
+        <div class="graph2_container">
+        <ul class="graph2">    
+        <span>
+          <li class="item1 p-${myAverage}"></li>
+          <li class="item2 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item3 p-${myAverage}"></li>
+          <li class="item4 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item5 p-${myAverage}"></li>
+          <li class="item6 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item7 p-${myAverage}"></li>
+          <li class="item8 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item9 p-${myAverage}"></li>
+          <li class="item10 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item11 p-${myAverage}"></li>
+          <li class="item12 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item13 p-${myAverage}"></li>
+          <li class="item14 p-${bestAverage}"></li>
+        </span>
+        <span>
+          <li class="item15 p-${myAverage}"></li>
+          <li class="item16 p-${bestAverage}"></li>
+        </span>
+        </ul>
+        <ul class="graph2_problem_count">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>합계</span>
+        </ul>
+        `;
+        target.prepend(newDiv);
+
+        // if (best >= 101 && challenger >= 101) {
+        //   graph1.style.height = `100%`;
+        //   graph1.style.animation = `p-999 3s`;
+        //   graph2.style.height = `100%`;
+        //   graph2.style.animation = `p-999 3s`;
+
+        //   document.styleSheets[0].addRule(
+        //     `li.item1::before`,
+        //     'content: "' + record1 + '";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     `li.item2::before`,
+        //     'content: "' + record2 + '";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     "li.item1::after",
+        //     'content: "' + bestName + '";'
+        //   );
+
+        //   document.styleSheets[0].addRule(
+        //     "li.item2::after",
+        //     'content: "' + nickname + '";'
+        //   );
+        // } else if (best >= 101 && challenger < 101) {
+        //   graph1.style.height = `100%`;
+        //   graph1.style.animation = `p-999 3s`;
+        //   graph2.style.height = `${challenger}%`;
+        //   graph2.style.animation = `p-${challenger} 3s`;
+
+        //   graph3.style.height = `${challenger}%`;
+        //   graph3.style.animation = `p-${challenger} 3s`;
+        //   graph4.style.height = `100%`;
+        //   graph4.style.animation = `p-999 3s`;
+
+        //   graph5.style.height = `${challenger}%`;
+        //   graph5.style.animation = `p-${challenger} 3s`;
+        //   graph6.style.height = `100%`;
+        //   graph6.style.animation = `p-999 3s`;
+
+        //   graph7.style.height = `${challenger}%`;
+        //   graph7.style.animation = `p-${challenger} 3s`;
+        //   graph8.style.height = `100%`;
+        //   graph8.style.animation = `p-999 3s`;
+
+        //   graph9.style.height = `${challenger}%`;
+        //   graph9.style.animation = `p-${challenger} 3s`;
+        //   graph10.style.height = `100%`;
+        //   graph10.style.animation = `p-999 3s`;
+
+        //   graph11.style.height = `${challenger}%`;
+        //   graph11.style.animation = `p-${challenger} 3s`;
+        //   graph12.style.height = `100%`;
+        //   graph12.style.animation = `p-999 3s`;
+
+        //   graph13.style.height = `${challenger}%`;
+        //   graph13.style.animation = `p-${challenger} 3s`;
+        //   graph14.style.height = `100%`;
+        //   graph14.style.animation = `p-999 3s`;
+
+        //   graph15.style.height = `${challenger}%`;
+        //   graph15.style.animation = `p-${challenger} 3s`;
+        //   graph16.style.height = `100%`;
+        //   graph16.style.animation = `p-999 3s`;
+
+        //   // document.styleSheets[0].addRule(
+        //   //   `li.item1::before`,
+        //   //   'content: "' + record1 + '";'
+        //   // );
+
+        //   // document.styleSheets[0].addRule(
+        //   //   `li.item2::before`,
+        //   //   'content: "' + record2 + '";'
+        //   // );
+
+        //   // document.styleSheets[0].addRule(
+        //   //   "li.item1::after",
+        //   //   'content: "' + bestName + '";'
+        //   // );
+
+        //   // document.styleSheets[0].addRule(
+        //   //   "li.item2::after",
+        //   //   'content: "' + nickname + '";'
+        //   // );
+        // } else {
+
+        for (let i = 0; i < bestArr.length; i++) {
+          if (myArr[i] > 100) myArr[i] = 999;
+
+          document.querySelector(
+            `.graph2 .item${i * 2 + 1}`
+          ).style.height = `${myArr[i]}%`;
+          document.querySelector(
+            `.graph2 .item${i * 2 + 1}`
+          ).style.animation = `p-${myArr[i]} 3s`;
+
+          document.styleSheets[0].addRule(
+            `li.item${i * 2 + 1}::before`,
+            'content: "' + myRecordArray[i] + '";'
+          );
+          if (bestArr[i] > 100) bestArr[i] = 999;
+
+          document.querySelector(
+            `.graph2 .item${i * 2 + 2}`
+          ).style.height = `${bestArr[i]}%`;
+          document.querySelector(
+            `.graph2 .item${i * 2 + 2}`
+          ).style.animation = `p-${bestArr[i]} 3s`;
+
+          document.styleSheets[0].addRule(
+            `li.item${i * 2 + 2}::before`,
+            'content: "' + bestRecordArray[i] + '";'
+          );
+        }
+
+        document.querySelector(
+          ".graph2 .item15"
+        ).style.height = `${myPercent}%`;
+        document.querySelector(
+          ".graph2 .item15"
+        ).style.animation = `p-${myPercent} 5s`;
+        document.querySelector(
+          ".graph2 .item16"
+        ).style.height = `${bestPercent}%`;
+        document.querySelector(
+          ".graph2 .item16"
+        ).style.animation = `p-${bestPercent} 5s`;
+
+        document.styleSheets[0].addRule(
+          `li.item15::before`,
+          'content: "' + myAverage + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          `li.item16::before`,
+          'content: "' + bestAverage + '";'
+        );
+
+        // graph1.style.height = `${bestArr[0]}%`;
+        // graph1.style.animation = `p-${bestArr[0]} 3s`;
+        // graph2.style.height = `${myArr[0]}%`;
+        // graph2.style.animation = `p-${myArr[0]} 3s`;
+
+        // graph3.style.height = `${myArr[1]}%`;
+        // graph3.style.animation = `p-${myArr[1]} 3s`;
+        // graph4.style.height = `${bestArr[1]}%`;
+        // graph4.style.animation = `p-${bestArr[1]} 3s`;
+
+        // graph5.style.height = `${myArr[2]}%`;
+        // graph5.style.animation = `p-${myArr[2]} 3s`;
+        // graph6.style.height = `${bestArr[2]}%`;
+        // graph6.style.animation = `p-${bestArr[2]} 3s`;
+
+        // graph7.style.height = `${myArr[3]}%`;
+        // graph7.style.animation = `p-${myArr[3]} 3s`;
+        // graph8.style.height = `${bestArr[3]}%`;
+        // graph8.style.animation = `p-${bestArr[3]} 3s`;
+
+        // graph9.style.height = `${myArr[4]}%`;
+        // graph9.style.animation = `p-${myArr[4]} 3s`;
+        // graph10.style.height = `${bestArr[4]}%`;
+        // graph10.style.animation = `p-${bestArr[4]} 3s`;
+
+        // graph11.style.height = `${myArr[5]}%`;
+        // graph11.style.animation = `p-${myArr[5]} 3s`;
+        // graph12.style.height = `${bestArr[5]}%`;
+        // graph12.style.animation = `p-${bestArr[5]} 3s`;
+
+        // graph13.style.height = `${myArr[6]}%`;
+        // graph13.style.animation = `p-${myArr[6]} 3s`;
+        // graph14.style.height = `${bestArr[6]}%`;
+        // graph14.style.animation = `p-${bestArr[6]} 3s`;
+
+        // graph15.style.height = `${challenger}%`;
+        // graph15.style.animation = `p-${challenger} 3s`;
+        // graph16.style.height = `${best}%`;
+        // graph16.style.animation = `p-${best} 3s`;
+
+        // document.styleSheets[0].addRule(
+        //   `li.item1::before`,
+        //   'content: "' + record1 + '";'
+        // );
+
+        // document.styleSheets[0].addRule(
+        //   `li.item2::before`,
+        //   'content: "' + record2 + '";'
+        // );
+
+        // document.styleSheets[0].addRule(
+        //   "li.item1::after",
+        //   'content: "' + bestName + '";'
+        // );
+
+        // document.styleSheets[0].addRule(
+        //   "li.item2::after",
+        //   'content: "' + nickname + '";'
+        // );
+        // }
       }
     }
   }
@@ -751,7 +769,6 @@ class Ranking extends Component {
   }
 
   print2 = (value) => (e) => {
-    const { bestRecordArray, myRecordArray } = this.state;
     const best = [];
     const my = [];
 
@@ -795,7 +812,11 @@ class Ranking extends Component {
             res.data.data[0].seven
           );
 
-          this.setState({ bestRecordArray: best });
+          this.setState({
+            bestRecordArray: best,
+            bestAverage: res.data.data[0].average,
+            bestName: res.data.data[0].name,
+          });
 
           for (let i = 0; i < res.data.data.length; i++) {
             if (res.data.data[i].name === nickname) {
@@ -833,7 +854,11 @@ class Ranking extends Component {
             res.data.myRank[0].seven
           );
 
-          this.setState({ myRecordArray: my });
+          this.setState({
+            myRecordArray: my,
+            myAverage: res.data.myRank[0].average,
+            myName: res.data.myRank[0].name,
+          });
 
           for (const [index, value] of myRank.entries()) {
             myItems.push(
