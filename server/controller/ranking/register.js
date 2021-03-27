@@ -1,8 +1,17 @@
 const { Ranking, Users } = require("../../models");
 
 module.exports = async (req, res) => {
-  const { id, recordTime, recordresultSpeed, count, filterTitle } = req.body;
+  const {
+    id,
+    recordTime,
+    recordresultSpeed,
+    count,
+    filterTitle,
+    recordArray,
+  } = req.body;
   // const { id, time, average, title } = req.body;
+
+  console.log("=========", recordArray);
 
   // 유저 아이디 있으면 업데이트
   // 없으면 추가
@@ -25,6 +34,13 @@ module.exports = async (req, res) => {
         average: Math.round(recordresultSpeed / count),
         title: filterTitle,
         userId: id,
+        one: recordArray[0],
+        two: recordArray[1],
+        three: recordArray[2],
+        four: recordArray[3],
+        five: recordArray[4],
+        six: recordArray[5],
+        seven: recordArray[6],
       },
     });
 
@@ -50,6 +66,13 @@ module.exports = async (req, res) => {
           time: recordTime,
           average: Math.round(recordresultSpeed / count),
           title: filterTitle,
+          one: recordArray[0],
+          two: recordArray[1],
+          three: recordArray[2],
+          four: recordArray[3],
+          five: recordArray[4],
+          six: recordArray[5],
+          seven: recordArray[6],
         },
         {
           where: {
