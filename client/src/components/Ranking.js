@@ -72,6 +72,8 @@ class Ranking extends Component {
     const myItems = [];
     const nickname = window.localStorage.getItem("nick");
 
+    console.log("====", nickname);
+
     axios
       .post("http://localhost:8080/ranking/print", {
         title: "눈 녹듯",
@@ -128,7 +130,11 @@ class Ranking extends Component {
           myItems.push(
             <tr>
               <td className="myRanking_rank"></td>
-              <td className="myRanking_name">{nickname}</td>
+              {!nickname ? (
+                <td className="myRanking_name">Guest</td>
+              ) : (
+                <td className="myRanking_name">{nickname}</td>
+              )}
               <td className="myRanking_record">0타수</td>
               <td className="myRanking_time">0초</td>
             </tr>
@@ -147,7 +153,8 @@ class Ranking extends Component {
   }
 
   detail() {
-    const test = document.querySelectorAll(".rank");
+    // const test = document.querySelectorAll(".rank");
+    const test = document.querySelectorAll(".ranking_table");
     const nickname = window.localStorage.getItem("nick");
 
     // 1등 기록, 이름
@@ -164,16 +171,32 @@ class Ranking extends Component {
 
     // 비회원
     if (nickname === null) {
-      const target = document.querySelector(".detail_body");
+      // const target = document.querySelector(".detail_body");
+      const target = document.querySelector(".detail_body2");
       const guest = "Guest";
 
       target.innerHTML = "";
 
       const newDiv = document.createElement("div");
 
-      newDiv.className = "graph-wrapper";
+      // newDiv.className = "graph-wrapper";
+      // newDiv.innerHTML = `
+      //   <div class="percent-indicator">
+      //     <div class="per-0"></div>
+      //     <div class="per-20"></div>
+      //     <div class="per-40"></div>
+      //     <div class="per-60"></div>
+      //     <div class="per-80"></div>
+      //     <div class="per-100"></div>
+      //   </div>
+      //   <ul class="graph">
+      //     <li class="item1 p-${best}"></li>
+      //     <li class="item2 p-20"></li>
+      //   </ul>
+      //   `;
+      newDiv.className = "graph-wrapper2";
       newDiv.innerHTML = `
-        <div class="percent-indicator">
+        <div class="percent-indicator2">
           <div class="per-0"></div>
           <div class="per-20"></div>
           <div class="per-40"></div>
@@ -181,27 +204,35 @@ class Ranking extends Component {
           <div class="per-80"></div>
           <div class="per-100"></div>
         </div>
-        <ul class="graph">
-          <li class="item1 p-${best}"></li>
+        <ul class="graph2">
           <li class="item2 p-20"></li>
+          <li class="item1 p-${best}"></li>
         </ul>
         `;
       target.prepend(newDiv);
 
-      const graph1 = document.querySelector(".graph .item1");
-      const graph2 = document.querySelector(".graph .item2");
+      // const graph1 = document.querySelector(".graph .item1");
+      // const graph2 = document.querySelector(".graph .item2");
+      const graph1 = document.querySelector(".graph2 .item1");
+      const graph2 = document.querySelector(".graph2 .item2");
 
       if (best >= 101) {
-        graph1.style.width = `106%`;
+        // graph1.style.width = `106%`;
+        // graph1.style.animation = `p-999 3s`;
+        // graph1.style.maxHeight = "40px";
+        // graph2.style.width = `30%`;
+        // graph2.style.animation = `p-30 3s`;
+        // graph2.style.maxHeight = "40px";
+        graph1.style.height = `100%`;
         graph1.style.animation = `p-999 3s`;
-        graph1.style.maxHeight = "40px";
-        graph2.style.width = `30%`;
+        // graph1.style.maxHeight = "40px";
+        graph2.style.height = `30%`;
         graph2.style.animation = `p-30 3s`;
-        graph2.style.maxHeight = "40px";
+        // graph2.style.maxHeight = "40px";
 
         document.styleSheets[0].addRule(
           `li.item1::before`,
-          'content: "' + best + '타수";'
+          'content: "' + bestRecord + '타수";'
         );
 
         document.styleSheets[0].addRule(
@@ -219,12 +250,18 @@ class Ranking extends Component {
           'content: "' + guest + '";'
         );
       } else {
-        graph1.style.width = `${best}%`;
+        // graph1.style.width = `${best}%`;
+        // graph1.style.animation = `p-${best} 3s`;
+        // graph1.style.maxHeight = "40px";
+        // graph2.style.width = `30%`;
+        // graph2.style.animation = `p-30 3s`;
+        // graph2.style.maxHeight = "40px";
+        graph1.style.height = `${best}%`;
         graph1.style.animation = `p-${best} 3s`;
-        graph1.style.maxHeight = "40px";
-        graph2.style.width = `30%`;
+        // graph1.style.maxHeight = "40px";
+        graph2.style.height = `30%`;
         graph2.style.animation = `p-30 3s`;
-        graph2.style.maxHeight = "40px";
+        // graph2.style.maxHeight = "40px";
 
         const record1 = bestRecord.substring(0, 3);
 
@@ -251,7 +288,8 @@ class Ranking extends Component {
     }
     // 회원
     else {
-      const target = document.querySelector(".detail_body");
+      // const target = document.querySelector(".detail_body");
+      const target = document.querySelector(".detail_body2");
 
       target.innerHTML = "";
 
@@ -277,9 +315,24 @@ class Ranking extends Component {
       if (userRecord === undefined) {
         const newDiv = document.createElement("div");
 
-        newDiv.className = "graph-wrapper";
+        // newDiv.className = "graph-wrapper";
+        // newDiv.innerHTML = `
+        // <div class="percent-indicator">
+        //   <div class="per-0"></div>
+        //   <div class="per-20"></div>
+        //   <div class="per-40"></div>
+        //   <div class="per-60"></div>
+        //   <div class="per-80"></div>
+        //   <div class="per-100"></div>
+        // </div>
+        // <ul class="graph">
+        //   <li class="item1 p-${best}"></li>
+        //   <li class="item2 p-20"></li>
+        // </ul>
+        // `;
+        newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
-        <div class="percent-indicator">
+        <div class="percent-indicator2">
           <div class="per-0"></div>
           <div class="per-20"></div>
           <div class="per-40"></div>
@@ -287,23 +340,31 @@ class Ranking extends Component {
           <div class="per-80"></div>
           <div class="per-100"></div>
         </div>
-        <ul class="graph">
-          <li class="item1 p-${best}"></li>
+        <ul class="graph2">
           <li class="item2 p-20"></li>
+          <li class="item1 p-${best}"></li>
         </ul>
         `;
         target.prepend(newDiv);
 
-        const graph1 = document.querySelector(".graph .item1");
-        const graph2 = document.querySelector(".graph .item2");
+        // const graph1 = document.querySelector(".graph .item1");
+        // const graph2 = document.querySelector(".graph .item2");
+        const graph1 = document.querySelector(".graph2 .item1");
+        const graph2 = document.querySelector(".graph2 .item2");
 
         if (best >= 101) {
-          graph1.style.width = `106%`;
+          // graph1.style.width = `106%`;
+          // graph1.style.animation = `p-999 3s`;
+          // graph1.style.maxHeight = "40px";
+          // graph2.style.width = `20%`;
+          // graph2.style.animation = `p-20 3s`;
+          // graph2.style.maxHeight = "40px";
+          graph1.style.height = `100%`;
           graph1.style.animation = `p-999 3s`;
-          graph1.style.maxHeight = "40px";
-          graph2.style.width = `20%`;
+          // graph1.style.maxHeight = "40px";
+          graph2.style.height = `20%`;
           graph2.style.animation = `p-20 3s`;
-          graph2.style.maxHeight = "40px";
+          // graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
           var noRecord = "기록x";
@@ -328,12 +389,18 @@ class Ranking extends Component {
             'content: "' + nickname + '";'
           );
         } else {
-          graph1.style.width = `${best}%`;
+          // graph1.style.width = `${best}%`;
+          // graph1.style.animation = `p-${best} 3s`;
+          // graph1.style.maxHeight = "40px";
+          // graph2.style.width = `20%`;
+          // graph2.style.animation = `p-20 3s`;
+          // graph2.style.maxHeight = "40px";
+          graph1.style.height = `${best}%`;
           graph1.style.animation = `p-${best} 3s`;
-          graph1.style.maxHeight = "40px";
-          graph2.style.width = `20%`;
+          // graph1.style.maxHeight = "40px";
+          graph2.style.height = `20%`;
           graph2.style.animation = `p-20 3s`;
-          graph2.style.maxHeight = "40px";
+          // graph2.style.maxHeight = "40px";
 
           const record1 = bestRecord.substring(0, 3);
           var noRecord1 = "기록x";
@@ -365,15 +432,26 @@ class Ranking extends Component {
         const challenger = Math.floor(
           (userRecord.split("타수")[0] / 750) * 100
         );
-
         const newDiv = document.createElement("div");
 
-        console.log("=best=", best);
-        console.log("=chall=", challenger);
-
-        newDiv.className = "graph-wrapper";
+        // newDiv.className = "graph-wrapper";
+        // newDiv.innerHTML = `
+        // <div class="percent-indicator">
+        //   <div class="per-0"></div>
+        //   <div class="per-20"></div>
+        //   <div class="per-40"></div>
+        //   <div class="per-60"></div>
+        //   <div class="per-80"></div>
+        //   <div class="per-100"></div>
+        // </div>
+        // <ul class="graph">
+        //   <li class="item1 p-${best}"></li>
+        //   <li class="item2 p-${challenger}"></li>
+        // </ul>
+        // `;
+        newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
-        <div class="percent-indicator">
+        <div class="percent-indicator2">
           <div class="per-0"></div>
           <div class="per-20"></div>
           <div class="per-40"></div>
@@ -381,25 +459,33 @@ class Ranking extends Component {
           <div class="per-80"></div>
           <div class="per-100"></div>
         </div>
-        <ul class="graph">
-          <li class="item1 p-${best}"></li>
+        <ul class="graph2">
           <li class="item2 p-${challenger}"></li>
+          <li class="item1 p-${best}"></li>
         </ul>
         `;
         target.prepend(newDiv);
 
-        const graph1 = document.querySelector(".graph .item1");
-        const graph2 = document.querySelector(".graph .item2");
+        // const graph1 = document.querySelector(".graph .item1");
+        // const graph2 = document.querySelector(".graph .item2");
+        const graph1 = document.querySelector(".graph2 .item1");
+        const graph2 = document.querySelector(".graph2 .item2");
         const record1 = bestRecord.split(" ")[0];
         const record2 = userRecord.split(" ")[0];
 
         if (best >= 101 && challenger >= 101) {
-          graph1.style.width = `106%`;
+          // graph1.style.width = `106%`;
+          // graph1.style.animation = `p-999 3s`;
+          // graph1.style.maxHeight = "40px";
+          // graph2.style.width = `106%`;
+          // graph2.style.animation = `p-999 3s`;
+          // graph2.style.maxHeight = "40px";
+          graph1.style.height = `100%`;
           graph1.style.animation = `p-999 3s`;
-          graph1.style.maxHeight = "40px";
-          graph2.style.width = `106%`;
+          // graph1.style.maxHeight = "40px";
+          graph2.style.height = `100%`;
           graph2.style.animation = `p-999 3s`;
-          graph2.style.maxHeight = "40px";
+          // graph2.style.maxHeight = "40px";
 
           document.styleSheets[0].addRule(
             `li.item1::before`,
@@ -421,12 +507,20 @@ class Ranking extends Component {
             'content: "' + nickname + '";'
           );
         } else if (best >= 101 && challenger < 101) {
-          graph1.style.width = `106%`;
+          // graph1.style.width = `106%`;
+          // graph1.style.animation = `p-999 3s`;
+          // graph1.style.maxHeight = "40px";
+          // graph2.style.width = `${challenger}%`;
+          // graph2.style.animation = `p-${challenger} 3s`;
+          // graph2.style.maxHeight = "40px";
+          graph1.style.height = `100%`;
           graph1.style.animation = `p-999 3s`;
-          graph1.style.maxHeight = "40px";
-          graph2.style.width = `${challenger}%`;
+          // graph1.style.maxHeight = "40px";
+          graph2.style.height = `${challenger}%`;
           graph2.style.animation = `p-${challenger} 3s`;
-          graph2.style.maxHeight = "40px";
+          // graph2.style.maxHeight = "40px";
+
+          // alert("테스트");
 
           document.styleSheets[0].addRule(
             `li.item1::before`,
@@ -448,12 +542,18 @@ class Ranking extends Component {
             'content: "' + nickname + '";'
           );
         } else {
-          graph1.style.width = `${best}%`;
+          // graph1.style.width = `${best}%`;
+          // graph1.style.animation = `p-${best} 3s`;
+          // graph1.style.maxHeight = "40px";
+          // graph2.style.width = `${challenger}%`;
+          // graph2.style.animation = `p-${challenger} 3s`;
+          // graph2.style.maxHeight = "40px";
+          graph1.style.height = `${best}%`;
           graph1.style.animation = `p-${best} 3s`;
-          graph1.style.maxHeight = "40px";
-          graph2.style.width = `${challenger}%`;
+          // graph1.style.maxHeight = "40px";
+          graph2.style.height = `${challenger}%`;
           graph2.style.animation = `p-${challenger} 3s`;
-          graph2.style.maxHeight = "40px";
+          // graph2.style.maxHeight = "40px";
 
           document.styleSheets[0].addRule(
             `li.item1::before`,
@@ -579,7 +679,11 @@ class Ranking extends Component {
             myItems.push(
               <tr>
                 <td className="myRanking_rank"></td>
-                <td className="myRanking_name">{nickname}</td>
+                {!nickname ? (
+                  <td className="myRanking_name">Guest</td>
+                ) : (
+                  <td className="myRanking_name">{nickname}</td>
+                )}
                 <td className="myRanking_record">0타수</td>
                 <td className="myRanking_time">0초</td>
               </tr>
@@ -690,18 +794,48 @@ class Ranking extends Component {
             {nick === null ? (
               <div className="ranking_tail">
                 <div className="ranking_detail">
-                  <div className="detail_header">
+                  {/* <div className="detail_header">
                     Guest님의 기록<br></br>기록을 등록하기 위해서는 로그인이
                     필요합니다
-                  </div>
-                  <div className="detail_body"></div>
+                  </div> */}
+                  {/* <div className="detail_body"></div> */}
+                  <div className="detail_body2"></div>
                 </div>
               </div>
             ) : (
               <div className="ranking_tail">
-                <div className="ranking_detail">
+                {/* <div className="ranking_detail">
                   <div className="detail_header">{nick}님의 기록</div>
                   <div className="detail_body"></div>
+                </div> */}
+                <div className="ranking_detail2">
+                  <div className="detail_body2_header">
+                    <div className="detail_body2_header_top">
+                      <div className="header_me_text">{nick}&nbsp;&nbsp;</div>
+                      <div className="header_me"></div>
+                    </div>
+                    <div className="detail_body2_header_bottom">
+                      <div className="header_top1_text">1등&nbsp;&nbsp;</div>
+                      <div className="header_top1"></div>
+                    </div>
+                  </div>
+                  {/* <div className="detail_header2">{nick}님의 기록</div> */}
+                  <div className="detail_body2">
+                    {/* <div className="graph-wrapper2">
+                      <div className="percent-indicator2">
+                        <div className="per-0"></div>
+                        <div className="per-20"></div>
+                        <div className="per-40"></div>
+                        <div className="per-60"></div>
+                        <div className="per-80"></div>
+                        <div className="per-100"></div>
+                      </div>
+                      <ul className="graph2">
+                        <li className="item1">오옹</li>
+                        <li className="item2">히힝</li>
+                      </ul>
+                    </div> */}
+                  </div>
                 </div>
               </div>
             )}
