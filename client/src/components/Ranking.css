@@ -237,6 +237,10 @@ tbody tr:hover {
   background-color: #2a1a1a;
 }
 
+/* tbody tr:active {
+  background-color: #2a1a1a;
+} */
+
 .rank__name,
 .rank__record,
 .rank__time {
@@ -1447,6 +1451,9 @@ tbody tr:hover {
 }
 
 li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   list-style: none;
   background: #000;
   color: #fff;
