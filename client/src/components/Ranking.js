@@ -76,7 +76,7 @@ class Ranking extends Component {
     const items = [];
     const printRank = [];
     const myRank = [];
-    const myItems = [];
+    const loginUser = [];
     const nickname = window.localStorage.getItem("nick");
     const best = [];
     const my = [];
@@ -132,8 +132,6 @@ class Ranking extends Component {
         }
         this.setState({ items: items });
 
-        // console.log("======len======", items);
-
         res.data.myRank.forEach((el) => {
           myRank.push({
             name: el.name,
@@ -142,53 +140,63 @@ class Ranking extends Component {
           });
         });
 
-        // console.log("======len======", res.data.myRank);
-
-        // if(res.data.myRanking.length > 0) {
-        //   my.push(
-        //     res.data.myRank[0].one,
-        //     res.data.myRank[0].two,
-        //     res.data.myRank[0].three,
-        //     res.data.myRank[0].four,
-        //     res.data.myRank[0].five,
-        //     res.data.myRank[0].six,
-        //     res.data.myRank[0].seven
+        // for (const [index, value] of myRank.entries()) {
+        //   myItems.push(
+        //     <tr>
+        //       <td className="myRanking_rank">{this.state.myRanking}</td>
+        //       <td className="myRanking_name">{value.name}</td>
+        //       <td className="myRanking_record">{value.average}타수</td>
+        //       <td className="myRanking_time">{value.time}초</td>
+        //     </tr>
         //   );
-
-        //   this.setState({
-        //     myRecordArray: my,
-        //     myAverage: res.data.myRank[0].average,
-        //     myName: res.data.myRank[0].name,
-        //   });
         // }
-
-        for (const [index, value] of myRank.entries()) {
-          myItems.push(
+        for (const ele of myRank) {
+          loginUser.push(
             <tr>
               <td className="myRanking_rank">{this.state.myRanking}</td>
-              <td className="myRanking_name">{value.name}</td>
-              <td className="myRanking_record">{value.average}타수</td>
-              <td className="myRanking_time">{value.time}초</td>
+              <td className="myRanking_name">{ele.name}</td>
+              <td className="myRanking_record">{ele.average}타수</td>
+              <td className="myRanking_time">{ele.time}초</td>
             </tr>
           );
         }
 
-        if (myItems.length !== 0) {
-          this.setState({ myItems: myItems });
+        if (loginUser.length !== 0) {
+          this.setState({ myItems: loginUser });
         } else {
-          myItems.push(
-            <tr>
-              <td className="myRanking_rank"></td>
-              {!nickname ? (
-                <td className="myRanking_name">Guest</td>
-              ) : (
-                <td className="myRanking_name">{nickname}</td>
-              )}
-              <td className="myRanking_record">0타수</td>
-              <td className="myRanking_time">0초</td>
-            </tr>
-          );
-          this.setState({ myItems: myItems });
+          {
+            !nickname
+              ? loginUser.push(
+                  <tr className="myRanking_hover">
+                    <td className="myRanking_rank"></td>
+                    <td className="myRanking_name">Guest</td>
+                    <td className="myRanking_record">0타수</td>
+                    <td className="myRanking_time">0초</td>
+                  </tr>
+                )
+              : loginUser.push(
+                  <tr className="myRanking_hover2">
+                    <td className="myRanking_rank"></td>
+                    <td className="myRanking_name">Guest</td>
+                    <td className="myRanking_record">0타수</td>
+                    <td className="myRanking_time">0초</td>
+                  </tr>
+                );
+          }
+
+          // loginUser.push(
+          //   <tr className="myRanking_hover">
+          //     <td className="myRanking_rank"></td>
+          //     {!nickname ? (
+          //       <td className="myRanking_name">Guest</td>
+          //     ) : (
+          //       <td className="myRanking_name">{nickname}</td>
+          //     )}
+          //     <td className="myRanking_record">0타수</td>
+          //     <td className="myRanking_time">0초</td>
+          //   </tr>
+          // );
+          this.setState({ myItems: loginUser });
         }
         // 유저 기록이 있으면
         if (res.data.myRank.length > 0) {
@@ -255,9 +263,7 @@ class Ranking extends Component {
 
     // 비회원
     if (nickname === null) {
-      // const target = document.querySelector(".detail_body");
       const target = document.querySelector(".detail_body2");
-      const guest = "Guest";
 
       target.innerHTML = "";
 
@@ -265,78 +271,111 @@ class Ranking extends Component {
 
       newDiv.className = "graph-wrapper2";
       newDiv.innerHTML = `
-        <div class="percent-indicator2">
-          <div class="per-0"></div>
-          <div class="per-20"></div>
-          <div class="per-40"></div>
-          <div class="per-60"></div>
-          <div class="per-80"></div>
-          <div class="per-100"></div>
-        </div>
-        <ul class="graph2">
-          <li class="item2 p-20"></li>
-          <li class="item1 p-${bestPercent}"></li>
+      <div class="percent-indicator2">
+        <div class="per-0"></div>
+        <div class="per-20"></div>
+        <div class="per-40"></div>
+        <div class="per-60"></div>
+        <div class="per-80"></div>
+        <div class="per-100"></div>
+      </div>
+        <div class="graph2_container">
+          <ul class="graph2">    
+        <span>
+          <li class="item1"></li>
+          <li class="item2"></li>
+        </span>
+        <span>
+          <li class="item3"></li>
+          <li class="item4"></li>
+        </span>
+        <span>
+          <li class="item5"></li>
+          <li class="item6"></li>
+        </span>
+        <span>
+          <li class="item7"></li>
+          <li class="item8"></li>
+        </span>
+        <span>
+          <li class="item9"></li>
+          <li class="item10"></li>
+        </span>
+        <span>
+          <li class="item11"></li>
+          <li class="item12"></li>
+        </span>
+        <span>
+          <li class="item13"></li>
+          <li class="item14"></li>
+        </span>
+        <span>
+          <li class="item15"></li>
+          <li class="item16"></li>
+        </span>
+          </ul>
+        <ul class="graph2_problem_count">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>합계</span>
         </ul>
         `;
       target.prepend(newDiv);
 
-      // const graph1 = document.querySelector(".graph .item1");
-      // const graph2 = document.querySelector(".graph .item2");
-      const graph1 = document.querySelector(".graph2 .item1");
-      const graph2 = document.querySelector(".graph2 .item2");
+      var noRecord = "기록x";
 
-      if (bestPercent >= 101) {
-        graph1.style.height = `100%`;
-        graph1.style.animation = `p-999 3s`;
-        graph2.style.height = `30%`;
-        graph2.style.animation = `p-30 3s`;
-
-        document.styleSheets[0].addRule(
-          `li.item1::before`,
-          'content: "' + bestAverage + '타수";'
-        );
+      for (let i = 0; i < bestArr.length; i++) {
+        document.querySelector(
+          `.graph2 .item${i * 2 + 1}`
+        ).style.height = `20%`;
+        document.querySelector(
+          `.graph2 .item${i * 2 + 1}`
+        ).style.animation = `p-20 3s`;
 
         document.styleSheets[0].addRule(
-          `li.item2::before`,
-          'content: "' + guest + '";'
+          `li.item${i * 2 + 1}::before`,
+          'content: "' + noRecord + '";'
         );
+
+        if (bestArr[i] > 100) bestArr[i] = 999;
+
+        document.querySelector(
+          `.graph2 .item${i * 2 + 2}`
+        ).style.height = `${bestArr[i]}%`;
+        document.querySelector(
+          `.graph2 .item${i * 2 + 2}`
+        ).style.animation = `p-${bestArr[i]} 3s`;
 
         document.styleSheets[0].addRule(
-          "li.item1::after",
-          'content: "' + bestName + '";'
+          `li.item${i * 2 + 2}::before`,
+          'content: "' + bestRecordArray[i] + '";'
         );
-
-        document.styleSheets[0].addRule(
-          "li.item2::after",
-          'content: "' + guest + '";'
-        );
-      } else {
-        graph1.style.height = `${bestPercent}%`;
-        graph1.style.animation = `p-${bestPercent} 3s`;
-        graph2.style.height = `30%`;
-        graph2.style.animation = `p-30 3s`;
-        // graph2.style.maxHeight = "40px";
-
-        // document.styleSheets[0].addRule(
-        //   `li.item1::before`,
-        //   'content: "' + record1 + '타수";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   `li.item2::before`,
-        //   'content: "' + guest + '";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   "li.item1::after",
-        //   'content: "' + bestName + '";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   "li.item2::after",
-        //   'content: "' + guest + '";'
-        // );
       }
+      // console.log("=============", bestPercent);
+
+      document.querySelector(".graph2 .item15").style.height = `20%`;
+      document.querySelector(".graph2 .item15").style.animation = `p-20 5s`;
+      document.querySelector(
+        ".graph2 .item16"
+      ).style.height = `${bestPercent}%`;
+      document.querySelector(
+        ".graph2 .item16"
+      ).style.animation = `p-${bestPercent} 5s`;
+
+      document.styleSheets[0].addRule(
+        `li.item15::before`,
+        'content: "' + noRecord + '";'
+      );
+
+      document.styleSheets[0].addRule(
+        `li.item16::before`,
+        'content: "' + bestAverage + '";'
+      );
     }
     // 회원
     else {
@@ -344,74 +383,75 @@ class Ranking extends Component {
 
       target.innerHTML = "";
 
-      let userRecord;
-      // 로그인 유저 기록
-      for (let i = 0; i < test.length; i++) {
-        for (
-          let j = 0;
-          j < test[i].querySelectorAll(".rank__name").length;
-          j++
-        ) {
-          if (
-            test[i].querySelectorAll(".rank__name")[j].innerHTML === nickname
-          ) {
-            userRecord = test[i]
-              .querySelectorAll(".rank__name")
-              [j].parentElement.querySelector(".rank__record").innerHTML;
-          }
-        }
-      }
+      // let userRecord;
+      // // 로그인 유저 기록
+      // for (let i = 0; i < test.length; i++) {
+      //   for (
+      //     let j = 0;
+      //     j < test[i].querySelectorAll(".rank__name").length;
+      //     j++
+      //   ) {
+      //     if (
+      //       test[i].querySelectorAll(".rank__name")[j].innerHTML === nickname
+      //     ) {
+      //       userRecord = test[i]
+      //         .querySelectorAll(".rank__name")
+      //         [j].parentElement.querySelector(".rank__record").innerHTML;
+      //     }
+      //   }
+      // }
+
+      console.log("=============", myRecordArray.length);
 
       // 로그인(기록 없음)
-      if (userRecord === undefined) {
+      if (myRecordArray.length === 0) {
         const newDiv = document.createElement("div");
 
         newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
         <div class="percent-indicator2">
-          <div class="per-0">
-          </div>
-          <div class="per-20"></div>
-          <div class="per-40"></div>
-          <div class="per-60"></div>
-          <div class="per-80"></div>
-          <div class="per-100"></div>
-        </div>
+        <div class="per-0"></div>
+        <div class="per-20"></div>
+        <div class="per-40"></div>
+        <div class="per-60"></div>
+        <div class="per-80"></div>
+        <div class="per-100"></div>
+      </div>
         <div class="graph2_container">
-        <ul class="graph2">    
+          <ul class="graph2">    
         <span>
-          <li class="item1 p-20"></li>
-          <li class="item2 p-${bestPercent}"></li>
+          <li class="item1"></li>
+          <li class="item2"></li>
         </span>
         <span>
-          <li class="item3 p-20"></li>
-          <li class="item4 p-${bestPercent}"></li>
+          <li class="item3"></li>
+          <li class="item4"></li>
         </span>
         <span>
-          <li class="item5 p-20"></li>
-          <li class="item6 p-${bestPercent}"></li>
+          <li class="item5"></li>
+          <li class="item6"></li>
         </span>
         <span>
-          <li class="item7 p-20"></li>
-          <li class="item8 p-${bestPercent}"></li>
+          <li class="item7"></li>
+          <li class="item8"></li>
         </span>
         <span>
-          <li class="item9 p-20"></li>
-          <li class="item10 p-${bestPercent}"></li>
+          <li class="item9"></li>
+          <li class="item10"></li>
         </span>
         <span>
-          <li class="item11 p-20"></li>
-          <li class="item12 p-${bestPercent}"></li>
+          <li class="item11"></li>
+          <li class="item12"></li>
         </span>
         <span>
-          <li class="item13 p-20"></li>
-          <li class="item14 p-${bestPercent}"></li>
+          <li class="item13"></li>
+          <li class="item14"></li>
         </span>
         <span>
-          <li class="item15 p-20"></li>
-          <li class="item16 p-${bestPercent}"></li>
+          <li class="item15"></li>
+          <li class="item16"></li>
         </span>
-        </ul>
+          </ul>
         <ul class="graph2_problem_count">
           <span>1</span>
           <span>2</span>
@@ -440,6 +480,8 @@ class Ranking extends Component {
             'content: "' + noRecord + '";'
           );
 
+          if (bestArr[i] > 100) bestArr[i] = 999;
+
           document.querySelector(
             `.graph2 .item${i * 2 + 2}`
           ).style.height = `${bestArr[i]}%`;
@@ -451,83 +493,77 @@ class Ranking extends Component {
             `li.item${i * 2 + 2}::before`,
             'content: "' + bestRecordArray[i] + '";'
           );
-
-          document.querySelector(".graph2 .item15").style.height = `20%`;
-          document.querySelector(".graph2 .item15").style.animation = `p-20 5s`;
-          document.querySelector(
-            ".graph2 .item16"
-          ).style.height = `${bestPercent}%`;
-          document.querySelector(
-            ".graph2 .item16"
-          ).style.animation = `p-${bestPercent} 5s`;
-
-          document.styleSheets[0].addRule(
-            `li.item15::before`,
-            'content: "' + noRecord + '";'
-          );
-
-          document.styleSheets[0].addRule(
-            `li.item16::before`,
-            'content: "' + bestAverage + '";'
-          );
         }
+
+        document.querySelector(".graph2 .item15").style.height = `20%`;
+        document.querySelector(".graph2 .item15").style.animation = `p-20 5s`;
+        document.querySelector(
+          ".graph2 .item16"
+        ).style.height = `${bestPercent}%`;
+        document.querySelector(
+          ".graph2 .item16"
+        ).style.animation = `p-${bestPercent} 5s`;
+
+        document.styleSheets[0].addRule(
+          `li.item15::before`,
+          'content: "' + noRecord + '";'
+        );
+
+        document.styleSheets[0].addRule(
+          `li.item16::before`,
+          'content: "' + bestAverage + '";'
+        );
       }
       // 로그인(기록 있음)
       else {
-        // const best = Math.floor((bestRecord.split("타수")[0] / 750) * 100);
-        // const challenger = Math.floor(
-        //   (userRecord.split("타수")[0] / 750) * 100
-        // );
         const myPercent = Math.floor((myAverage / 750) * 100);
-
         const newDiv = document.createElement("div");
 
         newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
         <div class="percent-indicator2">
-          <div class="per-0">
-          </div>
-          <div class="per-20"></div>
-          <div class="per-40"></div>
-          <div class="per-60"></div>
-          <div class="per-80"></div>
-          <div class="per-100"></div>
-        </div>
+        <div class="per-0"></div>
+        <div class="per-20"></div>
+        <div class="per-40"></div>
+        <div class="per-60"></div>
+        <div class="per-80"></div>
+        <div class="per-100"></div>
+      </div>
         <div class="graph2_container">
-        <ul class="graph2">    
+          <ul class="graph2">    
         <span>
-          <li class="item1 p-${myAverage}"></li>
-          <li class="item2 p-${bestAverage}"></li>
+          <li class="item1"></li>
+          <li class="item2"></li>
         </span>
         <span>
-          <li class="item3 p-${myAverage}"></li>
-          <li class="item4 p-${bestAverage}"></li>
+          <li class="item3"></li>
+          <li class="item4"></li>
         </span>
         <span>
-          <li class="item5 p-${myAverage}"></li>
-          <li class="item6 p-${bestAverage}"></li>
+          <li class="item5"></li>
+          <li class="item6"></li>
         </span>
         <span>
-          <li class="item7 p-${myAverage}"></li>
-          <li class="item8 p-${bestAverage}"></li>
+          <li class="item7"></li>
+          <li class="item8"></li>
         </span>
         <span>
-          <li class="item9 p-${myAverage}"></li>
-          <li class="item10 p-${bestAverage}"></li>
+          <li class="item9"></li>
+          <li class="item10"></li>
         </span>
         <span>
-          <li class="item11 p-${myAverage}"></li>
-          <li class="item12 p-${bestAverage}"></li>
+          <li class="item11"></li>
+          <li class="item12"></li>
         </span>
         <span>
-          <li class="item13 p-${myAverage}"></li>
-          <li class="item14 p-${bestAverage}"></li>
+          <li class="item13"></li>
+          <li class="item14"></li>
         </span>
         <span>
-          <li class="item15 p-${myAverage}"></li>
-          <li class="item16 p-${bestAverage}"></li>
+          <li class="item15"></li>
+          <li class="item16"></li>
         </span>
-        </ul>
+          </ul>
         <ul class="graph2_problem_count">
           <span>1</span>
           <span>2</span>
@@ -540,93 +576,6 @@ class Ranking extends Component {
         </ul>
         `;
         target.prepend(newDiv);
-
-        // if (best >= 101 && challenger >= 101) {
-        //   graph1.style.height = `100%`;
-        //   graph1.style.animation = `p-999 3s`;
-        //   graph2.style.height = `100%`;
-        //   graph2.style.animation = `p-999 3s`;
-
-        //   document.styleSheets[0].addRule(
-        //     `li.item1::before`,
-        //     'content: "' + record1 + '";'
-        //   );
-
-        //   document.styleSheets[0].addRule(
-        //     `li.item2::before`,
-        //     'content: "' + record2 + '";'
-        //   );
-
-        //   document.styleSheets[0].addRule(
-        //     "li.item1::after",
-        //     'content: "' + bestName + '";'
-        //   );
-
-        //   document.styleSheets[0].addRule(
-        //     "li.item2::after",
-        //     'content: "' + nickname + '";'
-        //   );
-        // } else if (best >= 101 && challenger < 101) {
-        //   graph1.style.height = `100%`;
-        //   graph1.style.animation = `p-999 3s`;
-        //   graph2.style.height = `${challenger}%`;
-        //   graph2.style.animation = `p-${challenger} 3s`;
-
-        //   graph3.style.height = `${challenger}%`;
-        //   graph3.style.animation = `p-${challenger} 3s`;
-        //   graph4.style.height = `100%`;
-        //   graph4.style.animation = `p-999 3s`;
-
-        //   graph5.style.height = `${challenger}%`;
-        //   graph5.style.animation = `p-${challenger} 3s`;
-        //   graph6.style.height = `100%`;
-        //   graph6.style.animation = `p-999 3s`;
-
-        //   graph7.style.height = `${challenger}%`;
-        //   graph7.style.animation = `p-${challenger} 3s`;
-        //   graph8.style.height = `100%`;
-        //   graph8.style.animation = `p-999 3s`;
-
-        //   graph9.style.height = `${challenger}%`;
-        //   graph9.style.animation = `p-${challenger} 3s`;
-        //   graph10.style.height = `100%`;
-        //   graph10.style.animation = `p-999 3s`;
-
-        //   graph11.style.height = `${challenger}%`;
-        //   graph11.style.animation = `p-${challenger} 3s`;
-        //   graph12.style.height = `100%`;
-        //   graph12.style.animation = `p-999 3s`;
-
-        //   graph13.style.height = `${challenger}%`;
-        //   graph13.style.animation = `p-${challenger} 3s`;
-        //   graph14.style.height = `100%`;
-        //   graph14.style.animation = `p-999 3s`;
-
-        //   graph15.style.height = `${challenger}%`;
-        //   graph15.style.animation = `p-${challenger} 3s`;
-        //   graph16.style.height = `100%`;
-        //   graph16.style.animation = `p-999 3s`;
-
-        //   // document.styleSheets[0].addRule(
-        //   //   `li.item1::before`,
-        //   //   'content: "' + record1 + '";'
-        //   // );
-
-        //   // document.styleSheets[0].addRule(
-        //   //   `li.item2::before`,
-        //   //   'content: "' + record2 + '";'
-        //   // );
-
-        //   // document.styleSheets[0].addRule(
-        //   //   "li.item1::after",
-        //   //   'content: "' + bestName + '";'
-        //   // );
-
-        //   // document.styleSheets[0].addRule(
-        //   //   "li.item2::after",
-        //   //   'content: "' + nickname + '";'
-        //   // );
-        // } else {
 
         for (let i = 0; i < bestArr.length; i++) {
           if (myArr[i] > 100) myArr[i] = 999;
@@ -679,46 +628,6 @@ class Ranking extends Component {
           `li.item16::before`,
           'content: "' + bestAverage + '";'
         );
-
-        // graph1.style.height = `${bestArr[0]}%`;
-        // graph1.style.animation = `p-${bestArr[0]} 3s`;
-        // graph2.style.height = `${myArr[0]}%`;
-        // graph2.style.animation = `p-${myArr[0]} 3s`;
-
-        // graph3.style.height = `${myArr[1]}%`;
-        // graph3.style.animation = `p-${myArr[1]} 3s`;
-        // graph4.style.height = `${bestArr[1]}%`;
-        // graph4.style.animation = `p-${bestArr[1]} 3s`;
-
-        // graph5.style.height = `${myArr[2]}%`;
-        // graph5.style.animation = `p-${myArr[2]} 3s`;
-        // graph6.style.height = `${bestArr[2]}%`;
-        // graph6.style.animation = `p-${bestArr[2]} 3s`;
-
-        // graph7.style.height = `${myArr[3]}%`;
-        // graph7.style.animation = `p-${myArr[3]} 3s`;
-        // graph8.style.height = `${bestArr[3]}%`;
-        // graph8.style.animation = `p-${bestArr[3]} 3s`;
-
-        // graph9.style.height = `${myArr[4]}%`;
-        // graph9.style.animation = `p-${myArr[4]} 3s`;
-        // graph10.style.height = `${bestArr[4]}%`;
-        // graph10.style.animation = `p-${bestArr[4]} 3s`;
-
-        // graph11.style.height = `${myArr[5]}%`;
-        // graph11.style.animation = `p-${myArr[5]} 3s`;
-        // graph12.style.height = `${bestArr[5]}%`;
-        // graph12.style.animation = `p-${bestArr[5]} 3s`;
-
-        // graph13.style.height = `${myArr[6]}%`;
-        // graph13.style.animation = `p-${myArr[6]} 3s`;
-        // graph14.style.height = `${bestArr[6]}%`;
-        // graph14.style.animation = `p-${bestArr[6]} 3s`;
-
-        // graph15.style.height = `${challenger}%`;
-        // graph15.style.animation = `p-${challenger} 3s`;
-        // graph16.style.height = `${best}%`;
-        // graph16.style.animation = `p-${best} 3s`;
 
         // document.styleSheets[0].addRule(
         //   `li.item1::before`,
@@ -773,11 +682,12 @@ class Ranking extends Component {
     const my = [];
 
     const items = [];
+    const loginUser = [];
     const printRank = [];
     const selectValue = value;
 
     const myRank = [];
-    const myItems = [];
+
     const nickname = window.localStorage.getItem("nick");
 
     this.setState({ init: value });
@@ -844,48 +754,78 @@ class Ranking extends Component {
             });
           });
 
-          my.push(
-            res.data.myRank[0].one,
-            res.data.myRank[0].two,
-            res.data.myRank[0].three,
-            res.data.myRank[0].four,
-            res.data.myRank[0].five,
-            res.data.myRank[0].six,
-            res.data.myRank[0].seven
-          );
-
-          this.setState({
-            myRecordArray: my,
-            myAverage: res.data.myRank[0].average,
-            myName: res.data.myRank[0].name,
-          });
-
-          for (const [index, value] of myRank.entries()) {
-            myItems.push(
+          for (const ele of myRank) {
+            loginUser.push(
               <tr>
                 <td className="myRanking_rank">{this.state.myRanking}</td>
-                <td className="myRanking_name">{value.name}</td>
-                <td className="myRanking_record">{value.average}타수</td>
-                <td className="myRanking_time">{value.time}초</td>
+                <td className="myRanking_name">{ele.name}</td>
+                <td className="myRanking_record">{ele.average}타수</td>
+                <td className="myRanking_time">{ele.time}초</td>
               </tr>
             );
           }
-          if (myItems.length !== 0) {
-            this.setState({ myItems: myItems });
+
+          if (loginUser.length !== 0) {
+            this.setState({ myItems: loginUser });
           } else {
-            myItems.push(
-              <tr>
-                <td className="myRanking_rank"></td>
-                {!nickname ? (
-                  <td className="myRanking_name">Guest</td>
-                ) : (
-                  <td className="myRanking_name">{nickname}</td>
-                )}
-                <td className="myRanking_record">0타수</td>
-                <td className="myRanking_time">0초</td>
-              </tr>
+            {
+              !nickname
+                ? loginUser.push(
+                    <tr className="myRanking_hover">
+                      <td className="myRanking_rank"></td>
+                      <td className="myRanking_name">Guest</td>
+                      <td className="myRanking_record">0타수</td>
+                      <td className="myRanking_time">0초</td>
+                    </tr>
+                  )
+                : loginUser.push(
+                    <tr className="myRanking_hover2">
+                      <td className="myRanking_rank"></td>
+                      <td className="myRanking_name">Guest</td>
+                      <td className="myRanking_record">0타수</td>
+                      <td className="myRanking_time">0초</td>
+                    </tr>
+                  );
+            }
+
+            // loginUser.push(
+            //   <tr className="myRanking_hover2">
+            //     <td className="myRanking_rank"></td>
+            //     {!nickname ? (
+            //       <td className="myRanking_name">Guest</td>
+            //     ) : (
+            //       <td className="myRanking_name">{nickname}</td>
+            //     )}
+            //     <td className="myRanking_record">0타수</td>
+            //     <td className="myRanking_time">0초</td>
+            //   </tr>
+            // );
+            this.setState({ myItems: loginUser });
+          }
+
+          // console.log("=============");
+
+          // 유저 기록이 있으면
+          if (res.data.myRank.length > 0) {
+            my.push(
+              res.data.myRank[0].one,
+              res.data.myRank[0].two,
+              res.data.myRank[0].three,
+              res.data.myRank[0].four,
+              res.data.myRank[0].five,
+              res.data.myRank[0].six,
+              res.data.myRank[0].seven
             );
-            this.setState({ myItems: myItems });
+
+            this.setState({
+              myRecordArray: my,
+              myAverage: res.data.myRank[0].average,
+              myName: res.data.myRank[0].name,
+            });
+          }
+          // 유저 기록 없으면
+          else {
+            this.setState({ myRecordArray: my, myAverage: "", myName: "" });
           }
         })
         .catch((err) => {
@@ -894,6 +834,8 @@ class Ranking extends Component {
     } else {
       alert("에러");
     }
+
+    // console.log("=============", this.state.myRecordArray);
 
     document.querySelector(".dropdown-content").classList.remove("show");
 
@@ -996,9 +938,43 @@ class Ranking extends Component {
     };
   }
 
+  printArrow() {
+    window.onmouseover = function (event) {
+      if (event.target.closest(".myRanking_hover")) {
+        document.querySelector(".myRanking_table_arrow").style.display =
+          "block";
+        document.querySelector(".myRanking_table_triangle").style.display =
+          "inline-block";
+      }
+
+      if (event.target.closest(".myRanking_hover2")) {
+        document.querySelector(".myRanking_table_arrow2").style.display =
+          "block";
+        document.querySelector(".myRanking_table_triangle").style.display =
+          "inline-block";
+      }
+    };
+
+    window.onmouseout = function (event) {
+      if (event.target.closest(".myRanking_hover")) {
+        document.querySelector(".myRanking_table_arrow").style.display = "none";
+        document.querySelector(".myRanking_table_triangle").style.display =
+          "none";
+      }
+
+      if (event.target.closest(".myRanking_hover2")) {
+        document.querySelector(".myRanking_table_arrow2").style.display =
+          "none";
+        document.querySelector(".myRanking_table_triangle").style.display =
+          "none";
+      }
+    };
+  }
+
   componentDidMount() {
     // this.print();
     this.init();
+    this.printArrow();
   }
 
   render() {
@@ -1062,14 +1038,13 @@ class Ranking extends Component {
               </div>
 
               <div className="ranking_table_myRanking">
+                <div className="myRanking_table_arrow">
+                  기록을 등록하기 위해서는 로그인이 필요합니다{" "}
+                </div>
+                <div className="myRanking_table_arrow2">기록이 없습니다 </div>
+                <div className="myRanking_table_triangle"></div>
                 <table className="myRanking_table">
-                  <tbody>
-                    {/* <td className="myRanking_rank">3</td>
-                      <td className="myRanking_name">테스트</td>
-                      <td className="myRanking_record">617타수</td>
-                      <td className="myRanking_time">4.9초</td> */}
-                    {myItems}
-                  </tbody>
+                  <tbody>{myItems}</tbody>
                 </table>
               </div>
             </div>
