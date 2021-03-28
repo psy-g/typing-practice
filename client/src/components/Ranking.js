@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import "./Ranking.css";
 import axios from "axios";
 import arrow from "../image/arrow2.png";
+// import $ from "jquery";
 
 class Ranking extends Component {
   constructor(props) {
@@ -121,7 +122,7 @@ class Ranking extends Component {
 
         for (const [index, value] of printRank.entries()) {
           items.push(
-            <tr className={`rank__${index}`}>
+            <tr className={`rank__${index}`} onClick={this.clickRank}>
               <td className="rank__rank">{index + 1}</td>
               <td className="rank__name">{value.name}</td>
               <td className="rank__record">{value.average}타수</td>
@@ -480,7 +481,6 @@ class Ranking extends Component {
         const myPercent = Math.floor((myAverage / 750) * 100);
 
         const newDiv = document.createElement("div");
-        //
 
         newDiv.className = "graph-wrapper2";
         newDiv.innerHTML = `
@@ -782,7 +782,7 @@ class Ranking extends Component {
 
     this.setState({ init: value });
 
-    // console.log("=====", value);
+    document.querySelector(".header_top1_text").innerHTML = `1등&nbsp;&nbsp;`;
 
     if (selectValue) {
       axios
@@ -826,7 +826,7 @@ class Ranking extends Component {
 
           for (const [index, value] of printRank.entries()) {
             items.push(
-              <tr className={`rank__${index}`}>
+              <tr className={`rank__${index}`} onClick={this.clickRank}>
                 <td className="rank__rank">{index + 1}</td>
                 <td className="rank__name">{value.name}</td>
                 <td className="rank__record">{value.average}타수</td>
@@ -902,6 +902,100 @@ class Ranking extends Component {
     }, 500);
   };
 
+  clickRank() {
+    const clickRecord = [];
+    const clickArray = [];
+
+    window.onclick = function (event) {
+      if (event.target.closest(".ranking_table_body")) {
+        let clickName = event.target.parentNode.children[1].innerHTML;
+        let clickTitle = document.querySelector(".dropbtn_text").innerHTML;
+
+        // console.log("check", document.querySelector(".dropbtn_text").innerHTML);
+        // console.log(event.target.parentNode.children);
+
+        // event.target.parentElement.style.backgroundColor = "#2a1a1a";
+        // event.target.parentElement.style.all = "unset";
+
+        axios
+          .post("http://localhost:8080/ranking/print", {
+            title: clickTitle,
+            name: clickName,
+          })
+          .then((res) => {
+            // res.data.myRank.forEach((el) => {
+            //   clickRecord.push({
+            //     name: el.name,
+            //     average: el.average,
+            //     time: el.time,
+            //   });
+            // });
+
+            clickArray.push(
+              res.data.myRank[0].one,
+              res.data.myRank[0].two,
+              res.data.myRank[0].three,
+              res.data.myRank[0].four,
+              res.data.myRank[0].five,
+              res.data.myRank[0].six,
+              res.data.myRank[0].seven
+            );
+
+            clickRecord.push(
+              res.data.myRank[0].name,
+              res.data.myRank[0].average
+            );
+
+            const percentArr = [];
+            const clickPercent = Math.floor((clickRecord[1] / 750) * 100);
+
+            document.querySelector(
+              ".header_top1_text"
+            ).innerHTML = `${clickRecord[0]}&nbsp;&nbsp;`;
+
+            for (let i = 0; i < clickArray.length; i++) {
+              percentArr.push(Math.floor((clickArray[i] / 750) * 100));
+            }
+
+            for (let i = 0; i < percentArr.length; i++) {
+              if (percentArr[i] > 100) percentArr[i] = 999;
+
+              document.querySelector(
+                `.graph2 .item${i * 2 + 2}`
+              ).style.height = `${percentArr[i]}%`;
+              document.querySelector(
+                `.graph2 .item${i * 2 + 2}`
+              ).style.animation = `p-${percentArr[i]} 3s`;
+
+              document.styleSheets[0].addRule(
+                `li.item${i * 2 + 2}::before`,
+                'content: "' + clickArray[i] + '";'
+              );
+            }
+
+            document.querySelector(
+              ".graph2 .item16"
+            ).style.height = `${clickPercent}%`;
+            document.querySelector(
+              ".graph2 .item16"
+            ).style.animation = `p-${clickPercent} 5s`;
+
+            document.styleSheets[0].addRule(
+              `li.item16::before`,
+              'content: "' + clickRecord[1] + '";'
+            );
+            // jquery
+            // $("ul.graph2 span li.item2").replaceWith(
+            //   `<li class="item2 p-${percentArr[0]}"></li>`
+            // );
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
+      }
+    };
+  }
+
   componentDidMount() {
     // this.print();
     this.init();
@@ -963,15 +1057,7 @@ class Ranking extends Component {
                       <th className="column__time">시간</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {/* <tr>
-                      <td>Lorem</td>
-                      <td>Ipsum</td>
-                      <td>Dolor</td>
-                    </tr> */}
-                    {items}
-                  </tbody>
-                  {/* <div className="rank">{items}</div> */}
+                  <tbody className="ranking_table_body">{items}</tbody>
                 </table>
               </div>
 
