@@ -34,12 +34,12 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: selectValue,
-        })
-        // .post("http://54.180.91.194:8080/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         // })
+        .post("http://54.180.91.194:8080/ranking/print", {
+          title: selectValue,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -82,13 +82,14 @@ class Ranking extends Component {
     const my = [];
 
     axios
-      .post("http://localhost:8080/ranking/print", {
+      // .post("http://localhost:8080/ranking/print", {
+      //   title: "눈 녹듯",
+      //   name: nickname,
+      // })
+      .post("http://54.180.91.194:8080/ranking/print", {
         title: "눈 녹듯",
         name: nickname,
       })
-      // .post("http://54.180.91.194:8080/ranking/print", {
-      //   title: selectValue,
-      // })
       .then((res) => {
         res.data.data.forEach((el) => {
           printRank.push({
@@ -687,13 +688,14 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
+        //   title: selectValue,
+        //   name: nickname,
+        // })
+        .post("http://54.180.91.194:8080/ranking/print", {
           title: selectValue,
           name: nickname,
         })
-        // .post("http://54.180.91.194:8080/ranking/print", {
-        //   title: selectValue,
-        // })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -851,7 +853,11 @@ class Ranking extends Component {
         // event.target.parentElement.style.all = "unset";
 
         axios
-          .post("http://localhost:8080/ranking/print", {
+          // .post("http://localhost:8080/ranking/print", {
+          //   title: clickTitle,
+          //   name: clickName,
+          // })
+          .post("http://54.180.91.194:8080/ranking/print", {
             title: clickTitle,
             name: clickName,
           })
