@@ -73,8 +73,8 @@ class Signin extends React.Component {
       loginDuplicate.style.display = "none";
 
       const loginRequest = await axios.post(
-        "http://localhost:8080/auth/signin",
-        // "http://54.180.91.194:8080/auth/signin",
+        // "http://localhost:8080/auth/signin",
+        "http://54.180.91.194:8080/auth/signin",
         { nickname, password },
         { withCredentials: true }
       );
@@ -106,8 +106,8 @@ class Signin extends React.Component {
 
     if (password.length >= 4 && nickname.length >= 2 && nickname.length <= 5) {
       axios
-        .post("http://localhost:8080/auth/signup", this.state)
-        // .post("http://54.180.91.194:8080/auth/signup", this.state)
+        // .post("http://localhost:8080/auth/signup", this.state)
+        .post("http://54.180.91.194:8080/auth/signup", this.state)
         .then((res) => {
           if (res.data.message === "signup") {
             this.props.history.push("/");
