@@ -177,25 +177,13 @@ class Ranking extends Component {
               : loginUser.push(
                   <tr className="myRanking_hover2">
                     <td className="myRanking_rank"></td>
-                    <td className="myRanking_name">Guest</td>
+                    <td className="myRanking_name">{nickname}</td>
                     <td className="myRanking_record">0타수</td>
                     <td className="myRanking_time">0초</td>
                   </tr>
                 );
           }
 
-          // loginUser.push(
-          //   <tr className="myRanking_hover">
-          //     <td className="myRanking_rank"></td>
-          //     {!nickname ? (
-          //       <td className="myRanking_name">Guest</td>
-          //     ) : (
-          //       <td className="myRanking_name">{nickname}</td>
-          //     )}
-          //     <td className="myRanking_record">0타수</td>
-          //     <td className="myRanking_time">0초</td>
-          //   </tr>
-          // );
           this.setState({ myItems: loginUser });
         }
         // 유저 기록이 있으면
@@ -228,7 +216,7 @@ class Ranking extends Component {
   }
 
   detail() {
-    const test = document.querySelectorAll(".ranking_table");
+    // const test = document.querySelectorAll(".ranking_table");
     const nickname = window.localStorage.getItem("nick");
 
     // 1등, 로그인 유저 기록
@@ -237,7 +225,6 @@ class Ranking extends Component {
       myRecordArray,
       bestAverage,
       myAverage,
-      bestName,
     } = this.state;
 
     // 1등 기록, 이름
@@ -252,6 +239,8 @@ class Ranking extends Component {
     // 1등, 유저 배열
     const bestArr = [];
     const myArr = [];
+    var noRecord = "x";
+    var noRecord2 = "기록x";
 
     for (let i = 0; i < bestRecordArray.length; i++) {
       bestArr.push(Math.floor((bestRecordArray[i] / 750) * 100));
@@ -327,7 +316,8 @@ class Ranking extends Component {
         `;
       target.prepend(newDiv);
 
-      var noRecord = "기록x";
+      // var noRecord = "x";
+      // var noRecord2 = "기록x";
 
       for (let i = 0; i < bestArr.length; i++) {
         document.querySelector(
@@ -369,7 +359,7 @@ class Ranking extends Component {
 
       document.styleSheets[0].addRule(
         `li.item15::before`,
-        'content: "' + noRecord + '";'
+        'content: "' + noRecord2 + '";'
       );
 
       document.styleSheets[0].addRule(
@@ -401,7 +391,7 @@ class Ranking extends Component {
       //   }
       // }
 
-      console.log("=============", myRecordArray.length);
+      // console.log("=============", myRecordArray.length);
 
       // 로그인(기록 없음)
       if (myRecordArray.length === 0) {
@@ -465,7 +455,8 @@ class Ranking extends Component {
         `;
         target.prepend(newDiv);
 
-        var noRecord = "기록x";
+        // var noRecord = "x";
+        // var noRecord2 = "기록x";
 
         for (let i = 0; i < bestArr.length; i++) {
           document.querySelector(
@@ -506,7 +497,7 @@ class Ranking extends Component {
 
         document.styleSheets[0].addRule(
           `li.item15::before`,
-          'content: "' + noRecord + '";'
+          'content: "' + noRecord2 + '";'
         );
 
         document.styleSheets[0].addRule(
@@ -781,7 +772,7 @@ class Ranking extends Component {
                 : loginUser.push(
                     <tr className="myRanking_hover2">
                       <td className="myRanking_rank"></td>
-                      <td className="myRanking_name">Guest</td>
+                      <td className="myRanking_name">{nickname}</td>
                       <td className="myRanking_record">0타수</td>
                       <td className="myRanking_time">0초</td>
                     </tr>
