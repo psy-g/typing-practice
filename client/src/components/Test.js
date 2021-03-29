@@ -350,8 +350,11 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        .post("http://localhost:8080/ranking/print", { title: filterTitle })
-        // .post("http://54.180.91.194:8080/ranking/print", { title: filterTitle })
+        .post("http://localhost:8080/ranking/print", {
+          title: filterTitle,
+          name: null,
+        })
+        // .post("http://54.180.91.194:8080/ranking/print", { title: filterTitle, name: null })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -384,32 +387,59 @@ class Test extends Component {
 
       newDiv.className = "header_problem_result_print_rank_top3_print";
 
-      printRank.forEach(function (el, index) {
-        newDiv.innerHTML += `
-          <div id="header_problem_result_print_rank_top3_print_print_${index}">
-          <div class="header_problem_result_print_rank_top_ranker}">${
-            index + 1
-          }등
-          </div>
-          <div class="header_problem_result_print_rank_speed_column">
-          <div class="header_problem_result_print_rank_top_speed">${
-            el.average
-          }타수</div>
-          </div>
-          <div class="header_problem_result_print_rank_time_column">
-          <div class="header_problem_result_print_rank_top_time">${
-            el.time
-          }초</div>
-           </div>
-          <div class="header_problem_result_print_rank_name_column">
-          <div class="header_problem_result_print_rank_top_name">${
-            el.name
-          }</div>
-          </div>
-          </div>
+      let PrintRankLenth = printRank.length;
+      if (PrintRankLenth > 3) PrintRankLenth = 3;
 
-          `;
-      });
+      for (let i = 0; i < PrintRankLenth; i++) {
+        newDiv.innerHTML += `
+        <div id="header_problem_result_print_rank_top3_print_print_${i}">
+          <div class="header_problem_result_print_rank_top_ranker}">${i + 1}등
+        </div>
+        <div class="header_problem_result_print_rank_speed_column">
+        <div class="header_problem_result_print_rank_top_speed">${
+          printRank[i].average
+        }타수</div>
+        </div>
+        <div class="header_problem_result_print_rank_time_column">
+        <div class="header_problem_result_print_rank_top_time">${
+          printRank[i].time
+        }초</div>
+         </div>
+        <div class="header_problem_result_print_rank_name_column">
+        <div class="header_problem_result_print_rank_top_name">${
+          printRank[i].name
+        }</div>
+        </div>
+        </div>
+        `;
+      }
+
+      // printRank.forEach(function (el, index) {
+      //   newDiv.innerHTML += `
+      //     <div id="header_problem_result_print_rank_top3_print_print_${index}">
+      //     <div class="header_problem_result_print_rank_top_ranker}">${
+      //       index + 1
+      //     }등
+      //     </div>
+      //     <div class="header_problem_result_print_rank_speed_column">
+      //     <div class="header_problem_result_print_rank_top_speed">${
+      //       el.average
+      //     }타수</div>
+      //     </div>
+      //     <div class="header_problem_result_print_rank_time_column">
+      //     <div class="header_problem_result_print_rank_top_time">${
+      //       el.time
+      //     }초</div>
+      //      </div>
+      //     <div class="header_problem_result_print_rank_name_column">
+      //     <div class="header_problem_result_print_rank_top_name">${
+      //       el.name
+      //     }</div>
+      //     </div>
+      //     </div>
+
+      //     `;
+      // });
 
       target.prepend(newDiv);
     }, 2000); // 시간. 2초 후 실행
