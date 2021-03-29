@@ -17,7 +17,7 @@ class Test extends Component {
       time: 0,
       accuracy: "",
       speed: "",
-      title: ["말리꽃", "오아시스", "눈 녹듯"],
+      title: ["광야", "님의 손길", "진달래꽃"],
       filterTitle: "",
       timer: "",
       keyEvent: false,
@@ -41,7 +41,7 @@ class Test extends Component {
   compare() {
     const { problem, count, answer, time, recordArray } = this.state;
 
-    // 반짝이는 눈 속에 나는 두 손 모아 빌었지(50유효타수, 4초)
+    // 반짝이는 듯속에 나는 두 손 모아 빌었지(50유효타수, 4초)
     // 50타 * 60초 / 4초 => 750타?
     // 백스페이스 7번
 
@@ -486,12 +486,12 @@ class Test extends Component {
       "ㄷ", // -31433
       "ㄸ", // -31432
       "ㄹ", // -31431
-      "ㅁ", // -31423
+      "꽃", // -31423
       "ㅂ", // -31422
       "ㅃ", // -31421
       "ㅅ", // -31419
       "ㅆ", // -31418
-      "ㅇ", // -31417
+      "스", // -31417
       "ㅈ", // -31416
       "ㅉ", // -31415
       "ㅊ", // -31414
@@ -696,9 +696,25 @@ class Test extends Component {
                   // {count !== 2 ? (
                   <div className="header_problem_count_header">
                     {tttt.length !== 9 ? (
-                      <div className="header_problem_count">{tttt}</div>
+                      <div className="problemAndTyping">
+                        <div className="header_problem_count">{tttt}</div>
+                        <textarea
+                          type="text"
+                          className="typing"
+                          onChange={this.handleInputValue("answer")}
+                          autoFocus
+                        ></textarea>
+                      </div>
                     ) : (
-                      <div className="header_problem_count"></div>
+                      <div className="problemAndTyping">
+                        <div className="header_problem_count"></div>
+                        <textarea
+                          type="text"
+                          className="typing"
+                          onChange={this.handleInputValue("answer")}
+                          autoFocus
+                        ></textarea>
+                      </div>
                     )}
                   </div>
                 ) : (
@@ -750,12 +766,12 @@ class Test extends Component {
               {count !== 7 ? (
                 // {count !== 2 ? (
                 <div className="header_problem_tail">
-                  <textarea
+                  {/* <textarea
                     type="text"
                     className="typing"
                     onChange={this.handleInputValue("answer")}
                     autoFocus
-                  ></textarea>
+                  ></textarea> */}
                   <span id="show">00:00:00</span>
                 </div>
               ) : (

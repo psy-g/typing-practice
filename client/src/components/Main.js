@@ -3,10 +3,10 @@ import "./Main.css";
 import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import logo from "../image/taza.png";
-import mainImg1 from "../image/main_img1.gif";
-import mainImg2 from "../image/main_img2.png";
-import mainImg3 from "../image/main_img3.png";
-import mainImg4 from "../image/main_img4.png";
+import mainImg1 from "../image/main_img_1.gif";
+import mainImg2 from "../image/main_img_2.png";
+import mainImg3 from "../image/main_img_3.png";
+import mainImg4 from "../image/main_img_4.gif";
 import scrollIcon1 from "../image/icon1.png";
 import scrollIcon2 from "../image/icon2.png";
 import scrollIcon3 from "../image/icon3.png";
@@ -80,7 +80,7 @@ class Main extends Component {
     // console.log("3", check);
 
     return (
-      <div>
+      <div id="home">
         <Nav />
         <div id="main">
           <div className="header____tail">
@@ -143,7 +143,7 @@ class Main extends Component {
                   <div className="context-header-text-top1">
                     타자치자<br></br>
                     입력하여 실력을<br></br>
-                    확인하자!
+                    확인하자
                   </div>
                   <div className="context-header-text-bottom1">
                     한글의 자음과 모음을 분리하여
@@ -246,7 +246,7 @@ class Main extends Component {
                     기록을 확인합니다
                   </div>
                   <div className="context-header-text-bottom3">
-                    그래프를 통해 1등 기록과
+                    그래프를 통해 다른 기록과
                     <div className="context-header-text-bottom-marker-container3">
                       <div className="context-header-text-bottom-marker">
                         {" "}
@@ -292,7 +292,7 @@ class Main extends Component {
                 >
                   블로그
                 </a>
-                <a href="mailto:@gmail.com">이메일</a>
+                <a href="mailto:psykyg@gmail.com">이메일</a>
                 <a
                   href="https://github.com/psy-g"
                   target="_blank"

@@ -48,6 +48,12 @@
   scroll-snap-align: start;
 }
 
+/* @media (max-height: 1000px) {
+  .header____tail {
+    scroll-snap-align: none;
+  }
+} */
+
 .header____tail:nth-child(1),
 .header____tail:nth-child(2),
 .header____tail:nth-child(3),

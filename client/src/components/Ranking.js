@@ -12,7 +12,7 @@ class Ranking extends Component {
       items: [],
       myItems: [],
       myRecord: "",
-      init: "눈 녹듯",
+      init: "진달래꽃",
       myInit: [],
       myRanking: "",
       bestRecordArray: [],
@@ -83,11 +83,11 @@ class Ranking extends Component {
 
     axios
       // .post("http://localhost:8080/ranking/print", {
-      //   title: "눈 녹듯",
+      //   title: "진달래꽃",
       //   name: nickname,
       // })
       .post("http://54.180.91.194:8080/ranking/print", {
-        title: "눈 녹듯",
+        title: "진달래꽃",
         name: nickname,
       })
       .then((res) => {
@@ -862,14 +862,6 @@ class Ranking extends Component {
             name: clickName,
           })
           .then((res) => {
-            // res.data.myRank.forEach((el) => {
-            //   clickRecord.push({
-            //     name: el.name,
-            //     average: el.average,
-            //     time: el.time,
-            //   });
-            // });
-
             clickArray.push(
               res.data.myRank[0].one,
               res.data.myRank[0].two,
@@ -992,9 +984,9 @@ class Ranking extends Component {
                     <img className="dropbtn_img" src={arrow} alt="arrow" />
                   </button>
                   <div id="myDropdown" className="dropdown-content">
-                    <span onClick={this.print2("눈 녹듯")}>눈 녹듯</span>
-                    <span onClick={this.print2("말리꽃")}>말리꽃</span>
-                    <span onClick={this.print2("오아시스")}>오아시스</span>
+                    <span onClick={this.print2("진달래꽃")}>진달래꽃</span>
+                    <span onClick={this.print2("광야")}>광야</span>
+                    <span onClick={this.print2("님의 손길")}>님의 손길</span>
                   </div>
                 </div>
               </div>

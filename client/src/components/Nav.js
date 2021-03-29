@@ -218,7 +218,7 @@ const Nav = () => {
                     >
                       블로그
                     </a>
-                    <a href="mailto:@gmail.com">이메일</a>
+                    <a href="mailto:psykyg@gmail.com">이메일</a>
                     <a
                       href="https://github.com/psy-g"
                       target="_blank"
@@ -266,7 +266,7 @@ const Nav = () => {
                     >
                       블로그
                     </a>
-                    <a href="mailto:@gmail.com">이메일</a>
+                    <a href="mailto:psykyg@gmail.com">이메일</a>
                     <a
                       href="https://github.com/psy-g"
                       target="_blank"

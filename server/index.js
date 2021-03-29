@@ -23,7 +23,8 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "http://tajachija.s3-website.ap-northeast-2.amazonaws.com",
+    // origin: "http://tajachija.s3-website.ap-northeast-2.amazonaws.com",
+    origin: "https://tajachija.com",
     methods: ["OPTIONS", "GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
