@@ -42,6 +42,7 @@
   align-items: center;
   width: 50%;
   min-width: 480px;
+  min-height: 550px;
   height: 60vh;
   text-align: center;
   background: url("../image/rankback.png");
@@ -54,10 +55,10 @@
   color: white;
 }
 
-/* @media (max-width: 600px) {
+/* @media (max-height: 600px) {
   .header_problem {
     width: 80%;
-    height: 65vh;
+    height: 40vh;
   }
 } */
 
@@ -102,7 +103,7 @@
 
 .header_title {
   color: #efdc05;
-  font-size: max(0.8em, 1.4vw);
+  font-size: max(0.7em, 1.4vw);
 }
 
 .header_titleAndProblem {
@@ -113,7 +114,7 @@
 .header_problem_count_header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   height: 70%;
 }
@@ -127,7 +128,7 @@
 .header_titleAndProblem_print_header {
   width: 100%;
   color: #e53a40;
-  font-size: max(0.8em, 1.4vw);
+  font-size: max(0.7em, 1.4vw);
 }
 
 .header_titleAndProblem_print_body {
@@ -174,6 +175,12 @@
     width: 80%;
   }
 }
+
+/* @media (min-height: 800px) {
+  .header_problem_result {
+    height: 2vh;
+  }
+} */
 
 /* .header_problem_result {
   display: flex;
@@ -296,6 +303,12 @@
   font-size: max(0.6em, 1vw);
 }
 
+@media (max-height: 650px) {
+  .header_problem_result_print_rank_top3_print {
+    height: 120px;
+  }
+}
+
 #header_problem_result_print_rank_top3_print_print_0,
 #header_problem_result_print_rank_top3_print_print_1,
 #header_problem_result_print_rank_top3_print_print_2 {
@@ -329,7 +342,15 @@
 
 .header_problem_count {
   display: inline-block;
-  font-size: max(1em, 1.7vw);
+  font-size: max(0.7em, 1.5vw);
+  width: 99%;
+  text-align: left;
+}
+
+@media (max-width: 1000px) {
+  .header_problem_count {
+    width: 98%;
+  }
 }
 
 .header_problem_tail {
@@ -344,15 +365,32 @@
   display: none;
 }
 
+.problemAndTyping {
+  width: 80%;
+}
+
 .typing {
-  width: 25vw;
-  max-width: 450px;
+  /* width: 25vw; */
+  width: 100%;
+  /* max-width: 450px; */
+  margin-top: 5px;
   min-width: 250px;
-  height: 4vh;
+  height: 5vh;
   overflow: hidden;
   resize: none;
-  font-size: max(0.8em, 1.4vw);
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  /* background-color: transparent; */
+  font-size: max(0.7em, 1.5vw);
   /* font-size: 1.1vw; */
+  border-left: none;
+  border-right: none;
+  /* border-top: none; */
+}
+
+.typing:focus {
+  outline: none;
 }
 
 #show {
@@ -369,6 +407,12 @@
   width: 100%;
   /* height: 10vh; */
   height: 20vh;
+}
+
+@media (max-height: 650px) {
+  .test_input {
+    display: none;
+  }
 }
 
 #keyboard {
