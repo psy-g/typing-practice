@@ -692,7 +692,7 @@ class Ranking extends Component {
         //   title: selectValue,
         //   name: nickname,
         // })
-        .post("https://tajachija.tk:8080/ranking/print", {
+        .post("https://tajachija.tk/ranking/print", {
           title: selectValue,
           name: nickname,
         })
