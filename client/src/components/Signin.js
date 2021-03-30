@@ -74,7 +74,7 @@ class Signin extends React.Component {
 
       const loginRequest = await axios.post(
         // "http://localhost:8080/auth/signin",
-        "https://tajachija.tk:8080/auth/signin",
+        "https://tajachija.tk/auth/signin",
         { nickname, password },
         { withCredentials: true }
       );
@@ -107,7 +107,7 @@ class Signin extends React.Component {
     if (password.length >= 4 && nickname.length >= 2 && nickname.length <= 5) {
       axios
         // .post("http://localhost:8080/auth/signup", this.state)
-        .post("https://tajachija.tk:8080/auth/signup", this.state)
+        .post("https://tajachija.tk/auth/signup", this.state)
         .then((res) => {
           if (res.data.message === "signup") {
             this.props.history.push("/");
