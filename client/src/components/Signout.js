@@ -13,7 +13,7 @@ class Signout extends Component {
   logout() {
     axios
       // .post("http://localhost:8080/auth/signout", { credentials: "include" })
-      .post("http://54.180.91.194:8080/auth/signout", {
+      .post("https://tajachija.tk:8080/auth/signout", {
         credentials: "include",
       })
       .then((res) => {
