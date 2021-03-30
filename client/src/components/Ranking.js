@@ -37,7 +37,7 @@ class Ranking extends Component {
         // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         // })
-        .post("http://54.180.91.194:8080/ranking/print", {
+        .post("https://tajachija.tk:8080/ranking/print", {
           title: selectValue,
         })
         .then((res) => {
@@ -86,7 +86,7 @@ class Ranking extends Component {
       //   title: "진달래꽃",
       //   name: nickname,
       // })
-      .post("http://54.180.91.194:8080/ranking/print", {
+      .post("https://tajachija.tk/ranking/print", {
         title: "진달래꽃",
         name: nickname,
       })
@@ -692,7 +692,7 @@ class Ranking extends Component {
         //   title: selectValue,
         //   name: nickname,
         // })
-        .post("http://54.180.91.194:8080/ranking/print", {
+        .post("https://tajachija.tk:8080/ranking/print", {
           title: selectValue,
           name: nickname,
         })
@@ -857,7 +857,7 @@ class Ranking extends Component {
           //   title: clickTitle,
           //   name: clickName,
           // })
-          .post("http://54.180.91.194:8080/ranking/print", {
+          .post("https://tajachija.tk/ranking/print", {
             title: clickTitle,
             name: clickName,
           })

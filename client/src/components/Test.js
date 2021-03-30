@@ -250,7 +250,7 @@ class Test extends Component {
     if (random) {
       axios
         // .post("http://localhost:8080/problem/random", { title: random })
-        .post("http://54.180.91.194:8080/problem/random", { title: random })
+        .post("https://tajachija.tk:8080/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -293,7 +293,7 @@ class Test extends Component {
     if (random) {
       axios
         // .post("http://localhost:8080/problem/random", { title: random })
-        .post("http://54.180.91.194:8080/problem/random", { title: random })
+        .post("https://tajachija.tk:8080/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -330,7 +330,7 @@ class Test extends Component {
     if (id) {
       axios
         // .post("http://localhost:8080/ranking/register", this.state)
-        .post("http://54.180.91.194:8080/ranking/register", this.state)
+        .post("https://tajachija.tk:8080/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -354,7 +354,7 @@ class Test extends Component {
         //   title: filterTitle,
         //   name: null,
         // })
-        .post("http://54.180.91.194:8080/ranking/print", {
+        .post("https://tajachija.tk:8080/ranking/print", {
           title: filterTitle,
           name: null,
         })
