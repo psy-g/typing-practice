@@ -249,8 +249,8 @@ class Test extends Component {
     // if (title) {
     if (random) {
       axios
-        // .post("http://localhost:8080/problem/random", { title: random })
-        .post("https://tajachija.tk/problem/random", { title: random })
+        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -292,8 +292,8 @@ class Test extends Component {
 
     if (random) {
       axios
-        // .post("http://localhost:8080/problem/random", { title: random })
-        .post("https://tajachija.tk/problem/random", { title: random })
+        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -329,8 +329,8 @@ class Test extends Component {
 
     if (id) {
       axios
-        // .post("http://localhost:8080/ranking/register", this.state)
-        .post("https://tajachija.tk/ranking/register", this.state)
+        .post("http://localhost:8080/ranking/register", this.state)
+        // .post("https://tajachija.tk/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -350,14 +350,14 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        // .post("http://localhost:8080/ranking/print", {
-        //   title: filterTitle,
-        //   name: null,
-        // })
-        .post("https://tajachija.tk/ranking/print", {
+        .post("http://localhost:8080/ranking/print", {
           title: filterTitle,
           name: null,
         })
+        // .post("https://tajachija.tk/ranking/print", {
+        //   title: filterTitle,
+        //   name: null,
+        // })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({

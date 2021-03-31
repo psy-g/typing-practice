@@ -73,8 +73,8 @@ class Signin extends React.Component {
       loginDuplicate.style.display = "none";
 
       const loginRequest = await axios.post(
-        // "http://localhost:8080/auth/signin",
-        "https://tajachija.tk/auth/signin",
+        "http://localhost:8080/auth/signin",
+        // "https://tajachija.tk/auth/signin",
         { nickname, password },
         { withCredentials: true }
       );
@@ -106,8 +106,8 @@ class Signin extends React.Component {
 
     if (password.length >= 4 && nickname.length >= 2 && nickname.length <= 5) {
       axios
-        // .post("http://localhost:8080/auth/signup", this.state)
-        .post("https://tajachija.tk/auth/signup", this.state)
+        .post("http://localhost:8080/auth/signup", this.state)
+        // .post("https://tajachija.tk/auth/signup", this.state)
         .then((res) => {
           if (res.data.message === "signup") {
             this.props.history.push("/");
@@ -193,13 +193,13 @@ class Signin extends React.Component {
           <div className="signin____header____tail">
             <div className="signin_container">
               <div className="signin_header">
-                <div className="signin_header_top">
-                  <img
-                    className="signin_header_logo"
-                    src={signinLogo}
-                    alt="login_logo"
-                  />
-                </div>
+                {/* <div className="signin_header_top"> */}
+                <img
+                  className="signin_header_logo"
+                  src={signinLogo}
+                  alt="login_logo"
+                />
+                {/* </div> */}
               </div>
               {check ? (
                 <div className="signin_body">
@@ -231,13 +231,15 @@ class Signin extends React.Component {
                       4자 이상이어야 합니다
                     </div>
                   </div>
-                  <button
-                    type="submit"
-                    className="signin_body_loginBtn"
-                    onClick={() => this.clickBtn()}
-                  >
-                    회원가입
-                  </button>
+                  <div className="signin_body_loginAndSignup">
+                    <button
+                      type="submit"
+                      className="signin_body_loginBtn2"
+                      onClick={() => this.clickBtn()}
+                    >
+                      회원가입
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="signin_body">

@@ -8,6 +8,12 @@
   padding: 0; */
 }
 
+/* html {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+} */
+
 @font-face {
   font-family: "HeirofLightRegular";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightRegular.woff")
