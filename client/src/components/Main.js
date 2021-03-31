@@ -7,6 +7,7 @@ import mainImg1 from "../image/main_img_1.gif";
 import mainImg2 from "../image/main_img_2.png";
 import mainImg3 from "../image/main_img_3.png";
 import mainImg4 from "../image/main_img_4.gif";
+import scroll from "../image/scroll_icon.png";
 import scrollIcon1 from "../image/icon1.png";
 import scrollIcon2 from "../image/icon2.png";
 import scrollIcon3 from "../image/icon3.png";
@@ -99,14 +100,6 @@ class Main extends Component {
               <div className="tail_button">
                 {!checkLogin ? (
                   <Link to="/signin">
-                    {/* <img
-                      className="tail_button"
-                      src={btn}
-                      width="50px"
-                      height="50px"
-                      alt="btn"
-                    /> */}
-                    {/* <img className="tail_button_img" /> */}
                     <div className="tail_button_main" />
                   </Link>
                 ) : (
@@ -115,25 +108,18 @@ class Main extends Component {
                   </Link>
                 )}
               </div>
-              {/* <p className="tail_button_arrow_box">로그인</p> */}
             </div>
-            {/* <div className="context-main-tail">
-              <img
-                className="context-main-tail-img"
-                src={scroll}
-                width="50px"
-                height="50px"
-                alt="스크롤"
-              />
-            </div> */}
             <div className="scroll_icon">
               <img
                 className="scroll_icon-img1"
                 src={scrollIcon1}
-                // width="50px"
-                // height="50px"
                 alt="스크롤아이콘"
               />
+              {/* <img
+                className="scroll_icon-text"
+                src={scroll}
+                alt="스크롤아이콘"
+              /> */}
             </div>
           </div>
           <div className="header____tail">
@@ -168,15 +154,6 @@ class Main extends Component {
                   />
                 </div>
               </div>
-              {/* <div className="context-tail">
-                <img
-                  className="context-tail-img"
-                  src={scroll}
-                  width="50px"
-                  height="50px"
-                  alt="스크롤"
-                />
-              </div> */}
               <div className="scroll_icon">
                 <img
                   className="scroll_icon-img2"
@@ -218,15 +195,6 @@ class Main extends Component {
                   </div>
                 </div>
               </div>
-              {/* <div className="context-tail">
-                <img
-                  className="context-tail-img"
-                  src={scroll}
-                  width="50px"
-                  height="50px"
-                  alt="스크롤"
-                />
-              </div> */}
               <div className="scroll_icon">
                 <img
                   className="scroll_icon-img3"
@@ -275,15 +243,6 @@ class Main extends Component {
                   />
                 </div>
               </div>
-              {/* <div className="context-tail">
-                <img
-                  className="context-tail-img"
-                  src={scroll}
-                  width="50px"
-                  height="50px"
-                  alt="스크롤"
-                />
-              </div> */}
               <div className="main_footer">
                 <a
                   href="https://wonderfulharu.tistory.com/"
