@@ -188,7 +188,9 @@ class Signin extends React.Component {
 
     return (
       <div>
-        <Nav />
+        <div id="nav_signin">
+          <Nav />
+        </div>
         <div id="signin">
           <div className="signin____header____tail">
             <div className="signin_container">
