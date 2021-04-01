@@ -81,8 +81,10 @@ class Main extends Component {
     // console.log("3", check);
 
     return (
-      <div id="home">
-        <Nav />
+      <div>
+        <div id="nav_main">
+          <Nav />
+        </div>
         <div id="main">
           <div className="header____tail">
             <div className="header">

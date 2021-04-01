@@ -668,7 +668,9 @@ class Test extends Component {
 
     return (
       <div>
+        {/* <div id="nav_test"> */}
         <Nav />
+        {/* </div> */}
         <div id="test">
           <div className="test_____header____tail">
             {/* <div className="test_header"> */}
