@@ -440,7 +440,10 @@ a {
   .header_logo {
     height: 100%;
   }
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     top: 86%;
     right: 0;
   }
@@ -508,7 +511,10 @@ a {
   .header_logo {
     height: 100%;
   }
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     right: 0;
   }
   .header____tail____descript {
@@ -576,7 +582,10 @@ a {
   .header_logo {
     height: 100%;
   }
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     right: 1%;
   }
   .header____tail____descript {
@@ -639,7 +648,10 @@ a {
 
 /* 스마트폰 모바일(가로) */
 @media only screen and (min-device-width: 480px) and (max-device-width: 767px) {
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     right: 0%;
   }
   .header____tail {
@@ -717,7 +729,10 @@ a {
 
 /* 태블릿, 아이패드 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1023px) {
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     right: 2%;
   }
   .header____tail____descript {
@@ -794,7 +809,10 @@ a {
   .header_logo {
     height: 100%;
   }
-  .scroll_icon-img1 {
+  .scroll_icon-img1,
+  .scroll_icon-img2,
+  .scroll_icon-img3,
+  .scroll_icon-img4 {
     right: 2%;
   }
   .header____tail____descript {

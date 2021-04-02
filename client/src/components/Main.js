@@ -20,46 +20,77 @@ class Main extends Component {
   // }
 
   scrollTest() {
+    // let scrollValue = document.querySelector("#main").scrollTop;
+
+    // console.log("스크롤 위치는?", scrollValue);
+
     $(document).ready(function () {
       $("#main").on("scroll", function () {
-        var scrollValue = $("#main").scrollTop();
-        // console.log("스크롤위치", scrollValue);
+        // var scrollValue = $("#main").scrollTop();
+        //   console.log("스크롤위치", scrollValue);
 
         // var scrollValue2 = $(".scroll_icon-img1").offset();
         // console.log("대상의위치값", scrollValue2);
+        let scrollLocation = document.querySelector("#main").scrollTop; // 현재 스크롤바 위치
+        let windowHeight = window.innerHeight; // 스크린 창
+        let fullHeight = document.querySelector("#main").scrollHeight; //  margin 값은 포함 x
+
+        // console.log("스크롤 위치는?", scrollLocation);
 
         const icon1 = document.querySelector(".scroll_icon-img1");
         const icon2 = document.querySelector(".scroll_icon-img2");
         const icon3 = document.querySelector(".scroll_icon-img3");
         const icon4 = document.querySelector(".scroll_icon-img4");
 
-        if (scrollValue < 999) {
-          icon1.style.display = `block`;
-          icon2.style.display = `none`;
-          icon3.style.display = `none`;
-          icon4.style.display = `none`;
-        }
-        if (scrollValue === 1000) {
-          // if (800 < scrollValue) {
-          icon1.style.display = `none`;
-          icon2.style.display = `block`;
-          icon3.style.display = `none`;
-          icon4.style.display = `none`;
-        }
-        if (scrollValue === 2000) {
-          // if (1650 < scrollValue) {
-          icon1.style.display = `none`;
-          icon2.style.display = `none`;
-          icon3.style.display = `block`;
-          icon4.style.display = `none`;
-        }
-        if (scrollValue === 3000) {
-          // if (2700 < scrollValue) {
+        // 스크롤 처음
+        // if (scrollLocation === 0) {
+        //   icon1.style.display = `block`;
+        //   icon2.style.display = `none`;
+        //   icon3.style.display = `none`;
+        //   icon4.style.display = `none`;
+        // }
+
+        // 중간
+        // if (scrollLocation + windowHeight < fullHeight) {
+        //   icon1.style.display = `none`;
+        //   icon2.style.display = `block`;
+        //   icon3.style.display = `none`;
+        //   icon4.style.display = `none`;
+        // }
+
+        // 스크롤 끝
+        if (scrollLocation + windowHeight >= fullHeight) {
           icon1.style.display = `none`;
           icon2.style.display = `none`;
           icon3.style.display = `none`;
           icon4.style.display = `block`;
+          console.log("끝");
         }
+
+        // if (scrollValue < 999) {
+        //   icon1.style.display = `block`;
+        //   icon2.style.display = `none`;
+        //   icon3.style.display = `none`;
+        //   icon4.style.display = `none`;
+        // }
+        // if (scrollValue === 1000) {
+        //   icon1.style.display = `none`;
+        //   icon2.style.display = `block`;
+        //   icon3.style.display = `none`;
+        //   icon4.style.display = `none`;
+        // }
+        // if (scrollValue === 2000) {
+        //   icon1.style.display = `none`;
+        //   icon2.style.display = `none`;
+        //   icon3.style.display = `block`;
+        //   icon4.style.display = `none`;
+        // }
+        // if (scrollValue === 3000) {
+        //   icon1.style.display = `none`;
+        //   icon2.style.display = `none`;
+        //   icon3.style.display = `none`;
+        //   icon4.style.display = `block`;
+        // }
       });
     });
   }

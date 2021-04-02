@@ -34,12 +34,12 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: selectValue,
-        })
-        // .post("https://tajachija.tk:8080/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         // })
+        .post("https://tajachija.tk:8080/ranking/print", {
+          title: selectValue,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -82,14 +82,14 @@ class Ranking extends Component {
     const my = [];
 
     axios
-      .post("http://localhost:8080/ranking/print", {
-        title: "진달래꽃",
-        name: nickname,
-      })
-      // .post("https://tajachija.tk/ranking/print", {
+      // .post("http://localhost:8080/ranking/print", {
       //   title: "진달래꽃",
       //   name: nickname,
       // })
+      .post("https://tajachija.tk/ranking/print", {
+        title: "진달래꽃",
+        name: nickname,
+      })
       .then((res) => {
         res.data.data.forEach((el) => {
           printRank.push({
@@ -688,14 +688,14 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: selectValue,
-          name: nickname,
-        })
-        // .post("https://tajachija.tk/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         //   name: nickname,
         // })
+        .post("https://tajachija.tk/ranking/print", {
+          title: selectValue,
+          name: nickname,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -853,14 +853,14 @@ class Ranking extends Component {
         // event.target.parentElement.style.all = "unset";
 
         axios
-          .post("http://localhost:8080/ranking/print", {
-            title: clickTitle,
-            name: clickName,
-          })
-          // .post("https://tajachija.tk/ranking/print", {
+          // .post("http://localhost:8080/ranking/print", {
           //   title: clickTitle,
           //   name: clickName,
           // })
+          .post("https://tajachija.tk/ranking/print", {
+            title: clickTitle,
+            name: clickName,
+          })
           .then((res) => {
             clickArray.push(
               res.data.myRank[0].one,
