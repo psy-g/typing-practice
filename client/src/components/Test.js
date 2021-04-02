@@ -169,7 +169,7 @@ class Test extends Component {
       const key = document.getElementById(e.key);
 
       if (key) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 || e.keyCode === 28) {
           if (
             document.querySelector(".header_problem_count").innerHTML === "" ||
             document.querySelector(".header_problem_count").childNodes
@@ -249,8 +249,8 @@ class Test extends Component {
     // if (title) {
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
-        // .post("https://tajachija.tk/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -292,8 +292,8 @@ class Test extends Component {
 
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
-        // .post("https://tajachija.tk/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -329,8 +329,8 @@ class Test extends Component {
 
     if (id) {
       axios
-        .post("http://localhost:8080/ranking/register", this.state)
-        // .post("https://tajachija.tk/ranking/register", this.state)
+        // .post("http://localhost:8080/ranking/register", this.state)
+        .post("https://tajachija.tk/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -350,14 +350,14 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: filterTitle,
-          name: null,
-        })
-        // .post("https://tajachija.tk/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: filterTitle,
         //   name: null,
         // })
+        .post("https://tajachija.tk/ranking/print", {
+          title: filterTitle,
+          name: null,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -417,33 +417,6 @@ class Test extends Component {
         `;
       }
 
-      // printRank.forEach(function (el, index) {
-      //   newDiv.innerHTML += `
-      //     <div id="header_problem_result_print_rank_top3_print_print_${index}">
-      //     <div class="header_problem_result_print_rank_top_ranker}">${
-      //       index + 1
-      //     }등
-      //     </div>
-      //     <div class="header_problem_result_print_rank_speed_column">
-      //     <div class="header_problem_result_print_rank_top_speed">${
-      //       el.average
-      //     }타수</div>
-      //     </div>
-      //     <div class="header_problem_result_print_rank_time_column">
-      //     <div class="header_problem_result_print_rank_top_time">${
-      //       el.time
-      //     }초</div>
-      //      </div>
-      //     <div class="header_problem_result_print_rank_name_column">
-      //     <div class="header_problem_result_print_rank_top_name">${
-      //       el.name
-      //     }</div>
-      //     </div>
-      //     </div>
-
-      //     `;
-      // });
-
       target.prepend(newDiv);
     }, 2000); // 시간. 2초 후 실행
   }
@@ -456,24 +429,47 @@ class Test extends Component {
     problemValid.addEventListener("input", (e) => {
       if (problemCheck.childNodes.length > 9) {
         const input = e.target.value;
-        const inputLen = e.target.value.length;
+        // const inputLen = e.target.value.length;
         const newProblem = this.state.problem[this.state.count].split("");
+        const inputArray = input.split("");
 
-        // 조건문 개선
-        let counter = inputLen + 3;
-        let limit = newProblem.length + 4;
+        // console.log("입력", input);
+        // console.log("길이", inputLen);
+        // console.log("문제", newProblem);
+        // console.log("입력배열", inputArray);
+        // 수정
+        // 입력된 값을 배열로 만들어서 비교
 
-        if (counter > 3 && counter < limit) {
-          if (input[counter - 4] === newProblem[counter - 4]) {
-            document.querySelector(
-              `.header_problem_count .t${counter - 4}`
-            ).style.color = "#efdc05";
-          } else {
-            document.querySelector(
-              `.header_problem_count .t${counter - 4}`
-            ).style.color = "#e53a40";
+        // 개선
+        for (let i = 0; i < inputArray.length; i++) {
+          if (inputArray.length <= newProblem.length) {
+            if (inputArray[i] === newProblem[i]) {
+              document.querySelector(
+                `.header_problem_count .t${i}`
+              ).style.color = "#efdc05";
+            } else {
+              document.querySelector(
+                `.header_problem_count .t${i}`
+              ).style.color = "#e53a40";
+            }
           }
         }
+
+        // 기존
+        // let counter = inputLen + 3;
+        // let limit = newProblem.length + 4;
+
+        // if (counter > 3 && counter < limit) {
+        //   if (input[counter - 4] === newProblem[counter - 4]) {
+        //     document.querySelector(
+        //       `.header_problem_count .t${counter - 4}`
+        //     ).style.color = "#efdc05";
+        //   } else {
+        //     document.querySelector(
+        //       `.header_problem_count .t${counter - 4}`
+        //     ).style.color = "#e53a40";
+        //   }
+        // }
       }
     });
   }
@@ -704,6 +700,8 @@ class Test extends Component {
                           type="text"
                           className="typing"
                           onChange={this.handleInputValue("answer")}
+                          spellcheck="false"
+                          maxlength={tt.length}
                           autoFocus
                         ></textarea>
                       </div>
@@ -714,6 +712,8 @@ class Test extends Component {
                           type="text"
                           className="typing"
                           onChange={this.handleInputValue("answer")}
+                          spellcheck="false"
+                          maxlength={tt.length}
                           autoFocus
                         ></textarea>
                       </div>
@@ -782,6 +782,8 @@ class Test extends Component {
                     type="text"
                     className="typing"
                     onChange={this.handleInputValue("answer")}
+                    spellcheck="false"
+                    maxlength={tt.length}
                     disabled
                   ></textarea>
                   <span id="show">00:00:00</span>
@@ -898,7 +900,7 @@ class Test extends Component {
                   <div id="ㅁ" className="btn_11">
                     ㅁ
                   </div>
-                  <div id="ㅔ" className="btn_1">
+                  <div id="ㄴ" className="btn_1">
                     ㄴ
                   </div>
                   <div id="ㅇ" className="btn_1">

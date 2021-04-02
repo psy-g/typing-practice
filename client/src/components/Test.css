@@ -472,7 +472,8 @@
   background: #090707;
   border-radius: 0.6rem;
   padding: 30%;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
+  transition: all 0.3s ease;
 }
 
 .pressed {
@@ -499,7 +500,8 @@
   background: #090707;
   border-radius: 0.6rem;
   padding: 30%;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
+  transition: all 0.3s ease;
 }
 
 .btn_11_end:nth-child(12) {
