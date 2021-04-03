@@ -93,30 +93,92 @@
 } */
 
 .header_problem_score {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 65%;
+  height: 15%;
+}
+
+/* .header_problem_score {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 60%;
   height: 15%;
-}
+} */
 
 .header_problem_score_speed {
-  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .header_problem_score_accuracy {
-  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.header_title {
+/* .header_title {
   color: #efdc05;
   font-size: max(0.7em, 1.4vw);
+} */
+.header_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header_title_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #efdc05;
+  font-size: max(0.6em, 1.3vw);
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  /* display: inline-block; */
+}
+
+.problem-content {
+  display: none;
+  /* background-color: #f1f1f1; */
+  min-width: 90px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 15;
+  border-radius: 0px 0px 5px 5px;
+  font-size: max(0.5em, 0.5vw);
+}
+
+.header_title_title a:hover {
+  background-color: #353535;
+}
+
+.problem-content span {
+  /* background-color: #1a1919; */
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  color: white;
+  padding: 10px 4px;
+  display: block;
+}
+
+.header_title_title span:hover {
+  /* background-color: #353535; */
+  color: #efdc05;
+}
+
+/* .show {
+  display: block;
+} */
+
+.header_title_count {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  font-size: max(0.5em, 1.1vw);
 }
 
 .header_titleAndProblem {
@@ -169,11 +231,8 @@
 }
 
 .header_problem_result {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* width: 50%;
-  min-width: 480px; */
+  display: grid;
+  grid-template-columns: 1fr 0.1fr 1fr;
   width: 80vw;
   max-width: 960px;
   height: 13vh;
@@ -185,33 +244,26 @@
   border-radius: 0 0 0.6rem 0.6rem;
 }
 
-@media (max-width: 600px) {
-  .header_problem_result {
-    width: 80%;
-  }
-}
-
-/* @media (min-height: 800px) {
-  .header_problem_result {
-    height: 2vh;
-  }
-} */
-
 /* .header_problem_result {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  width: 70%;
-  max-width: 1000px;
-  height: 11vh;
-  min-height: 50px;
+  width: 80vw;
+  max-width: 960px;
+  height: 13vh;
+  text-align: center;
   background-color: #cadbe9;
   border-top-width: 2.5px;
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
 } */
+
+@media (max-width: 600px) {
+  .header_problem_result {
+    width: 80%;
+  }
+}
 
 .header_problem_score_speed_result,
 .header_problem_score_accuracy_result {
@@ -245,10 +297,46 @@
   color: #e53a40;
 }
 
-.header_timer {
+/* .header_timer {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+} */
+
+.header_problem_result_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_problem_result_right {
+  display: none;
+}
+
+.header_problem_result_right_triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px;
+  border-color: transparent white transparent transparent;
+  z-index: 10;
+  margin: 0px;
+}
+
+.header_problem_result_right_arrow {
+  border-radius: 8px;
+  background: white;
+  border: solid transparent;
+  color: black;
+  border-width: 10px;
+  z-index: 10;
+  margin: 0px;
+}
+
+.header_problem_result_center:hover + .header_problem_result_right {
+  display: flex;
+  justify-content: left;
   align-items: center;
 }
 
@@ -260,7 +348,18 @@
   cursor: pointer;
 }
 
+.start_button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .tail_button_test_login_true {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /* 기존 */
   cursor: pointer;
   border: none;
   background: url("../image/power_on.png");
@@ -270,6 +369,10 @@
 }
 
 .tail_button_test_login_false {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /* 기존 */
   cursor: pointer;
   border: none;
   background: url("../image/power.png");

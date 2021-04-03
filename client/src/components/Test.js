@@ -18,7 +18,7 @@ class Test extends Component {
       accuracy: "",
       speed: "",
       title: ["광야", "님의 손길", "진달래꽃"],
-      filterTitle: "",
+      filterTitle: "선택",
       timer: "",
       keyEvent: false,
       recordTime: 0,
@@ -168,6 +168,8 @@ class Test extends Component {
     keyboardEvent.addEventListener("keydown", (e) => {
       const key = document.getElementById(e.key);
 
+      console.log("체크", e.keyCode);
+
       if (key) {
         if (e.keyCode === 13 || e.keyCode === 28) {
           if (
@@ -249,8 +251,8 @@ class Test extends Component {
     // if (title) {
     if (random) {
       axios
-        // .post("http://localhost:8080/problem/random", { title: random })
-        .post("https://tajachija.tk/problem/random", { title: random })
+        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -279,9 +281,76 @@ class Test extends Component {
     }
   }
 
+  // 문제 선택
+  selectProblem = (value) => (e) => {
+    document.querySelector(".typing").value = "";
+
+    const divChange = document.querySelector(".header_problem_count").children
+      .length;
+
+    for (let i = 0; i < divChange; i++) {
+      document.querySelector(`.header_problem_count .t${i}`).style.color =
+        "white";
+    }
+
+    this.setState({ keyEvent: false, count: 0, recordTime: 0 });
+    this.stop();
+    this.init();
+
+    if (value) {
+      axios
+        .post("http://localhost:8080/problem/random", { title: value })
+        // .post("https://tajachija.tk/problem/random", { title: value })
+        .then((res) => {
+          let filterProblem = [];
+          let filter = "";
+
+          res.data.data.forEach((el) => {
+            filterProblem.push(el.problem);
+            filter = el.title;
+          });
+
+          if (res.data.winner) {
+            this.setState({ problem: filterProblem });
+            this.setState({ filterTitle: filter });
+            this.setState({ winnerRecord: res.data.winner.time });
+          } else {
+            this.setState({ problem: filterProblem });
+            this.setState({ filterTitle: filter });
+          }
+        })
+        .catch((err) => {
+          if (err) {
+            alert("문제 요청 에러");
+          }
+        });
+    } else {
+      alert("에러");
+    }
+  };
+
+  selectButton() {
+    document.querySelector("#problemDropdown").classList.toggle("show");
+
+    if (document.querySelector(".show")) {
+      document.querySelector(".header_title_count").style.display = "none";
+    } else {
+      document.querySelector(".header_title_count").style.display = "flex";
+    }
+
+    window.onclick = function (event) {
+      if (!event.target.matches(".header_title_title")) {
+      }
+    };
+  }
+
   // 문제 요청 새로고침
   requestRefresh() {
+    // 키보드 이벤트가 발생을 안함..일단 보류
     document.querySelector(".typing").value = "";
+    document.querySelector(".header_problem_score_speed_result").innerHTML = "";
+    document.querySelector(".header_problem_score_accuracy_result").innerHTML =
+      "";
 
     this.setState({ keyEvent: false, count: 0, recordTime: 0 });
     this.stop();
@@ -292,8 +361,8 @@ class Test extends Component {
 
     if (random) {
       axios
-        // .post("http://localhost:8080/problem/random", { title: random })
-        .post("https://tajachija.tk/problem/random", { title: random })
+        .post("http://localhost:8080/problem/random", { title: random })
+        // .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -329,8 +398,8 @@ class Test extends Component {
 
     if (id) {
       axios
-        // .post("http://localhost:8080/ranking/register", this.state)
-        .post("https://tajachija.tk/ranking/register", this.state)
+        .post("http://localhost:8080/ranking/register", this.state)
+        // .post("https://tajachija.tk/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -350,14 +419,14 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        // .post("http://localhost:8080/ranking/print", {
-        //   title: filterTitle,
-        //   name: null,
-        // })
-        .post("https://tajachija.tk/ranking/print", {
+        .post("http://localhost:8080/ranking/print", {
           title: filterTitle,
           name: null,
         })
+        // .post("https://tajachija.tk/ranking/print", {
+        //   title: filterTitle,
+        //   name: null,
+        // })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -664,13 +733,10 @@ class Test extends Component {
 
     return (
       <div>
-        {/* <div id="nav_test"> */}
         <Nav />
-        {/* </div> */}
         <div id="test">
           <div className="test_____header____tail">
             {/* <div className="test_header"> */}
-
             <div className="header_problem">
               <div className="header_problem_score">
                 <div className="header_problem_score_speed">
@@ -679,7 +745,36 @@ class Test extends Component {
                     {speed}
                   </div>
                 </div>
-                <div className="header_title">{filterTitle}</div>
+                {/* <div className="header_title">{filterTitle}</div> */}
+                <div className="header_title">
+                  {count < 7 ? (
+                    <div
+                      className="header_title_title"
+                      onClick={this.selectButton}
+                    >
+                      {filterTitle}
+                      <div id="problemDropdown" className="problem-content">
+                        <span onClick={this.selectProblem("진달래꽃")}>
+                          진달래꽃
+                        </span>
+                        <span onClick={this.selectProblem("광야")}>광야</span>
+                        <span onClick={this.selectProblem("님의 손길")}>
+                          님의 손길
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="header_title_title">{filterTitle}</div>
+                  )}
+                  {/* <div className="header_title_title">{filterTitle}</div> */}
+                  {(count < 7 && filterTitle === "진달래꽃") ||
+                  (count < 7 && filterTitle === "광야") ||
+                  (count < 7 && filterTitle === "님의 손길") ? (
+                    <div className="header_title_count">{count + 1} / 7</div>
+                  ) : (
+                    <div className="header_title_count"></div>
+                  )}
+                </div>
                 <div className="header_problem_score_accuracy">
                   <div className="header_problem_score_accuracy_column">
                     정확도
@@ -690,7 +785,7 @@ class Test extends Component {
                 </div>
               </div>
               <div className="header_titleAndProblem">
-                {count !== 7 ? (
+                {count < 7 ? (
                   // {count !== 2 ? (
                   <div className="header_problem_count_header">
                     {tttt.length !== 9 ? (
@@ -765,7 +860,7 @@ class Test extends Component {
                   </div>
                 )}
               </div>
-              {count !== 7 ? (
+              {count < 7 ? (
                 // {count !== 2 ? (
                 <div className="header_problem_tail">
                   {/* <textarea
@@ -774,7 +869,7 @@ class Test extends Component {
                     onChange={this.handleInputValue("answer")}
                     autoFocus
                   ></textarea> */}
-                  <span id="show">00:00:00</span>
+                  <span id="show">00:00</span>
                 </div>
               ) : (
                 <div className="header_problem_tail_end">
@@ -786,14 +881,16 @@ class Test extends Component {
                     maxlength={tt.length}
                     disabled
                   ></textarea>
-                  <span id="show">00:00:00</span>
+                  <span id="show">00:00</span>
                 </div>
               )}
             </div>
             <div className="header_problem_result">
-              <div className="header_timer">
-                {count !== 7 ? (
-                  // {count !== 2 ? (
+              <div className="header_problem_result_left"></div>
+              <div className="header_problem_result_center">
+                {" "}
+                {/* <div className="header_timer"> */}
+                {count < 7 ? (
                   <div className="start_button">
                     {!checkLogin ? (
                       <div
@@ -814,15 +911,6 @@ class Test extends Component {
                         onClick={this.requestProblem}
                       />
                     )}
-
-                    {/* <img
-                        className="random_start"
-                        src={randomBtn}
-                        width="50px"
-                        height="50px"
-                        alt="randomBtn"
-                        onClick={this.requestProblem}
-                      /> */}
                   </div>
                 ) : (
                   <div className="start_button">
@@ -833,7 +921,7 @@ class Test extends Component {
                         width="50px"
                         height="50px"
                         alt="randomBtn"
-                        onClick={this.requestRefresh}
+                        // onClick={this.requestRefresh}
                       />
                     ) : (
                       <div
@@ -842,25 +930,21 @@ class Test extends Component {
                         width="50px"
                         height="50px"
                         alt="randomBtn"
-                        onClick={this.requestRefresh}
+                        // onClick={window.location.reload()}
+                        // onClick={this.requestRefresh}
                       />
                     )}
-
-                    {/* <img
-                        className="random_start_rank"
-                        src={randomBtn}
-                        width="50px"
-                        height="50px"
-                        alt="randomBtn"
-                        onClick={this.requestRefresh}
-                      /> */}
                   </div>
                 )}
               </div>
+              <div className="header_problem_result_right">
+                <p className="header_problem_result_right_triangle"></p>
+                <p className="header_problem_result_right_arrow">랜덤 문제</p>
+                {/* </div> */}
+              </div>
             </div>
             {/* </div> */}
-
-            {count !== 7 ? (
+            {count < 7 ? (
               // {count !== 2 ? (
               <div className="test_input">
                 <div id="keyboard">

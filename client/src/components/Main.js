@@ -130,7 +130,25 @@ class Main extends Component {
               </div>
             </div>
             <div className="tail">
-              <div className="tail_button">
+              <div className="tail_left"></div>
+              <div className="tail_center">
+                <div className="tail_button">
+                  {!checkLogin ? (
+                    <Link to="/signin">
+                      <div className="tail_button_main" />
+                    </Link>
+                  ) : (
+                    <Link to="/test">
+                      <div className="tail_button_main_login" />
+                    </Link>
+                  )}
+                </div>
+              </div>
+              <div className="tail_right">
+                <p className="tail_right_triangle"></p>
+                <p className="tail_right_arrow">로그인</p>
+              </div>
+              {/* <div className="tail_button">
                 {!checkLogin ? (
                   <Link to="/signin">
                     <div className="tail_button_main" />
@@ -140,7 +158,7 @@ class Main extends Component {
                     <div className="tail_button_main_login" />
                   </Link>
                 )}
-              </div>
+              </div> */}
             </div>
             <div className="scroll_icon">
               <img
