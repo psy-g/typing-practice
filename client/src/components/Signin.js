@@ -73,8 +73,8 @@ class Signin extends React.Component {
       loginDuplicate.style.display = "none";
 
       const loginRequest = await axios.post(
-        // "http://localhost:8080/auth/signin",
-        "https://tajachija.tk/auth/signin",
+        "http://localhost:8080/auth/signin",
+        // "https://tajachija.tk/auth/signin",
         { nickname, password },
         { withCredentials: true }
       );
@@ -106,8 +106,8 @@ class Signin extends React.Component {
 
     if (password.length >= 4 && nickname.length >= 2 && nickname.length <= 5) {
       axios
-        // .post("http://localhost:8080/auth/signup", this.state)
-        .post("https://tajachija.tk/auth/signup", this.state)
+        .post("http://localhost:8080/auth/signup", this.state)
+        // .post("https://tajachija.tk/auth/signup", this.state)
         .then((res) => {
           if (res.data.message === "signup") {
             this.props.history.push("/");
@@ -286,16 +286,16 @@ class Signin extends React.Component {
               )}
             </div>
             <div className="signin_tail">
-              <Link to="/">
-                {/* <img
-                  className="signin_tail_button"
-                  src={btn}
-                  width="50px"
-                  height="50px"
-                  alt="btn"
-                /> */}
-                <div className="tail_button_signin" />
-              </Link>
+              <div className="signin_tail_left"></div>
+              <div className="signin_tail_center">
+                <Link to="/">
+                  <div className="tail_button_signin" />
+                </Link>
+              </div>
+              <div className="signin_tail_right">
+                <p className="signin_tail_right_triangle"></p>
+                <p className="signin_tail_right_arrow">홈</p>
+              </div>
             </div>
           </div>
         </div>
