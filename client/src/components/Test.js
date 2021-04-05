@@ -163,15 +163,16 @@ class Test extends Component {
     // event = false 처음에 이벤트 발생시키면 true로 바꾸고 문제가 넘어가거나
     // 틀렸을 경우 다시 false로 바꾸고 다시 실행 시킬 준비
     // console.log("확인", this.state.keyEvent);
+
     const keyboardEvent = document.querySelector(".typing");
 
     keyboardEvent.addEventListener("keydown", (e) => {
       const key = document.getElementById(e.key);
 
-      console.log("체크", e.keyCode);
+      // console.log("체크", e.keyCode);
 
       if (key) {
-        if (e.keyCode === 13 || e.keyCode === 28) {
+        if (e.keyCode === 13 || e.keyCode === 66) {
           if (
             document.querySelector(".header_problem_count").innerHTML === "" ||
             document.querySelector(".header_problem_count").childNodes
@@ -251,8 +252,8 @@ class Test extends Component {
     // if (title) {
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
-        // .post("https://tajachija.tk/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -299,8 +300,8 @@ class Test extends Component {
 
     if (value) {
       axios
-        .post("http://localhost:8080/problem/random", { title: value })
-        // .post("https://tajachija.tk/problem/random", { title: value })
+        // .post("http://localhost:8080/problem/random", { title: value })
+        .post("https://tajachija.tk/problem/random", { title: value })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -344,10 +345,15 @@ class Test extends Component {
     };
   }
 
-  // 문제 요청 새로고침
+  // 문제 요청 새로고침(개선)
   requestRefresh() {
+    window.location.reload();
+  }
+
+  // 문제 요청 새로고침(기존)
+  requestRefresh2() {
     // 키보드 이벤트가 발생을 안함..일단 보류
-    document.querySelector(".typing").value = "";
+    // document.querySelector(".typing").value = "";
     document.querySelector(".header_problem_score_speed_result").innerHTML = "";
     document.querySelector(".header_problem_score_accuracy_result").innerHTML =
       "";
@@ -361,8 +367,8 @@ class Test extends Component {
 
     if (random) {
       axios
-        .post("http://localhost:8080/problem/random", { title: random })
-        // .post("https://tajachija.tk/problem/random", { title: random })
+        // .post("http://localhost:8080/problem/random", { title: random })
+        .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
           let filter = "";
@@ -398,8 +404,8 @@ class Test extends Component {
 
     if (id) {
       axios
-        .post("http://localhost:8080/ranking/register", this.state)
-        // .post("https://tajachija.tk/ranking/register", this.state)
+        // .post("http://localhost:8080/ranking/register", this.state)
+        .post("https://tajachija.tk/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -419,14 +425,14 @@ class Test extends Component {
     } else {
       // alert("회원가입이 필요합니다");
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: filterTitle,
-          name: null,
-        })
-        // .post("https://tajachija.tk/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: filterTitle,
         //   name: null,
         // })
+        .post("https://tajachija.tk/ranking/print", {
+          title: filterTitle,
+          name: null,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -465,7 +471,7 @@ class Test extends Component {
       for (let i = 0; i < PrintRankLenth; i++) {
         newDiv.innerHTML += `
         <div id="header_problem_result_print_rank_top3_print_print_${i}">
-          <div class="header_problem_result_print_rank_top_ranker}">${i + 1}등
+          <div class="header_problem_result_print_rank_top_ranker">${i + 1}등
         </div>
         <div class="header_problem_result_print_rank_speed_column">
         <div class="header_problem_result_print_rank_top_speed">${
@@ -754,12 +760,12 @@ class Test extends Component {
                     >
                       {filterTitle}
                       <div id="problemDropdown" className="problem-content">
-                        <span onClick={this.selectProblem("진달래꽃")}>
-                          진달래꽃
-                        </span>
-                        <span onClick={this.selectProblem("광야")}>광야</span>
                         <span onClick={this.selectProblem("님의 손길")}>
                           님의 손길
+                        </span>
+                        <span onClick={this.selectProblem("광야")}>광야</span>
+                        <span onClick={this.selectProblem("진달래꽃")}>
+                          진달래꽃
                         </span>
                       </div>
                     </div>
@@ -767,9 +773,9 @@ class Test extends Component {
                     <div className="header_title_title">{filterTitle}</div>
                   )}
                   {/* <div className="header_title_title">{filterTitle}</div> */}
-                  {(count < 7 && filterTitle === "진달래꽃") ||
+                  {(count < 7 && filterTitle === "님의 손길") ||
                   (count < 7 && filterTitle === "광야") ||
-                  (count < 7 && filterTitle === "님의 손길") ? (
+                  (count < 7 && filterTitle === "진달래꽃") ? (
                     <div className="header_title_count">{count + 1} / 7</div>
                   ) : (
                     <div className="header_title_count"></div>
@@ -788,37 +794,33 @@ class Test extends Component {
                 {count < 7 ? (
                   // {count !== 2 ? (
                   <div className="header_problem_count_header">
-                    {tttt.length !== 9 ? (
-                      <div className="problemAndTyping">
+                    <div className="problemAndTyping">
+                      {tttt.length !== 9 ? (
                         <div className="header_problem_count">{tttt}</div>
-                        <textarea
-                          type="text"
-                          className="typing"
-                          onChange={this.handleInputValue("answer")}
-                          spellcheck="false"
-                          maxlength={tt.length}
-                          autoFocus
-                        ></textarea>
-                      </div>
-                    ) : (
-                      <div className="problemAndTyping">
+                      ) : (
                         <div className="header_problem_count"></div>
-                        <textarea
-                          type="text"
-                          className="typing"
-                          onChange={this.handleInputValue("answer")}
-                          spellcheck="false"
-                          maxlength={tt.length}
-                          autoFocus
-                        ></textarea>
-                      </div>
-                    )}
+                      )}
+                      <textarea
+                        type="text"
+                        className="typing"
+                        onChange={this.handleInputValue("answer")}
+                        spellcheck="false"
+                        maxlength={tt.length}
+                        autoFocus
+                      ></textarea>
+                    </div>
                   </div>
                 ) : (
                   <div className="header_titleAndProblem_print">
-                    <div className="header_titleAndProblem_print_header">
-                      기록
-                    </div>
+                    {nickname ? (
+                      <div className="header_titleAndProblem_print_header">
+                        {nickname}님의 기록
+                      </div>
+                    ) : (
+                      <div className="header_titleAndProblem_print_header">
+                        Guest님의 기록
+                      </div>
+                    )}
                     <div className="header_titleAndProblem_print_body">
                       <div className="header_titleAndProblem_print_body_speed">
                         <div className="header_titleAndProblem_print_body_speed_column">
@@ -833,29 +835,9 @@ class Test extends Component {
                           시간
                         </div>
                         <div className="header_titleAndProblem_print_body_time_result">
-                          {recordTime.toFixed(1)}초
+                          {recordTime.toFixed(1)}초 걸렸습니다
                         </div>
                       </div>
-                      <div className="header_titleAndProblem_print_body_name">
-                        <div className="header_titleAndProblem_print_body_name_column">
-                          닉네임
-                        </div>
-                        {nickname ? (
-                          <div className="header_titleAndProblem_print_body_name_result">
-                            {nickname}
-                          </div>
-                        ) : (
-                          <div className="header_titleAndProblem_print_body_name_result">
-                            Guest
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="header_problem_result_print_rank">
-                      <div className="header_problem_result_print_rank_text">
-                        <Link to="/ranking">🏆</Link> TOP 3
-                      </div>
-                      <div className="header_problem_result_print_rank_top3"></div>
                     </div>
                   </div>
                 )}
@@ -863,25 +845,17 @@ class Test extends Component {
               {count < 7 ? (
                 // {count !== 2 ? (
                 <div className="header_problem_tail">
-                  {/* <textarea
-                    type="text"
-                    className="typing"
-                    onChange={this.handleInputValue("answer")}
-                    autoFocus
-                  ></textarea> */}
                   <span id="show">00:00</span>
                 </div>
               ) : (
-                <div className="header_problem_tail_end">
-                  <textarea
-                    type="text"
-                    className="typing"
-                    onChange={this.handleInputValue("answer")}
-                    spellcheck="false"
-                    maxlength={tt.length}
-                    disabled
-                  ></textarea>
-                  <span id="show">00:00</span>
+                // <div className="header_problem_tail_end">
+                <div className="header_problem_tail">
+                  <div className="header_problem_result_print_rank">
+                    <div className="header_problem_result_print_rank_text">
+                      순위 <Link to="/ranking">🏆</Link>
+                    </div>
+                    <div className="header_problem_result_print_rank_top3"></div>
+                  </div>
                 </div>
               )}
             </div>
@@ -921,7 +895,7 @@ class Test extends Component {
                         width="50px"
                         height="50px"
                         alt="randomBtn"
-                        // onClick={this.requestRefresh}
+                        onClick={this.requestRefresh}
                       />
                     ) : (
                       <div
@@ -931,7 +905,7 @@ class Test extends Component {
                         height="50px"
                         alt="randomBtn"
                         // onClick={window.location.reload()}
-                        // onClick={this.requestRefresh}
+                        onClick={this.requestRefresh}
                       />
                     )}
                   </div>
@@ -939,7 +913,7 @@ class Test extends Component {
               </div>
               <div className="header_problem_result_right">
                 <p className="header_problem_result_right_triangle"></p>
-                <p className="header_problem_result_right_arrow">랜덤 문제</p>
+                <p className="header_problem_result_right_arrow">랜덤</p>
                 {/* </div> */}
               </div>
             </div>
