@@ -378,7 +378,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 65%;
+  height: 85%;
 }
 
 .context-header-text-top3 {
@@ -402,7 +402,7 @@
 
 .context-header-text3 {
   width: 100%;
-  height: 60%;
+  height: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -415,8 +415,9 @@
 }
 
 .context-header-img3-container {
-  height: 40%;
+  height: 50%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 

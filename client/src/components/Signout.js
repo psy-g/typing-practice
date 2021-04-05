@@ -12,10 +12,10 @@ class Signout extends Component {
 
   logout() {
     axios
-      .post("http://localhost:8080/auth/signout", { credentials: "include" })
-      // .post("https://tajachija.tk/auth/signout", {
-      //   credentials: "include",
-      // })
+      // .post("http://localhost:8080/auth/signout", { credentials: "include" })
+      .post("https://tajachija.tk/auth/signout", {
+        credentials: "include",
+      })
       .then((res) => {
         if (res.data.message === "signout") {
           window.localStorage.removeItem("isLogin");

@@ -12,7 +12,7 @@ class Ranking extends Component {
       items: [],
       myItems: [],
       myRecord: "",
-      init: "진달래꽃",
+      init: "님의 손길",
       myInit: [],
       myRanking: "",
       bestRecordArray: [],
@@ -34,12 +34,12 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: selectValue,
-        })
-        // .post("https://tajachija.tk:8080/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         // })
+        .post("https://tajachija.tk:8080/ranking/print", {
+          title: selectValue,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -82,14 +82,14 @@ class Ranking extends Component {
     const my = [];
 
     axios
-      .post("http://localhost:8080/ranking/print", {
-        title: "진달래꽃",
-        name: nickname,
-      })
-      // .post("https://tajachija.tk/ranking/print", {
-      //   title: "진달래꽃",
+      // .post("http://localhost:8080/ranking/print", {
+      //   title: "님의 손길",
       //   name: nickname,
       // })
+      .post("https://tajachija.tk/ranking/print", {
+        title: "님의 손길",
+        name: nickname,
+      })
       .then((res) => {
         res.data.data.forEach((el) => {
           printRank.push({
@@ -688,14 +688,14 @@ class Ranking extends Component {
 
     if (selectValue) {
       axios
-        .post("http://localhost:8080/ranking/print", {
-          title: selectValue,
-          name: nickname,
-        })
-        // .post("https://tajachija.tk/ranking/print", {
+        // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         //   name: nickname,
         // })
+        .post("https://tajachija.tk/ranking/print", {
+          title: selectValue,
+          name: nickname,
+        })
         .then((res) => {
           res.data.data.forEach((el) => {
             printRank.push({
@@ -853,14 +853,14 @@ class Ranking extends Component {
         // event.target.parentElement.style.all = "unset";
 
         axios
-          .post("http://localhost:8080/ranking/print", {
-            title: clickTitle,
-            name: clickName,
-          })
-          // .post("https://tajachija.tk/ranking/print", {
+          // .post("http://localhost:8080/ranking/print", {
           //   title: clickTitle,
           //   name: clickName,
           // })
+          .post("https://tajachija.tk/ranking/print", {
+            title: clickTitle,
+            name: clickName,
+          })
           .then((res) => {
             clickArray.push(
               res.data.myRank[0].one,
@@ -984,9 +984,9 @@ class Ranking extends Component {
                     <img className="dropbtn_img" src={arrow} alt="arrow" />
                   </button>
                   <div id="myDropdown" className="dropdown-content">
-                    <span onClick={this.print2("진달래꽃")}>진달래꽃</span>
-                    <span onClick={this.print2("광야")}>광야</span>
                     <span onClick={this.print2("님의 손길")}>님의 손길</span>
+                    <span onClick={this.print2("광야")}>광야</span>
+                    <span onClick={this.print2("진달래꽃")}>진달래꽃</span>
                   </div>
                 </div>
               </div>

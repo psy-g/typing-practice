@@ -64,7 +64,7 @@ class Main extends Component {
           icon2.style.display = `none`;
           icon3.style.display = `none`;
           icon4.style.display = `block`;
-          console.log("끝");
+          // console.log("끝");
         }
 
         // if (scrollValue < 999) {
