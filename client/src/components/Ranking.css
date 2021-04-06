@@ -1289,58 +1289,6 @@ li:hover::before {
   display: block;
 }
 
-/* @media screen and (max-width: 640px) {
-  .percent-indicator div::after {
-    display: none;
-  }
-} */
-
-/* @media (max-height: 1000px) {
-  .select_wrapper {
-    display: flex;
-    height: 3vh;
-    margin-bottom: 15px;
-  }
-  .dropbtn {
-    width: 100%;
-    height: 75%;
-    font-size: 0.8em;
-  }
-  .dropbtn_img {
-    height: 100%;
-    min-height: 20px;
-  }
-  .ranking_table_myRanking {
-    height: 23%;
-  }
-}
-
-@media (max-width: 800px) {
-  .select_wrapper {
-    display: flex;
-    height: 3vh;
-    margin-bottom: 15px;
-  }
-  .dropbtn {
-    width: 100%;
-    height: 75%;
-    font-size: 0.8em;
-  }
-  .dropbtn_img {
-    height: 100%;
-    min-height: 20px;
-  }
-  .ranking_table_myRanking {
-    height: 23%;
-  }
-  .ranking_detail2 {
-    padding: 5px;
-  }
-  .detail_body2_header {
-    height: 10%;
-  }
-} */
-
 /* 갤럭시 fold */
 @media only screen and (min-device-width: 280px) and (max-device-width: 319px) {
   .select_wrapper {
@@ -1503,5 +1451,55 @@ li:hover::before {
   }
   li {
     font-size: 14px;
+  }
+  .graph-wrapper2 {
+    height: 15vh;
+  }
+}
+
+/* 데스크톱 */
+@media (hover: hover) and (pointer: fine) and (max-height: 1000px) {
+  .select_wrapper {
+    display: flex;
+    height: 3vh;
+    margin-bottom: 15px;
+  }
+  .dropbtn {
+    /* width: 50%; */
+    height: 75%;
+    font-size: 0.8em;
+  }
+  .dropbtn_img {
+    height: 100%;
+    min-height: 20px;
+  }
+  .ranking_table_myRanking {
+    height: 23%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (max-width: 800px) {
+  .select_wrapper {
+    display: flex;
+    height: 3vh;
+    margin-bottom: 15px;
+  }
+  .dropbtn {
+    width: 100%;
+    height: 75%;
+    font-size: 0.8em;
+  }
+  .dropbtn_img {
+    height: 100%;
+    min-height: 20px;
+  }
+  .ranking_table_myRanking {
+    height: 23%;
+  }
+  .ranking_detail2 {
+    padding: 5px;
+  }
+  .detail_body2_header {
+    height: 10%;
   }
 }
