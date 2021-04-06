@@ -7,11 +7,7 @@ import mainImg1 from "../image/main_img_1.gif";
 import mainImg2 from "../image/main_img_2.png";
 import mainImg3 from "../image/main_img_3.png";
 import mainImg4 from "../image/main_img_4.gif";
-import scroll from "../image/scroll_icon.png";
-import scrollIcon1 from "../image/icon1.png";
-import scrollIcon2 from "../image/icon2.png";
-import scrollIcon3 from "../image/icon3.png";
-import scrollIcon4 from "../image/icon4.png";
+import scrollText from "../image/scroll_image.png";
 import $ from "jquery";
 
 class Main extends Component {
@@ -37,60 +33,15 @@ class Main extends Component {
 
         // console.log("스크롤 위치는?", scrollLocation);
 
-        const icon1 = document.querySelector(".scroll_icon-img1");
-        const icon2 = document.querySelector(".scroll_icon-img2");
-        const icon3 = document.querySelector(".scroll_icon-img3");
-        const icon4 = document.querySelector(".scroll_icon-img4");
-
-        // 스크롤 처음
-        // if (scrollLocation === 0) {
-        //   icon1.style.display = `block`;
-        //   icon2.style.display = `none`;
-        //   icon3.style.display = `none`;
-        //   icon4.style.display = `none`;
-        // }
-
-        // 중간
-        // if (scrollLocation + windowHeight < fullHeight) {
-        //   icon1.style.display = `none`;
-        //   icon2.style.display = `block`;
-        //   icon3.style.display = `none`;
-        //   icon4.style.display = `none`;
-        // }
+        const scrollImg = document.querySelector(".scroll_icon");
 
         // 스크롤 끝
         if (scrollLocation + windowHeight >= fullHeight) {
-          icon1.style.display = `none`;
-          icon2.style.display = `none`;
-          icon3.style.display = `none`;
-          icon4.style.display = `block`;
+          scrollImg.style.display = `none`;
           // console.log("끝");
+        } else {
+          scrollImg.style.display = `block`;
         }
-
-        // if (scrollValue < 999) {
-        //   icon1.style.display = `block`;
-        //   icon2.style.display = `none`;
-        //   icon3.style.display = `none`;
-        //   icon4.style.display = `none`;
-        // }
-        // if (scrollValue === 1000) {
-        //   icon1.style.display = `none`;
-        //   icon2.style.display = `block`;
-        //   icon3.style.display = `none`;
-        //   icon4.style.display = `none`;
-        // }
-        // if (scrollValue === 2000) {
-        //   icon1.style.display = `none`;
-        //   icon2.style.display = `none`;
-        //   icon3.style.display = `block`;
-        //   icon4.style.display = `none`;
-        // }
-        // if (scrollValue === 3000) {
-        //   icon1.style.display = `none`;
-        //   icon2.style.display = `none`;
-        //   icon3.style.display = `none`;
-        //   icon4.style.display = `block`;
-        // }
       });
     });
   }
@@ -98,6 +49,7 @@ class Main extends Component {
   componentDidMount() {
     this.scrollTest();
   }
+
   render() {
     const checkLogin = window.localStorage.getItem("isLogin");
 
@@ -163,14 +115,11 @@ class Main extends Component {
             <div className="scroll_icon">
               <img
                 className="scroll_icon-img1"
-                src={scrollIcon1}
+                src={scrollText}
                 alt="스크롤아이콘"
+                width="70px"
+                height="80px"
               />
-              {/* <img
-                className="scroll_icon-text"
-                src={scroll}
-                alt="스크롤아이콘"
-              /> */}
             </div>
           </div>
           <div className="header____tail">
@@ -206,11 +155,11 @@ class Main extends Component {
                 </div>
               </div>
               <div className="scroll_icon">
-                <img
+                {/* <img
                   className="scroll_icon-img2"
                   src={scrollIcon2}
                   alt="스크롤아이콘"
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -247,11 +196,11 @@ class Main extends Component {
                 </div>
               </div>
               <div className="scroll_icon">
-                <img
+                {/* <img
                   className="scroll_icon-img3"
                   src={scrollIcon3}
                   alt="스크롤아이콘"
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -312,11 +261,11 @@ class Main extends Component {
                 </a>
               </div>
               <div className="scroll_icon">
-                <img
+                {/* <img
                   className="scroll_icon-img4"
                   src={scrollIcon4}
                   alt="스크롤아이콘"
-                />
+                /> */}
               </div>
             </div>
           </div>
