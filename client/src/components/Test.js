@@ -41,8 +41,6 @@ class Test extends Component {
   compare() {
     const { problem, count, answer, time, recordArray } = this.state;
 
-    console.log("time:", time);
-
     // 반짝이는 듯속에 나는 두 손 모아 빌었지(50유효타수, 4초)
     // 50타 * 60초 / 4초 => 750타?
     // 백스페이스 7번
@@ -57,7 +55,7 @@ class Test extends Component {
 
     // 타수
     // 현재속도 = (타수(글자수) - 백스페이스 * 2) / 경과시간(초) * 60초
-    // 한컴타자는 백스페이스 * 3
+    // 글컴타자는 백스페이스 * 3
     const tasu = this.getConstantVowel(problem[count]);
     const tasuJS = JSON.stringify(tasu);
     const inputAnswer = this.getConstantVowel(answer);
@@ -168,13 +166,11 @@ class Test extends Component {
 
     const keyboardEvent = document.querySelector(".typing");
 
-    keyboardEvent.addEventListener("keydown", (e) => {
+    keyboardEvent.addEventListener("keypress", (e) => {
       const key = document.getElementById(e.key);
 
-      // console.log("체크", e.keyCode);
-
       if (key) {
-        if (e.keyCode === 13 || e.keyCode === 66) {
+        if (e.keyCode === 13) {
           if (
             document.querySelector(".header_problem_count").innerHTML === "" ||
             document.querySelector(".header_problem_count").childNodes
@@ -204,7 +200,19 @@ class Test extends Component {
             if (e.preventDefault) e.preventDefault();
             return false;
           }
-        } else {
+        }
+      }
+    });
+
+    keyboardEvent.addEventListener("keydown", (e) => {
+      const key = document.getElementById(e.key);
+
+      // console.log("인풋", e);
+      // console.log("isComposing:", e.isComposing);
+
+      if (key) {
+        // if (64 < e.keyCode < 91) {
+        if (e.keyCode === 229) {
           if (!this.state.keyEvent) {
             this.start();
             this.setState({ keyEvent: true });
@@ -223,10 +231,87 @@ class Test extends Component {
           }
           key.classList.add("pressed");
         }
+      } else {
+        if (!this.state.keyEvent) {
+          this.start();
+          this.setState({ keyEvent: true });
+
+          // 색상 초기화
+          for (
+            let i = 0;
+            i < document.querySelector(".header_problem_count").children.length;
+            i++
+          ) {
+            document.querySelector(`.header_problem_count .t${i}`).style.color =
+              "white";
+          }
+        }
       }
     });
 
+    //
+    // keyboardEvent.addEventListener("keydown", (e) => {
+    //   const key = document.getElementById(e.key);
+
+    //   // console.log("키코드:", e.keyCode);
+    //   // console.log("인풋", e);
+    //   // console.log("isComposing:", e.isComposing);
+
+    //   if (key) {
+    //     if (e.keyCode === 13) {
+    //       if (
+    //         document.querySelector(".header_problem_count").innerHTML === "" ||
+    //         document.querySelector(".header_problem_count").childNodes
+    //           .length === 9
+    //       ) {
+    //         this.requestProblem();
+    //         if (e.preventDefault) e.preventDefault();
+    //         return false;
+    //       } else {
+    //         this.stop();
+
+    //         const resultTime = document
+    //           .getElementById("show")
+    //           .innerHTML.split(":");
+
+    //         this.setState({
+    //           time: Number(`${resultTime[0]}.${resultTime[1]}`),
+    //         });
+    //         this.compare();
+
+    //         if (this.state.count === 7) {
+    //           // if (this.state.count === 2) {
+    //           this.rankPrint();
+    //           // 2초 후에 렌더링 시킬 메소드 추가
+    //         }
+
+    //         if (e.preventDefault) e.preventDefault();
+    //         return false;
+    //       }
+    //     } else {
+    //       if (!this.state.keyEvent) {
+    //         this.start();
+    //         this.setState({ keyEvent: true });
+
+    //         // 색상 초기화
+    //         for (
+    //           let i = 0;
+    //           i <
+    //           document.querySelector(".header_problem_count").children.length;
+    //           i++
+    //         ) {
+    //           document.querySelector(
+    //             `.header_problem_count .t${i}`
+    //           ).style.color = "white";
+    //         }
+    //       }
+    //       key.classList.add("pressed");
+    //     }
+    //   }
+    // });
+
     keyboardEvent.addEventListener("keyup", (e) => {
+      // keyboardEvent.addEventListener("keyup", (e) => {
       const key = document.getElementById(e.key);
 
       if (key) key.classList.remove("pressed");
@@ -255,6 +340,7 @@ class Test extends Component {
     if (random) {
       axios
         // .post("http://localhost:8080/problem/random", { title: random })
+        // .post("http://d5932f4fad26.ngrok.io/problem/random", { title: random })
         .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
@@ -303,6 +389,7 @@ class Test extends Component {
     if (value) {
       axios
         // .post("http://localhost:8080/problem/random", { title: value })
+        // .post("http://d5932f4fad26.ngrok.io/problem/random", { title: value })
         .post("https://tajachija.tk/problem/random", { title: value })
         .then((res) => {
           let filterProblem = [];
@@ -370,6 +457,7 @@ class Test extends Component {
     if (random) {
       axios
         // .post("http://localhost:8080/problem/random", { title: random })
+        // .post("http://d5932f4fad26.ngrok.io/problem/random", { title: random })
         .post("https://tajachija.tk/problem/random", { title: random })
         .then((res) => {
           let filterProblem = [];
@@ -407,6 +495,7 @@ class Test extends Component {
     if (id) {
       axios
         // .post("http://localhost:8080/ranking/register", this.state)
+        // .post("http://d5932f4fad26.ngrok.io/ranking/register", this.state)
         .post("https://tajachija.tk/ranking/register", this.state)
         .then((res) => {
           res.data.data.forEach((el) => {
@@ -428,6 +517,10 @@ class Test extends Component {
       // alert("회원가입이 필요합니다");
       axios
         // .post("http://localhost:8080/ranking/print", {
+        //   title: filterTitle,
+        //   name: null,
+        // })
+        // .post("http://d5932f4fad26.ngrok.io/ranking/print", {
         //   title: filterTitle,
         //   name: null,
         // })
@@ -618,7 +711,7 @@ class Test extends Component {
       "ㅄ",
       "ㅅ",
       "ㅆ",
-      "ㅇ",
+      "문",
       "ㅈ",
       "ㅊ",
       "ㅋ",

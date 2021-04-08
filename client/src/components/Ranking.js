@@ -37,6 +37,9 @@ class Ranking extends Component {
         // .post("http://localhost:8080/ranking/print", {
         //   title: selectValue,
         // })
+        // .post("http://a6e13414648b.ngrok.io/ranking/print", {
+        //   title: selectValue,
+        // })
         .post("https://tajachija.tk:8080/ranking/print", {
           title: selectValue,
         })
@@ -83,6 +86,10 @@ class Ranking extends Component {
 
     axios
       // .post("http://localhost:8080/ranking/print", {
+      //   title: "님의 손길",
+      //   name: nickname,
+      // })
+      // .post("http://a6e13414648b.ngrok.io/ranking/print", {
       //   title: "님의 손길",
       //   name: nickname,
       // })
@@ -692,6 +699,10 @@ class Ranking extends Component {
         //   title: selectValue,
         //   name: nickname,
         // })
+        // .post("http://a6e13414648b.ngrok.io/ranking/print", {
+        //   title: selectValue,
+        //   name: nickname,
+        // })
         .post("https://tajachija.tk/ranking/print", {
           title: selectValue,
           name: nickname,
@@ -854,6 +865,10 @@ class Ranking extends Component {
 
         axios
           // .post("http://localhost:8080/ranking/print", {
+          //   title: clickTitle,
+          //   name: clickName,
+          // })
+          // .post("http://a6e13414648b.ngrok.io/ranking/print", {
           //   title: clickTitle,
           //   name: clickName,
           // })
