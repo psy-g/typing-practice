@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Main.css";
-import Nav from "./Nav";
+// import Nav from "./Nav";
 import { Link } from "react-router-dom";
 import logo from "../image/taza.png";
 import mainImg1 from "../image/main_img_1.gif";

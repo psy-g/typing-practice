@@ -1,12 +1,18 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Nav.css";
-import Signout from "./Signout";
-import * as actions from "../actions/nav";
+// import Signout from "./Signout";
+// import * as actions from "../actions/nav";
 
-const Nav = ({ userState, burger, openBurger, closeBurger }) => {
+const Nav = ({
+  userState,
+  burger,
+  openBurger,
+  closeBurger,
+  closeBurgerView,
+  logoutHandler,
+}) => {
   return (
     <>
       <Container>
@@ -26,10 +32,10 @@ const Nav = ({ userState, burger, openBurger, closeBurger }) => {
                   <>
                     <MenuTop>
                       <MenuTopContent>
-                        <LinkIcon exact to="/">
+                        <LinkIcon exact to="/" onClick={closeBurgerView}>
                           🏠
                         </LinkIcon>
-                        <LinkName exact to="/">
+                        <LinkName exact to="/" onClick={closeBurgerView}>
                           홈
                         </LinkName>
                       </MenuTopContent>
@@ -37,26 +43,32 @@ const Nav = ({ userState, burger, openBurger, closeBurger }) => {
                     <MenuBottom>
                       <MenuBottomContent>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/singin">
-                            🖥
-                          </LinkIcon>
-                          <LinkName exact to="/singin">
-                            로그인
-                          </LinkName>
+                          <LogoutIcon onClick={logoutHandler}>🖥</LogoutIcon>
+                          <LogoutName onClick={logoutHandler}>
+                            로그아웃
+                          </LogoutName>
                         </MenuBottomContent1>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/ranking">
+                          <LinkIcon
+                            exact
+                            to="/ranking"
+                            onClick={closeBurgerView}
+                          >
                             🏆
                           </LinkIcon>
-                          <LinkName exact to="/ranking">
+                          <LinkName
+                            exact
+                            to="/ranking"
+                            onClick={closeBurgerView}
+                          >
                             순위
                           </LinkName>
                         </MenuBottomContent1>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/test">
+                          <LinkIcon exact to="/test" onClick={closeBurgerView}>
                             ⌨
                           </LinkIcon>
-                          <LinkName exact to="/test">
+                          <LinkName exact to="/test" onClick={closeBurgerView}>
                             타자연습
                           </LinkName>
                         </MenuBottomContent1>
@@ -67,10 +79,10 @@ const Nav = ({ userState, burger, openBurger, closeBurger }) => {
                   <>
                     <MenuTop>
                       <MenuTopContent>
-                        <LinkIcon exact to="/">
+                        <LinkIcon exact to="/" onClick={closeBurgerView}>
                           🏠
                         </LinkIcon>
-                        <LinkName exact to="/">
+                        <LinkName exact to="/" onClick={closeBurgerView}>
                           홈
                         </LinkName>
                       </MenuTopContent>
@@ -78,26 +90,42 @@ const Nav = ({ userState, burger, openBurger, closeBurger }) => {
                     <MenuBottom>
                       <MenuBottomContent>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/signup">
+                          <LinkIcon
+                            exact
+                            to="/signin"
+                            onClick={closeBurgerView}
+                          >
                             🖥
                           </LinkIcon>
-                          <LinkName exact to="/signup">
-                            회원가입
+                          <LinkName
+                            exact
+                            to="/signin"
+                            onClick={closeBurgerView}
+                          >
+                            로그인
                           </LinkName>
                         </MenuBottomContent1>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/ranking">
+                          <LinkIcon
+                            exact
+                            to="/ranking"
+                            onClick={closeBurgerView}
+                          >
                             🏆
                           </LinkIcon>
-                          <LinkName exact to="/ranking">
+                          <LinkName
+                            exact
+                            to="/ranking"
+                            onClick={closeBurgerView}
+                          >
                             순위
                           </LinkName>
                         </MenuBottomContent1>
                         <MenuBottomContent1>
-                          <LinkIcon exact to="/test">
+                          <LinkIcon exact to="/test" onClick={closeBurgerView}>
                             ⌨
                           </LinkIcon>
-                          <LinkName exact to="/test">
+                          <LinkName exact to="/test" onClick={closeBurgerView}>
                             타자연습
                           </LinkName>
                         </MenuBottomContent1>
@@ -114,124 +142,6 @@ const Nav = ({ userState, burger, openBurger, closeBurger }) => {
         </Wrapper>
       </Container>
       <Space />
-      {/* <div id="nav">
-        <div className="nav">
-          <div className="nav_logo">
-            <Link to="/" className="nav_logo_font">
-              타자치자
-            </Link>
-          </div>
-          {navCheck !== 0 ? (
-            <div className="burger_container">
-              <div className="bunger_container_header">
-                <div className="burger_icon" onClick={closeNav}>
-                  &times;&nbsp;
-                </div>
-              </div>
-              {loginCheck ? (
-                <div className="burger">
-                  <div className="burger_home">
-                    <div className="buger_home_home">
-                      <Link to="/">
-                        <span className="burger_home_icon">🏠</span>{" "}
-                        <span className="burger_home_text">홈</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="burger_close">
-                    <div className="burger_close_logout">
-                      <Signout />
-                    </div>
-                    <div className="burger_close_ranking">
-                      <Link to="/ranking">
-                        <span className="burger_ranking_icon">🏆</span>{" "}
-                        <span className="burger_ranking_text">순위</span>
-                      </Link>
-                    </div>
-                    <div className="burger_close_test">
-                      <Link to="/test">
-                        <span className="burger_test_icon">⌨</span>{" "}
-                        <span className="burger_test_text">타자연습</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="nav_footer">
-                    <a
-                      href="https://wonderfulharu.tistory.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      블로그
-                    </a>
-                    <a href="mailto:psykyg@gmail.com">이메일</a>
-                    <a
-                      href="https://github.com/psy-g"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      깃허브
-                    </a>
-                  </div>
-                </div>
-              ) : (
-                <div className="burger">
-                  <div className="burger_home">
-                    <div className="buger_home_home">
-                      <Link to="/">
-                        <span className="burger_home_icon">🏠</span>{" "}
-                        <span className="burger_home_text">홈</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="burger_close">
-                    <div className="burger_close_signin">
-                      <Link to="/signin">
-                        <span className="burger_signup_icon">🖥</span>{" "}
-                        <span className="burger_signup_text">로그인</span>
-                      </Link>
-                    </div>
-                    <div className="burger_close_ranking">
-                      <Link to="/ranking">
-                        <span className="burger_ranking_icon">🏆</span>{" "}
-                        <span className="burger_ranking_text">순위</span>
-                      </Link>
-                    </div>
-                    <div className="burger_close_test">
-                      <Link to="/test">
-                        <span className="burger_test_icon">⌨</span>{" "}
-                        <span className="burger_test_text">타자연습</span>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="nav_footer">
-                    <a
-                      href="https://wonderfulharu.tistory.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      블로그
-                    </a>
-                    <a href="mailto:psykyg@gmail.com">이메일</a>
-                    <a
-                      href="https://github.com/psy-g"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      깃허브
-                    </a>
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="burger_basic">
-              <span className="burger_open" onClick={openNav}>
-                &#9776;
-              </span>
-            </div>
-          )}
-        </div>
-      </div> */}
     </>
   );
 };
@@ -248,6 +158,7 @@ const Container = styled.header`
   justify-content: center;
   align-items: center;
   z-index: 10;
+  background-color: #30a9de;
 `;
 
 // 헤더 크기만큼 공간 차지
@@ -283,18 +194,18 @@ const UserNavWrapper = styled.div`
 `;
 
 // 유저 정보
+/* 
 const User = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   font-weight: bold;
 
-  /*
   @media ${(props) => props.theme.mobile} {
     margin-right: 15px;
   }
-  */
 `;
+*/
 
 // 버거 이미지
 const BurgerImg = styled.div`
@@ -410,6 +321,19 @@ const LinkName = styled(NavLink).attrs({ activeClassName })`
   padding-left: 10px;
   font-size: 1rem;
   color: black;
+`;
+
+// 로그아웃(아이콘)
+const LogoutIcon = styled.div`
+  padding-left: 15px;
+  cursor: pointer;
+`;
+
+// 로그아웃(이름)
+const LogoutName = styled.div`
+  padding-left: 10px;
+  font-size: 1rem;
+  cursor: pointer;
 `;
 
 // const Nav = () => {

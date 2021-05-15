@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import Nav from "../components/Nav";
-import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../modules/user";
 
 const NavContainer = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   // 유저 로그인 체크(회원, 비회원 메뉴 다르게 표시)
   const userState = useSelector((state) => state.user.isLogged);
 
@@ -19,12 +24,25 @@ const NavContainer = () => {
     setBurger(false);
   };
 
+  // 메뉴 선택 - 버거 닫기
+  const closeBurgerView = () => {
+    setBurger(false);
+  };
+
+  // 로그아웃
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+    history.push("/");
+  };
+
   return (
     <Nav
       userState={userState}
       burger={burger}
       openBurger={openBurger}
       closeBurger={closeBurger}
+      closeBurgerView={closeBurgerView}
+      logoutHandler={logoutHandler}
     />
   );
 };
