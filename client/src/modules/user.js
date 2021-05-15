@@ -16,8 +16,8 @@ export function signupUser(body) {
 }
 
 // 로그인
-export function loginUser(dataToSubmit) {
-  const data = request("post", "/login", dataToSubmit);
+export function loginUser(body) {
+  const data = request("post", "/auth/signin", body);
 
   return {
     type: LOGIN_USER,
@@ -33,7 +33,7 @@ export function logoutUser() {
 }
 
 const initialState = {
-  token: "",
+  nickname: "",
   isLogged: false,
 };
 
@@ -43,7 +43,7 @@ export default function user(state = initialState, action) {
     case SIGNUP_USER:
       return {
         ...state,
-        token: action.payload.token,
+        nickname: action.payload.nickname,
         isLogged: true,
       };
 
@@ -51,7 +51,7 @@ export default function user(state = initialState, action) {
     case LOGIN_USER:
       return {
         ...state,
-        token: action.payload.token,
+        nickname: action.payload.nickname,
         isLogged: true,
       };
 
@@ -59,7 +59,7 @@ export default function user(state = initialState, action) {
     case LOGOUT_USER:
       return {
         ...state,
-        token: "",
+        nickname: "",
         isLogged: false,
       };
     default:
