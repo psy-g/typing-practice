@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Signin from "../components/Signin";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../modules/user";
 
 const SigninContainer = () => {
+  // const { nick, msg, error } = useSelector((state) => state.user);
+  const message = useSelector((state) => state.user.data.message);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -24,8 +26,12 @@ const SigninContainer = () => {
     e.preventDefault();
 
     dispatch(loginUser({ nickname, password })).then((res) => {
-      if (res.payload.message === "signin OK") {
+      if (res.payload.data.message === "signin OK") {
+        // console.log("=msg=", message);
+        window.localStorage.setItem("isLogged", true);
         history.push("/");
+      } else {
+        // console.log("====", message);
       }
     });
   };
