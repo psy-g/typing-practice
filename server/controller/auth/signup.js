@@ -16,8 +16,6 @@ module.exports = async (req, res) => {
     where: { nickname: nickname },
   });
 
-  // console.log("=====", duplicateCheck);
-
   if (duplicateCheck) {
     res.status(201).json({ message: "already registered user" });
   } else {
@@ -27,19 +25,4 @@ module.exports = async (req, res) => {
     });
     res.status(201).json({ message: "signup" });
   }
-
-  // const signup = await Users.findOrCreate({
-  //   where: { nickname },
-  //   defaults: { nickname, password: hash },
-  // });
-
-  // const [users] = signup;
-
-  // console.log("=====", users);
-
-  // if (users.nickname === nickname) {
-  //   res.status(401).json({ message: "already registered user" });
-  // } else {
-  //   res.status(201).json({ message: "signup" });
-  // }
 };

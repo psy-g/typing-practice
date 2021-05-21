@@ -16,7 +16,7 @@ const LOGIN_USER_FAILURE = "user/LOGIN_USER_FAILURE";
 
 // 회원가입
 export function signupUser(body) {
-  const data = request("post", "/sign-up", body);
+  const data = request("post", "/auth/signup", body);
 
   return {
     type: SIGNUP_USER,
@@ -59,6 +59,8 @@ export const loginUser = (body) => async (dispatch) => {
 
 // 로그아웃
 export function logoutUser() {
+  request("post", "/auth/signout");
+
   return {
     type: LOGOUT_USER,
   };
@@ -76,7 +78,8 @@ const initialState = {
   // },
 };
 
-export default function loginActions(state = initialState, action) {
+// export default function loginActions(state = initialState, action) {
+export default function userActions(state = initialState, action) {
   switch (action.type) {
     // 로그인 대기
     case LOGIN_USER:
@@ -126,6 +129,15 @@ export default function loginActions(state = initialState, action) {
         ...state,
         loading: false,
         error: action.error,
+      };
+
+    // 로그아웃
+    case LOGOUT_USER:
+      return {
+        ...state,
+        loading: false,
+        isLogged: false,
+        data: {},
       };
 
     default:

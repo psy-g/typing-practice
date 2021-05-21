@@ -5,6 +5,7 @@ import "./App.css";
 import Main from "./containers/MainContainer";
 import Nav from "./containers/NavContainer";
 import Signin from "./containers/SigninContainer";
+import Signup from "./containers/SignupContainer";
 
 // import Main from "../components/Main";
 // import Test from "../components/Test";
@@ -19,6 +20,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signup" component={Signup} />
       </Switch>
     </>
   );
