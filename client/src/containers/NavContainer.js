@@ -32,6 +32,7 @@ const NavContainer = () => {
   // 로그아웃
   const logoutHandler = () => {
     dispatch(logoutUser());
+    setBurger(false);
     history.push("/");
   };
 

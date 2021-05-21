@@ -85,12 +85,12 @@
   outline: none;
 } */
 
-.signin_body_name_input_validation,
+/* .signin_body_name_input_validation,
 .signin_body_name_input_validation2 {
   display: none;
   color: #e53a40;
   font-size: 14px;
-}
+} */
 
 .signin_body_password_input_validation {
   display: none;
@@ -98,11 +98,11 @@
   font-size: 14px;
 }
 
-.signin_body_name_input_duplicate {
+/* .signin_body_name_input_duplicate {
   display: none;
   color: #e53a40;
   font-size: 14px;
-}
+} */
 
 .signin_body_name_input_login1 {
   display: none;
@@ -116,13 +116,13 @@
   font-size: 13px;
 }
 
-.signin_body_loginAndSignup {
+/* .signin_body_loginAndSignup {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 98%;
   height: 15%;
-}
+} */
 
 /*
 .signin_body_loginBtn {
@@ -362,10 +362,10 @@
     height: 12%;
     flex-direction: row;
   }
-  .signin_body_name_column,
+  /* .signin_body_name_column,
   .signin_body_password_column {
     font-size: 12px;
-  }
+  } */
   .signin_body_name_input_validation,
   .signin_body_name_input_validation2,
   .signin_body_password_input_validation,

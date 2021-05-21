@@ -43,7 +43,7 @@ const Nav = ({
                     <MenuBottom>
                       <MenuBottomContent>
                         <MenuBottomContent1>
-                          <LogoutIcon onClick={logoutHandler}>🖥</LogoutIcon>
+                          <LogoutIcon onClick={logoutHandler}>👋</LogoutIcon>
                           <LogoutName onClick={logoutHandler}>
                             로그아웃
                           </LogoutName>
