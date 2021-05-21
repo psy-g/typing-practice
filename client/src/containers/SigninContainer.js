@@ -1,46 +1,64 @@
 import React, { useState } from "react";
 import Signin from "../components/Signin";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../modules/user";
 
 const SigninContainer = () => {
-  // const { nick, msg, error } = useSelector((state) => state.user);
-  const message = useSelector((state) => state.user.data.message);
+  // const { nick, message } = useSelector((state) => state.user.data);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [inputs, setInputs] = useState({});
+  const [checks, setChecks] = useState({ nickname: true, password: true });
+  const [match, setMatch] = useState(true);
 
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setMatch(true);
 
-  const nicknameHandler = (e) => {
-    setNickname(e.target.value);
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
-  const passwordHandler = (e) => {
-    setPassword(e.target.value);
+  const validatorHandler = (e) => {
+    const { name, value } = e.target;
+
+    // 닉네임, 비밀번호 미입력
+    if (value.length === 0) {
+      setChecks({
+        ...checks,
+        [name]: false,
+      });
+    } else {
+      setChecks({
+        ...checks,
+        [name]: true,
+      });
+    }
   };
 
   // 로그인 요청
   const loginRequestHandler = (e) => {
     e.preventDefault();
 
-    dispatch(loginUser({ nickname, password })).then((res) => {
-      if (res.payload.data.message === "signin OK") {
-        // console.log("=msg=", message);
-        window.localStorage.setItem("isLogged", true);
+    dispatch(loginUser(inputs)).then((res) => {
+      if (res.payload.data.loginSuccess) {
         history.push("/");
       } else {
-        // console.log("====", message);
+        setMatch(false);
       }
     });
   };
 
   return (
     <Signin
-      nicknameHandler={nicknameHandler}
-      passwordHandler={passwordHandler}
+      inputHandler={inputHandler}
       loginRequestHandler={loginRequestHandler}
+      validatorHandler={validatorHandler}
+      checks={checks}
+      match={match}
     />
   );
 };
