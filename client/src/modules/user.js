@@ -25,12 +25,12 @@ export function signupUser(body) {
 }
 
 // 로그인
-export const loginUser = (body) => (dispatch) => {
+export const loginUser = (body) => async (dispatch) => {
   // 시작
   dispatch({ type: LOGIN_USER });
 
   try {
-    const data = request("post", "/auth/signin", body); // API 호출
+    const data = await request("post", "/auth/signin", body); // API 호출
 
     // 성공
     return dispatch({
@@ -67,11 +67,13 @@ export function logoutUser() {
 const initialState = {
   loading: false,
   error: null,
-  data: {
-    nickname: "",
-    message: "",
-    // isLogged: false,
-  },
+  isLogged: false,
+  data: {},
+  // data: {
+  //   nickname: "",
+  //   message: "",
+  //   // isLogged: false,
+  // },
 };
 
 export default function loginActions(state = initialState, action) {
@@ -81,6 +83,8 @@ export default function loginActions(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        isLogged: false,
+        data: {},
       };
 
     // 로그인 성공
@@ -88,12 +92,33 @@ export default function loginActions(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: {
-          nickname: action.payload.data.nickname,
-          message: action.payload.data.message,
-          // isLogged: true,
-        },
+        isLogged: true,
+        data: action.payload.data,
       };
+
+    // 닉네임, 비밀번호 OK
+    // if (action.payload.data.message === "signin OK") {
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     isLogged: true,
+    //     data: action.payload.data,
+    //   };
+    // } else if (action.payload.data.message === "invalid nickname") {
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     isLogged: false,
+    //     data: {},
+    //   };
+    // } else if (action.payload.data.message === "invalid password") {
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     isLogged: false,
+    //     data: {},
+    //   };
+    // }
 
     // 로그인 실패
     case LOGIN_USER_FAILURE:
