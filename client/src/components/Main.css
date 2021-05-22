@@ -221,13 +221,13 @@
   height: 100%;
 }
 
-.scroll_icon {
+/* .scroll_icon {
   position: absolute;
   top: 40%;
   right: 0.1%;
-}
+} */
 
-.header____tail____tail {
+/* .header____tail____tail {
   background-color: #fafafa;
   display: flex;
   width: 75%;
@@ -236,41 +236,41 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.header____tail____descript {
+/* .header____tail____descript {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
   height: 100%;
   text-align: center;
-}
+} */
 
-.context-header {
+/* .context-header {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 60%;
-}
+} */
 
-.context-header-text {
+/* .context-header-text {
   width: 50%;
   height: 80%;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.context-header-text-top1 {
+/* .context-header-text-top1 {
   color: white;
   font-size: max(2em, 3.5vw);
   text-align: left;
   display: flex;
   align-items: flex-start;
   margin-bottom: 25px;
-}
+} */
 
-.context-header-text-bottom1 {
+/* .context-header-text-bottom1 {
   color: white;
   font-size: max(0.8em, 1vw);
   text-align: left;
@@ -278,9 +278,9 @@
   flex-direction: column;
   align-items: flex-start;
   font-family: "HeirofLightRegular";
-}
+} */
 
-.context-header-text-bottom-marker-container {
+/* .context-header-text-bottom-marker-container {
   display: flex;
   flex-direction: row;
 }
@@ -293,9 +293,9 @@
 .context-header-text-bottom-noMarker {
   font-family: "HeirofLightRegular";
   color: white;
-}
+} */
 
-.context-header-img-container {
+/* .context-header-img-container {
   width: 50%;
   height: 70%;
   border-radius: 8px;
@@ -303,12 +303,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-}
+} */
 
-.context-header-img {
+/* .context-header-img {
   width: 100%;
   height: 100%;
-}
+} */
 
 .context-tail {
   height: 10%;
@@ -322,7 +322,7 @@
   height: 100%;
 }
 
-.context-header-text-top2 {
+/* .context-header-text-top2 {
   color: white;
   font-size: max(2em, 3.5vw);
   text-align: right;
@@ -330,9 +330,9 @@
   flex-direction: column;
   align-items: flex-end;
   margin-bottom: 25px;
-}
+} */
 
-.context-header-text-bottom2 {
+/* .context-header-text-bottom2 {
   color: white;
   font-size: max(0.8em, 1vw);
   text-align: left;
@@ -340,26 +340,35 @@
   flex-direction: column;
   align-items: flex-end;
   font-family: "HeirofLightRegular";
-}
+} */
 
-.context-header3 {
+/* .context-header3 {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   height: 85%;
-}
+} */
 
-.context-header-text-top3 {
+/* .context-header-text3 {
+  width: 100%;
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+} */
+
+/* .context-header-text-top3 {
   color: white;
-  font-size: max(2.3em, 3.5vw);
+  font-size: max(2em, 3.5vw);
   text-align: left;
   display: flex;
   align-items: flex-start;
   margin-bottom: 25px;
-}
+} */
 
-.context-header-text-bottom3 {
+/* .context-header-text-bottom3 {
   color: white;
   font-size: max(0.8em, 1vw);
   text-align: left;
@@ -367,70 +376,59 @@
   flex-direction: column;
   align-items: flex-start;
   font-family: "HeirofLightRegular";
-}
+} */
 
-.context-header-text3 {
-  width: 100%;
-  height: 45%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-}
-
-.context-header-text-bottom-marker-container3 {
+/* .context-header-text-bottom-marker-container3 {
   display: flex;
   flex-direction: row;
-}
+} */
 
-.context-header-img3-container {
+/* .context-header-img3-container {
   width: 100%;
   height: 50%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
+} */
 
-.context-header-img3-1 {
+/* .context-header-img3-1 {
   width: 45%;
   height: 100%;
   border-radius: 8px;
-}
+} */
 
-.context-header-img3-2 {
+/* .context-header-img3-2 {
   width: 45%;
   height: 100%;
   border-radius: 8px;
-}
+} */
 
-.main_footer {
+/* .main_footer {
   display: flex;
   width: 100%;
-  /* height: 130px; */
   justify-content: center;
-  /* align-items: flex-end; */
-}
+} */
 
-.main_footer a {
+/* .main_footer a {
   color: #fafafa;
   font-family: "HeirofLightRegular";
   font-size: 18px;
   margin-left: 15px;
   opacity: 0.6;
-}
+} */
 
-.main_footer a:hover {
+/* .main_footer a:hover {
   color: #fafafa;
   font-family: "HeirofLightRegular";
   font-size: 18px;
   margin-left: 15px;
   opacity: 1;
-}
+} */
 
-a {
+/* a {
   text-decoration: none;
   color: black;
-}
+} */
 
 /* 갤럭시 fold */
 @media only screen and (min-device-width: 280px) and (max-device-width: 319px) {

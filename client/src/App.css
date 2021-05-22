@@ -63,3 +63,8 @@ html {
   /* 스크롤 */
   /* overflow: auto; */
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

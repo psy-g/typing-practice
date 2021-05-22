@@ -1,21 +1,19 @@
 import React from "react";
 import "./Main.css";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../image/taza.png";
-import mainImg1 from "../image/main_img_1.gif";
-import mainImg2 from "../image/main_img_2.png";
-import mainImg3 from "../image/main_img_3.png";
-import mainImg4 from "../image/main_img_4.gif";
-import scrollText from "../image/scroll_image.png";
-import $ from "jquery";
 
 import styled from "styled-components";
 import backgroundImg from "../image/rankback.png";
 import signinLogo from "../image/taza.png";
 import powerBtn1 from "../image/power.png";
 import powerBtn2 from "../image/power_on.png";
+import mainImg1 from "../image/main_img_1.gif";
+import mainImg2 from "../image/main_img_2.png";
+import mainImg3 from "../image/main_img_3.png";
+import mainImg4 from "../image/main_img_4.gif";
+import scrollText from "../image/scroll_image.png";
 
-const Main = ({ isLogged }) => {
+const Main = ({ isLogged, scrollEnd }) => {
   return (
     <Container>
       <Wrapper>
@@ -34,13 +32,13 @@ const Main = ({ isLogged }) => {
           <Left></Left>
           <Center>
             {!isLogged ? (
-              <Link to="/signin">
+              <LinkBtn to="/signin">
                 <PowerBtn1 />
-              </Link>
+              </LinkBtn>
             ) : (
-              <Link to="/test">
+              <LinkBtn to="/test">
                 <PowerBtn2 />
-              </Link>
+              </LinkBtn>
             )}
           </Center>
           {/* <div className="tail_right">
@@ -49,116 +47,77 @@ const Main = ({ isLogged }) => {
           </div> */}
         </Bottom>
         <ScrollWrapper>
-          <ScrollIcon src={scrollText} alt="scroll" />
+          <ScrollIcon src={scrollText} alt="scroll" scrollCheck={scrollEnd} />
         </ScrollWrapper>
       </Wrapper>
       <Wrapper>
         <Description>
-          <div className="context-header">
-            <div className="context-header-text">
-              <div className="context-header-text-top1">
-                타자치자<br></br>
+          <ContentsWrapper>
+            <TextContents>
+              <TextTopPage2>
+                타자치자<p></p>
                 입력하여 실력을<br></br>
                 확인하자
-              </div>
-              <div className="context-header-text-bottom1">
+              </TextTopPage2>
+              <TextBottomPage2>
                 한글의 자음과 모음을 분리하여
-                <div className="context-header-text-bottom-marker-container">
-                  <div className="context-header-text-bottom-marker">
-                    {" "}
-                    타수와 정확도를 계산
-                  </div>
-                  <div className="context-header-text-bottom-noMarker">
-                    합니다
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="context-header-img-container">
-              <img
-                className="context-header-img"
-                src={mainImg1}
-                width="50px"
-                height="50px"
-                alt="측정이미지"
-              />
-            </div>
-          </div>
-          <div className="scroll_icon"></div>
+                <br></br>
+                <span>타수와 정확도를 계산</span>
+                <span>합니다</span>
+              </TextBottomPage2>
+            </TextContents>
+            <ImgContents>
+              <Image src={mainImg1} alt="image" />
+            </ImgContents>
+          </ContentsWrapper>
+          {/* <div className="scroll_icon"></div> */}
         </Description>
       </Wrapper>
       <Wrapper>
         <Description>
-          <div className="context-header">
-            <div className="context-header-img-container">
-              <img
-                className="context-header-img"
-                src={mainImg2}
-                width="50px"
-                height="50px"
-                alt="측정이미지"
-              />
-            </div>
-            <div className="context-header-text">
-              <div className="context-header-text-top2">
-                <div>기록</div>
-                <div>측정이 끝나고</div>
-                <div>기록을 확인하자</div>
-              </div>
-              <div className="context-header-text-bottom2">
+          <ContentsWrapper>
+            <ImgContents>
+              <Image src={mainImg2} alt="image" />
+            </ImgContents>
+            <TextContents>
+              <TextTopPage3>
+                기록<p></p>
+                측정이 끝나고<br></br>
+                기록을 확인하자
+              </TextTopPage3>
+              <TextBottomPage3>
                 주어진 문제를 모두 풀면
-                <div className="context-header-text-bottom-marker-container">
-                  <div className="context-header-text-bottom-marker">
-                    {" "}
-                    기록과 순위를 확인
-                  </div>
-                  <div className="context-header-text-bottom-noMarker">
-                    합니다
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="scroll_icon"></div>
+                <br></br>
+                <span>기록과 순위를 확인</span>
+                <span>합니다</span>
+              </TextBottomPage3>
+            </TextContents>
+          </ContentsWrapper>
+          {/* <div className="scroll_icon"></div> */}
         </Description>
       </Wrapper>
       <Wrapper>
         <Description>
-          <div className="context-header3">
-            <div className="context-header-text3">
-              <div className="context-header-text-top3">
-                순위<br></br>
+          <ContentsWrapperLast>
+            <TextContentsLast>
+              <TextTopPage4>
+                순위<p></p>
                 다른 사람의<br></br>
                 기록을 확인합니다
-              </div>
-              <div className="context-header-text-bottom3">
+              </TextTopPage4>
+              <TextBottomPage4>
                 그래프를 통해 다른 기록과
-                <div className="context-header-text-bottom-marker-container3">
-                  <div className="context-header-text-bottom-marker"> 비교</div>
-                  <div className="context-header-text-bottom-noMarker">
-                    해 볼 수 있습니다
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="context-header-img3-container">
-              <img
-                className="context-header-img3-1"
-                src={mainImg3}
-                width="50px"
-                height="50px"
-                alt="순위1"
-              />
-              <img
-                className="context-header-img3-2"
-                src={mainImg4}
-                width="50px"
-                height="50px"
-                alt="순위2"
-              />
-            </div>
-          </div>
-          <div className="main_footer">
+                <br></br>
+                <span>비교</span>
+                <span>해 볼 수 있습니다</span>
+              </TextBottomPage4>
+            </TextContentsLast>
+            <ImgContentsWrapper>
+              <ImageLast src={mainImg3} alt="rank1" />
+              <ImageLast src={mainImg4} alt="rank2" />
+            </ImgContentsWrapper>
+          </ContentsWrapperLast>
+          <Footer>
             <a
               href="https://wonderfulharu.tistory.com/"
               target="_blank"
@@ -174,7 +133,7 @@ const Main = ({ isLogged }) => {
             >
               깃허브
             </a>
-          </div>
+          </Footer>
           <div className="scroll_icon"></div>
         </Description>
       </Wrapper>
@@ -282,6 +241,7 @@ const Bottom = styled.div`
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 `;
 
 // 하단 좌
@@ -293,6 +253,8 @@ const Center = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const LinkBtn = styled(Link)``;
 
 // 전원 버튼1(비로그인)
 const PowerBtn1 = styled.div`
@@ -321,6 +283,7 @@ const ScrollWrapper = styled.div`
 
 // 스크롤 아이콘
 const ScrollIcon = styled.img`
+  display: ${(props) => (props.scrollCheck.scrollEnd ? "none" : "block")};
   width: 70px;
   height: 80px;
 `;
@@ -335,190 +298,191 @@ const Description = styled.div`
   text-align: center;
 `;
 
-// class Main extends Component {
+// 컨텐츠 박스(2~3페이지) - .context-header
+const ContentsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60%;
+`;
 
-//   render() {
-//     const checkLogin = window.localStorage.getItem("isLogin");
+// 컨텐츠 설명 박스(2~3페이지) - .context-header-text
+const TextContents = styled.div`
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+`;
 
-//     return (
-// <div>
-//   <div id="nav_main">{/* <Nav /> */}</div>
-//   <div id="main">
-//     <div className="header____tail">
-//       <div className="header">
-//         <div className="header_top">
-//           <img className="header_logo" src={logo} alt="logo" />
-//         </div>
-//         <div className="header_enter">
-//           <Link to="/test" className="header_enter_test">
-//             INSERT COIN
-//           </Link>
-//           <div className="header_enter_tail">@YG 2021</div>
-//         </div>
-//       </div>
-//             <div className="tail">
-//               <div className="tail_left"></div>
-//               <div className="tail_center">
-//                 <div className="tail_button">
-//                   {!checkLogin ? (
-//                     <Link to="/signin">
-//                       <div className="tail_button_main" />
-//                     </Link>
-//                   ) : (
-//                     <Link to="/test">
-//                       <div className="tail_button_main_login" />
-//                     </Link>
-//                   )}
-//                 </div>
-//               </div>
-//               <div className="tail_right">
-//                 <p className="tail_right_triangle"></p>
-//                 <p className="tail_right_arrow">로그인</p>
-//               </div>
-//             </div>
-//             <div className="scroll_icon">
-//               <img
-//                 className="scroll_icon-img1"
-//                 src={scrollText}
-//                 alt="스크롤아이콘"
-//                 width="70px"
-//                 height="80px"
-//               />
-//             </div>
-//           </div>
-//           <div className="header____tail">
-//             <div className="header____tail____descript">
-//               <div className="context-header">
-//                 <div className="context-header-text">
-//                   <div className="context-header-text-top1">
-//                     타자치자<br></br>
-//                     입력하여 실력을<br></br>
-//                     확인하자
-//                   </div>
-//                   <div className="context-header-text-bottom1">
-//                     한글의 자음과 모음을 분리하여
-//                     <div className="context-header-text-bottom-marker-container">
-//                       <div className="context-header-text-bottom-marker">
-//                         {" "}
-//                         타수와 정확도를 계산
-//                       </div>
-//                       <div className="context-header-text-bottom-noMarker">
-//                         합니다
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//                 <div className="context-header-img-container">
-//                   <img
-//                     className="context-header-img"
-//                     src={mainImg1}
-//                     width="50px"
-//                     height="50px"
-//                     alt="측정이미지"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="scroll_icon"></div>
-//             </div>
-//           </div>
-//           <div className="header____tail">
-//             <div className="header____tail____descript">
-//               <div className="context-header">
-//                 <div className="context-header-img-container">
-//                   <img
-//                     className="context-header-img"
-//                     src={mainImg2}
-//                     width="50px"
-//                     height="50px"
-//                     alt="측정이미지"
-//                   />
-//                 </div>
-//                 <div className="context-header-text">
-//                   <div className="context-header-text-top2">
-//                     <div>기록</div>
-//                     <div>측정이 끝나고</div>
-//                     <div>기록을 확인하자</div>
-//                   </div>
-//                   <div className="context-header-text-bottom2">
-//                     주어진 문제를 모두 풀면
-//                     <div className="context-header-text-bottom-marker-container">
-//                       <div className="context-header-text-bottom-marker">
-//                         {" "}
-//                         기록과 순위를 확인
-//                       </div>
-//                       <div className="context-header-text-bottom-noMarker">
-//                         합니다
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//               <div className="scroll_icon"></div>
-//             </div>
-//           </div>
-//           <div className="header____tail">
-//             <div className="header____tail____descript">
-//               <div className="context-header3">
-//                 <div className="context-header-text3">
-//                   <div className="context-header-text-top3">
-//                     순위<br></br>
-//                     다른 사람의<br></br>
-//                     기록을 확인합니다
-//                   </div>
-//                   <div className="context-header-text-bottom3">
-//                     그래프를 통해 다른 기록과
-//                     <div className="context-header-text-bottom-marker-container3">
-//                       <div className="context-header-text-bottom-marker">
-//                         {" "}
-//                         비교
-//                       </div>
-//                       <div className="context-header-text-bottom-noMarker">
-//                         해 볼 수 있습니다
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//                 <div className="context-header-img3-container">
-//                   <img
-//                     className="context-header-img3-1"
-//                     src={mainImg3}
-//                     width="50px"
-//                     height="50px"
-//                     alt="순위1"
-//                   />
-//                   <img
-//                     className="context-header-img3-2"
-//                     src={mainImg4}
-//                     width="50px"
-//                     height="50px"
-//                     alt="순위2"
-//                   />
-//                 </div>
-//               </div>
-//               <div className="main_footer">
-//                 <a
-//                   href="https://wonderfulharu.tistory.com/"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   블로그
-//                 </a>
-//                 <a href="mailto:psykyg@gmail.com">이메일</a>
-//                 <a
-//                   href="https://github.com/psy-g"
-//                   target="_blank"
-//                   rel="noopener noreferrer"
-//                 >
-//                   깃허브
-//                 </a>
-//               </div>
-//               <div className="scroll_icon"></div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+// 컨텐츠 설명(2페이지) - .context-header-text-top1
+const TextTopPage2 = styled.div`
+  color: white;
+  font-size: max(2em, 3.5vw);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  p {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+`;
 
-// export default Main;
+// 컨텐츠 설명(3페이지) - .context-header-text-top2
+const TextTopPage3 = styled.div`
+  color: white;
+  font-size: max(2em, 3.5vw);
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 15px;
+  p {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+`;
+
+// 컨텐츠 설명(2페이지) - .context-header-text-bottom1
+const TextBottomPage2 = styled.div`
+  color: white;
+  font-size: max(0.8em, 1vw);
+  text-align: left;
+  font-family: "HeirofLightRegular";
+  span {
+    &:nth-child(2) {
+      font-family: "HeirofLightRegular";
+      color: #e53a40;
+    }
+    &:nth-child(3) {
+      font-family: "HeirofLightRegular";
+      color: white;
+    }
+  }
+`;
+
+// 컨텐츠 설명(3페이지) - .context-header-text-bottom2
+const TextBottomPage3 = styled.div`
+  color: white;
+  font-size: max(0.8em, 1vw);
+  text-align: right;
+  font-family: "HeirofLightRegular";
+  span {
+    &:nth-child(2) {
+      font-family: "HeirofLightRegular";
+      color: #e53a40;
+    }
+    &:nth-child(3) {
+      font-family: "HeirofLightRegular";
+      color: white;
+    }
+  }
+`;
+
+// 컨텐츠 이미지 박스(2~3페이지) - .context-header-img-container
+const ImgContents = styled.div`
+  width: 50%;
+  height: 70%;
+  border-radius: 8px;
+  border: solid;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+// 설명 이미지(2~3페이지) - .context-header-img
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+// 컨텐츠 박스(4페이지) - .context-header3
+const ContentsWrapperLast = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 85%;
+`;
+
+// 컨텐츠 설명 박스(4페이지) - .context-header-text3
+const TextContentsLast = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+`;
+
+// 컨텐츠 설명(4페이지) - .context-header-text-top3
+const TextTopPage4 = styled.div`
+  color: white;
+  font-size: max(2em, 3.5vw);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  p {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+`;
+
+// 컨텐츠 설명(4페이지) - .context-header-text-bottom3, context-header-img3-2
+const TextBottomPage4 = styled.div`
+  color: white;
+  font-size: max(0.8em, 1vw);
+  text-align: left;
+  font-family: "HeirofLightRegular";
+  span {
+    &:nth-child(2) {
+      font-family: "HeirofLightRegular";
+      color: #e53a40;
+    }
+    &:nth-child(3) {
+      font-family: "HeirofLightRegular";
+      color: white;
+    }
+  }
+`;
+
+// 컨텐츠 이미지 박스(4페이지) - .context-header-img3-container
+const ImgContentsWrapper = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+// 설명 이미지1(4페이지) - .context-header-img3-1
+const ImageLast = styled.img`
+  width: 48%;
+  height: 100%;
+  border-radius: 8px;
+`;
+
+// Footer - .main_footer
+const Footer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  a {
+    color: #fafafa;
+    font-family: "HeirofLightRegular";
+    font-size: 18px;
+    margin-left: 15px;
+    opacity: 0.6;
+    &:hover {
+      color: #fafafa;
+      font-family: "HeirofLightRegular";
+      font-size: 18px;
+      margin-left: 15px;
+      opacity: 1;
+    }
+  }
+`;

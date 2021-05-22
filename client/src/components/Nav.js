@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-// import "./Nav.css";
-// import Signout from "./Signout";
-// import * as actions from "../actions/nav";
 
 const Nav = ({
   userState,
@@ -17,7 +14,7 @@ const Nav = ({
     <>
       <Container>
         <Wrapper>
-          <Logo href="/" title="서비스 페이지로 이동">
+          <Logo href="/" title="홈으로 이동합니다">
             타자치자
           </Logo>
           <UserNavWrapper>
@@ -249,11 +246,12 @@ const CloseBurgerBtn = styled.div`
   width: 47px;
   height: 100%;
   border-radius: 10px 0px 0px 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 `;
 
 // 버거 메뉴(상단)
 const MenuTop = styled.div`
-  padding-top: 30px;
+  padding-top: 20px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -269,16 +267,18 @@ const MenuBottom = styled.div`
   background: white;
   height: 180px;
   border-radius: 10px 0px 0px 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 `;
 
 // 홈
 const MenuTopContent = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   background: white;
   height: 100%;
   border-radius: 10px 0px 0px 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 `;
 
 const MenuBottomContent = styled.div`
@@ -321,6 +321,10 @@ const LinkName = styled(NavLink).attrs({ activeClassName })`
   padding-left: 10px;
   font-size: 1rem;
   color: black;
+
+  &:hover {
+    color: #ff5252;
+  }
 `;
 
 // 로그아웃(아이콘)
@@ -335,144 +339,3 @@ const LogoutName = styled.div`
   font-size: 1rem;
   cursor: pointer;
 `;
-
-// const Nav = () => {
-//   const dispatch = useDispatch();
-//   const [navCheck, setNavCheck] = useState(0);
-//   const loginCheck = window.localStorage.getItem("isLogin");
-
-//   const openNav = useCallback(() => {
-//     setNavCheck(navCheck + 1);
-//     dispatch(actions.openNav());
-//   }, [navCheck, dispatch]);
-
-//   const closeNav = useCallback(() => {
-//     setNavCheck(navCheck - 1);
-//     dispatch(actions.closeNav());
-//   }, [navCheck, dispatch]);
-
-//   return (
-//     <div>
-//       <div id="nav">
-//         <div className="nav">
-//           <div className="nav_logo">
-//             <Link to="/" className="nav_logo_font">
-//               타자치자
-//             </Link>
-//           </div>
-//           {navCheck !== 0 ? (
-//             <div className="burger_container">
-//               <div className="bunger_container_header">
-//                 <div className="burger_icon" onClick={closeNav}>
-//                   &times;&nbsp;
-//                 </div>
-//               </div>
-//               {loginCheck ? (
-//                 <div className="burger">
-//                   <div className="burger_home">
-//                     <div className="buger_home_home">
-//                       <Link to="/">
-//                         <span className="burger_home_icon">🏠</span>{" "}
-//                         <span className="burger_home_text">홈</span>
-//                       </Link>
-//                     </div>
-//                   </div>
-//                   <div className="burger_close">
-//                     <div className="burger_close_logout">
-//                       <Signout />
-//                     </div>
-//                     <div className="burger_close_ranking">
-//                       <Link to="/ranking">
-//                         <span className="burger_ranking_icon">🏆</span>{" "}
-//                         <span className="burger_ranking_text">순위</span>
-//                       </Link>
-//                     </div>
-//                     <div className="burger_close_test">
-//                       <Link to="/test">
-//                         <span className="burger_test_icon">⌨</span>{" "}
-//                         <span className="burger_test_text">타자연습</span>
-//                       </Link>
-//                     </div>
-//                   </div>
-//                   <div className="nav_footer">
-//                     <a
-//                       href="https://wonderfulharu.tistory.com/"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                     >
-//                       블로그
-//                     </a>
-//                     <a href="mailto:psykyg@gmail.com">이메일</a>
-//                     <a
-//                       href="https://github.com/psy-g"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                     >
-//                       깃허브
-//                     </a>
-//                   </div>
-//                 </div>
-//               ) : (
-//                 <div className="burger">
-//                   <div className="burger_home">
-//                     <div className="buger_home_home">
-//                       <Link to="/">
-//                         <span className="burger_home_icon">🏠</span>{" "}
-//                         <span className="burger_home_text">홈</span>
-//                       </Link>
-//                     </div>
-//                   </div>
-//                   <div className="burger_close">
-//                     <div className="burger_close_signin">
-//                       <Link to="/signin">
-//                         <span className="burger_signup_icon">🖥</span>{" "}
-//                         <span className="burger_signup_text">로그인</span>
-//                       </Link>
-//                     </div>
-//                     <div className="burger_close_ranking">
-//                       <Link to="/ranking">
-//                         <span className="burger_ranking_icon">🏆</span>{" "}
-//                         <span className="burger_ranking_text">순위</span>
-//                       </Link>
-//                     </div>
-//                     <div className="burger_close_test">
-//                       <Link to="/test">
-//                         <span className="burger_test_icon">⌨</span>{" "}
-//                         <span className="burger_test_text">타자연습</span>
-//                       </Link>
-//                     </div>
-//                   </div>
-//                   <div className="nav_footer">
-//                     <a
-//                       href="https://wonderfulharu.tistory.com/"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                     >
-//                       블로그
-//                     </a>
-//                     <a href="mailto:psykyg@gmail.com">이메일</a>
-//                     <a
-//                       href="https://github.com/psy-g"
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                     >
-//                       깃허브
-//                     </a>
-//                   </div>
-//                 </div>
-//               )}
-//             </div>
-//           ) : (
-//             <div className="burger_basic">
-//               <span className="burger_open" onClick={openNav}>
-//                 &#9776;
-//               </span>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Nav;

@@ -193,6 +193,7 @@ const Bottom = styled.div`
   border-top-style: solid;
   border-top-color: #090707;
   border-radius: 0 0 0.6rem 0.6rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 `;
 
 // 하단 좌
