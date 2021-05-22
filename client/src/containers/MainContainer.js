@@ -1,41 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../components/Main";
 import { useSelector } from "react-redux";
+import $ from "jquery";
 
 const MainContainer = () => {
   const isLogged = useSelector((state) => state.user.isLogged);
-  //   scrollTest() {
-  //     $(document).ready(function () {
-  //       $("#main").on("scroll", function () {
-  //         // var scrollValue = $("#main").scrollTop();
-  //         //   console.log("스크롤위치", scrollValue);
+  const [scrollEnd, setScrollEnd] = useState(false);
 
-  //         // var scrollValue2 = $(".scroll_icon-img1").offset();
-  //         // console.log("대상의위치값", scrollValue2);
-  //         let scrollLocation = document.querySelector("#main").scrollTop; // 현재 스크롤바 위치
-  //         let windowHeight = window.innerHeight; // 스크린 창
-  //         let fullHeight = document.querySelector("#main").scrollHeight; //  margin 값은 포함 x
+  useEffect(() => {
+    scrollCheck();
+  }, []);
 
-  //         // console.log("스크롤 위치는?", scrollLocation);
+  const scrollCheck = () => {
+    const div = document.querySelector("#root div:nth-child(3)");
 
-  //         const scrollImg = document.querySelector(".scroll_icon");
+    $("#root div:nth-child(3)").on("scroll", function () {
+      // 스크롤바 위치, 스크린 높이, 브라우저 화면 전체 높이
+      const scrollValue = $("#root div:nth-child(3)").scrollTop();
+      const windowHeight = window.innerHeight;
+      const fullHeight = div.scrollHeight;
 
-  //         // 스크롤 끝
-  //         if (scrollLocation + windowHeight >= fullHeight) {
-  //           scrollImg.style.display = `none`;
-  //           // console.log("끝");
-  //         } else {
-  //           scrollImg.style.display = `block`;
-  //         }
-  //       });
-  //     });
-  //   }
+      // 스크롤바 끝까지 내려오면(아이콘 숨김)
+      if (scrollValue + windowHeight >= fullHeight) {
+        setScrollEnd({
+          ...scrollEnd,
+          scrollEnd: true,
+        });
+      } else {
+        setScrollEnd({
+          ...scrollEnd,
+          scrollEnd: false,
+        });
+      }
+    });
+  };
 
-  //   componentDidMount() {
-  //     this.scrollTest();
-  //   }
-
-  return <Main isLogged={isLogged} />;
+  return <Main isLogged={isLogged} scrollEnd={scrollEnd} />;
 };
 
 export default MainContainer;
