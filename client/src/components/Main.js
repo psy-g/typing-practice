@@ -1,5 +1,5 @@
 import React from "react";
-import "./Main.css";
+// import "./Main.css";
 import { Link, NavLink } from "react-router-dom";
 
 import styled from "styled-components";
@@ -162,7 +162,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   scroll-snap-align: start;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 // 1페이지 상단

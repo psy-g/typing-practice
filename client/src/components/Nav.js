@@ -161,7 +161,7 @@ const Container = styled.header`
 // 헤더 크기만큼 공간 차지
 const Space = styled.div`
   width: 100%;
-  height: 10%;
+  height: 10vh;
 `;
 
 // 로고, 메뉴

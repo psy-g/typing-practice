@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
   } = req.body;
   // const { id, time, average, title } = req.body;
 
-  // console.log("=========", recordArray);
+  console.log("=========", req.body);
 
   // 유저 아이디 있으면 업데이트
   // 없으면 추가

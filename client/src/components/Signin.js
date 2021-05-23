@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// import "./Signin.css";
 import styled from "styled-components";
 import backgroundImg from "../image/rankback.png";
 import signinLogo from "../image/taza.png";
@@ -70,9 +69,9 @@ export default Signin;
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
