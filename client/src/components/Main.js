@@ -1,8 +1,7 @@
 import React from "react";
-// import "./Main.css";
 import { Link, NavLink } from "react-router-dom";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import backgroundImg from "../image/rankback.png";
 import signinLogo from "../image/taza.png";
 import powerBtn1 from "../image/power.png";
@@ -206,13 +205,24 @@ const Enter = styled.div`
   height: 60%;
 `;
 
+// 애니메이션
+const animation = keyframes`
+  0% {
+    color: #fff;
+  }
+  100% {
+    color: #fff;
+    text-shadow: -2px 0 #00f, 0 2px #00f, 2px 0 #00f, 0 -2px #00f;
+  }
+`;
+
 // Insert Coin
 const InsertCoin = styled(NavLink)`
   font-size: max(1.1em, 1.5vw);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  animation: blink 1s infinite;
+  animation: ${animation} 1s infinite;
   height: 80%;
 `;
 
