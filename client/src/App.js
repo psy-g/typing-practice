@@ -6,6 +6,11 @@ import Main from "./containers/MainContainer";
 import Nav from "./containers/NavContainer";
 import Signin from "./containers/SigninContainer";
 import Signup from "./containers/SignupContainer";
+import Test from "./containers/TestContainer";
+
+import { ThemeProvider } from "styled-components";
+import media from "./style/media";
+import theme from "./style/theme";
 
 // import Main from "../components/Main";
 // import Test from "../components/Test";
@@ -15,14 +20,15 @@ import Signup from "./containers/SignupContainer";
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={{ ...theme, ...media }}>
       <Nav />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/test" component={Test} />
       </Switch>
-    </>
+    </ThemeProvider>
   );
 };
 
