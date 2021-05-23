@@ -1,34 +1,36 @@
 // import React, { Component } from "react";
 import "./Test.css";
-import Nav from "./Nav";
-import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import randomBtn from "../image/power.png";
 
-import React, { useEffect } from "react";
+import React from "react";
 
 import styled from "styled-components";
 import backgroundImg from "../image/rankback.png";
 import powerBtn1 from "../image/power.png";
 import powerBtn2 from "../image/power_on.png";
 
-const Test = ({ requestProblem, problem, filterTitle, count }) => {
-  const speed = 1;
-  const accuracy = 150;
-  const nickname = "테스트";
-  const recordresultSpeed = 200;
-  const recordTime = 50;
-  const checkLogin = true;
+const Test = ({
+  nickname,
+  checkLogin,
+  requestProblem,
+  requestRefresh,
+  problem,
+  filterTitle,
+  count,
+  speed,
+  accuracy,
+  records,
+}) => {
+  // const nickname = "테스트";
+  // const recordresultSpeed = 200;
+  // const recordTime = 50;
+  // const checkLogin = true;
 
-  // // 문제 생성(엘리먼트)
-  // const createDiv = () => {
-  //   const tt = String(problem[count]);
-  //   const ttt = tt.split("");
-  //   const tttt = ttt.map((el, index) => (
-  //     <span className={"t" + index}>{el}</span>
-  //   ));
-  // };
+  const tt = String(problem[count]);
+  const ttt = tt.split("");
+  const tttt = ttt.map((el, index) => (
+    <SplitProblem key={index}>{el}</SplitProblem>
+  ));
 
   return (
     <Container>
@@ -88,12 +90,14 @@ const Test = ({ requestProblem, problem, filterTitle, count }) => {
                   ) : (
                     <div className="header_problem_count"></div>
                   )} */}
-                  <PrintProblem name="problem">{problem[count]}</PrintProblem>
+                  {/* <PrintProblem name="problem">{problem[count]}</PrintProblem> */}
+                  <PrintProblem name="problem">{tttt}</PrintProblem>
                   <textarea
                     type="text"
+                    name="answer"
                     // onChange={this.handleInputValue("answer")}
                     spellcheck="false"
-                    // maxlength={tt.length}
+                    maxlength={tt.length}
                     autoFocus
                   ></textarea>
                 </ProblemKeyboard>
@@ -108,11 +112,13 @@ const Test = ({ requestProblem, problem, filterTitle, count }) => {
                 <RecordPrintBox>
                   <SpeedRecord>
                     <div>평균</div>
-                    <div>{Math.round(recordresultSpeed / count)}타수</div>
+                    {/* <div>{Math.round(recordresultSpeed / count)}타수</div> */}
+                    <div>{Math.round(records.speed / count)}타수</div>
                   </SpeedRecord>
                   <TimeRecord>
                     <div>시간</div>
-                    <div>{recordTime.toFixed(1)}초 걸렸습니다</div>
+                    {/* <div>{recordTime.toFixed(1)}초 걸렸습니다</div> */}
+                    <div>{records.time.toFixed(1)}초 걸렸습니다</div>
                   </TimeRecord>
                 </RecordPrintBox>
               </PrintResult>
@@ -136,7 +142,8 @@ const Test = ({ requestProblem, problem, filterTitle, count }) => {
         <Bottom>
           <Left></Left>
           <Center>
-            {count < 7 ? (
+            {/* {count < 7 ? ( */}
+            {count < 1 ? (
               <>
                 {!checkLogin ? (
                   <PowerBtn1
@@ -157,13 +164,13 @@ const Test = ({ requestProblem, problem, filterTitle, count }) => {
                 {!checkLogin ? (
                   <PowerBtn1
                     alt="randomBtn"
-                    onClick={requestProblem}
+                    onClick={requestRefresh}
                     // onClick={this.requestRefresh}
                   />
                 ) : (
-                  <PowerBtn1
+                  <PowerBtn2
                     alt="randomBtn"
-                    onClick={requestProblem}
+                    onClick={requestRefresh}
                     // onClick={this.requestRefresh}
                   />
                 )}
@@ -401,6 +408,9 @@ const PrintProblem = styled.div`
   text-align: left;
 `;
 
+// 문제 잘게 잘게
+const SplitProblem = styled.span``;
+
 // 결과 출력 박스 - .header_titleAndProblem_print
 // div1 - .header_titleAndProblem_print_header
 const PrintResult = styled.div`
@@ -607,6 +617,7 @@ const Keyboard = styled.div`
   min-height: 15vh;
   background: #cadbe9;
   border-radius: 0.8rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
 
   div {
     font-size: 0.8vw;
