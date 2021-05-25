@@ -167,6 +167,8 @@ const TestContainer = () => {
     textareaInput.current.addEventListener("keypress", (e) => {
       const key = document.getElementById(e.key);
 
+      console.log("enter", key);
+
       if (key) {
         if (e.keyCode === 13 && !enterKey.current) {
           // 아무것도 입력하지 않은 상태에서 엔터 누른 경우
@@ -210,6 +212,8 @@ const TestContainer = () => {
     textareaInput.current.addEventListener("keydown", (e) => {
       const key = document.getElementById(e.key);
 
+      console.log("key", key);
+
       if (key) {
         // 229 키코드 : 한글 입력
         if (e.keyCode === 229) {
@@ -219,6 +223,12 @@ const TestContainer = () => {
             keyEvent.current = true;
           }
           key.classList.add("pressed");
+        }
+      } else {
+        if (!keyEvent.current) {
+          // if (!eventCheck) {
+          timerStart();
+          keyEvent.current = true;
         }
       }
     });
@@ -619,16 +629,6 @@ const TestContainer = () => {
 
     return final;
   };
-
-  // console.log(
-  //   "체크",
-  //   "id:",
-  //   id,
-  //   "title:",
-  //   filterTitle,
-  //   "accumulate_array:",
-  //   records.arr
-  // );
 
   return (
     <Test
