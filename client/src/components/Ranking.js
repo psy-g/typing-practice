@@ -148,16 +148,6 @@ class Ranking extends Component {
           });
         });
 
-        // for (const [index, value] of myRank.entries()) {
-        //   myItems.push(
-        //     <tr>
-        //       <td className="myRanking_rank">{this.state.myRanking}</td>
-        //       <td className="myRanking_name">{value.name}</td>
-        //       <td className="myRanking_record">{value.average}타수</td>
-        //       <td className="myRanking_time">{value.time}초</td>
-        //     </tr>
-        //   );
-        // }
         for (const ele of myRank) {
           loginUser.push(
             <tr>
@@ -213,10 +203,6 @@ class Ranking extends Component {
           });
         }
       });
-
-    // .catch((err) => {
-    //   console.log(err.response);
-    // });
 
     setTimeout(() => {
       this.detail();
@@ -324,9 +310,6 @@ class Ranking extends Component {
         `;
       target.prepend(newDiv);
 
-      // var noRecord = "x";
-      // var noRecord2 = "기록x";
-
       for (let i = 0; i < bestArr.length; i++) {
         document.querySelector(
           `.graph2 .item${i * 2 + 1}`
@@ -380,26 +363,6 @@ class Ranking extends Component {
       const target = document.querySelector(".detail_body2");
 
       target.innerHTML = "";
-
-      // let userRecord;
-      // // 로그인 유저 기록
-      // for (let i = 0; i < test.length; i++) {
-      //   for (
-      //     let j = 0;
-      //     j < test[i].querySelectorAll(".rank__name").length;
-      //     j++
-      //   ) {
-      //     if (
-      //       test[i].querySelectorAll(".rank__name")[j].innerHTML === nickname
-      //     ) {
-      //       userRecord = test[i]
-      //         .querySelectorAll(".rank__name")
-      //         [j].parentElement.querySelector(".rank__record").innerHTML;
-      //     }
-      //   }
-      // }
-
-      // console.log("=============", myRecordArray.length);
 
       // 로그인(기록 없음)
       if (myRecordArray.length === 0) {
@@ -462,9 +425,6 @@ class Ranking extends Component {
         </ul>
         `;
         target.prepend(newDiv);
-
-        // var noRecord = "x";
-        // var noRecord2 = "기록x";
 
         for (let i = 0; i < bestArr.length; i++) {
           document.querySelector(
@@ -627,27 +587,6 @@ class Ranking extends Component {
           `li.item16::before`,
           'content: "' + bestAverage + '";'
         );
-
-        // document.styleSheets[0].addRule(
-        //   `li.item1::before`,
-        //   'content: "' + record1 + '";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   `li.item2::before`,
-        //   'content: "' + record2 + '";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   "li.item1::after",
-        //   'content: "' + bestName + '";'
-        // );
-
-        // document.styleSheets[0].addRule(
-        //   "li.item2::after",
-        //   'content: "' + nickname + '";'
-        // );
-        // }
       }
     }
   }
@@ -663,15 +602,6 @@ class Ranking extends Component {
 
     window.onclick = function (event) {
       if (!event.target.matches(".dropbtn")) {
-        // let dropdowns = document.querySelector(".dropdown-content");
-        // console.log("=======", dropdowns.childNodes[0]);
-        // for (let i = 0; i < dropdowns.childNodes.length; i++) {
-        //   // let openDropdown = dropdowns.childNodes[i];
-        //   console.log("123456789", dropdowns.childNodes[0]);
-        // if (openDropdown.classList.contains("show")) {
-        //   openDropdown.classList.remove("show");
-        // }
-        // }
       }
     };
   }
@@ -792,22 +722,8 @@ class Ranking extends Component {
                   );
             }
 
-            // loginUser.push(
-            //   <tr className="myRanking_hover2">
-            //     <td className="myRanking_rank"></td>
-            //     {!nickname ? (
-            //       <td className="myRanking_name">Guest</td>
-            //     ) : (
-            //       <td className="myRanking_name">{nickname}</td>
-            //     )}
-            //     <td className="myRanking_record">0타수</td>
-            //     <td className="myRanking_time">0초</td>
-            //   </tr>
-            // );
             this.setState({ myItems: loginUser });
           }
-
-          // console.log("=============");
 
           // 유저 기록이 있으면
           if (res.data.myRank.length > 0) {
@@ -839,8 +755,6 @@ class Ranking extends Component {
       alert("에러");
     }
 
-    // console.log("=============", this.state.myRecordArray);
-
     document.querySelector(".dropdown-content").classList.remove("show");
 
     setTimeout(() => {
@@ -856,12 +770,6 @@ class Ranking extends Component {
       if (event.target.closest(".ranking_table_body")) {
         let clickName = event.target.parentNode.children[1].innerHTML;
         let clickTitle = document.querySelector(".dropbtn_text").innerHTML;
-
-        // console.log("check", document.querySelector(".dropbtn_text").innerHTML);
-        // console.log(event.target.parentNode.children);
-
-        // event.target.parentElement.style.backgroundColor = "#2a1a1a";
-        // event.target.parentElement.style.all = "unset";
 
         axios
           .post("http://localhost:8080/ranking/print", {
@@ -930,10 +838,6 @@ class Ranking extends Component {
               `li.item16::before`,
               'content: "' + clickRecord[1] + '";'
             );
-            // jquery
-            // $("ul.graph2 span li.item2").replaceWith(
-            //   `<li class="item2 p-${percentArr[0]}"></li>`
-            // );
           })
           .catch((err) => {
             console.log(err.response);
@@ -987,10 +891,8 @@ class Ranking extends Component {
 
     return (
       <div>
-        <Nav />
         <div id="ranking">
           <div className="ranking____header____tail">
-            {/* <div className="ranking_list"> */}
             <div className="ranking_list_table">
               <div className="select_wrapper">
                 <div className="dropdown">
@@ -1005,28 +907,6 @@ class Ranking extends Component {
                   </div>
                 </div>
               </div>
-
-              {/* <div className="select_wrapper">
-                <select
-                  type="button"
-                  className="select_start"
-                  onChange={this.print}
-                >
-                  <option value="select_0" disabled>
-                    선택
-                  </option>
-                  <option value="select_1">눈 녹듯</option>
-                  <option value="select_2">말리꽃</option>
-                  <option value="select-3">오아시스</option>
-                </select>
-              </div> */}
-
-              {/* <div className="table__column">
-                  <span className="column__rank">순위</span>
-                  <span className="column__nick">닉네임</span>
-                  <span className="column__record">기록</span>
-                </div>
-                <div className="rank">{items}</div> */}
               <div className="ranking_table_wrapper">
                 <table className="ranking_table">
                   <thead>
@@ -1066,20 +946,11 @@ class Ranking extends Component {
                       <div className="header_top1"></div>
                     </div>
                   </div>
-                  {/* <div className="detail_header">
-                    Guest님의 기록<br></br>기록을 등록하기 위해서는 로그인이
-                    필요합니다
-                  </div> */}
-                  {/* <div className="detail_body"></div> */}
                   <div className="detail_body2"></div>
                 </div>
               </div>
             ) : (
               <div className="ranking_tail">
-                {/* <div className="ranking_detail">
-                  <div className="detail_header">{nick}님의 기록</div>
-                  <div className="detail_body"></div>
-                </div> */}
                 <div className="ranking_detail2">
                   <div className="detail_body2_header">
                     <div className="detail_body2_header_top">
@@ -1091,23 +962,7 @@ class Ranking extends Component {
                       <div className="header_top1"></div>
                     </div>
                   </div>
-                  {/* <div className="detail_header2">{nick}님의 기록</div> */}
-                  <div className="detail_body2">
-                    {/* <div className="graph-wrapper2">
-                      <div className="percent-indicator2">
-                        <div className="per-0"></div>
-                        <div className="per-20"></div>
-                        <div className="per-40"></div>
-                        <div className="per-60"></div>
-                        <div className="per-80"></div>
-                        <div className="per-100"></div>
-                      </div>
-                      <ul className="graph2">
-                        <li className="item1">오옹</li>
-                        <li className="item2">히힝</li>
-                      </ul>
-                    </div> */}
-                  </div>
+                  <div className="detail_body2"></div>
                 </div>
               </div>
             )}

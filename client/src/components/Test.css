@@ -108,7 +108,7 @@
   cursor: pointer;
 } */
 
-.problem-content {
+/* .problem-content {
   display: none;
   min-width: 90px;
   overflow: auto;
@@ -116,7 +116,7 @@
   z-index: 15;
   border-radius: 0px 0px 5px 5px;
   font-size: max(0.5em, 0.5vw);
-}
+} */
 
 .header_title_title a:hover {
   background-color: #353535;

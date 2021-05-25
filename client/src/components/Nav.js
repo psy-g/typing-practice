@@ -25,111 +25,65 @@ const Nav = ({
                     &times;&nbsp;
                   </CloseBurgerBtn>
                 </BurgerContainerHeader>
-                {userState ? (
-                  <>
-                    <MenuTop>
-                      <MenuTopContent>
-                        <LinkIcon exact to="/" onClick={closeBurgerView}>
-                          🏠
+                <>
+                  <MenuTop>
+                    <MenuTopContent>
+                      <LinkIcon exact to="/" onClick={closeBurgerView}>
+                        🏠
+                      </LinkIcon>
+                      <LinkName exact to="/" onClick={closeBurgerView}>
+                        홈
+                      </LinkName>
+                    </MenuTopContent>
+                  </MenuTop>
+                  <MenuBottom>
+                    <MenuBottomContent>
+                      <MenuBottomContent1>
+                        {userState ? (
+                          <>
+                            <LogoutIcon onClick={logoutHandler}>👋</LogoutIcon>
+                            <LogoutName onClick={logoutHandler}>
+                              로그아웃
+                            </LogoutName>
+                          </>
+                        ) : (
+                          <>
+                            <LinkIcon
+                              exact
+                              to="/signin"
+                              onClick={closeBurgerView}
+                            >
+                              🖥
+                            </LinkIcon>
+                            <LinkName
+                              exact
+                              to="/signin"
+                              onClick={closeBurgerView}
+                            >
+                              로그인
+                            </LinkName>
+                          </>
+                        )}
+                      </MenuBottomContent1>
+                      <MenuBottomContent1>
+                        <LinkIcon exact to="/ranking" onClick={closeBurgerView}>
+                          🏆
                         </LinkIcon>
-                        <LinkName exact to="/" onClick={closeBurgerView}>
-                          홈
+                        <LinkName exact to="/ranking" onClick={closeBurgerView}>
+                          순위
                         </LinkName>
-                      </MenuTopContent>
-                    </MenuTop>
-                    <MenuBottom>
-                      <MenuBottomContent>
-                        <MenuBottomContent1>
-                          <LogoutIcon onClick={logoutHandler}>👋</LogoutIcon>
-                          <LogoutName onClick={logoutHandler}>
-                            로그아웃
-                          </LogoutName>
-                        </MenuBottomContent1>
-                        <MenuBottomContent1>
-                          <LinkIcon
-                            exact
-                            to="/ranking"
-                            onClick={closeBurgerView}
-                          >
-                            🏆
-                          </LinkIcon>
-                          <LinkName
-                            exact
-                            to="/ranking"
-                            onClick={closeBurgerView}
-                          >
-                            순위
-                          </LinkName>
-                        </MenuBottomContent1>
-                        <MenuBottomContent1>
-                          <LinkIcon exact to="/test" onClick={closeBurgerView}>
-                            ⌨
-                          </LinkIcon>
-                          <LinkName exact to="/test" onClick={closeBurgerView}>
-                            타자연습
-                          </LinkName>
-                        </MenuBottomContent1>
-                      </MenuBottomContent>
-                    </MenuBottom>
-                  </>
-                ) : (
-                  <>
-                    <MenuTop>
-                      <MenuTopContent>
-                        <LinkIcon exact to="/" onClick={closeBurgerView}>
-                          🏠
+                      </MenuBottomContent1>
+                      <MenuBottomContent1>
+                        <LinkIcon exact to="/test" onClick={closeBurgerView}>
+                          ⌨
                         </LinkIcon>
-                        <LinkName exact to="/" onClick={closeBurgerView}>
-                          홈
+                        <LinkName exact to="/test" onClick={closeBurgerView}>
+                          타자연습
                         </LinkName>
-                      </MenuTopContent>
-                    </MenuTop>
-                    <MenuBottom>
-                      <MenuBottomContent>
-                        <MenuBottomContent1>
-                          <LinkIcon
-                            exact
-                            to="/signin"
-                            onClick={closeBurgerView}
-                          >
-                            🖥
-                          </LinkIcon>
-                          <LinkName
-                            exact
-                            to="/signin"
-                            onClick={closeBurgerView}
-                          >
-                            로그인
-                          </LinkName>
-                        </MenuBottomContent1>
-                        <MenuBottomContent1>
-                          <LinkIcon
-                            exact
-                            to="/ranking"
-                            onClick={closeBurgerView}
-                          >
-                            🏆
-                          </LinkIcon>
-                          <LinkName
-                            exact
-                            to="/ranking"
-                            onClick={closeBurgerView}
-                          >
-                            순위
-                          </LinkName>
-                        </MenuBottomContent1>
-                        <MenuBottomContent1>
-                          <LinkIcon exact to="/test" onClick={closeBurgerView}>
-                            ⌨
-                          </LinkIcon>
-                          <LinkName exact to="/test" onClick={closeBurgerView}>
-                            타자연습
-                          </LinkName>
-                        </MenuBottomContent1>
-                      </MenuBottomContent>
-                    </MenuBottom>
-                  </>
-                )}
+                      </MenuBottomContent1>
+                    </MenuBottomContent>
+                  </MenuBottom>
+                </>
               </BurgerContainer>
             ) : (
               <BurgerImg onClick={openBurger}>&#9776;</BurgerImg>
@@ -338,4 +292,8 @@ const LogoutName = styled.div`
   padding-left: 10px;
   font-size: 1rem;
   cursor: pointer;
+
+  &:hover {
+    color: #ff5252;
+  }
 `;

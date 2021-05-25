@@ -3,6 +3,9 @@ import { request } from "../utils/axios";
 const RANDOM_TEST = "test/RANDOM_TEST";
 // const SELECT_TEST = "test/SELECT_TEST";
 
+// .post("http://d5932f4fad26.ngrok.io/problem/random", { title: value })
+// .post("https://tajachija.tk/problem/random", { title: value })
+
 // 랜덤 문제 요청
 export function requestRandom(body) {
   const data = request("post", "/problem/random", body);
