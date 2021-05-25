@@ -47,6 +47,7 @@ const SigninContainer = () => {
       if (res.payload.data.loginSuccess) {
         window.localStorage.setItem("isLogged", true);
         window.localStorage.setItem("id", res.payload.data.id);
+        window.localStorage.setItem("nick", res.payload.data.nick);
         history.push("/");
       } else {
         setMatch(false);

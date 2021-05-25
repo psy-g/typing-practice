@@ -9,7 +9,8 @@ const TestContainer = () => {
 
   // 유저 정보, 로그인, 제목
   // const id = useSelector((state) => state.user.data.id);
-  const nickname = useSelector((state) => state.user.data.nick);
+  // const nickname = useSelector((state) => state.user.data.nick);
+  const nickname = window.localStorage.getItem("nick");
   // const isLogged = useSelector((state) => state.user.isLogged); // ??
   const isLogged = window.localStorage.getItem("isLogged");
   const id = window.localStorage.getItem("id");
@@ -58,7 +59,7 @@ const TestContainer = () => {
     requestProblem();
     keyboardEvent();
     testValid();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 정확도 계산
   const compare = () => {
@@ -367,15 +368,8 @@ const TestContainer = () => {
     }
     // 비회원
     else {
-      let body = {
-        name: null,
-        title: title_data.current,
-      };
-
-      dispatch(printRanking(body))
+      dispatch(printRanking({ title: title_data.current, name: nickname }))
         .then((res) => {
-          // console.log("res.payload.data", res.payload.data);
-
           res.payload.data.data.forEach((el) => {
             rankerPrint.current.push({
               name: el.name,
@@ -388,28 +382,6 @@ const TestContainer = () => {
           console.log(err);
         });
     }
-
-    // else {
-    //   axios
-    //     .post("http://localhost:8080/ranking/print", {
-    //       title: filterTitle,
-    //       name: null,
-    //     })
-    //     .then((res) => {
-    //       res.data.data.forEach((el) => {
-    //         printRank.push({
-    //           name: el.name,
-    //           average: el.average,
-    //           time: el.time,
-    //         });
-    //       });
-
-    //       this.setState({ printRank: printRank });
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.response);
-    //     });
-    // }
   };
 
   // // 순위 출력
@@ -418,7 +390,7 @@ const TestContainer = () => {
       document.querySelector(".pressed").classList.remove("pressed");
     }
 
-    ranking();
+    // ranking();
 
     setTimeout(() => {
       const target = rankTarget.current;
@@ -430,9 +402,10 @@ const TestContainer = () => {
       for (let i = 0; i < PrintRankLenth; i++) {
         newDiv.innerHTML += `
             <div>
-              <span>${rankerPrint.current[i].average}타수</span>
               <span>${rankerPrint.current[i].time}초</span>
+              <span>${rankerPrint.current[i].average}타수</span>
               <span>${rankerPrint.current[i].name}</span>
+              <span>#${i + 1}</span>
             </div>
             `;
       }
