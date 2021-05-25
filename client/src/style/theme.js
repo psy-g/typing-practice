@@ -1,14 +1,15 @@
-// import styled from "styled-components";
+/* 
+PC, 테블릿 가로 - 768px ~ 1023px
 
-const colors = {
-  black: "#000000",
-  grey: "#999999",
-};
+테블릿 세로 - 768px ~ 1023px
 
-// ... 생략
+모바일 가로, 테블릿 세로 - 480px ~ 767px
+
+모바일 가로, 테블릿 세로 - ~479px
+*/
 
 const theme = {
-  colors,
+  desktop: `(min-width: 1024px)`,
 };
 
 export default theme;

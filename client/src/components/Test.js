@@ -1,4 +1,4 @@
-import "./Test.css";
+// import "./Test.css";
 import { Link } from "react-router-dom";
 
 import React from "react";
@@ -39,7 +39,6 @@ const Test = ({
               <div>{element.speed}</div>
             </Speed>
             <TitleWrapper>
-              {/* {count < 7 ? ( */}
               {element.count < 7 ? (
                 <Title onClick={selectButton}>
                   {element.title}
@@ -50,7 +49,6 @@ const Test = ({
                   </ToggleMenu>
                 </Title>
               ) : (
-                // <Title>{filterTitle}</Title>
                 <Title>{element.title}</Title>
               )}
               {(element.count < 7 && filterTitle === "님의 손길") ||
@@ -70,13 +68,6 @@ const Test = ({
             {element.count < 7 ? (
               <ProblemBox>
                 <ProblemKeyboard>
-                  {/* {tttt.length !== 9 ? (
-                    <div className="header_problem_count">{tttt}</div>
-                  ) : (
-                    <div className="header_problem_count"></div>
-                  )} */}
-                  {/* <PrintProblem name="problem">{problem[count]}</PrintProblem> */}
-                  {/* <PrintProblem ref={problemPrint}>{tttt}</PrintProblem> */}
                   {tttt.length !== 9 ? (
                     <PrintProblem ref={problemPrint}>{tttt}</PrintProblem>
                   ) : (
@@ -84,7 +75,6 @@ const Test = ({
                   )}
                   <textarea
                     type="text"
-                    // onChange={this.handleInputValue("answer")}
                     spellCheck="false"
                     maxLength={tt.length}
                     autoFocus
@@ -107,14 +97,12 @@ const Test = ({
                       ref={textareaInput}
                     ></textarea>
                     <div>평균</div>
-                    {/* <div>{Math.round(recordresultSpeed / count)}타수</div> */}
                     <div>
                       {Math.round(element.accumulateSpeed / element.count)}타수
                     </div>
                   </SpeedRecord>
                   <TimeRecord>
                     <div>시간</div>
-                    {/* <div>{recordTime.toFixed(1)}초 걸렸습니다</div> */}
                     <div>{element.time.toFixed(1)}초 걸렸습니다</div>
                   </TimeRecord>
                 </RecordPrintBox>
@@ -140,17 +128,12 @@ const Test = ({
         <Bottom>
           <Left></Left>
           <Center>
-            {/* {count < 7 ? ( */}
             {element.count < 7 ? (
               <>
                 {!checkLogin ? (
                   <PowerBtn1 alt="randomBtn" onClick={requestProblem} />
                 ) : (
-                  <PowerBtn2
-                    alt="randomBtn"
-                    onClick={requestProblem}
-                    // onClick={this.requestProblem}
-                  />
+                  <PowerBtn2 alt="randomBtn" onClick={requestProblem} />
                 )}
               </>
             ) : (
@@ -164,12 +147,11 @@ const Test = ({
             )}
           </Center>
           <Right>
-            <p className="header_problem_result_right_triangle"></p>
-            <p className="header_problem_result_right_arrow">랜덤</p>
+            <p></p>
+            <p>랜덤</p>
           </Right>
         </Bottom>
         {element.count < 7 ? (
-          // {count !== 2 ? (
           <KeyBoardWrapper>
             <Keyboard>
               <div id="ㅂ">ㅂ</div>
@@ -245,6 +227,13 @@ export default React.memo(Test);
 const Container = styled.div`
   width: 100%;
   height: 90vh;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 100vh;
+  }
+
+  @media all and (max-width: 767px) {
+  }
 `;
 
 // wrapper - .test_____header____tail
@@ -275,6 +264,14 @@ const Top = styled.div`
   border-radius: 0.6rem 0.6rem 0 0;
   font-size: 20px;
   color: white;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 90%;
+  }
+
+  @media all and (max-width: 767px) {
+    height: 90%;
+  }
 `;
 
 // 스코어보드(타수, 문제 제목, 정확도) - .header_problem_score
@@ -382,6 +379,13 @@ const ProblemBox = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 70%;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 80%;
+  }
+
+  @media all and (max-width: 767px) {
+  }
 `;
 
 // 문제, 키보드 입력 -.problemAndTyping
@@ -505,6 +509,10 @@ const PrintRank = styled.div`
       color: #efdc05;
       font-size: 14px;
       height: 15%;
+
+      @media all and (min-width: 768px) and (max-width: 1023px) {
+        font-size: 12px;
+      }
     }
     &:nth-child(2) {
       height: 100%;
@@ -661,6 +669,13 @@ const KeyBoardWrapper = styled.div`
   align-items: center;
   width: 100%;
   height: 20vh;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+  }
+
+  @media all and (max-width: 767px) {
+    height: 10%;
+  }
 `;
 
 // 키보드 - #keyboard
@@ -696,6 +711,14 @@ const Keyboard = styled.div`
   .pressed {
     background-color: #e53a40;
     transform: scale(1.2);
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    visibility: hidden;
+  }
+
+  @media all and (max-width: 767px) {
+    visibility: hidden;
   }
 `;
 

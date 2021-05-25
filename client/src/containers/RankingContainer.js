@@ -110,7 +110,6 @@ const RankingContainer = () => {
         // 전체
         for (const [index, value] of printRank.entries()) {
           items.push(
-            // <tr className={`rank__${index}`} onClick={this.clickRank}>
             <tr key={index} onClick={clickRank}>
               <td>{index + 1}</td>
               <td>{value.name}</td>
@@ -131,7 +130,6 @@ const RankingContainer = () => {
         // 회원, 기록 O
         if (myRank) {
           for (const ele of myRank) {
-            //   for (const [index, value] of myRank.entries()) {
             loginUser.push(
               <tr key={ele.average}>
                 <td>{myRanking}</td>

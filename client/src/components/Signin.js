@@ -105,6 +105,15 @@ const Logo = styled.div`
 const LogoImg = styled.img`
   width: 80%;
   max-width: 550px;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    width: 70%;
+    height: 150px;
+  }
+
+  @media all and (max-width: 767px) {
+    height: 100%;
+  }
 `;
 
 // 입력 박스
@@ -114,11 +123,19 @@ const InputWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   height: 60%;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    flex-direction: row;
+  }
+
+  @media all and (max-width: 767px) {
+    justify-content: center;
+  }
 `;
 
 // 닉네임 박스
 const NicknameWrapper = styled.div`
-  height: 25%;
+  height: 30%;
 `;
 
 // 타이틀
@@ -137,7 +154,11 @@ const Input = styled.input`
 
 // 비밀번호(입력)
 const Password = styled.div`
-  height: 20%;
+  height: 25%;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 30%;
+  }
 `;
 
 // 숨김(정보 미입력)
@@ -161,6 +182,10 @@ const ButtonWrapper = styled.div`
   justify-content: flex-start;
   width: 98%;
   height: 15%;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 0%;
+  }
 `;
 
 // 로그인 버튼
@@ -171,6 +196,10 @@ const LoginBtn = styled.button`
   border: solid 0.15rem #33ffff;
   border-radius: 0.4rem;
   cursor: pointer;
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    font-size: 12px;
+    width: 80px;
+  }
 `;
 
 // 회원가입 버튼
@@ -181,6 +210,9 @@ const SignupBtn = styled.button`
   border: solid 0.15rem #33ffff;
   border-radius: 0.4rem;
   cursor: pointer;
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    font-size: 12px;
+  }
 `;
 
 // 모니터 하단

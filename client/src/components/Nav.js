@@ -84,6 +84,23 @@ const Nav = ({
                     </MenuBottomContent>
                   </MenuBottom>
                 </>
+                <Footer>
+                  <a
+                    href="https://wonderfulharu.tistory.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    블로그
+                  </a>
+                  <a href="mailto:psykyg@gmail.com">이메일</a>
+                  <a
+                    href="https://github.com/psy-g"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    깃허브
+                  </a>
+                </Footer>
               </BurgerContainer>
             ) : (
               <BurgerImg onClick={openBurger}>&#9776;</BurgerImg>
@@ -144,20 +161,6 @@ const UserNavWrapper = styled.div`
   align-items: center;
 `;
 
-// 유저 정보
-/* 
-const User = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  font-weight: bold;
-
-  @media ${(props) => props.theme.mobile} {
-    margin-right: 15px;
-  }
-`;
-*/
-
 // 버거 이미지
 const BurgerImg = styled.div`
   cursor: pointer;
@@ -181,6 +184,15 @@ const BurgerContainer = styled.div`
   padding: 27px 0px 20px 20px;
   border-radius: 10px;
   z-index: 5;
+
+  @media all and (max-width: 767px) {
+    position: fixed;
+    z-index: 10;
+    top: -20px;
+    width: 100%;
+    height: 150%;
+    background-color: #30a9de;
+  }
 `;
 
 // 버거 컨테이너 상단
@@ -222,6 +234,10 @@ const MenuBottom = styled.div`
   height: 180px;
   border-radius: 10px 0px 0px 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.2);
+
+  @media all and (max-width: 767px) {
+    height: 150px;
+  }
 `;
 
 // 홈
@@ -295,5 +311,34 @@ const LogoutName = styled.div`
 
   &:hover {
     color: #ff5252;
+  }
+`;
+
+// 하단(이메일, 깃헙, 블로그)
+const Footer = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  display: none;
+
+  a {
+    color: #fafafa;
+    font-family: "HeirofLightRegular";
+    font-size: 18px;
+    margin-left: 15px;
+    opacity: 0.6;
+
+    &:hover {
+      color: #fafafa;
+      font-family: "HeirofLightRegular";
+      font-size: 18px;
+      margin-left: 15px;
+      opacity: 1;
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    display: flex;
   }
 `;

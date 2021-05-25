@@ -40,10 +40,10 @@ const Main = ({ isLogged, scrollEnd }) => {
               </LinkBtn>
             )}
           </Center>
-          {/* <div className="tail_right">
-            <p className="tail_right_triangle"></p>
-            <p className="tail_right_arrow">로그인</p>
-          </div> */}
+          <Right>
+            <p></p>
+            <p>로그인</p>
+          </Right>
         </Bottom>
         <ScrollWrapper>
           <ScrollIcon src={scrollText} alt="scroll" scrollCheck={scrollEnd} />
@@ -194,6 +194,15 @@ const Logo = styled.div`
 const LogoImg = styled.img`
   width: 80%;
   max-width: 550px;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    width: 70%;
+    height: 150px;
+  }
+
+  @media all and (max-width: 767px) {
+    height: 100%;
+  }
 `;
 
 // 입장(Enter)
@@ -257,11 +266,45 @@ const Bottom = styled.div`
 // 하단 좌
 const Left = styled.div``;
 
+// 하단 우 .tail_right
+// p1 .tail_right_triangle
+// p2 .tail_right_arrow
+const Right = styled.div`
+  display: none;
+
+  p {
+    &:nth-child(1) {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px;
+      border-color: transparent white transparent transparent;
+      z-index: 10;
+      margin: 0px;
+    }
+    &:nth-child(2) {
+      border-radius: 8px;
+      background: white;
+      border: solid transparent;
+      color: black;
+      border-width: 10px;
+      z-index: 10;
+      margin: 0px;
+    }
+  }
+`;
+
 // 하단 중
 const Center = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover + ${Right} {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
 `;
 
 const LinkBtn = styled(Link)``;
@@ -289,6 +332,10 @@ const ScrollWrapper = styled.div`
   position: absolute;
   top: 40%;
   right: 0.1%;
+
+  @media all and (max-width: 767px) {
+    right: -2%;
+  }
 `;
 
 // 스크롤 아이콘
@@ -306,6 +353,10 @@ const Description = styled.div`
   width: 50%;
   height: 100%;
   text-align: center;
+
+  @media all and (max-width: 767px) {
+    width: 75%;
+  }
 `;
 
 // 컨텐츠 박스(2~3페이지) - .context-header
@@ -314,6 +365,10 @@ const ContentsWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   height: 60%;
+
+  @media all and (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 // 컨텐츠 설명 박스(2~3페이지) - .context-header-text
@@ -322,6 +377,12 @@ const TextContents = styled.div`
   height: 80%;
   display: flex;
   flex-direction: column;
+
+  @media all and (max-width: 767px) {
+    width: 80%;
+    height: 55%;
+    justify-content: flex-end;
+  }
 `;
 
 // 컨텐츠 설명(2페이지) - .context-header-text-top1
@@ -399,6 +460,10 @@ const ImgContents = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media all and (max-width: 767px) {
+    width: 80%;
+  }
 `;
 
 // 설명 이미지(2~3페이지) - .context-header-img
@@ -414,6 +479,11 @@ const ContentsWrapperLast = styled.div`
   align-items: center;
   width: 100%;
   height: 85%;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    justify-content: flex-end;
+    height: 70%;
+  }
 `;
 
 // 컨텐츠 설명 박스(4페이지) - .context-header-text3
@@ -424,6 +494,14 @@ const TextContentsLast = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: left;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    justify-content: flex-end;
+  }
+
+  @media all and (max-width: 767px) {
+    height: 40%;
+  }
 `;
 
 // 컨텐츠 설명(4페이지) - .context-header-text-top3
@@ -466,6 +544,14 @@ const ImgContentsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    height: 30%;
+  }
+
+  @media all and (max-width: 767px) {
+    height: 55%;
+  }
 `;
 
 // 설명 이미지1(4페이지) - .context-header-img3-1
