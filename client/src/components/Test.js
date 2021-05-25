@@ -1,4 +1,3 @@
-// import React, { Component } from "react";
 import "./Test.css";
 import { Link } from "react-router-dom";
 
@@ -145,11 +144,7 @@ const Test = ({
             {element.count < 7 ? (
               <>
                 {!checkLogin ? (
-                  <PowerBtn1
-                    alt="randomBtn"
-                    onClick={requestProblem}
-                    // onClick={this.requestProblem}
-                  />
+                  <PowerBtn1 alt="randomBtn" onClick={requestProblem} />
                 ) : (
                   <PowerBtn2
                     alt="randomBtn"
@@ -252,7 +247,7 @@ const Container = styled.div`
   height: 90vh;
 `;
 
-// wrapeer - .test_____header____tail
+// wrapper - .test_____header____tail
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -524,23 +519,38 @@ const PrintRank = styled.div`
 
           div {
             &:nth-child(1) {
-              color: green;
+              color: white;
               display: flex;
               flex-direction: row-reverse;
               align-items: center;
+              span {
+                &:nth-child(4) {
+                  color: #e53a40;
+                }
+              }
             }
             &:nth-child(2) {
-              color: yellow;
+              color: white;
               display: flex;
               flex-direction: row-reverse;
               align-items: center;
+              span {
+                &:nth-child(4) {
+                  color: #e53a40;
+                }
+              }
             }
             &:nth-child(3) {
-              color: blue;
+              color: white;
               display: flex;
               flex-direction: row-reverse;
               align-items: center;
               height: 100%;
+              span {
+                &:nth-child(4) {
+                  color: #e53a40;
+                }
+              }
             }
           }
         }

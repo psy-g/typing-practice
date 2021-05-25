@@ -36,6 +36,7 @@ const NavContainer = () => {
     setBurger(false);
     window.localStorage.setItem("isLogged", false);
     window.localStorage.removeItem("id");
+    window.localStorage.removeItem("nick");
     history.push("/");
   };
 
