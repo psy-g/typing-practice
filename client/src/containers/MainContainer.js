@@ -9,7 +9,7 @@ const MainContainer = () => {
 
   useEffect(() => {
     scrollCheck();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const scrollCheck = () => {
     const div = document.querySelector("#root div:nth-child(3)");

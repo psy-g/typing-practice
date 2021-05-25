@@ -7,6 +7,7 @@ import Nav from "./containers/NavContainer";
 import Signin from "./containers/SigninContainer";
 import Signup from "./containers/SignupContainer";
 import Test from "./containers/TestContainer";
+import Ranking from "./containers/RankingContainer";
 
 import { ThemeProvider } from "styled-components";
 import media from "./style/media";
@@ -27,6 +28,7 @@ const App = () => {
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/test" component={Test} />
+        <Route exact path="/ranking" component={Ranking} />
       </Switch>
     </ThemeProvider>
   );

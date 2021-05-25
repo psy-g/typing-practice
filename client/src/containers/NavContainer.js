@@ -10,6 +10,7 @@ const NavContainer = () => {
 
   // 유저 로그인 체크(회원, 비회원 메뉴 다르게 표시)
   const userState = useSelector((state) => state.user.isLogged);
+  // const userState = window.localStorage.getItem("isLogged");
 
   // 버거 체크(true: 열려있음, false: 안열려있음)
   const [burger, setBurger] = useState(false);
@@ -33,6 +34,8 @@ const NavContainer = () => {
   const logoutHandler = () => {
     dispatch(logoutUser());
     setBurger(false);
+    window.localStorage.setItem("isLogged", false);
+    window.localStorage.removeItem("id");
     history.push("/");
   };
 

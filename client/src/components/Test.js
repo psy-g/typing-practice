@@ -10,23 +10,21 @@ import powerBtn1 from "../image/power.png";
 import powerBtn2 from "../image/power_on.png";
 
 const Test = ({
+  element,
   nickname,
   checkLogin,
   requestProblem,
   requestRefresh,
-  problem,
   filterTitle,
-  count,
-  speed,
-  accuracy,
-  records,
+  selectBtn,
+  selectButton,
+  selectProblem,
+  textareaInput,
+  problemPrint,
+  timerPrint,
+  rankTarget,
 }) => {
-  // const nickname = "테스트";
-  // const recordresultSpeed = 200;
-  // const recordTime = 50;
-  // const checkLogin = true;
-
-  const tt = String(problem[count]);
+  const tt = String(element.problem[element.count]);
   const ttt = tt.split("");
   const tttt = ttt.map((el, index) => (
     <SplitProblem key={index}>{el}</SplitProblem>
@@ -39,50 +37,38 @@ const Test = ({
           <ScoreBoard>
             <Speed>
               <div>타수</div>
-              <div>{speed}</div>
+              <div>{element.speed}</div>
             </Speed>
             <TitleWrapper>
-              {count < 7 ? (
-                <Title
-                // onClick={this.selectButton}
-                >
-                  {filterTitle}
-                  <div id="problemDropdown" className="problem-content">
-                    <span
-                    // onClick={this.selectProblem("님의 손길")}
-                    >
-                      님의 손길
-                    </span>
-                    <span
-                    // onClick={this.selectProblem("광야")}
-                    >
-                      광야
-                    </span>
-                    <span
-                    // onClick={this.selectProblem("진달래꽃")}
-                    >
-                      진달래꽃
-                    </span>
-                  </div>
+              {/* {count < 7 ? ( */}
+              {element.count < 7 ? (
+                <Title onClick={selectButton}>
+                  {element.title}
+                  <ToggleMenu ref={selectBtn}>
+                    <span onClick={selectProblem("님의 손길")}>님의 손길</span>
+                    <span onClick={selectProblem("광야")}>광야</span>
+                    <span onClick={selectProblem("진달래꽃")}>진달래꽃</span>
+                  </ToggleMenu>
                 </Title>
               ) : (
-                <Title>{filterTitle}</Title>
+                // <Title>{filterTitle}</Title>
+                <Title>{element.title}</Title>
               )}
-              {(count < 7 && filterTitle === "님의 손길") ||
-              (count < 7 && filterTitle === "광야") ||
-              (count < 7 && filterTitle === "진달래꽃") ? (
-                <Counter>{count + 1} / 7</Counter>
+              {(element.count < 7 && filterTitle === "님의 손길") ||
+              (element.count < 7 && filterTitle === "광야") ||
+              (element.count < 7 && filterTitle === "진달래꽃") ? (
+                <Counter>{element.count + 1} / 7</Counter>
               ) : (
                 <Counter></Counter>
               )}
             </TitleWrapper>
             <AccuracyWrapper>
               <div>정확도</div>
-              <div>{accuracy}</div>
+              <div>{element.accuracy}</div>
             </AccuracyWrapper>
           </ScoreBoard>
           <PrintWrapper>
-            {count < 7 ? (
+            {element.count < 7 ? (
               <ProblemBox>
                 <ProblemKeyboard>
                   {/* {tttt.length !== 9 ? (
@@ -91,14 +77,19 @@ const Test = ({
                     <div className="header_problem_count"></div>
                   )} */}
                   {/* <PrintProblem name="problem">{problem[count]}</PrintProblem> */}
-                  <PrintProblem name="problem">{tttt}</PrintProblem>
+                  {/* <PrintProblem ref={problemPrint}>{tttt}</PrintProblem> */}
+                  {tttt.length !== 9 ? (
+                    <PrintProblem ref={problemPrint}>{tttt}</PrintProblem>
+                  ) : (
+                    <PrintProblem ref={problemPrint}></PrintProblem>
+                  )}
                   <textarea
                     type="text"
-                    name="answer"
                     // onChange={this.handleInputValue("answer")}
-                    spellcheck="false"
-                    maxlength={tt.length}
+                    spellCheck="false"
+                    maxLength={tt.length}
                     autoFocus
+                    ref={textareaInput}
                   ></textarea>
                 </ProblemKeyboard>
               </ProblemBox>
@@ -111,22 +102,29 @@ const Test = ({
                 )}
                 <RecordPrintBox>
                   <SpeedRecord>
+                    <textarea
+                      type="text"
+                      readOnly
+                      ref={textareaInput}
+                    ></textarea>
                     <div>평균</div>
                     {/* <div>{Math.round(recordresultSpeed / count)}타수</div> */}
-                    <div>{Math.round(records.speed / count)}타수</div>
+                    <div>
+                      {Math.round(element.accumulateSpeed / element.count)}타수
+                    </div>
                   </SpeedRecord>
                   <TimeRecord>
                     <div>시간</div>
                     {/* <div>{recordTime.toFixed(1)}초 걸렸습니다</div> */}
-                    <div>{records.time.toFixed(1)}초 걸렸습니다</div>
+                    <div>{element.time.toFixed(1)}초 걸렸습니다</div>
                   </TimeRecord>
                 </RecordPrintBox>
               </PrintResult>
             )}
           </PrintWrapper>
-          {count < 7 ? (
+          {element.count < 7 ? (
             <PrintRankBox>
-              <Timer name="timer">00:00</Timer>
+              <Timer ref={timerPrint}>00:00</Timer>
             </PrintRankBox>
           ) : (
             <PrintRankBox>
@@ -134,7 +132,8 @@ const Test = ({
                 <div>
                   순위 <Link to="/ranking">🏆</Link>
                 </div>
-                <div></div>
+                <div ref={rankTarget}></div>
+                <Timer ref={timerPrint}>00:00</Timer>
               </PrintRank>
             </PrintRankBox>
           )}
@@ -143,7 +142,7 @@ const Test = ({
           <Left></Left>
           <Center>
             {/* {count < 7 ? ( */}
-            {count < 1 ? (
+            {element.count < 7 ? (
               <>
                 {!checkLogin ? (
                   <PowerBtn1
@@ -162,17 +161,9 @@ const Test = ({
             ) : (
               <>
                 {!checkLogin ? (
-                  <PowerBtn1
-                    alt="randomBtn"
-                    onClick={requestRefresh}
-                    // onClick={this.requestRefresh}
-                  />
+                  <PowerBtn1 alt="randomBtn" onClick={requestRefresh} />
                 ) : (
-                  <PowerBtn2
-                    alt="randomBtn"
-                    onClick={requestRefresh}
-                    // onClick={this.requestRefresh}
-                  />
+                  <PowerBtn2 alt="randomBtn" onClick={requestRefresh} />
                 )}
               </>
             )}
@@ -182,7 +173,7 @@ const Test = ({
             <p className="header_problem_result_right_arrow">랜덤</p>
           </Right>
         </Bottom>
-        {count < 7 ? (
+        {element.count < 7 ? (
           // {count !== 2 ? (
           <KeyBoardWrapper>
             <Keyboard>
@@ -253,7 +244,7 @@ const Test = ({
   );
 };
 
-export default Test;
+export default React.memo(Test);
 
 // 컨테이너
 const Container = styled.div`
@@ -336,6 +327,24 @@ const Title = styled.div`
   cursor: pointer;
 `;
 
+// 토글 메뉴 버튼 -.problem-content
+const ToggleMenu = styled.div`
+  display: none;
+  min-width: 90px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 15;
+  border-radius: 0px 0px 5px 5px;
+  font-size: max(0.5em, 0.5vw);
+  flex-direction: column;
+
+  span {
+    color: white;
+    padding: 10px 4px;
+    display: block;
+  }
+`;
+
 // 카운터 - .header_title_count
 const Counter = styled.div`
   display: flex;
@@ -397,6 +406,10 @@ const ProblemKeyboard = styled.div`
     font-size: max(0.7em, 1.5vw);
     border-left: none;
     border-right: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
@@ -446,10 +459,14 @@ const SpeedRecord = styled.div`
   grid-template-columns: 0.5fr 1.5fr;
 
   div {
-    &:nth-child(2) {
+    &:nth-child(3) {
       color: white;
       text-align: left;
     }
+  }
+
+  textarea {
+    display: none;
   }
 `;
 
@@ -486,16 +503,48 @@ const PrintRank = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 
   div {
     &:nth-child(1) {
       color: #efdc05;
-      font-size: max(0.7em, 1.4vw);
-      height: 10%;
+      font-size: 14px;
+      height: 15%;
     }
     &:nth-child(2) {
-      height: 90%;
+      height: 100%;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        &:nth-child(1) {
+          height: 100%;
+
+          div {
+            &:nth-child(1) {
+              color: green;
+              display: flex;
+              flex-direction: row-reverse;
+              align-items: center;
+            }
+            &:nth-child(2) {
+              color: yellow;
+              display: flex;
+              flex-direction: row-reverse;
+              align-items: center;
+            }
+            &:nth-child(3) {
+              color: blue;
+              display: flex;
+              flex-direction: row-reverse;
+              align-items: center;
+              height: 100%;
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -677,12 +726,12 @@ const Keyboard = styled.div`
 //   compare() {
 //     const { problem, count, answer, time, recordArray } = this.state;
 
-//     // 반짝이는 듯속에 나는 두 손 모아 빌었지(50유효타수, 4초)
+//     // 반짝이는 듯속키 나는 두 손 모아 빌었지(50유효타수, 4초)
 //     // 50타 * 60초 / 4초 => 750타?
 //     // 백스페이스 7번
 
 //     // 일단 스페이스 빼자
-//     // 스페이스는 하나만 인정(배열에는 스페이스 하나당 세개씩 들어감)
+//     // 스페이스는 하나만 인정(배열터는 스페이스 하나당 세개씩 들어감)
 //     // 빈 칸 3칸이면 undefinded가 9개 들어감
 
 //     // 수 계산(타수*60/걸린시간(초))

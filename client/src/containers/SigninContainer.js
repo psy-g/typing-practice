@@ -45,6 +45,8 @@ const SigninContainer = () => {
 
     dispatch(loginUser(inputs)).then((res) => {
       if (res.payload.data.loginSuccess) {
+        window.localStorage.setItem("isLogged", true);
+        window.localStorage.setItem("id", res.payload.data.id);
         history.push("/");
       } else {
         setMatch(false);
