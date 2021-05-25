@@ -2,18 +2,19 @@ import React, { useEffect, useState, useRef } from "react";
 import Test from "../components/Test";
 import { requestRandom } from "../modules/test";
 import { registerRanking, printRanking } from "../modules/ranking";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const TestContainer = () => {
   const dispatch = useDispatch();
 
   // 유저 정보, 로그인, 제목
-  // const id = useSelector((state) => state.user.data.id);
-  // const nickname = useSelector((state) => state.user.data.nick);
+
   const nickname = window.localStorage.getItem("nick");
-  // const isLogged = useSelector((state) => state.user.isLogged); // ??
   const isLogged = window.localStorage.getItem("isLogged");
   const id = window.localStorage.getItem("id");
+  // const id = useSelector((state) => state.user.data.id);
+  // const nickname = useSelector((state) => state.user.data.nick);
+  // const isLogged = useSelector((state) => state.user.isLogged); // ??
 
   // 문제
   const [problem, setProblem] = useState([""]);
@@ -258,8 +259,6 @@ const TestContainer = () => {
     timerStop();
     timerInit();
 
-    // console.log("===", value);
-
     let random = title[Math.floor(Math.random() * title.length)];
 
     // 문제 선택
@@ -334,7 +333,8 @@ const TestContainer = () => {
   // 순위 등록 요청
   const ranking = () => {
     // 회원
-    if (isLogged) {
+    // if (isLogged) {
+    if (nickname) {
       let body = {
         id: id,
         recordTime: accumulate_time.current,
@@ -390,7 +390,7 @@ const TestContainer = () => {
       document.querySelector(".pressed").classList.remove("pressed");
     }
 
-    // ranking();
+    ranking();
 
     setTimeout(() => {
       const target = rankTarget.current;

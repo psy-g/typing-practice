@@ -22,7 +22,7 @@ const Ranking = ({
   bubble2,
   triangle,
 }) => {
-  // console.log("element", element);
+  // console.log("element", element.all);
 
   return (
     <Container>
@@ -51,7 +51,11 @@ const Ranking = ({
                   <th>시간</th>
                 </tr>
               </thead>
-              <TableBody ref={tableBody}>{element.all}</TableBody>
+              <TableBody ref={tableBody}>
+                {element.all.length > 0 ? element.all : null}
+              </TableBody>
+              {/* {element.all} */}
+              {/* {row.length > 0 ? row :null } */}
               {/* <tbody className="ranking_table_body">{element}</tbody> */}
             </Table>
           </TableWrapper>
@@ -72,7 +76,7 @@ const Ranking = ({
                   </tr>
                 </tbody>
               ) : (
-                <tbody>{element.user}</tbody>
+                <tbody>{element.user.length > 0 ? element.user : null}</tbody>
               )}
             </MyTable>
           </MyRank>
@@ -182,6 +186,14 @@ const DropBtn = styled.button`
     width: 15%;
     min-width: 18px;
     max-width: 25px;
+  }
+
+  @media all and (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+  }
+
+  @media all and (max-width: 767px) {
+    width: 100%;
   }
 `;
 
