@@ -9,9 +9,8 @@ import Signup from "containers/SignupContainer";
 import Test from "containers/TestContainer";
 import Ranking from "containers/RankingContainer";
 import theme from "style/theme";
-import "App.css";
 
-const App = () => {
+const Routes = () => {
   return (
     <ThemeProvider theme={theme}>
       <Nav />
@@ -26,4 +25,4 @@ const App = () => {
   );
 };
 
-export default withRouter(App);
+export default withRouter(Routes);

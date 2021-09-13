@@ -5,14 +5,15 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { Store, persistor } from "modules";
-import App from "App";
-import "index.css";
+import GlobalStyle from "style/GlobalStyle";
+import Routes from "Routes";
 
 ReactDOM.render(
   <Provider store={Store}>
     <PersistGate loading={null} persistor={persistor}>
       <Router>
-        <App />
+        <GlobalStyle />
+        <Routes />
       </Router>
     </PersistGate>
   </Provider>,
