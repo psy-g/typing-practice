@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const ADDRESS = "http://localhost:8080";
-const ADDRESS = "https://tajachija.tk";
+const ADDRESS = "http://localhost:8080";
+// const ADDRESS = "https://tajachija.tk";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;

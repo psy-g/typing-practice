@@ -1,10 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import styled from "styled-components";
-import backgroundImg from "../image/rankback.png";
-import signinLogo from "../image/taza.png";
-import powerBtn from "../image/power_pending.png";
+import backgroundImg from "image/rankback.png";
+import signinLogo from "image/taza.png";
+import powerBtn from "image/power_pending.png";
 
 const Signup = ({
   inputHandler,

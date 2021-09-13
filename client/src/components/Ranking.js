@@ -1,9 +1,9 @@
 import React from "react";
-import "./Ranking.css";
-import arrow from "../image/arrow2.png";
-
 import styled from "styled-components";
-import backgroundImg from "../image/rankback.png";
+
+import "components/Ranking.css";
+import arrow from "image/arrow2.png";
+import backgroundImg from "image/rankback.png";
 
 const Ranking = ({
   title,

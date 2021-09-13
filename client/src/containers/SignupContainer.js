@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Signup from "../components/Signup";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signupUser } from "../modules/user";
+
+import Signup from "components/Signup";
+import { signupUser } from "modules/user";
 
 const SignupContainer = () => {
   const history = useHistory();

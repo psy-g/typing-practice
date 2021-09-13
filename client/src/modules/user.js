@@ -1,18 +1,11 @@
-import { request } from "../utils/axios";
+import { request } from "utils/axios";
 
-// 유저(회원가입, 로그인, 로그아웃)
+//유저(회원가입, 로그인, 로그아웃)
 const SIGNUP_USER = "user/SIGNUP";
-// const LOGIN_USER = "user/LOGIN";
 const LOGOUT_USER = "user/LOGOUT";
-//
 const LOGIN_USER = "user/LOGIN_USER";
 const LOGIN_USER_SUCCESS = "user/LOGIN_USER_SUCCESS";
 const LOGIN_USER_FAILURE = "user/LOGIN_USER_FAILURE";
-
-// 로그인
-// const LOGIN_PENDING = "user/LOGIN_PENDING";
-// const LOGIN_SUCCESS = "user/LOGIN_SUCCESS";
-// const LOGIN_FAILURE = "user/LOGIN_FAILURE";
 
 // 회원가입
 export function signupUser(body) {
@@ -144,33 +137,3 @@ export default function userActions(state = initialState, action) {
       return state;
   }
 }
-
-// export default function user(state = initialState, action) {
-//   switch (action.type) {
-//     // 회원가입
-//     case SIGNUP_USER:
-//       return {
-//         ...state,
-//         nickname: action.payload.nickname,
-//         isLogged: true,
-//       };
-
-//     // 로그인 대기
-//     case LOGIN_USER:
-//       return {
-//         ...state,
-//         nickname: action.payload.nickname,
-//         isLogged: true,
-//       };
-
-//     // 로그아웃
-//     case LOGOUT_USER:
-//       return {
-//         ...state,
-//         nickname: "",
-//         isLogged: false,
-//       };
-//     default:
-//       return state;
-//   }
-// }

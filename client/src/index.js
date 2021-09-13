@@ -1,55 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import promiseMiddlerware from "redux-promise";
-import reduxThunk from "redux-thunk";
-
-import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
-import rootReducer from "./modules";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(promiseMiddlerware, reduxThunk))
-);
-
-const persistor = persistStore(store);
+import { Store, persistor } from "modules";
+import GlobalStyle from "style/GlobalStyle";
+import Routes from "Routes";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}></PersistGate>
-    <Router>
-      <App />
-    </Router>
+  <Provider store={Store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <GlobalStyle />
+        <Routes />
+      </Router>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );
-
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import App from "./App";
-// import { BrowserRouter as Router } from "react-router-dom";
-
-// // Redux 관련 불러오기
-// import { createStore } from "redux";
-// import reducers from "./reducers";
-// import { Provider } from "react-redux";
-
-// // 스토어 생성
-// const store = createStore(reducers);
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <Router>
-//       <App />
-//     </Router>
-//   </Provider>,
-//   document.getElementById("root")
-// );
