@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import user from "./user";
-import test from "./test";
-import ranking from "./ranking";
+
+import user from "modules/user";
+import test from "modules/test";
+import ranking from "modules/ranking";
 
 const persistConfig = {
   key: "root",

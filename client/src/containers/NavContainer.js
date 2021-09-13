@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Nav from "../components/Nav";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../modules/user";
+
+import Nav from "components/Nav";
+import { logoutUser } from "modules/user";
 
 const NavContainer = () => {
   const history = useHistory();

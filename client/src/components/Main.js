@@ -1,16 +1,16 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-
 import styled, { keyframes } from "styled-components";
-import backgroundImg from "../image/rankback.png";
-import signinLogo from "../image/taza.png";
-import powerBtn1 from "../image/power.png";
-import powerBtn2 from "../image/power_on.png";
-import mainImg1 from "../image/main_img_1.gif";
-import mainImg2 from "../image/main_img_2.png";
-import mainImg3 from "../image/main_img_3.png";
-import mainImg4 from "../image/main_img_4.gif";
-import scrollText from "../image/scroll_image.png";
+
+import backgroundImg from "image/rankback.png";
+import signinLogo from "image/taza.png";
+import powerBtn1 from "image/power.png";
+import powerBtn2 from "image/power_on.png";
+import mainImg1 from "image/main_img_1.gif";
+import mainImg2 from "image/main_img_2.png";
+import mainImg3 from "image/main_img_3.png";
+import mainImg4 from "image/main_img_4.gif";
+import scrollText from "image/scroll_image.png";
 
 const Main = ({ isLogged, scrollEnd }) => {
   return (

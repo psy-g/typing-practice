@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import Ranking from "../components/Ranking";
-import { printRanking } from "../modules/ranking";
 import { useDispatch } from "react-redux";
+
+import Ranking from "components/Ranking";
+import { printRanking } from "modules/ranking";
 
 const RankingContainer = () => {
   const dispatch = useDispatch();

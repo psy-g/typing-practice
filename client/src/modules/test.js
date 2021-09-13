@@ -1,4 +1,4 @@
-import { request } from "../utils/axios";
+import { request } from "utils/axios";
 
 const RANDOM_TEST = "test/RANDOM_TEST";
 // const SELECT_TEST = "test/SELECT_TEST";

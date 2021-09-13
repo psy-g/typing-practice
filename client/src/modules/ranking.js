@@ -1,4 +1,4 @@
-import { request } from "../utils/axios";
+import { request } from "utils/axios";
 
 const REGISTER_RANKING = "ranking/REGISTER_RANKING";
 const REGISTER_RANKING_SUCCESS = "ranking/REGISTER_RANKING_SUCCESS";

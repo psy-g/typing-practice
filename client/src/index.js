@@ -1,19 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import promiseMiddlerware from "redux-promise";
 import reduxThunk from "redux-thunk";
-
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 
-import rootReducer from "./modules";
-import { composeWithDevTools } from "redux-devtools-extension";
+import App from "./App";
+import rootReducer from "modules";
+import "./index.css";
 
 const store = createStore(
   rootReducer,

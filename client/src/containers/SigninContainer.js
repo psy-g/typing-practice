@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Signin from "../components/Signin";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../modules/user";
+
+import Signin from "components/Signin";
+import { loginUser } from "modules/user";
 
 const SigninContainer = () => {
   // const { nick, message } = useSelector((state) => state.user.data);

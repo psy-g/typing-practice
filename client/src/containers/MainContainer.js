@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Main from "../components/Main";
 import { useSelector } from "react-redux";
 import $ from "jquery";
+
+import Main from "components/Main";
 
 const MainContainer = () => {
   const isLogged = useSelector((state) => state.user.isLogged);

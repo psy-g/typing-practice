@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import Test from "../components/Test";
-import { requestRandom } from "../modules/test";
-import { registerRanking, printRanking } from "../modules/ranking";
 import { useDispatch } from "react-redux";
+
+import Test from "components/Test";
+import { requestRandom } from "modules/test";
+import { registerRanking, printRanking } from "modules/ranking";
 
 const TestContainer = () => {
   const dispatch = useDispatch();

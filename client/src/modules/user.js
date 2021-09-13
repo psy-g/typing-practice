@@ -1,4 +1,4 @@
-import { request } from "../utils/axios";
+import { request } from "utils/axios";
 
 // 유저(회원가입, 로그인, 로그아웃)
 const SIGNUP_USER = "user/SIGNUP";
