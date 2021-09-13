@@ -9,7 +9,7 @@ import Signup from "containers/SignupContainer";
 import Test from "containers/TestContainer";
 import Ranking from "containers/RankingContainer";
 import theme from "style/theme";
-import "./App.css";
+import "App.css";
 
 const App = () => {
   return (
