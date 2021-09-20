@@ -3,11 +3,10 @@ import { Switch, Route, withRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import Main from "containers/MainContainer";
-import Nav from "containers/NavContainer";
+import Nav from "components/nav/NavContainer";
 import Signin from "containers/SigninContainer";
 import Signup from "containers/SignupContainer";
 import Test from "containers/TestContainer";
-// import Ranking from "containers/RankingContainer";
 import Ranking from "components/ranking/RankingContainer";
 import theme from "style/theme";
 
