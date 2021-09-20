@@ -7,7 +7,8 @@ import Nav from "containers/NavContainer";
 import Signin from "containers/SigninContainer";
 import Signup from "containers/SignupContainer";
 import Test from "containers/TestContainer";
-import Ranking from "containers/RankingContainer";
+// import Ranking from "containers/RankingContainer";
+import Ranking from "components/ranking/RankingContainer";
 import theme from "style/theme";
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/test" component={Test} />
+        {/* <Route exact path="/ranking" component={Ranking} /> */}
         <Route exact path="/ranking" component={Ranking} />
       </Switch>
     </ThemeProvider>
