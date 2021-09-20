@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const RankingTableBody = ({ rank }) => {
+const RankingTableBody = ({ rank, rankerChangeHandler }) => {
   return (
     <BodyBlock>
       <Table>
@@ -16,7 +16,7 @@ const RankingTableBody = ({ rank }) => {
         <TableBody>
           {rank.all
             ? rank.all.map((ele, idx) => (
-                <tr key={idx}>
+                <tr key={idx} onClick={() => rankerChangeHandler(ele)}>
                   <td>{idx + 1}</td>
                   <td>{ele.name}</td>
                   <td>{ele.average}타수</td>
@@ -24,12 +24,6 @@ const RankingTableBody = ({ rank }) => {
                 </tr>
               ))
             : null}
-          {/* <tr key={index} onClick={clickRank}>
-            <td>{index + 1}</td>
-            <td>{value.name}</td>
-            <td>{value.average}타수</td>
-            <td>{value.time}초</td>
-          </tr> */}
         </TableBody>
       </Table>
     </BodyBlock>

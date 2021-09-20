@@ -14,7 +14,7 @@ const RankingTableBottom = ({ rank, record }) => {
         bubble1.current.style.display = "block";
         triangle.current.style.display = "block";
       };
-    } else if (record.user === 0) {
+    } else if (record.user.length === 0) {
       mouseTable.current.onmouseover = function (event) {
         bubble2.current.style.display = "block";
         triangle.current.style.display = "block";

@@ -3,19 +3,24 @@ import styled from "styled-components";
 
 import arrow from "image/arrow2.png";
 
-const RankingTableHead = () => {
+const RankingTableHead = ({
+  printHandler,
+  selectHandler,
+  toggle,
+  menuTitle,
+}) => {
   return (
     <HeadBlock>
       <Dropdown>
-        {/* <DropBtn onClick={selectBtn}>
-          <span ref={titleName}>{title}</span>
+        <DropBtn onClick={selectHandler}>
+          <span>{menuTitle}</span>
           <img src={arrow} alt="arrow" />
-        </DropBtn> */}
-        {/* <Menu ref={dropMenu} toggle={toggle}>
-          <span onClick={() => print("님의 손길")}>님의 손길</span>
-          <span onClick={() => print("광야")}>광야</span>
-          <span onClick={() => print("진달래꽃")}>진달래꽃</span>
-        </Menu> */}
+        </DropBtn>
+        <Menu toggle={toggle}>
+          <span onClick={() => printHandler("님의 손길")}>님의 손길</span>
+          <span onClick={() => printHandler("광야")}>광야</span>
+          <span onClick={() => printHandler("진달래꽃")}>진달래꽃</span>
+        </Menu>
       </Dropdown>
     </HeadBlock>
   );

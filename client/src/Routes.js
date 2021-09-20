@@ -20,7 +20,6 @@ const Routes = () => {
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/test" component={Test} />
-        {/* <Route exact path="/ranking" component={Ranking} /> */}
         <Route exact path="/ranking" component={Ranking} />
       </Switch>
     </ThemeProvider>

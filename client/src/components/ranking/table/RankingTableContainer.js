@@ -6,11 +6,24 @@ import RankingTableBody from "components/ranking/table/RankingTableBody";
 import RankingTableBottom from "components/ranking/table/RankingTableBottom";
 import backgroundImg from "image/rankback.png";
 
-const RankingTableContainer = ({ rank, record }) => {
+const RankingTableContainer = ({
+  rank,
+  record,
+  toggle,
+  menuTitle,
+  printHandler,
+  selectHandler,
+  rankerChangeHandler,
+}) => {
   return (
     <Container>
-      <RankingTableHead />
-      <RankingTableBody rank={rank} />
+      <RankingTableHead
+        printHandler={printHandler}
+        selectHandler={selectHandler}
+        toggle={toggle}
+        menuTitle={menuTitle}
+      />
+      <RankingTableBody rank={rank} rankerChangeHandler={rankerChangeHandler} />
       <RankingTableBottom rank={rank} record={record} />
     </Container>
   );

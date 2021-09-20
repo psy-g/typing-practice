@@ -1,16 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 
-import RankingTableContainer from "components/ranking/table/RankingTableContainer";
 import { useRankingService } from "components/ranking/RankingService";
+import RankingTableContainer from "components/ranking/table/RankingTableContainer";
+import RankingGraphContainer from "components/ranking/graph/RankingGraphContainer";
 
 const RankingContainer = () => {
-  const { rank, record } = useRankingService();
+  const {
+    rank,
+    record,
+    toggle,
+    menuTitle,
+    printHandler,
+    selectHandler,
+    rankerChangeHandler,
+  } = useRankingService();
 
   return (
     <Container>
       <Wrapper>
-        <RankingTableContainer rank={rank} record={record} />
+        <RankingTableContainer
+          rank={rank}
+          record={record}
+          toggle={toggle}
+          menuTitle={menuTitle}
+          printHandler={printHandler}
+          selectHandler={selectHandler}
+          rankerChangeHandler={rankerChangeHandler}
+        />
+        <RankingGraphContainer record={record} rank={rank} />
       </Wrapper>
     </Container>
   );
