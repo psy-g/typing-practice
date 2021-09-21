@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { ProblemInfo } from "constant";
 import arrow from "image/arrow2.png";
 
 const RankingTableHead = ({
@@ -17,9 +18,15 @@ const RankingTableHead = ({
           <img src={arrow} alt="arrow" />
         </DropBtn>
         <Menu toggle={toggle}>
-          <span onClick={() => printHandler("님의 손길")}>님의 손길</span>
-          <span onClick={() => printHandler("광야")}>광야</span>
-          <span onClick={() => printHandler("진달래꽃")}>진달래꽃</span>
+          <span onClick={() => printHandler(ProblemInfo.NO1)}>
+            {ProblemInfo.NO1}
+          </span>
+          <span onClick={() => printHandler(ProblemInfo.NO2)}>
+            {ProblemInfo.NO2}
+          </span>
+          <span onClick={() => printHandler(ProblemInfo.NO3)}>
+            {ProblemInfo.NO3}
+          </span>
         </Menu>
       </Dropdown>
     </HeadBlock>

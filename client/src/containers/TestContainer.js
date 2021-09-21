@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Test from "components/Test";
 import { requestRandom } from "modules/test";
 import { registerRanking, printRanking } from "modules/ranking";
+import { ProblemInfo } from "constant";
 
 const TestContainer = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const TestContainer = () => {
   // 문제
   const [problem, setProblem] = useState([""]);
   const [filterTitle, setFilterTitle] = useState("");
-  const title = ["광야", "님의 손길", "진달래꽃"];
+  const title = [ProblemInfo.NO1, ProblemInfo.NO2, ProblemInfo.NO3];
 
   const textareaInput = useRef();
   const problemPrint = useRef();
@@ -168,8 +169,6 @@ const TestContainer = () => {
     textareaInput.current.addEventListener("keypress", (e) => {
       const key = document.getElementById(e.key);
 
-      console.log("enter", key);
-
       if (key) {
         if (e.keyCode === 13 && !enterKey.current) {
           // 아무것도 입력하지 않은 상태에서 엔터 누른 경우
@@ -212,8 +211,6 @@ const TestContainer = () => {
     // 키보드 버튼 색상 on
     textareaInput.current.addEventListener("keydown", (e) => {
       const key = document.getElementById(e.key);
-
-      console.log("key", key);
 
       if (key) {
         // 229 키코드 : 한글 입력

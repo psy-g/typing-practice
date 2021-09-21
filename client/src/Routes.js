@@ -6,7 +6,8 @@ import Main from "containers/MainContainer";
 import Nav from "components/nav/NavContainer";
 import Signin from "containers/SigninContainer";
 import Signup from "containers/SignupContainer";
-import Test from "containers/TestContainer";
+// import Test from "containers/TestContainer";
+import Test from "components/test/TestContainer";
 import Ranking from "components/ranking/RankingContainer";
 import theme from "style/theme";
 

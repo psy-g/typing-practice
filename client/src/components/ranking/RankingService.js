@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { printRanking } from "modules/ranking";
+import { ProblemInfo } from "constant";
 
 export const useRankingService = () => {
   const dispatch = useDispatch();
   const nickname = window.localStorage.getItem("nick");
   const [record, setRecord] = useState({ best: "", user: "" });
-  const [menuTitle, setMenuTitle] = useState("님의 손길");
+  const [menuTitle, setMenuTitle] = useState(ProblemInfo.NO1);
   const [toggle, setToggle] = useState(true);
   const [rank, setRank] = useState({
     all: "",
@@ -17,7 +18,7 @@ export const useRankingService = () => {
   });
 
   useEffect(() => {
-    printHandler("님의 손길");
+    printHandler(ProblemInfo.NO1);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const printHandler = (value) => {
