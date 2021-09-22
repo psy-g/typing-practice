@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/macro";
 
 import TestMonitor from "components/test/screen/TestScreenContainer";
+import TestKeyboard from "components/test/keyboard/TestKeyboardContainer";
 import { useTestService } from "components/test/TestService";
 
 const TestContainer = () => {
@@ -15,6 +16,7 @@ const TestContainer = () => {
           selectHandler={selectHandler}
           toggle={toggle}
         />
+        <TestKeyboard />
       </Wrapper>
     </Container>
   );
