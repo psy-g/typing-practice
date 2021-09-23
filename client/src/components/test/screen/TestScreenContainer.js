@@ -10,6 +10,7 @@ const TestScreenContainer = ({
   proceeding,
   toggle,
   timer,
+  rankerArr,
   textareaInput,
   keyupEvent,
   keydownEvent,
@@ -30,7 +31,11 @@ const TestScreenContainer = ({
         keyupEvent={keyupEvent}
         keydownEvent={keydownEvent}
       />
-      <TestMonitorBottom proceeding={proceeding} timer={timer} />
+      <TestMonitorBottom
+        proceeding={proceeding}
+        timer={timer}
+        rankerArr={rankerArr}
+      />
     </MonitorBlock>
   );
 };

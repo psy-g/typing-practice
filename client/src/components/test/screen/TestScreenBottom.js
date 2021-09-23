@@ -1,25 +1,32 @@
 import React from "react";
-import styled from "styled-components/macro";
-// import Timer from "utils/Timer";
-
 import { Link } from "react-router-dom";
+import styled from "styled-components/macro";
 
-const TestScreenBottom = ({ proceeding, timer }) => {
+import TestScreenRank from "components/test/screen/TestScreenRank";
+
+const TestScreenBottom = ({ proceeding, timer, rankerArr }) => {
   return (
     <>
       {proceeding.count < 7 ? (
         <BottomBlock>
-          {/* <Timer ref={timerPrint}>00:00</Timer> */}
           <Timer>{timer}초</Timer>
         </BottomBlock>
       ) : (
         <BottomBlock>
           <PrintRank>
-            <div>
+            <Title>
               순위 <Link to="/ranking">🏆</Link>
-            </div>
-            {/* <div ref={rankTarget}></div> */}
-            {/* <Timer ref={timerPrint}>00:00</Timer> */}
+            </Title>
+            {rankerArr.map(
+              (ele, idx) =>
+                idx < 3 && (
+                  <TestScreenRank key={idx} data={ele} rank={idx + 1} />
+                )
+            )}
+            {/* <Timer>
+              {proceeding.recordTime.reduce((acc, cur) => acc + cur).toFixed(1)}
+              초
+            </Timer> */}
           </PrintRank>
         </BottomBlock>
       )}
@@ -49,66 +56,8 @@ const PrintRank = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+`;
 
-  div {
-    &:nth-child(1) {
-      color: #efdc05;
-      font-size: 14px;
-      height: 15%;
-
-      @media all and (min-width: 768px) and (max-width: 1023px) {
-        font-size: 12px;
-      }
-    }
-    &:nth-child(2) {
-      height: 100%;
-
-      div {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-
-        &:nth-child(1) {
-          height: 100%;
-
-          div {
-            &:nth-child(1) {
-              color: white;
-              display: flex;
-              flex-direction: row-reverse;
-              align-items: center;
-              span {
-                &:nth-child(4) {
-                  color: #e53a40;
-                }
-              }
-            }
-            &:nth-child(2) {
-              color: white;
-              display: flex;
-              flex-direction: row-reverse;
-              align-items: center;
-              span {
-                &:nth-child(4) {
-                  color: #e53a40;
-                }
-              }
-            }
-            &:nth-child(3) {
-              color: white;
-              display: flex;
-              flex-direction: row-reverse;
-              align-items: center;
-              height: 100%;
-              span {
-                &:nth-child(4) {
-                  color: #e53a40;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+const Title = styled.div`
+  color: #efdc05;
 `;

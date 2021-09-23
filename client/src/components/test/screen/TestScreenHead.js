@@ -29,6 +29,9 @@ const TestScreenHead = ({
               {ProblemInfo.NO3}
             </span>
           </DropMenu>
+          {proceeding.count < 7 && (
+            <Counter>{proceeding.count + 1} / 7</Counter>
+          )}
         </Title>
       </TitleWrapper>
       <AccuracyWrapper>
@@ -78,6 +81,14 @@ const Title = styled.div`
   width: 100%;
   position: relative;
   cursor: pointer;
+`;
+
+const Counter = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  font-size: max(0.5em, 1.1vw);
 `;
 
 const DropMenu = styled.div`

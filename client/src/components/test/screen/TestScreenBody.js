@@ -48,7 +48,10 @@ const TestScreenBody = ({
               <textarea type="text" readOnly ref={textareaInput}></textarea>
               <div>평균</div>
               <div>
-                {Math.round(proceeding.accumulateSpeed / proceeding.count)}타수
+                {Math.round(
+                  proceeding.recordArr.reduce((acc, cur) => acc + cur) / 7
+                )}
+                타수
               </div>
             </SpeedRecord>
             <TimeRecord>
