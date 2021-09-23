@@ -1,21 +1,34 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-import TestMonitor from "components/test/screen/TestScreenContainer";
+import TestScreen from "components/test/screen/TestScreenContainer";
+import TestPower from "components/test/power/TestPowerContainer";
 import TestKeyboard from "components/test/keyboard/TestKeyboardContainer";
 import { useTestService } from "components/test/TestService";
 
 const TestContainer = () => {
-  const { proceeding, toggle, selectHandler } = useTestService();
+  const {
+    proceeding,
+    toggle,
+    timeSwitch,
+    isLogged,
+    textareaInput,
+    requestProblem,
+    selectHandler,
+  } = useTestService();
 
   return (
     <Container>
       <Wrapper>
-        <TestMonitor
+        <TestScreen
           proceeding={proceeding}
-          selectHandler={selectHandler}
           toggle={toggle}
+          timeSwitch={timeSwitch}
+          textareaInput={textareaInput}
+          requestProblem={requestProblem}
+          selectHandler={selectHandler}
         />
+        <TestPower proceeding={proceeding} isLogged={isLogged} />
         <TestKeyboard />
       </Wrapper>
     </Container>

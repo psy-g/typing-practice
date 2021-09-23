@@ -3,11 +3,14 @@ import styled from "styled-components/macro";
 
 import { Link } from "react-router-dom";
 
-const TestScreenBottom = ({ proceeding }) => {
+const TestScreenBottom = ({ proceeding, timeSwitch }) => {
   return (
     <>
       {proceeding.count < 7 ? (
-        <BottomBlock>{/* <Timer ref={timerPrint}>00:00</Timer> */}</BottomBlock>
+        <BottomBlock>
+          {/* <Timer ref={timerPrint}>00:00</Timer> */}
+          <Timer>{timeSwitch}</Timer>
+        </BottomBlock>
       ) : (
         <BottomBlock>
           <PrintRank>

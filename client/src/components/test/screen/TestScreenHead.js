@@ -3,9 +3,12 @@ import styled from "styled-components/macro";
 
 import { ProblemInfo } from "constant";
 
-const TestScreenHead = ({ proceeding, toggle, selectHandler }) => {
-  console.log("proceeding", proceeding.title);
-
+const TestScreenHead = ({
+  proceeding,
+  toggle,
+  requestProblem,
+  selectHandler,
+}) => {
   return (
     <HeadBlock>
       <SpeedWrapper>
@@ -13,16 +16,16 @@ const TestScreenHead = ({ proceeding, toggle, selectHandler }) => {
         <div>{proceeding.speed}</div>
       </SpeedWrapper>
       <TitleWrapper>
-        <Title onClick={() => selectHandler(ProblemInfo.NO1)}>
+        <Title onClick={selectHandler}>
           {proceeding.title}
           <DropMenu drop={toggle}>
-            <span onClick={() => selectHandler(ProblemInfo.NO1)}>
+            <span onClick={() => requestProblem(ProblemInfo.NO1)}>
               {ProblemInfo.NO1}
             </span>
-            <span onClick={() => selectHandler(ProblemInfo.NO2)}>
+            <span onClick={() => requestProblem(ProblemInfo.NO2)}>
               {ProblemInfo.NO2}
             </span>
-            <span onClick={() => selectHandler(ProblemInfo.NO3)}>
+            <span onClick={() => requestProblem(ProblemInfo.NO3)}>
               {ProblemInfo.NO3}
             </span>
           </DropMenu>

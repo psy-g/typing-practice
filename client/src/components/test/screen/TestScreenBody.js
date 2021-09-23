@@ -1,28 +1,35 @@
 import React from "react";
 import styled from "styled-components/macro";
 
-const TestScreenBody = ({ proceeding }) => {
+import TestScreenProblem from "components/test/screen/TestScreenProblem";
+
+const TestScreenBody = ({ proceeding, textareaInput }) => {
   const nickname = window.localStorage.getItem("nick");
+  const inputLength = proceeding.problem[proceeding.count]
+    ? proceeding.problem[proceeding.count].length
+    : 10;
 
   return (
     <BodyBlock>
       {proceeding.count < 7 ? (
-        <ProblemBox>
+        <>
+          <ProblemBox>
+            {proceeding.problem[proceeding.count] &&
+              proceeding.problem[proceeding.count]
+                .split("")
+                .map((ele, idx) => <TestScreenProblem word={ele} key={idx} />)}
+          </ProblemBox>
           <ProblemKeyboard>
-            {/* {tttt.length !== 9 ? (
-              <PrintProblem ref={problemPrint}>{tttt}</PrintProblem>
-            ) : (
-              <PrintProblem ref={problemPrint}></PrintProblem>
-            )} */}
             <textarea
               type="text"
               spellCheck="false"
-              //   maxLength={tt.length}
+              maxLength={inputLength}
               autoFocus
-              //   ref={textareaInput}
+              ref={textareaInput}
+              placeholder="Enter ↲"
             ></textarea>
           </ProblemKeyboard>
-        </ProblemBox>
+        </>
       ) : (
         <PrintResult>
           {nickname ? (
@@ -32,11 +39,7 @@ const TestScreenBody = ({ proceeding }) => {
           )}
           <RecordPrintBox>
             <SpeedRecord>
-              <textarea
-                type="text"
-                readOnly
-                //   ref={textareaInput}
-              ></textarea>
+              <textarea type="text" readOnly ref={textareaInput}></textarea>
               <div>평균</div>
               <div>
                 {Math.round(proceeding.accumulateSpeed / proceeding.count)}타수
@@ -59,23 +62,17 @@ const BodyBlock = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 80%;
   height: 40%;
 `;
 
 const ProblemBox = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: row;
   align-items: center;
-  height: 70%;
-
-  @media all and (min-width: 768px) and (max-width: 1023px) {
-    height: 80%;
-  }
-
-  @media all and (max-width: 767px) {
-  }
+  height: 50%;
+  width: 80%;
 `;
 
 const ProblemKeyboard = styled.div`

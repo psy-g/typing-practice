@@ -6,16 +6,24 @@ import TestMonitorBody from "components/test/screen/TestScreenBody";
 import TestMonitorBottom from "components/test/screen/TestScreenBottom";
 import backgroundImg from "image/rankback.png";
 
-const TestScreenContainer = ({ proceeding, toggle, selectHandler }) => {
+const TestScreenContainer = ({
+  proceeding,
+  toggle,
+  timeSwitch,
+  textareaInput,
+  requestProblem,
+  selectHandler,
+}) => {
   return (
     <MonitorBlock>
       <TestMonitorHead
         proceeding={proceeding}
         toggle={toggle}
+        requestProblem={requestProblem}
         selectHandler={selectHandler}
       />
-      <TestMonitorBody proceeding={proceeding} />
-      <TestMonitorBottom proceeding={proceeding} />
+      <TestMonitorBody proceeding={proceeding} textareaInput={textareaInput} />
+      <TestMonitorBottom proceeding={proceeding} timeSwitch={timeSwitch} />
     </MonitorBlock>
   );
 };

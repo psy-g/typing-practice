@@ -94,7 +94,7 @@ export const useRankingService = () => {
       })
       .catch((err) => {
         if (err) {
-          alert("서버에 문제가 있습니다");
+          alert("server error");
         }
       });
   };
@@ -124,7 +124,7 @@ export const useRankingService = () => {
       })
       .catch((err) => {
         if (err) {
-          alert("서버에 문제가 있습니다");
+          alert("server error");
         }
       });
   };
