@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components/macro";
+// import Timer from "utils/Timer";
 
 import { Link } from "react-router-dom";
 
-const TestScreenBottom = ({ proceeding, timeSwitch }) => {
+const TestScreenBottom = ({ proceeding, timer }) => {
   return (
     <>
       {proceeding.count < 7 ? (
         <BottomBlock>
           {/* <Timer ref={timerPrint}>00:00</Timer> */}
-          <Timer>{timeSwitch}</Timer>
+          <Timer>{timer}초</Timer>
         </BottomBlock>
       ) : (
         <BottomBlock>

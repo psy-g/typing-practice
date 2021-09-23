@@ -1,6 +1,3 @@
-import { useState, useRef } from "react";
-
-// export const useCompare = () => {
 // 반짝이는 듯속에 나는 두 손 모아 빌었지(50유효타수, 4초)
 // 50타 * 60초 / 4초 => 750타
 // 백스페이스 7번
@@ -168,7 +165,6 @@ export const tasuCalculator = (kor) => {
 
   let consonantAndVowel = result.filter((item) => {
     return item !== null && item !== undefined;
-    // && item !== "";
   });
 
   return consonantAndVowel;

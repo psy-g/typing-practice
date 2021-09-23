@@ -10,9 +10,11 @@ const TestContainer = () => {
   const {
     proceeding,
     toggle,
-    timeSwitch,
+    elapsedTime,
     isLogged,
     textareaInput,
+    keyupEvent,
+    keydownEvent,
     requestProblem,
     selectHandler,
   } = useTestService();
@@ -23,8 +25,10 @@ const TestContainer = () => {
         <TestScreen
           proceeding={proceeding}
           toggle={toggle}
-          timeSwitch={timeSwitch}
+          timer={elapsedTime}
           textareaInput={textareaInput}
+          keyupEvent={keyupEvent}
+          keydownEvent={keydownEvent}
           requestProblem={requestProblem}
           selectHandler={selectHandler}
         />

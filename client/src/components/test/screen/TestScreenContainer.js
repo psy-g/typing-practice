@@ -9,8 +9,10 @@ import backgroundImg from "image/rankback.png";
 const TestScreenContainer = ({
   proceeding,
   toggle,
-  timeSwitch,
+  timer,
   textareaInput,
+  keyupEvent,
+  keydownEvent,
   requestProblem,
   selectHandler,
 }) => {
@@ -22,8 +24,13 @@ const TestScreenContainer = ({
         requestProblem={requestProblem}
         selectHandler={selectHandler}
       />
-      <TestMonitorBody proceeding={proceeding} textareaInput={textareaInput} />
-      <TestMonitorBottom proceeding={proceeding} timeSwitch={timeSwitch} />
+      <TestMonitorBody
+        proceeding={proceeding}
+        textareaInput={textareaInput}
+        keyupEvent={keyupEvent}
+        keydownEvent={keydownEvent}
+      />
+      <TestMonitorBottom proceeding={proceeding} timer={timer} />
     </MonitorBlock>
   );
 };

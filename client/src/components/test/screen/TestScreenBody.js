@@ -3,7 +3,12 @@ import styled from "styled-components/macro";
 
 import TestScreenProblem from "components/test/screen/TestScreenProblem";
 
-const TestScreenBody = ({ proceeding, textareaInput }) => {
+const TestScreenBody = ({
+  proceeding,
+  textareaInput,
+  keyupEvent,
+  keydownEvent,
+}) => {
   const nickname = window.localStorage.getItem("nick");
   const inputLength = proceeding.problem[proceeding.count]
     ? proceeding.problem[proceeding.count].length
@@ -25,8 +30,9 @@ const TestScreenBody = ({ proceeding, textareaInput }) => {
               spellCheck="false"
               maxLength={inputLength}
               autoFocus
+              onKeyUp={keyupEvent}
+              onKeyDown={keydownEvent}
               ref={textareaInput}
-              placeholder="Enter ↲"
             ></textarea>
           </ProblemKeyboard>
         </>
