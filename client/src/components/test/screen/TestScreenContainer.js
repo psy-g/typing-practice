@@ -12,7 +12,7 @@ const TestScreenContainer = ({
   timer,
   rankerArr,
   textareaInput,
-  keyupEvent,
+  isLogged,
   keydownEvent,
   requestProblem,
   selectHandler,
@@ -28,7 +28,7 @@ const TestScreenContainer = ({
       <TestMonitorBody
         proceeding={proceeding}
         textareaInput={textareaInput}
-        keyupEvent={keyupEvent}
+        isLogged={isLogged}
         keydownEvent={keydownEvent}
       />
       <TestMonitorBottom
