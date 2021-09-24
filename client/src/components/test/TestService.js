@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { requestRandom } from "modules/test";
@@ -31,6 +31,10 @@ export const useTestService = () => {
     recordArr: [],
     recordTime: [],
   });
+
+  useEffect(() => {
+    keyboardEvent();
+  }, []);
 
   const selectHandler = () => {
     setToggle(!toggle);
@@ -67,7 +71,7 @@ export const useTestService = () => {
   };
 
   const keydownEvent = (e) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && proceeding.problem) {
       e.preventDefault();
       stopTimer();
       compare();
@@ -75,18 +79,27 @@ export const useTestService = () => {
       if (proceeding.count === 6) requestRanking();
     }
 
-    if (e.keyCode === 229 && !keyEvent.current) {
+    if (e.keyCode === 229 && proceeding.problem && !keyEvent.current) {
       resetTimer();
       startTimer();
       keyEvent.current = true;
     }
   };
 
-  const keyupEvent = (e) => {
-    // textareaInput.current.addEventListener("keyup", (e) => {
-    //   const key = document.getElementById(e.key);
-    //   if (key) key.classList.remove("pressed");
-    // });
+  const keyboardEvent = () => {
+    // 키보드 버튼 색상 on
+    textareaInput.current.addEventListener("keydown", (e) => {
+      const key = document.getElementById(e.key);
+
+      if (key) key.classList.add("pressed");
+    });
+
+    // 키보드 버튼 색상 off
+    textareaInput.current.addEventListener("keyup", (e) => {
+      const key = document.getElementById(e.key);
+
+      if (key) key.classList.remove("pressed");
+    });
   };
 
   const compare = () => {
@@ -106,11 +119,6 @@ export const useTestService = () => {
         speed: `${resultSpeed}타수`,
         accuracy: "100%",
       });
-      // // 색상 초기화
-      // if (count_data.current < 7) {
-      //   textareaInput.current.value = "";
-      //   initColor();
-      // }
     } else {
       let right = 0;
       for (let i = 0; i < inputAnswer.length; i++) {
@@ -125,9 +133,6 @@ export const useTestService = () => {
         speed: `${resultSpeed}타수`,
         accuracy: `${acc}%`,
       });
-
-      // 색상 초기화
-      // initColor();
     }
 
     textareaInput.current.value = "";
@@ -135,7 +140,6 @@ export const useTestService = () => {
   };
 
   const requestRanking = () => {
-    console.log("랭킹요청");
     const tempArr = [];
 
     // 회원
@@ -189,7 +193,6 @@ export const useTestService = () => {
     isLogged,
     rankerArr,
     textareaInput,
-    keyupEvent,
     keydownEvent,
     requestProblem,
     selectHandler,

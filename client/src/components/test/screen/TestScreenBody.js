@@ -6,6 +6,7 @@ import TestScreenProblem from "components/test/screen/TestScreenProblem";
 const TestScreenBody = ({
   proceeding,
   textareaInput,
+  isLogged,
   keyupEvent,
   keydownEvent,
 }) => {
@@ -13,6 +14,23 @@ const TestScreenBody = ({
   const inputLength = proceeding.problem[proceeding.count]
     ? proceeding.problem[proceeding.count].length
     : 10;
+  let problemArr, inputArr;
+  let stateArr = [];
+
+  if (proceeding.problem) {
+    problemArr = proceeding.problem[proceeding.count].split("");
+    inputArr = textareaInput.current.value.split("");
+
+    for (let i = 0; i < inputArr.length; i++) {
+      if (inputArr.length <= problemArr.length) {
+        if (inputArr[i] === problemArr[i]) {
+          stateArr.push(true);
+        } else {
+          stateArr.push(false);
+        }
+      }
+    }
+  }
 
   return (
     <BodyBlock>
@@ -22,7 +40,13 @@ const TestScreenBody = ({
             {proceeding.problem[proceeding.count] &&
               proceeding.problem[proceeding.count]
                 .split("")
-                .map((ele, idx) => <TestScreenProblem word={ele} key={idx} />)}
+                .map((ele, idx) => (
+                  <TestScreenProblem
+                    word={ele}
+                    key={idx}
+                    validColor={stateArr[idx]}
+                  />
+                ))}
           </ProblemBox>
           <ProblemKeyboard>
             <textarea
@@ -38,7 +62,7 @@ const TestScreenBody = ({
         </>
       ) : (
         <PrintResult>
-          {nickname ? (
+          {isLogged ? (
             <UserInfo>{nickname}님의 기록</UserInfo>
           ) : (
             <UserInfo>Guest님의 기록</UserInfo>

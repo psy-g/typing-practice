@@ -29,7 +29,7 @@ const TestScreenHead = ({
               {ProblemInfo.NO3}
             </span>
           </DropMenu>
-          {proceeding.count < 7 && (
+          {proceeding.count < 7 && proceeding.problem && (
             <Counter>{proceeding.count + 1} / 7</Counter>
           )}
         </Title>

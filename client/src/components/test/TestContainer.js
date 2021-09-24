@@ -14,7 +14,6 @@ const TestContainer = () => {
     isLogged,
     rankerArr,
     textareaInput,
-    keyupEvent,
     keydownEvent,
     requestProblem,
     selectHandler,
@@ -29,7 +28,7 @@ const TestContainer = () => {
           timer={elapsedTime}
           rankerArr={rankerArr}
           textareaInput={textareaInput}
-          keyupEvent={keyupEvent}
+          isLogged={isLogged}
           keydownEvent={keydownEvent}
           requestProblem={requestProblem}
           selectHandler={selectHandler}
