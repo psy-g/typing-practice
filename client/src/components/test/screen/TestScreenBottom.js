@@ -23,10 +23,6 @@ const TestScreenBottom = ({ proceeding, timer, rankerArr }) => {
                   <TestScreenRank key={idx} data={ele} rank={idx + 1} />
                 )
             )}
-            {/* <Timer>
-              {proceeding.recordTime.reduce((acc, cur) => acc + cur).toFixed(1)}
-              초
-            </Timer> */}
           </PrintRank>
         </BottomBlock>
       )}

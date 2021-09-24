@@ -18,7 +18,10 @@ const TestScreenBody = ({
   let stateArr = [];
 
   if (proceeding.problem) {
-    problemArr = proceeding.problem[proceeding.count].split("");
+    problemArr =
+      proceeding.count < 7
+        ? proceeding.problem[proceeding.count].split("")
+        : [];
     inputArr = textareaInput.current.value.split("");
 
     for (let i = 0; i < inputArr.length; i++) {
