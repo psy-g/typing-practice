@@ -3,7 +3,9 @@
 한글타자를 측정하여 기록을 확인하고 다른 사람 기록과 비교해볼 수 있습니다.
 타자치자는 한글의 자음과 모음을 분리하여 입력된 것과 비교하여 정확도를 계산합니다.
 
-<h2><a href='https://tajachija.com/' target='_blank'>[타자치자 바로가기]</a> ⌨️</h2>
+<!-- <h2><a href='https://tajachija.com/' target='_blank'>[타자치자 바로가기]</a> ⌨️</h2> -->
+## ~~[타자치자 바로가기] ⌨️~~
+- 현재 접속 불가능(https://tajachija.com)
 
 ## Implementation List 📌
 - 로그인, 로그아웃, 회원가입
